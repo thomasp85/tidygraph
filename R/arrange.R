@@ -7,7 +7,7 @@ arrange.tbl_graph <- function(.data, ...) {
   }
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
-  d_tmp <- arrange_(d_tmp, ...)
+  d_tmp <- arrange(d_tmp, ...)
 
   switch(
     active(.data),
