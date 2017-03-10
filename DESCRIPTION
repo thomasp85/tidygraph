@@ -22,3 +22,5 @@ Imports: tibble,
     rlang
 Remotes: hadley/dplyr,
     hadley/rlang
+URL: https://github.com/thomasp85/tidygraph
+BugReports: https://github.com/thomasp85/tidygraph/issues
