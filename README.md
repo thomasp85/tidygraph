@@ -3,6 +3,8 @@
 tidygraph
 =========
 
+[![Travis-CI Build Status](https://travis-ci.org/thomasp85/tidygraph.svg?branch=master)](https://travis-ci.org/thomasp85/tidygraph) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/thomasp85/tidygraph?branch=master&svg=true)](https://ci.appveyor.com/project/thomasp85/tidygraph) [![CRAN\_Release\_Badge](http://www.r-pkg.org/badges/version-ago/tidygraph)](https://CRAN.R-project.org/package=tidygraph) [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
+
 This package provide a tidy API to graph/network manipulation. While network data itself is not tidy, it can be envisioned as two tidy tables, one for node data and one for edge data. `tidygraph` provides a way to switch between the two tables and provide `dplyr` verbs for manipulating them. Furthermore it provides access to a lot of graph algorithms with return values that facilitate their use in a tidy workflow.
 
 **This is a work in progress**
