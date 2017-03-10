@@ -11,6 +11,21 @@ as_tibble.tbl_graph <- function(x, active = NULL, ...) {
     stop('Unknown active element: ', active, '. Only nodes and edges supported', call. = FALSE)
   )
 }
+as_tibble.grouped_tbl_graph <- function(x, active = NULL, ...) {
+  tbl <- NextMethod()
+  if (is.null(active)) {
+    active <- attr(x, 'active')
+  }
+  attributes(tbl) <- attr(x, paste0(active, '_group_attr'))
+  tbl
+}
+#' @export
+tibble::as_tibble
+
+#' @importFrom magrittr %>%
+#' @export
+magrittr::`%>%`
+
 #' @importFrom igraph vertex_attr gorder
 #' @importFrom tibble as_tibble
 node_tibble <- function(x) {
@@ -33,12 +48,19 @@ edge_tibble <- function(x) {
   bind_cols(e_list, tbl)
 }
 set_graph_data <- function(x, value) {
+  UseMethod('set_graph_data')
+}
+set_graph_data.tbl_graph <- function(x, value) {
   switch(
     active(x),
     nodes = set_node_attributes(x, value),
     edges = set_edge_attributes(x, value),
     stop('Unknown active element: ', active(x), '. Only nodes and edges supported', call. = FALSE)
   )
+}
+set_graph_data.grouped_tbl_graph <- function(x, value) {
+  x <- NextMethod()
+  apply_groups(x, attributes(value))
 }
 #' @importFrom igraph vertex_attr<-
 set_node_attributes <- function(x, value) {
