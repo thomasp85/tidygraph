@@ -1,14 +1,14 @@
 #' @export
-#' @importFrom dplyr slice_
+#' @importFrom dplyr slice
 #' @importFrom igraph delete_vertices delete_edges
-slice_.tbl_graph <- function(.data, ..., .dots) {
+slice.tbl_graph <- function(.data, ...) {
   d_tmp <- as_tibble(.data)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
     stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
   }
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
-  d_tmp <- slice_(d_tmp, ..., .dots = .dots)
+  d_tmp <- slice(d_tmp, ...)
   remove_ind <- orig_ind[-d_tmp$.tbl_graph_index]
   switch(
     active(.data),
@@ -16,3 +16,5 @@ slice_.tbl_graph <- function(.data, ..., .dots) {
     edges = delete_edges(.data, remove_ind)
   ) %gr_attr% .data
 }
+#' @export
+dplyr::slice

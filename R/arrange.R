@@ -1,13 +1,13 @@
 #' @export
-#' @importFrom dplyr arrange_
-arrange_.tbl_graph <- function(.data, ..., .dots) {
+#' @importFrom dplyr arrange
+arrange.tbl_graph <- function(.data, ...) {
   d_tmp <- as_tibble(.data)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
     stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
   }
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
-  d_tmp <- arrange_(d_tmp, ..., .dots = .dots)
+  d_tmp <- arrange_(d_tmp, ...)
 
   switch(
     active(.data),
@@ -15,6 +15,8 @@ arrange_.tbl_graph <- function(.data, ..., .dots) {
     edges = permute_edges(.data, d_tmp$.tbl_graph_index)
   ) %gr_attr% .data
 }
+#' @export
+dplyr::arrange
 
 #' @importFrom igraph graph_from_data_frame is.directed as_data_frame vertex_attr<-
 permute_edges <- function(graph, order) {
