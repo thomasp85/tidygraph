@@ -9,6 +9,7 @@ left_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", 
 dplyr::left_join
 
 #' @importFrom dplyr right_join
+#' @importFrom stats na.omit
 #' @export
 right_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
   d_tmp <- as_tibble(x)
