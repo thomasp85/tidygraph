@@ -27,6 +27,8 @@
 \alias{reexports}
 \alias{left_join}
 \alias{reexports}
+\alias{right_join}
+\alias{reexports}
 \alias{inner_join}
 \alias{reexports}
 \alias{full_join}
@@ -77,7 +79,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{dplyr}{\code{\link[dplyr]{arrange}}, \code{\link[dplyr]{distinct}}, \code{\link[dplyr]{filter}}, \code{\link[dplyr]{top_n}}, \code{\link[dplyr]{group_by}}, \code{\link[dplyr]{ungroup}}, \code{\link[dplyr]{group_size}}, \code{\link[dplyr]{n_groups}}, \code{\link[dplyr]{groups}}, \code{\link[dplyr]{group_vars}}, \code{\link[dplyr]{left_join}}, \code{\link[dplyr]{inner_join}}, \code{\link[dplyr]{full_join}}, \code{\link[dplyr]{semi_join}}, \code{\link[dplyr]{anti_join}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{transmute}}, \code{\link[dplyr]{mutate_all}}, \code{\link[dplyr]{mutate_at}}, \code{\link[dplyr]{rename}}, \code{\link[dplyr]{sample_frac}}, \code{\link[dplyr]{sample_n}}, \code{\link[dplyr]{select}}, \code{\link[dplyr]{contains}}, \code{\link[dplyr]{ends_with}}, \code{\link[dplyr]{everything}}, \code{\link[dplyr]{matches}}, \code{\link[dplyr]{num_range}}, \code{\link[dplyr]{one_of}}, \code{\link[dplyr]{starts_with}}, \code{\link[dplyr]{slice}}}
+  \item{dplyr}{\code{\link[dplyr]{arrange}}, \code{\link[dplyr]{distinct}}, \code{\link[dplyr]{filter}}, \code{\link[dplyr]{top_n}}, \code{\link[dplyr]{group_by}}, \code{\link[dplyr]{ungroup}}, \code{\link[dplyr]{group_size}}, \code{\link[dplyr]{n_groups}}, \code{\link[dplyr]{groups}}, \code{\link[dplyr]{group_vars}}, \code{\link[dplyr]{left_join}}, \code{\link[dplyr]{right_join}}, \code{\link[dplyr]{inner_join}}, \code{\link[dplyr]{full_join}}, \code{\link[dplyr]{semi_join}}, \code{\link[dplyr]{anti_join}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{transmute}}, \code{\link[dplyr]{mutate_all}}, \code{\link[dplyr]{mutate_at}}, \code{\link[dplyr]{rename}}, \code{\link[dplyr]{sample_frac}}, \code{\link[dplyr]{sample_n}}, \code{\link[dplyr]{select}}, \code{\link[dplyr]{contains}}, \code{\link[dplyr]{ends_with}}, \code{\link[dplyr]{everything}}, \code{\link[dplyr]{matches}}, \code{\link[dplyr]{num_range}}, \code{\link[dplyr]{one_of}}, \code{\link[dplyr]{starts_with}}, \code{\link[dplyr]{slice}}}
 
   \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
 
