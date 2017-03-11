@@ -34,8 +34,6 @@ The goal is to support all verbs from dplyr that makes sense, which is almost al
 
 2.  **do:** The rationale is really just like the above - `do` can potentially modify the data in ways that does not make sense in a graph context. The solution is again to extract the data prior to the `do` call.
 
-The current status is that everything else, except for the joins and set methods are supported.
-
 ### 2. Provide Constructors for all general relational data structures
 
 The goal is that any data structure seems relational should be able to be fed into `as_tbl_graph` - this entails conversion functions into `igraph,` which is the underlying data structure that powers `tidygraph`. Currently the following is supported:
