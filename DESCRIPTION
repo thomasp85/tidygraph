@@ -19,7 +19,8 @@ Imports: tibble,
     igraph,
     magrittr,
     utils,
-    rlang
+    rlang,
+    R6
 Remotes: hadley/dplyr,
     hadley/rlang
 URL: https://github.com/thomasp85/tidygraph

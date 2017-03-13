@@ -1,6 +1,8 @@
 #' @export
 #' @importFrom dplyr mutate
 mutate.tbl_graph <- function(.data, ...) {
+  .graph_context$set(.data)
+  on.exit(.graph_context$clear())
   d_tmp <- as_tibble(.data)
   d_tmp <- mutate(d_tmp, ...)
   set_graph_data(.data, d_tmp)
