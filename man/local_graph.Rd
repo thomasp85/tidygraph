@@ -32,6 +32,12 @@ argument is ignored for undirected graphs.}
 
 \item{mindist}{The minimum distance to include the vertex in the result.}
 
+\item{weights}{Weight vector. If the graph has a \code{weight} edge
+attribute, then this is used by default. If this argument is given, then
+vertex strength (see \code{\link{strength}}) is used instead of vertex
+degree. But note that \code{knnk} is still given in the function of the
+normal vertex degree.}
+
 \item{...}{Parameters passed on to the \code{igraph} function in question}
 }
 \value{

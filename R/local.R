@@ -51,6 +51,7 @@ local_triangles <- function() {
   count_triangles(graph = .G())
 }
 #' @describeIn local_graph Calculates the average degree of based on the neighborhood of each node. Wraps [igraph::knn()].
+#' @inheritParams igraph::knn
 #' @importFrom igraph knn
 #' @export
 local_ave_degree <- function(weights = NULL) {
