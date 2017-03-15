@@ -20,8 +20,10 @@ Imports: tibble,
     magrittr,
     utils,
     rlang,
-    R6
+    R6,
+    Rcpp
 Remotes: hadley/dplyr,
     hadley/rlang
 URL: https://github.com/thomasp85/tidygraph
 BugReports: https://github.com/thomasp85/tidygraph/issues
+LinkingTo: Rcpp
