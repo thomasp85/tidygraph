@@ -26,6 +26,7 @@ NULL
 #' @importFrom igraph V alpha_centrality
 #' @export
 centrality_alpha <- function(...) {
+  expect_nodes()
   graph <- .G()
   alpha_centrality(graph = graph, nodes = V(graph), ...)
 }
@@ -33,6 +34,7 @@ centrality_alpha <- function(...) {
 #' @importFrom igraph authority_score
 #' @export
 centrality_authority <- function(...) {
+  expect_nodes()
   authority_score(graph = .G(), ...)$vector
 }
 #' @describeIn centrality Wrapper for [igraph::betweenness()] and [igraph::estimate_betweenness()]
@@ -40,6 +42,7 @@ centrality_authority <- function(...) {
 #' @importFrom rlang tidy_quotes
 #' @export
 centrality_betweenness <- function(...) {
+  expect_nodes()
   graph <- .G()
   dots <- tidy_quotes(...)
   if (is.null(dots$cutoff)) {
@@ -52,6 +55,7 @@ centrality_betweenness <- function(...) {
 #' @importFrom igraph V power_centrality
 #' @export
 centrality_power <- function(...) {
+  expect_nodes()
   graph <- .G()
   power_centrality(graph = graph, nodes = V(graph), ...)
 }
@@ -60,6 +64,7 @@ centrality_power <- function(...) {
 #' @importFrom rlang tidy_quotes
 #' @export
 centrality_closeness <- function(...) {
+  expect_nodes()
   graph <- .G()
   dots <- tidy_quotes(...)
   if (is.null(dots$cutoff)) {
@@ -72,18 +77,21 @@ centrality_closeness <- function(...) {
 #' @importFrom igraph eigen_centrality
 #' @export
 centrality_eigen <- function(...) {
+  expect_nodes()
   eigen_centrality(graph = .G(), ...)$vector
 }
 #' @describeIn centrality Wrapper for [igraph::hub_score()]
 #' @importFrom igraph hub_score
 #' @export
 centrality_hub <- function(...) {
+  expect_nodes()
   hub_score(graph = .G(), ...)$vector
 }
 #' @describeIn centrality Wrapper for [igraph::page_rank()]
 #' @importFrom igraph V page_rank
 #' @export
 centrality_pagerank <- function(...) {
+  expect_nodes()
   graph <- .G()
   page_rank(graph = graph, vids = V(graph), ...)$vector
 }
@@ -91,6 +99,7 @@ centrality_pagerank <- function(...) {
 #' @importFrom igraph subgraph_centrality
 #' @export
 centrality_subgraph <- function(...) {
+  expect_nodes()
   subgraph_centrality(graph = .G(), ...)
 }
 #' @describeIn centrality Wrapper for [igraph::degree()] and [igraph::strength()]
@@ -98,6 +107,7 @@ centrality_subgraph <- function(...) {
 #' @importFrom rlang tidy_quotes
 #' @export
 centrality_degree <- function(...) {
+  expect_nodes()
   graph <- .G()
   dots <- tidy_quotes(...)
   if (is.null(dots$weights)) {

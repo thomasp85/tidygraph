@@ -41,6 +41,7 @@ NULL
 #' @importFrom igraph bfs
 #' @export
 bfs_rank <- function(root, mode = 'out', unreachable = FALSE) {
+  expect_nodes()
   ind <- bfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, rank = TRUE)$rank
   as.integer(ind)
@@ -49,6 +50,7 @@ bfs_rank <- function(root, mode = 'out', unreachable = FALSE) {
 #' @importFrom igraph bfs
 #' @export
 bfs_parent <- function(root, mode = 'out', unreachable = FALSE) {
+  expect_nodes()
   ind <- bfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
       order = FALSE, father = TRUE)$father
   as.integer(ind)
@@ -57,6 +59,7 @@ bfs_parent <- function(root, mode = 'out', unreachable = FALSE) {
 #' @importFrom igraph bfs
 #' @export
 bfs_before <- function(root, mode = 'out', unreachable = FALSE) {
+  expect_nodes()
   ind <- bfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, pred = TRUE)$pred
   as.integer(ind)
@@ -65,6 +68,7 @@ bfs_before <- function(root, mode = 'out', unreachable = FALSE) {
 #' @importFrom igraph bfs
 #' @export
 bfs_after <- function(root, mode = 'out', unreachable = FALSE) {
+  expect_nodes()
   ind <- bfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, succ = TRUE)$succ
   as.integer(ind)
@@ -73,6 +77,7 @@ bfs_after <- function(root, mode = 'out', unreachable = FALSE) {
 #' @importFrom igraph bfs
 #' @export
 bfs_dist <- function(root, mode = 'out', unreachable = FALSE) {
+  expect_nodes()
   ind <- bfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, dist = TRUE)$dist
   as.integer(ind)
@@ -84,6 +89,7 @@ bfs_dist <- function(root, mode = 'out', unreachable = FALSE) {
 #' @importFrom igraph dfs
 #' @export
 dfs_rank <- function(root, mode = 'out', unreachable = FALSE) {
+  expect_nodes()
   ind <- dfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
              order = TRUE)$order
   match(seq_along(ind), as.integer(ind))
@@ -92,6 +98,7 @@ dfs_rank <- function(root, mode = 'out', unreachable = FALSE) {
 #' @importFrom igraph dfs
 #' @export
 dfs_rank_out <- function(root, mode = 'out', unreachable = FALSE) {
+  expect_nodes()
   ind <- dfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, order.out = TRUE)$order.out
   match(seq_along(ind), as.integer(ind))
@@ -100,6 +107,7 @@ dfs_rank_out <- function(root, mode = 'out', unreachable = FALSE) {
 #' @importFrom igraph dfs
 #' @export
 dfs_parent <- function(root, mode = 'out', unreachable = FALSE) {
+  expect_nodes()
   ind <- dfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, father = TRUE)$father
   as.integer(ind)
@@ -108,6 +116,7 @@ dfs_parent <- function(root, mode = 'out', unreachable = FALSE) {
 #' @importFrom igraph dfs
 #' @export
 dfs_dist <- function(root, mode = 'out', unreachable = FALSE) {
+  expect_nodes()
   ind <- dfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, dist = TRUE)$dist
   as.integer(ind)
