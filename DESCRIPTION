@@ -22,7 +22,8 @@ Imports: tibble,
     rlang,
     R6,
     Rcpp,
-    tools
+    tools,
+    stats
 Remotes: hadley/dplyr,
     hadley/rlang
 URL: https://github.com/thomasp85/tidygraph
