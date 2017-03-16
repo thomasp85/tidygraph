@@ -41,11 +41,53 @@ as_tbl_graph.default <- function(x, ...) {
     as_tbl_graph(as.igraph(x))
   }, error = function(e) stop('No support for ', class(x)[1], ' objects', call. = FALSE))
 }
+#' @importFrom tibble trunc_mat
+#' @importFrom tools toTitleCase
+#' @importFrom igraph is_simple is_directed is_bipartite is_connected is_chordal is_dag
+#' @export
+print.tbl_graph <- function(x, ...) {
+  arg_list <- list(...)
+  tree <- is_tree(x)
+  properties <- c(simple = is_simple(x), directed = is_directed(x),
+                  undirected = !is_directed(x), bipartite = is_bipartite(x),
+                  connected = is_connected(x), triangulated = is_chordal(x)$chordal,
+                  tree = tree, DAG = !tree && is_dag(x))
+  properties <- names(properties)[properties]
+  not_active <- if (active(x) == 'nodes') 'edges' else 'nodes'
+  top <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x), n = 6)))
+  top$summary <- sub('A tibble', toTitleCase(paste0(substr(active(x), 1, 4), ' data')), top$summary)
+  top$summary <- paste0(top$summary, ' (active)')
+  bottom <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x, active = not_active), n = 3)))
+  bottom$summary <- sub('A tibble', toTitleCase(paste0(substr(not_active, 1, 4), ' data')), bottom$summary)
+  cat('# A tbl_graph: ', gorder(x), ' nodes and ', gsize(x), ' edges\n', sep = '')
+  cat('#\n')
+  cat('# Properties: ', paste(properties, collapse = ', '), '\n', sep = '')
+  cat('#\n')
+  print(top)
+  cat('#\n')
+  print(bottom)
+  invisible(x)
+}
+#' @importFrom igraph is_connected
+is_tree <- function(x) {
+  is_connected(x) && (gorder(x) - gsize(x) == 1)
+}
 #' @describeIn as_tbl_graph Method for igraph object. Simply subclasses the object into a `tbl_graph`
 #' @export
 as_tbl_graph.igraph <- function(x, ...) {
   class(x) <- c('tbl_graph', 'igraph')
   attr(x, 'active') <- 'nodes'
+  x
+}
+#' @export
+as_tbl_graph.tbl_graph <- function(x, ...) {
+  x
+}
+#' @importFrom igraph as.igraph
+#' @export
+as.igraph.tbl_graph <- function(x, ...) {
+  class(x) <- 'igraph'
+  attr(x, 'active') <- NULL
   x
 }
 #' @importFrom dplyr tbl_vars
