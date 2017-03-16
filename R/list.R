@@ -42,7 +42,7 @@ as_graph_adj_list <- function(x, directed) {
   if (any(unlist(x) == 0)) {
     x <- lapply(x, `+`, 1)
   }
-  gr <- graph_from_adj_list(x, mode = if (directed) 'out' else 'all')
+  gr <- graph_from_adj_list(unname(x), mode = if (directed) 'out' else 'all')
   if (!is.null(names(x))) {
     gr <- set_vertex_attr(gr, 'name', value = names(x))
   }

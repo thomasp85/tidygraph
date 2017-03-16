@@ -29,4 +29,8 @@ Remotes: hadley/dplyr,
 URL: https://github.com/thomasp85/tidygraph
 BugReports: https://github.com/thomasp85/tidygraph/issues
 LinkingTo: Rcpp
-Suggests: network
+Suggests: network,
+    data.tree,
+    ape,
+    graph,
+    methods
