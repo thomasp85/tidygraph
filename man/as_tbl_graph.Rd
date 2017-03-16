@@ -38,6 +38,9 @@ as_tbl_graph(x, ...)
 \item{directed}{Should the constructed graph be directed (defaults to \code{TRUE})}
 
 \item{...}{Arguments passed on to the conversion function}
+
+\item{mode}{In case \code{directed = TRUE} should the edge direction be away from
+node or towards. Possible values are \code{"out"} (default) or \code{"in"}.}
 }
 \value{
 A \code{tbl_graph} object

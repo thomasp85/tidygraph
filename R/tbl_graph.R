@@ -23,6 +23,9 @@
 #'
 #' @param directed Should the constructed graph be directed (defaults to `TRUE`)
 #'
+#' @param mode In case `directed = TRUE` should the edge direction be away from
+#' node or towards. Possible values are `"out"` (default) or `"in"`.
+#'
 #' @param ... Arguments passed on to the conversion function
 #'
 #' @return A `tbl_graph` object
