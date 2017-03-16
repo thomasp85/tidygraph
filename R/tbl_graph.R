@@ -53,8 +53,8 @@ print.tbl_graph <- function(x, ...) {
   tree <- is_tree(x)
   properties <- c(simple = is_simple(x), directed = is_directed(x),
                   undirected = !is_directed(x), bipartite = is_bipartite(x),
-                  connected = is_connected(x), triangulated = is_chordal(x)$chordal,
-                  tree = tree, DAG = !tree && is_dag(x))
+                  connected = is_connected(x), tree = tree,
+                  DAG = !tree && is_dag(x))
   properties <- names(properties)[properties]
   not_active <- if (active(x) == 'nodes') 'edges' else 'nodes'
   top <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x), n = 6)))
