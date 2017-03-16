@@ -49,7 +49,7 @@ as_graph_adj_list <- function(x, directed) {
   gr
 }
 
-#' @importFrom igraph graph_from_data_frame vertex_attr<-
+#' @importFrom igraph graph_from_edgelist vertex_attr<-
 as_graph_node_edge <- function(x, directed) {
   nodes <- x[[which(names(x) %in% c('nodes', 'vertices'))]]
   edges <- x[[which(names(x) %in% c('edges', 'links'))]]
@@ -66,7 +66,8 @@ as_graph_node_edge <- function(x, directed) {
   if (is.character(edges[, 2])) {
     edges[, 2] <- match(edges[, 2], nodes[, name_ind])
   }
-  gr <- graph_from_data_frame(edges, directed = directed)
+  gr <- graph_from_edgelist(as.matrix(edges[, 1:2]), directed = directed)
+  edge_attr(gr) <- as.list(edges[, -c(1:2), drop = FALSE])
   vertex_attr(gr) <- as.list(nodes)
   gr
 }
