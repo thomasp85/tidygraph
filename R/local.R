@@ -61,11 +61,11 @@ local_ave_degree <- function(weights = NULL) {
 #' @describeIn local_graph Calculate the transitivity of each node, that is, the
 #' propensity for the nodes neighbors to be connected. Wraps [igraph::transitivity()]
 #' @importFrom igraph transitivity V
-#' @importFrom rlang tidy_quote
+#' @importFrom rlang dots_quos
 #' @export
 local_transitivity <- function(...) {
   expect_nodes()
-  dots <- tidy_quotes(...)
+  dots <- dots_quos(...)
   type <- if (is.null(dots$weights)) {
     'weighted'
   } else {
