@@ -47,29 +47,3 @@ edge_tibble <- function(x) {
   names(e_list) <- c('from', 'to')
   bind_cols(e_list, tbl)
 }
-set_graph_data <- function(x, value) {
-  UseMethod('set_graph_data')
-}
-set_graph_data.tbl_graph <- function(x, value) {
-  switch(
-    active(x),
-    nodes = set_node_attributes(x, value),
-    edges = set_edge_attributes(x, value),
-    stop('Unknown active element: ', active(x), '. Only nodes and edges supported', call. = FALSE)
-  )
-}
-set_graph_data.grouped_tbl_graph <- function(x, value) {
-  x <- NextMethod()
-  apply_groups(x, attributes(value))
-}
-#' @importFrom igraph vertex_attr<-
-set_node_attributes <- function(x, value) {
-  vertex_attr(x) <- as.list(value)
-  x
-}
-#' @importFrom igraph edge_attr<-
-set_edge_attributes <- function(x, value) {
-  value <- value[, !names(value) %in% c('from', 'to')]
-  edge_attr(x) <- as.list(value)
-  x
-}

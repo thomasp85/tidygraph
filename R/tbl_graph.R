@@ -44,18 +44,17 @@ as_tbl_graph.default <- function(x, ...) {
     as_tbl_graph(as.igraph(x))
   }, error = function(e) stop('No support for ', class(x)[1], ' objects', call. = FALSE))
 }
+#' @rdname as_tbl_graph
+#' @export
+is.tbl_graph <- function(x) {
+  inherits(x, 'tbl_graph')
+}
 #' @importFrom tibble trunc_mat
 #' @importFrom tools toTitleCase
-#' @importFrom igraph is_simple is_directed is_bipartite is_connected is_chordal is_dag
 #' @export
 print.tbl_graph <- function(x, ...) {
   arg_list <- list(...)
-  tree <- is_tree(x)
-  properties <- c(simple = is_simple(x), directed = is_directed(x),
-                  undirected = !is_directed(x), bipartite = is_bipartite(x),
-                  connected = is_connected(x), tree = tree,
-                  DAG = !tree && is_dag(x))
-  properties <- names(properties)[properties]
+  graph_desc <- describe_graph(x)
   not_active <- if (active(x) == 'nodes') 'edges' else 'nodes'
   top <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x), n = 6)))
   top$summary <- sub('A tibble', toTitleCase(paste0(substr(active(x), 1, 4), ' data')), top$summary)
@@ -64,19 +63,67 @@ print.tbl_graph <- function(x, ...) {
   bottom$summary <- sub('A tibble', toTitleCase(paste0(substr(not_active, 1, 4), ' data')), bottom$summary)
   cat('# A tbl_graph: ', gorder(x), ' nodes and ', gsize(x), ' edges\n', sep = '')
   cat('#\n')
-  cat('# Properties: ', paste(properties, collapse = ', '), '\n', sep = '')
+  cat('# ', graph_desc, '\n', sep = '')
   cat('#\n')
   print(top)
   cat('#\n')
   print(bottom)
   invisible(x)
 }
-#' @importFrom igraph is_connected
+#' @importFrom igraph is_simple is_directed is_bipartite is_connected is_dag
+describe_graph <- function(x) {
+  prop <- list(simple = is_simple(x), directed = is_directed(x),
+                  bipartite = is_bipartite(x), connected = is_connected(x),
+                  tree = is_tree(x), forest = is_forest(x), DAG = is_dag(x))
+  desc <- c()
+  if (prop$tree || prop$forest) {
+    desc[1] <- if (prop$directed) 'A rooted' else 'An unrooted'
+    desc[2] <- if (prop$tree) 'tree' else paste0('forest with ', count_components(x), ' trees')
+  } else {
+    desc[1] <- if (prop$DAG) 'A directed acyclic' else if (prop$bipartite) 'A bipartite' else if (prop$directed) 'A directed' else 'An undirected'
+    desc[2] <- if (prop$simple) 'simple graph' else 'multigraph'
+    n_comp <- count_components(x)
+    desc[3] <- paste0('with ' , n_comp, ' component', if (n_comp > 1) 's' else '')
+  }
+  paste(desc, collapse = ' ')
+}
+#' @importFrom igraph is_connected is_simple gorder gsize
 is_tree <- function(x) {
-  is_connected(x) && (gorder(x) - gsize(x) == 1)
+  is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) == 1)
+}
+#' @importFrom igraph is_connected is_simple gorder gsize count_components
+is_forest <- function(x) {
+  !is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) - count_components(x) == 1)
 }
 #' @export
 as_tbl_graph.tbl_graph <- function(x, ...) {
+  x
+}
+set_graph_data <- function(x, value, active) {
+  UseMethod('set_graph_data')
+}
+set_graph_data.tbl_graph <- function(x, value, active = NULL) {
+  if (is.null(active)) active <- active(x)
+  switch(
+    active,
+    nodes = set_node_attributes(x, value),
+    edges = set_edge_attributes(x, value),
+    stop('Unknown active element: ', active(x), '. Only nodes and edges supported', call. = FALSE)
+  )
+}
+set_graph_data.grouped_tbl_graph <- function(x, value, active = NULL) {
+  x <- NextMethod()
+  apply_groups(x, attributes(value))
+}
+#' @importFrom igraph vertex_attr<-
+set_node_attributes <- function(x, value) {
+  vertex_attr(x) <- as.list(value)
+  x
+}
+#' @importFrom igraph edge_attr<-
+set_edge_attributes <- function(x, value) {
+  value <- value[, !names(value) %in% c('from', 'to')]
+  edge_attr(x) <- as.list(value)
   x
 }
 #' @importFrom igraph as.igraph

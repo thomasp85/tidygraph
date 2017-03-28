@@ -112,3 +112,42 @@ anti_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, ...) {
 }
 #' @export
 dplyr::anti_join
+
+#' Join graphs on common nodes
+#'
+#' This graph-specific join method makes a full join on the nodes data and
+#' updates the edges in the joining graph so they matches the new indexes of the
+#' nodes in the resulting graph. Node and edge data is combined using
+#' [dplyr::bind_rows()] semantic, meaning that data is matched by column name
+#' and filled with `NA` if it is missing in either of the graphs.
+#'
+#' @param x A `tbl_graph`
+#' @param y An object convertible to a `tbl_graph` using [as_tbl_graph()]
+#' @inheritParams dplyr::full_join
+#'
+#' @return A `tbl_graph` containing the merged graph
+#'
+#' @importFrom tibble as_tibble
+#' @importFrom dplyr full_join bind_rows
+#' @export
+graph_join <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
+  stopifnot(is.tbl_graph(x))
+  y <- as_tbl_graph(y)
+
+  d_tmp <- as_tibble(x, active = 'nodes')
+  d_tmp2 <- as_tibble(y, active = 'nodes')
+  if ('.tbl_graph_index' %in% c(names(d_tmp), names(d_tmp2))) {
+    stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
+  }
+  orig_ind <- seq_len(nrow(d_tmp2))
+  d_tmp2$.tbl_graph_index <- orig_ind
+  nodes <- full_join(d_tmp, d_tmp2, by = by, copy = copy, suffix = suffix, ...)
+  ind_lookup <- data.frame(new = seq_len(nrow(nodes)), old = nodes$.tbl_graph_index)
+  nodes$.tbl_graph_index <- NULL
+  edges <- as_tibble(x, active = 'edges')
+  edges2 <- as_tibble(y, active = 'edges')
+  edges2$from <- ind_lookup$new[match(edges2$from, ind_lookup$old)]
+  edges2$to <- ind_lookup$new[match(edges2$to, ind_lookup$old)]
+  edges <- bind_rows(edges, edges2)
+  as_tbl_graph(list(nodes = nodes, edges = edges)) %gr_attr% y %gr_attr% x
+}
