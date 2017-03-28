@@ -22,16 +22,17 @@ List get_paths(IntegerVector parent) {
 //[[Rcpp::export]]
 List collect_offspring(ListOf<IntegerVector> offspring, IntegerVector order) {
   std::deque< std::deque<int> > offsprings;
-  int i, j, node, n_children;
+  int i, j, node, n_children, child;
   for (i = 0; i < order.size(); ++i) {
     std::deque<int> off(offspring[i].begin(), offspring[i].end());
     offsprings.push_back(off);
   }
   for (i = 0; i < order.size(); ++i) {
     node = order[i] - 1;
-    n_children = offsprings[i].size();
+    n_children = offsprings[node].size();
     for (j = 0; j < n_children; ++j) {
-      offsprings[i].insert(offsprings[i].end(), offsprings[j].begin(), offsprings[j]. end());
+      child = offsprings[node][j] - 1;
+      offsprings[node].insert(offsprings[node].end(), offsprings[child].begin(), offsprings[child].end());
     }
   }
   return wrap(offsprings);
