@@ -1,0 +1,143 @@
+#' Graph measurements
+#'
+#' This set of functions provide wrappers to a number of `ìgraph`s graph
+#' statistic algorithms. As for the other wrappers provided, they are intended
+#' for use inside the `tidygraph` framework and it is thus not necessary to
+#' supply the graph being computed on as the context is known. All of these
+#' functions are guarantied to return scalars making it easy to compute with
+#' them.
+#'
+#' @return A scalar, the type depending on the function
+#'
+#' @name graph_measures
+#' @rdname graph_measures
+#'
+NULL
+
+#' @describeIn graph_measures Gives the minimum edge connectivity. Wraps [igraph::edge_connectivity()]
+#' @importFrom igraph edge_connectivity
+#' @export
+graph_adhesion <- function() {
+  graph <- .G()
+  edge_connectivity(graph)
+}
+#' @describeIn graph_measures Measures the propensity of similar nodes to be connected. Wraps [igraph::assortativity()]
+#' @param attr The node attribute to measure on
+#' @param in_attr An alternative node attribute to use for incomming node. If `NULL` the attribute given by `type` will be used
+#' @param directed Should a directed graph be treated as directed
+#' @importFrom igraph assortativity assortativity_nominal
+#' @export
+graph_assortativity <- function(attr, in_attr = NULL, directed = TRUE) {
+  graph <- .G()
+  if (is.numeric(attr)) {
+    assortativity(graph, attr, in_attr, directed)
+  } else {
+    assortativity_nominal(graph, as.factor(attr), directed)
+  }
+}
+#' @describeIn graph_measures Calculate the number of automorphisms of the graph. Wraps [igraph::automorphisms()]
+#' @inheritParams igraph::automorphisms
+#' @importFrom igraph automorphisms
+#' @export
+graph_automorphisms <- function(sh = 'fm') {
+  graph <- .G()
+  as.numeric(automorphisms(graph, sh)$group_size)
+}
+#' @describeIn graph_measures Get the size of the largest clique. Wraps [igraph::clique_num()]
+#' @importFrom igraph clique_num
+#' @export
+graph_clique_num <- function() {
+  graph <- .G()
+  clique_num(graph)
+}
+#' @describeIn graph_measures Get the number of maximal cliques in the graph. Wraps [igraph::count_max_cliques()]
+#' @param min,max The upper and lower bounds of the cliques to be considered.
+#' @param subset The indexes of the nodes to start the search from (logical or integer). If provided only the cliques containing these nodes will be counted.
+#' @importFrom igraph count_max_cliques
+#' @export
+graph_clique_count <- function(min = NULL, max = NULL, subset = NULL) {
+  graph <- .G()
+  if (is.logical(subset)) subset <- which(subset)
+  count_max_cliques(graph, min, max, subset)
+}
+#' @describeIn graph_measures Count the number of unconnected componenets in the graph. Wraps [igraph::count_components()]
+#' @param type The type of component to count, either 'weak' or 'strong'. Ignored for undirected graphs.
+#' @importFrom igraph count_components
+#' @export
+graph_component_count <- function(type = 'weak') {
+  graph <- .G()
+  count_components(graph, type)
+}
+#' @describeIn graph_measures Count the number of motifs in a graph. Wraps [igraph::count_motifs()]
+#' @inheritParams igraph::count_motifs
+#' @importFrom igraph count_motifs
+#' @export
+graph_motif_count <- function(size = 3, cut.prob = rep(0, size)) {
+  graph <- .G()
+  count_motifs(graph, size, cut.prob)
+}
+#' @describeIn graph_measures Measures the length of the longest geodesic. Wraps [igraph::diameter()]
+#' @inheritParams igraph::diameter
+#' @importFrom igraph diameter
+#' @export
+graph_diameter <- function(directed = TRUE, unconnected = TRUE, weights = NULL) {
+  graph <- .G()
+  diameter(graph, directed, unconnected, weights)
+}
+#' @describeIn graph_measures Measrues the length of the shortest circle in the graph. Wraps [igraph::girth()]
+#' @importFrom igraph girth
+#' @export
+graph_girth <- function() {
+  graph <- .G()
+  girth(graph, F)$girth
+}
+#' @describeIn graph_measures Measures the smallest eccentricity in the graph. Wraps [igraph::radius()]
+#' @param mode How should eccentricity be calculated. If `"out"` only outbound edges are followed. If `"in"` only inbound are followed. If `"all"` all edges are followed. Ignored for undirected graphs.
+#' @importFrom igraph radius
+#' @export
+graph_radius <- function(mode = 'out') {
+  graph <- .G()
+  radius(graph, mode)
+}
+#' @describeIn graph_measures Counts the number of mutually connected nodes. Wraps [igraph::dyad_census()]
+#' @importFrom igraph dyad_census
+#' @export
+graph_mutual_count <- function() {
+  graph <- .G()
+  unname(dyad_census(graph)['mut'])
+}
+#' @describeIn graph_measures Counts the number of asymmetrically connected nodes. Wraps [igraph::dyad_census()]
+#' @importFrom igraph dyad_census
+#' @export
+graph_asym_count <- function() {
+  graph <- .G()
+  unname(dyad_census(graph)['asym'])
+}
+#' @describeIn graph_measures Counts the number of unconnected node pairs. Wraps [igraph::dyad_census()]
+#' @importFrom igraph dyad_census
+#' @export
+graph_unconn_count <- function() {
+  graph <- .G()
+  unname(dyad_census(graph)['null'])
+}
+#' @describeIn graph_measures Counts the number of edges in the graph. Wraps [igraph::gsize()]
+#' @importFrom igraph gsize
+#' @export
+graph_size <- function() {
+  graph <- .G()
+  gsize(graph)
+}
+#' @describeIn graph_measures Counts the number of nodes in the graph. Wraps [igraph::gorder()]
+#' @importFrom igraph gorder
+#' @export
+graph_order <- function() {
+  graph <- .G()
+  gorder(graph)
+}
+#' @describeIn graph_measures Measures the proportion of mutual connections in the graph. Wraps [igraph::reciprocity()]
+#' @importFrom igraph reciprocity
+#' @export
+graph_reciprocity <- function(ignore.loops = TRUE, ratio = FALSE) {
+  graph <- .G()
+  reciprocity(graph, ignore.loops, mode = if (ratio) 'ratio' else 'default')
+}

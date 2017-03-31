@@ -95,6 +95,24 @@ is_tree <- function(x) {
 is_forest <- function(x) {
   !is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) - count_components(x) == 1)
 }
+#' @importFrom igraph is_bipartite
+#' @export
+igraph::is_bipartite
+#' @importFrom igraph is_chordal
+#' @export
+igraph::is_chordal
+#' @importFrom igraph is_connected
+#' @export
+igraph::is_connected
+#' @importFrom igraph is_dag
+#' @export
+igraph::is_dag
+#' @importFrom igraph is_directed
+#' @export
+igraph::is_directed
+#' @importFrom igraph is_simple
+#' @export
+igraph::is_simple
 #' @export
 as_tbl_graph.tbl_graph <- function(x, ...) {
   x
