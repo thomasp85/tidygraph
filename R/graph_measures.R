@@ -135,6 +135,8 @@ graph_order <- function() {
   gorder(graph)
 }
 #' @describeIn graph_measures Measures the proportion of mutual connections in the graph. Wraps [igraph::reciprocity()]
+#' @param ignore_loops Logical. Should loops be ignored while calculating the reciprocity
+#' @param ratio Should the old "ratio" approach from igraph < v0.6 be used
 #' @importFrom igraph reciprocity
 #' @export
 graph_reciprocity <- function(ignore.loops = TRUE, ratio = FALSE) {
