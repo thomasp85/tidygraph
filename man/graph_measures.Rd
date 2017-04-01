@@ -50,7 +50,7 @@ graph_size()
 
 graph_order()
 
-graph_reciprocity(ignore.loops = TRUE, ratio = FALSE)
+graph_reciprocity(ignore_loops = TRUE, ratio = FALSE)
 }
 \arguments{
 \item{attr}{The node attribute to measure on}
@@ -91,9 +91,9 @@ used by default.}
 
 \item{mode}{How should eccentricity be calculated. If \code{"out"} only outbound edges are followed. If \code{"in"} only inbound are followed. If \code{"all"} all edges are followed. Ignored for undirected graphs.}
 
-\item{ratio}{Should the old "ratio" approach from igraph < v0.6 be used}
-
 \item{ignore_loops}{Logical. Should loops be ignored while calculating the reciprocity}
+
+\item{ratio}{Should the old "ratio" approach from igraph < v0.6 be used}
 }
 \value{
 A scalar, the type depending on the function

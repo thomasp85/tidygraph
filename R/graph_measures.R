@@ -139,7 +139,7 @@ graph_order <- function() {
 #' @param ratio Should the old "ratio" approach from igraph < v0.6 be used
 #' @importFrom igraph reciprocity
 #' @export
-graph_reciprocity <- function(ignore.loops = TRUE, ratio = FALSE) {
+graph_reciprocity <- function(ignore_loops = TRUE, ratio = FALSE) {
   graph <- .G()
-  reciprocity(graph, ignore.loops, mode = if (ratio) 'ratio' else 'default')
+  reciprocity(graph, ignore_loops, mode = if (ratio) 'ratio' else 'default')
 }
