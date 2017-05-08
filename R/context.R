@@ -4,32 +4,32 @@ ContextBuilder <- R6Class(
   public = list(
     set = function(graph) {
       stopifnot(inherits(graph, 'tbl_graph'))
-      private$context <- graph
+      private$context <- c(private$context, list(graph))
       invisible(self)
     },
     clear = function() {
-      private$context <- NULL
+      private$context <- private$context[-length(private$context)]
     },
     alive = function() {
-      !is.null(private$context)
+      length(private$context) != 0
     },
     graph = function() {
       private$check()
-      private$context
+      private$context[[length(private$context)]]
     },
     nodes = function() {
-      as_tibble(self$graph, active = 'nodes')
+      as_tibble(self$graph(), active = 'nodes')
     },
     edges = function() {
-      as_tibble(self$graph, active = 'edges')
+      as_tibble(self$graph(), active = 'edges')
     },
     active = function() {
       private$check()
-      active(private$context)
+      active(self$graph())
     }
   ),
   private = list(
-    context = NULL,
+    context = list(),
     check = function() {
       if (!self$alive()) {
         stop('This function should not be called directly', call. = FALSE)
