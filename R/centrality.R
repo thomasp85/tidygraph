@@ -39,12 +39,12 @@ centrality_authority <- function(...) {
 }
 #' @describeIn centrality Wrapper for [igraph::betweenness()] and [igraph::estimate_betweenness()]
 #' @importFrom igraph V betweenness estimate_betweenness
-#' @importFrom rlang dots_quos
+#' @importFrom rlang quos
 #' @export
 centrality_betweenness <- function(...) {
   expect_nodes()
   graph <- .G()
-  dots <- dots_quos(...)
+  dots <- quos(...)
   if (is.null(dots$cutoff)) {
     betweenness(graph = graph, v = V(graph), ...)
   } else {
@@ -61,12 +61,12 @@ centrality_power <- function(...) {
 }
 #' @describeIn centrality Wrapper for [igraph::closeness()] and [igraph::estimate_closeness()]
 #' @importFrom igraph V closeness estimate_closeness
-#' @importFrom rlang dots_quos
+#' @importFrom rlang quos
 #' @export
 centrality_closeness <- function(...) {
   expect_nodes()
   graph <- .G()
-  dots <- dots_quos(...)
+  dots <- quos(...)
   if (is.null(dots$cutoff)) {
     closeness(graph = graph, vids = V(graph), ...)
   } else {
@@ -104,12 +104,12 @@ centrality_subgraph <- function(...) {
 }
 #' @describeIn centrality Wrapper for [igraph::degree()] and [igraph::strength()]
 #' @importFrom igraph V degree strength
-#' @importFrom rlang dots_quos
+#' @importFrom rlang quos
 #' @export
 centrality_degree <- function(...) {
   expect_nodes()
   graph <- .G()
-  dots <- dots_quos(...)
+  dots <- quos(...)
   if (is.null(dots$weights)) {
     degree(graph = graph, v = V(graph), ...)
   } else {

@@ -1,5 +1,5 @@
 #' @importFrom dplyr distinct
-#' @importFrom rlang dots_quos quo as_symbol eval_tidy UQS
+#' @importFrom rlang quos quo sym eval_tidy UQS
 #' @importFrom utils head
 #' @export
 distinct.tbl_graph <- function(.data, ..., .keep_all = FALSE) {
@@ -10,9 +10,9 @@ distinct.tbl_graph <- function(.data, ..., .keep_all = FALSE) {
     stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
   }
   orig_ind <- seq_len(nrow(d_tmp))
-  dot_list <- dots_quos(..., .named = TRUE)
+  dot_list <- quos(..., .named = TRUE)
   if (length(dot_list) == 0) {
-    dot_list <- lapply(names(d_tmp), function(n) quo(!! as_symbol(n)))
+    dot_list <- lapply(names(d_tmp), function(n) quo(!! sym(n)))
     names(dot_list) <- names(d_tmp)
   }
   d_tmp$.tbl_graph_index <- orig_ind
