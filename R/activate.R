@@ -36,10 +36,9 @@ activate <- function(.data, what) {
   UseMethod('activate')
 }
 #' @export
+#' @importFrom rlang enquo quo_text
 activate.tbl_graph <- function(.data, what) {
-  what_name <- deparse(substitute(what))
-  if (what_name %in% c('nodes', 'edges')) what <- what_name
-  active(.data) <- what
+  active(.data) <- quo_text(enquo(what))
   .data
 }
 #' @export
@@ -54,9 +53,15 @@ active <- function(x) {
   attr(x, 'active')
 }
 `active<-` <- function(x, value) {
-  if (!value %in% c('nodes', 'edges')) {
+  value <- gsub('"', '', value)
+  value <- switch(
+    value,
+    vertices = ,
+    nodes = 'nodes',
+    links = ,
+    edges = 'edges',
     stop('Only possible to activate nodes and edges', call. = FALSE)
-  }
+  )
   attr(x, 'active') <- value
   x
 }
