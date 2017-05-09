@@ -53,8 +53,7 @@ activate.grouped_tbl_graph <- function(.data, what) {
 active.tbl_graph <- function(x) {
   attr(x, 'active')
 }
-#' @name active
-#' @rdname activate
+
 #' @keywords internal
 `active<-.tbl_graph` <- function(x, value) {
   if (!value %in% c('nodes', 'edges')) {

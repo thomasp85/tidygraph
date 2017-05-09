@@ -6,8 +6,6 @@
 \alias{activate.grouped_tbl_graph}
 \alias{activate}
 \alias{active.tbl_graph}
-\alias{active}
-\alias{active<-.tbl_graph}
 \title{Determine the context of subsequent manipulations}
 \usage{
 \method{activate}{tbl_graph}(.data, what)
@@ -15,8 +13,6 @@
 \method{activate}{grouped_tbl_graph}(.data, what)
 
 \method{active}{tbl_graph}(x)
-
-\method{active}{tbl_graph}(x) <- value
 }
 \arguments{
 \item{.data, x}{A tbl_graph or a grouped_tbl_graph}
@@ -54,4 +50,3 @@ gr \%>\%
   activate(context) \%>\%
   as_tibble()
 }
-\keyword{internal}
