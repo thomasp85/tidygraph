@@ -53,7 +53,7 @@ summarise operation modifies the number of rows in the data, but unlike
 filtering there are no specific rows that are retained. An alternative 
 `collapse` functionality is under consideration where nodes (and edges) can be
 merged. If data summaries are needed these can be achieved by extracting the 
-node or edge data using as_tibble prior to using `summarise` (note that this 
+node or edge data using `as_tibble` prior to using `summarise` (note that this 
 will remove the graph context)
 
 2. **do:** The rationale is really just like the above - `do` can potentially

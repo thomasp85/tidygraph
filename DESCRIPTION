@@ -23,9 +23,11 @@ Imports: tibble,
     R6,
     Rcpp,
     tools,
-    stats
+    stats, 
+    activate
 Remotes: hadley/dplyr,
-    hadley/rlang
+    hadley/rlang, 
+    r-gris/activate
 URL: https://github.com/thomasp85/tidygraph
 BugReports: https://github.com/thomasp85/tidygraph/issues
 LinkingTo: Rcpp
