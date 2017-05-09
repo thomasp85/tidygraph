@@ -10,13 +10,16 @@
 #'
 #' @param what What should get activated? Possible values are `nodes` or
 #' `edges`.
-#'
+#' 
+#' @param value 
 #' @return A tbl_graph
 #'
 #' @note Activate will ungroup a grouped_tbl_graph.
 #'
 #' @export
-#'
+#' @importFrom activate activate active active<-
+#' @name activate
+#' @export activate active 
 #' @examples
 #' gr <- as_tbl_graph(matrix(sample(5, 16, TRUE), ncol = 2))
 #' gr <- gr %>%
@@ -31,29 +34,29 @@
 #' gr %>%
 #'   activate(context) %>%
 #'   as_tibble()
-#'
-activate <- function(.data, what) {
-  UseMethod('activate')
-}
-#' @export
 activate.tbl_graph <- function(.data, what) {
   what_name <- deparse(substitute(what))
   if (what_name %in% c('nodes', 'edges')) what <- what_name
   active(.data) <- what
   .data
 }
+#' @rdname activate
 #' @export
 activate.grouped_tbl_graph <- function(.data, what) {
   message('Ungrouping graph...')
-  activate(ungroup(.data), what)
+  activate::activate(ungroup(.data), what)
 }
 
+#' @name activate
 #' @rdname activate
 #' @export
-active <- function(x) {
+active.tbl_graph <- function(x) {
   attr(x, 'active')
 }
-`active<-` <- function(x, value) {
+#' @name active
+#' @rdname activate
+#' @keywords internal
+`active<-.tbl_graph` <- function(x, value) {
   if (!value %in% c('nodes', 'edges')) {
     stop('Only possible to activate nodes and edges', call. = FALSE)
   }

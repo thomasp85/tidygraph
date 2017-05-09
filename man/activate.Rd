@@ -2,18 +2,29 @@
 % Please edit documentation in R/activate.R
 \name{activate}
 \alias{activate}
+\alias{activate.tbl_graph}
+\alias{activate.grouped_tbl_graph}
+\alias{activate}
+\alias{active.tbl_graph}
 \alias{active}
+\alias{active<-.tbl_graph}
 \title{Determine the context of subsequent manipulations}
 \usage{
-activate(.data, what)
+\method{activate}{tbl_graph}(.data, what)
 
-active(x)
+\method{activate}{grouped_tbl_graph}(.data, what)
+
+\method{active}{tbl_graph}(x)
+
+\method{active}{tbl_graph}(x) <- value
 }
 \arguments{
 \item{.data, x}{A tbl_graph or a grouped_tbl_graph}
 
 \item{what}{What should get activated? Possible values are \code{nodes} or
 \code{edges}.}
+
+\item{value}{}
 }
 \value{
 A tbl_graph
@@ -42,5 +53,5 @@ context <- 'nodes'
 gr \%>\%
   activate(context) \%>\%
   as_tibble()
-
 }
+\keyword{internal}
