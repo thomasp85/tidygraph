@@ -36,11 +36,4 @@ gr <- gr \%>\%
   activate(edges) \%>\%
   arrange(from)
 
-# activate will do standard evaluation if the provided symbol is anything
-# other than nodes and edges
-context <- 'nodes'
-gr \%>\%
-  activate(context) \%>\%
-  as_tibble()
-
 }
