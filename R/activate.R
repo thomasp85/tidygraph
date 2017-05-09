@@ -11,7 +11,6 @@
 #' @param what What should get activated? Possible values are `nodes` or
 #' `edges`.
 #' 
-#' @param value 
 #' @return A tbl_graph
 #'
 #' @note Activate will ungroup a grouped_tbl_graph.

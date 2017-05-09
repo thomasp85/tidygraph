@@ -19,8 +19,6 @@
 
 \item{what}{What should get activated? Possible values are \code{nodes} or
 \code{edges}.}
-
-\item{value}{}
 }
 \value{
 A tbl_graph
