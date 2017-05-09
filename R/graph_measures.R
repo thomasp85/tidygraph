@@ -143,3 +143,11 @@ graph_reciprocity <- function(ignore_loops = TRUE, ratio = FALSE) {
   graph <- .G()
   reciprocity(graph, ignore_loops, mode = if (ratio) 'ratio' else 'default')
 }
+#' @describeIn graph_measures Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps [igraph::min_cut()]@export
+#' @param capacity The capacity of the edges
+#' @importFrom igraph min_cut
+#' @export
+graph_min_cut <- function(capacity = NULL) {
+  graph <- .G()
+  min_cut(graph, capacity = capacity)$value
+}

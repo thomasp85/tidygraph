@@ -18,6 +18,7 @@
 \alias{graph_size}
 \alias{graph_order}
 \alias{graph_reciprocity}
+\alias{graph_min_cut}
 \title{Graph measurements}
 \usage{
 graph_adhesion()
@@ -51,6 +52,8 @@ graph_size()
 graph_order()
 
 graph_reciprocity(ignore_loops = TRUE, ratio = FALSE)
+
+graph_min_cut(capacity = NULL)
 }
 \arguments{
 \item{attr}{The node attribute to measure on}
@@ -94,6 +97,8 @@ used by default.}
 \item{ignore_loops}{Logical. Should loops be ignored while calculating the reciprocity}
 
 \item{ratio}{Should the old "ratio" approach from igraph < v0.6 be used}
+
+\item{capacity}{The capacity of the edges}
 }
 \value{
 A scalar, the type depending on the function
@@ -139,5 +144,7 @@ them.
 \item \code{graph_order}: Counts the number of nodes in the graph. Wraps \code{\link[igraph:gorder]{igraph::gorder()}}
 
 \item \code{graph_reciprocity}: Measures the proportion of mutual connections in the graph. Wraps \code{\link[igraph:reciprocity]{igraph::reciprocity()}}
+
+\item \code{graph_min_cut}: Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps \code{\link[igraph:min_cut]{igraph::min_cut()}}@export
 }}
 
