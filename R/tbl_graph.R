@@ -6,7 +6,7 @@
 #' `grouped_tbl_graph` is the equivalent of a `grouped_df` where either the
 #' nodes or the edges has been grouped. The `grouped_tbl_graph` is not
 #' constructed directly but by using the [group_by()] verb. After creation of a
-#' `tble_graph` the nodes are activated by default. The context can be changed
+#' `tbl_graph` the nodes are activated by default. The context can be changed
 #' using the [activate()] verb and affects all subsequent operations. Changing
 #' context automatically drops any grouping. The current active context can
 #' always be extracted with [as_tibble()], which drops the graph structure and
