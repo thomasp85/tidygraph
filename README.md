@@ -30,7 +30,7 @@ Roadmap
 
 The goal is to support all verbs from dplyr that makes sense, which is almost all of them. It is definetly easier to list the ones that wont get supported and describe why:
 
-1.  **All summarise functions:** Summarising nodes and edges in a graph context is ill-defined as it is unclear how the resulting graph should be created. A summarise operation modifies the number of rows in the data, but unlike filtering there are no specific rows that are retained. An alternative `collapse` functionality is under consideration where nodes (and edges) can be merged. If data summaries are needed these can be achieved by extracting the node or edge data using as\_tibble prior to using `summarise` (note that this will remove the graph context)
+1.  **All summarise functions:** Summarising nodes and edges in a graph context is ill-defined as it is unclear how the resulting graph should be created. A summarise operation modifies the number of rows in the data, but unlike filtering there are no specific rows that are retained. An alternative `collapse` functionality is under consideration where nodes (and edges) can be merged. If data summaries are needed these can be achieved by extracting the node or edge data using `as_tibble` prior to using `summarise` (note that this will remove the graph context)
 
 2.  **do:** The rationale is really just like the above - `do` can potentially modify the data in ways that does not make sense in a graph context. The solution is again to extract the data prior to the `do` call.
 
