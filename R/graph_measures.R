@@ -143,11 +143,18 @@ graph_reciprocity <- function(ignore_loops = TRUE, ratio = FALSE) {
   graph <- .G()
   reciprocity(graph, ignore_loops, mode = if (ratio) 'ratio' else 'default')
 }
-#' @describeIn graph_measures Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps [igraph::min_cut()]@export
+#' @describeIn graph_measures Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps [igraph::min_cut()]
 #' @param capacity The capacity of the edges
 #' @importFrom igraph min_cut
 #' @export
 graph_min_cut <- function(capacity = NULL) {
   graph <- .G()
   min_cut(graph, capacity = capacity)$value
+}
+#' @describeIn graph_measures Calculates the mean distance between all node pairs in the graph. Wraps [igraph::mean_distance()]
+#' @importFrom igraph mean_distance
+#' @export
+graph_mean_dist <- function(directed = TRUE, unconnected = TRUE) {
+  graph <- .G()
+  mean_distance(graph, directed = directed, unconnected = unconnected)
 }

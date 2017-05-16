@@ -19,6 +19,7 @@
 \alias{graph_order}
 \alias{graph_reciprocity}
 \alias{graph_min_cut}
+\alias{graph_mean_dist}
 \title{Graph measurements}
 \usage{
 graph_adhesion()
@@ -54,6 +55,8 @@ graph_order()
 graph_reciprocity(ignore_loops = TRUE, ratio = FALSE)
 
 graph_min_cut(capacity = NULL)
+
+graph_mean_dist(directed = TRUE, unconnected = TRUE)
 }
 \arguments{
 \item{attr}{The node attribute to measure on}
@@ -145,6 +148,8 @@ them.
 
 \item \code{graph_reciprocity}: Measures the proportion of mutual connections in the graph. Wraps \code{\link[igraph:reciprocity]{igraph::reciprocity()}}
 
-\item \code{graph_min_cut}: Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps \code{\link[igraph:min_cut]{igraph::min_cut()}}@export
+\item \code{graph_min_cut}: Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps \code{\link[igraph:min_cut]{igraph::min_cut()}}
+
+\item \code{graph_mean_dist}: Calculates the mean distance between all node pairs in the graph. Wraps \code{\link[igraph:mean_distance]{igraph::mean_distance()}}
 }}
 
