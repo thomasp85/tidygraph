@@ -12,7 +12,8 @@
 \alias{centrality_pagerank}
 \alias{centrality_subgraph}
 \alias{centrality_degree}
-\title{Calculate node centrality}
+\alias{centrality_edge_betweenness}
+\title{Calculate node and edge centrality}
 \usage{
 centrality_alpha(...)
 
@@ -33,6 +34,8 @@ centrality_pagerank(...)
 centrality_subgraph(...)
 
 centrality_degree(...)
+
+centrality_edge_betweenness(...)
 }
 \arguments{
 \item{...}{Parameters passed on to the \code{igraph} implementation.}
@@ -71,6 +74,8 @@ vector with measures ready to be added to the node data.
 \item \code{centrality_subgraph}: Wrapper for \code{\link[igraph:subgraph_centrality]{igraph::subgraph_centrality()}}
 
 \item \code{centrality_degree}: Wrapper for \code{\link[igraph:degree]{igraph::degree()}} and \code{\link[igraph:strength]{igraph::strength()}}
+
+\item \code{centrality_edge_betweenness}: Wrapper for \code{\link[igraph:edge_betweenness]{igraph::edge_betweenness()}}
 }}
 
 \examples{

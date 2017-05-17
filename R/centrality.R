@@ -1,4 +1,4 @@
-#' Calculate node centrality
+#' Calculate node and edge centrality
 #'
 #' The centrality of a node measures the importance of node in the network. As
 #' the concept of importance is ill-defined and dependent on the network and
@@ -114,5 +114,19 @@ centrality_degree <- function(...) {
     degree(graph = graph, v = V(graph), ...)
   } else {
     strength(graph = graph, vids = V(graph), ...)
+  }
+}
+#' @describeIn centrality Wrapper for [igraph::edge_betweenness()]
+#' @importFrom igraph edge_betweenness estimate_edge_betweenness E
+#' @importFrom rlang quos
+#' @export
+centrality_edge_betweenness <- function(...) {
+  expect_edges()
+  graph <- .G()
+  dots <- quos(...)
+  if (is.null(dots$cutoff)) {
+    edge_betweenness(graph = graph, e = E(graph), ...)
+  } else {
+    estimate_edge_betweenness(graph = graph, e = E(graph), ...)
   }
 }
