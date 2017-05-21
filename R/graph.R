@@ -1,4 +1,4 @@
-#' @describeIn as_tbl_graph Method for handling graphNEL objects from the graph package (on Bioconductor)
+#' @describeIn tbl_graph Method for handling graphNEL objects from the graph package (on Bioconductor)
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble tibble as_tibble
 #' @importFrom igraph as_edgelist edge_attr<- vertex_attr<- V
@@ -33,7 +33,7 @@ as_tbl_graph.graphNEL <- function(x, ...) {
   vertex_attr(graph) <- node_data
   as_tbl_graph(graph)
 }
-#' @describeIn as_tbl_graph Method for handling graphAM objects from the graph package (on Bioconductor)
+#' @describeIn tbl_graph Method for handling graphAM objects from the graph package (on Bioconductor)
 #' @export
 as_tbl_graph.graphAM <- function(x, ...) {
   if (!requireNamespace("methods", quietly = TRUE)) {
@@ -41,7 +41,7 @@ as_tbl_graph.graphAM <- function(x, ...) {
   }
   as_tbl_graph(methods::as(x, 'graphNEL'), ...)
 }
-#' @describeIn as_tbl_graph Method for handling graphBAM objects from the graph package (on Bioconductor)
+#' @describeIn tbl_graph Method for handling graphBAM objects from the graph package (on Bioconductor)
 #' @export
 as_tbl_graph.graphBAM <- function(x, ...) {
   if (!requireNamespace("methods", quietly = TRUE)) {

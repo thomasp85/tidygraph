@@ -16,8 +16,8 @@
 \alias{as_tbl_graph.network}
 \alias{as_tbl_graph.phylo}
 \alias{as_tbl_graph.evonet}
-\alias{as_tbl_graph}
 \alias{tbl_graph}
+\alias{as_tbl_graph}
 \alias{as_tbl_graph.default}
 \alias{is.tbl_graph}
 \title{A data structure for tidy graph manipulation}
@@ -48,6 +48,8 @@
 
 \method{as_tbl_graph}{evonet}(x, directed = TRUE, ...)
 
+tbl_graph(nodes = NULL, edges = NULL, directed = TRUE)
+
 as_tbl_graph(x, ...)
 
 \method{as_tbl_graph}{default}(x, ...)
@@ -63,6 +65,13 @@ is.tbl_graph(x)
 
 \item{mode}{In case \code{directed = TRUE} should the edge direction be away from
 node or towards. Possible values are \code{"out"} (default) or \code{"in"}.}
+
+\item{nodes}{A \code{data.frame} containing information about the nodes in the
+graph.}
+
+\item{edges}{A \code{data.frame} containing information about the edges in the
+graph. The terminal nodes of each edge must either be encoded in a \code{to} and
+\code{from} column, or in the two first columns, as integers.}
 }
 \value{
 A \code{tbl_graph} object
@@ -87,35 +96,35 @@ Constructors are provided for most data structures that resembles networks.
 If a class provides an \code{\link[igraph:as.igraph]{igraph::as.igraph()}} method it is automatically
 supported.
 }
-\section{Methods (by class)}{
+\section{Methods (by generic)}{
 \itemize{
-\item \code{data.frame}: Method for edge table
+\item \code{as_tbl_graph}: Method for edge table
 
-\item \code{Node}: Method to deal with Node objects from the data.tree package
+\item \code{as_tbl_graph}: Method to deal with Node objects from the data.tree package
 
-\item \code{dendrogram}: Method for dendrogram objects
+\item \code{as_tbl_graph}: Method for dendrogram objects
 
-\item \code{graphNEL}: Method for handling graphNEL objects from the graph package (on Bioconductor)
+\item \code{as_tbl_graph}: Method for handling graphNEL objects from the graph package (on Bioconductor)
 
-\item \code{graphAM}: Method for handling graphAM objects from the graph package (on Bioconductor)
+\item \code{as_tbl_graph}: Method for handling graphAM objects from the graph package (on Bioconductor)
 
-\item \code{graphBAM}: Method for handling graphBAM objects from the graph package (on Bioconductor)
+\item \code{as_tbl_graph}: Method for handling graphBAM objects from the graph package (on Bioconductor)
 
-\item \code{hclust}: Method for hclust objects
+\item \code{as_tbl_graph}: Method for hclust objects
 
-\item \code{igraph}: Method for igraph object. Simply subclasses the object into a \code{tbl_graph}
+\item \code{as_tbl_graph}: Method for igraph object. Simply subclasses the object into a \code{tbl_graph}
 
-\item \code{list}: Method for adjacency lists and lists of node and edge tables
+\item \code{as_tbl_graph}: Method for adjacency lists and lists of node and edge tables
 
-\item \code{matrix}: Method for edgelist, adjacency and incidence matrices
+\item \code{as_tbl_graph}: Method for edgelist, adjacency and incidence matrices
 
-\item \code{network}: Method to handle network objects from the \code{network}
+\item \code{as_tbl_graph}: Method to handle network objects from the \code{network}
 package. Requires this packages to work.
 
-\item \code{phylo}: Method for handling phylo objects from the ape package
+\item \code{as_tbl_graph}: Method for handling phylo objects from the ape package
 
-\item \code{evonet}: Method for handling evonet objects from the ape package
+\item \code{as_tbl_graph}: Method for handling evonet objects from the ape package
 
-\item \code{default}: Default method. tries to call \code{\link[igraph:as.igraph]{igraph::as.igraph()}} on the input.
+\item \code{as_tbl_graph}: Default method. tries to call \code{\link[igraph:as.igraph]{igraph::as.igraph()}} on the input.
 }}
 

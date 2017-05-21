@@ -1,4 +1,4 @@
-#' @describeIn as_tbl_graph Method for edgelist, adjacency and incidence matrices
+#' @describeIn tbl_graph Method for edgelist, adjacency and incidence matrices
 #' @export
 as_tbl_graph.matrix <- function(x, directed = TRUE, ...) {
   graph <- switch(

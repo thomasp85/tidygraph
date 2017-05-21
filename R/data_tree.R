@@ -1,4 +1,4 @@
-#' @describeIn as_tbl_graph Method to deal with Node objects from the data.tree package
+#' @describeIn tbl_graph Method to deal with Node objects from the data.tree package
 #' @export
 as_tbl_graph.Node <- function(x, directed = TRUE, mode = 'out', ...) {
   if (!requireNamespace("data.tree", quietly = TRUE)) {

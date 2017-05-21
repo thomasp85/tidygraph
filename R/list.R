@@ -1,4 +1,4 @@
-#' @describeIn as_tbl_graph Method for adjacency lists and lists of node and edge tables
+#' @describeIn tbl_graph Method for adjacency lists and lists of node and edge tables
 #' @export
 as_tbl_graph.list <- function(x, directed = TRUE, ...) {
   graph <- switch(

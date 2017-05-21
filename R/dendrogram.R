@@ -1,4 +1,4 @@
-#' @describeIn as_tbl_graph Method for dendrogram objects
+#' @describeIn tbl_graph Method for dendrogram objects
 #' @importFrom dplyr bind_rows
 #' @export
 as_tbl_graph.dendrogram <- function(x, directed = TRUE, mode = 'out', ...) {

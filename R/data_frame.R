@@ -1,4 +1,4 @@
-#' @describeIn as_tbl_graph Method for edge table
+#' @describeIn tbl_graph Method for edge table
 #' @export
 #' @importFrom igraph graph_from_data_frame
 as_tbl_graph.data.frame <- function(x, directed = TRUE, ...) {

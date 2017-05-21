@@ -19,6 +19,13 @@
 #' If a class provides an [igraph::as.igraph()] method it is automatically
 #' supported.
 #'
+#' @param nodes A `data.frame` containing information about the nodes in the
+#' graph.
+#'
+#' @param edges A `data.frame` containing information about the edges in the
+#' graph. The terminal nodes of each edge must either be encoded in a `to` and
+#' `from` column, or in the two first columns, as integers.
+#'
 #' @param x An object convertible to a `tbl_graph`
 #'
 #' @param directed Should the constructed graph be directed (defaults to `TRUE`)
@@ -30,13 +37,17 @@
 #'
 #' @return A `tbl_graph` object
 #'
-#' @aliases tbl_graph
 #' @export
 #'
+tbl_graph <- function(nodes = NULL, edges = NULL, directed = TRUE) {
+  as_tbl_graph(list(nodes = nodes, edges = edges), directed = directed)
+}
+#' @rdname tbl_graph
+#' @export
 as_tbl_graph <- function(x, ...) {
   UseMethod('as_tbl_graph')
 }
-#' @describeIn as_tbl_graph Default method. tries to call [igraph::as.igraph()] on the input.
+#' @describeIn tbl_graph Default method. tries to call [igraph::as.igraph()] on the input.
 #' @export
 #' @importFrom igraph as.igraph
 as_tbl_graph.default <- function(x, ...) {
@@ -44,7 +55,7 @@ as_tbl_graph.default <- function(x, ...) {
     as_tbl_graph(as.igraph(x))
   }, error = function(e) stop('No support for ', class(x)[1], ' objects', call. = FALSE))
 }
-#' @rdname as_tbl_graph
+#' @rdname tbl_graph
 #' @export
 is.tbl_graph <- function(x) {
   inherits(x, 'tbl_graph')

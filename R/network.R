@@ -1,4 +1,4 @@
-#' @describeIn as_tbl_graph Method to handle network objects from the `network`
+#' @describeIn tbl_graph Method to handle network objects from the `network`
 #' package. Requires this packages to work.
 #' @export
 as_tbl_graph.network <- function(x, ...) {
