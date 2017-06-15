@@ -21,3 +21,7 @@ dplyr::mutate_all
 #' @importFrom dplyr mutate_at
 #' @export
 dplyr::mutate_at
+
+#' @importFrom dplyr n
+#' @export
+dplyr::n

@@ -28,3 +28,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+
+static const R_CallMethodDef CallEntries[] = {
+    {"tidygraph_get_paths", (DL_FUNC) &tidygraph_get_paths, 1},
+    {"tidygraph_collect_offspring", (DL_FUNC) &tidygraph_collect_offspring, 2},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_tidygraph(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}
