@@ -12,7 +12,8 @@
 \alias{group_optimal}
 \alias{group_spinglass}
 \alias{group_walktrap}
-\title{Group nodes based on community structure}
+\alias{group_biconnected_component}
+\title{Group nodes and edges based on community structure}
 \usage{
 group_components(...)
 
@@ -33,6 +34,8 @@ group_optimal(...)
 group_spinglass(...)
 
 group_walktrap(...)
+
+group_biconnected_component()
 }
 \arguments{
 \item{...}{arguments passed on to the clustering function in question}
@@ -45,7 +48,9 @@ These functions are wrappers around the various clustering functions provided
 by \code{igraph}. As with the other wrappers they automatically use the graph that
 is being computed on, and otherwise passes on its arguments to the relevant
 clustering function. The return value is always a numeric vector of group
-memberships so that nodes with the same number are part of the same group.
+memberships so that nodes or edges with the same number are part of the same
+group. Grouping is predominantly made on nodes and currently the only
+grouping of edges supported is biconnected components.
 }
 \section{Functions}{
 \itemize{
@@ -68,6 +73,8 @@ memberships so that nodes with the same number are part of the same group.
 \item \code{group_spinglass}: Group nodes using simulated annealing with \code{\link[igraph:cluster_spinglass]{igraph::cluster_spinglass()}}
 
 \item \code{group_walktrap}: Group nodes via short random walks using \code{\link[igraph:cluster_walktrap]{igraph::cluster_walktrap()}}
+
+\item \code{group_biconnected_component}: Group edges by their membership of the maximal binconnected components using \code{\link[igraph:biconnected_components]{igraph::biconnected_components()}}
 }}
 
 \examples{

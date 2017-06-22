@@ -92,7 +92,7 @@ group_walktrap <- function(...) {
   expect_nodes()
   membership(cluster_walktrap(graph = .G(), ...))
 }
-#' @describeIn group_graph Group edges by their membership of the maximal binconnected components using [igraph::biconnected_componenents()]
+#' @describeIn group_graph Group edges by their membership of the maximal binconnected components using [igraph::biconnected_components()]
 #' @importFrom igraph biconnected_components
 #' @export
 group_biconnected_component <- function() {
