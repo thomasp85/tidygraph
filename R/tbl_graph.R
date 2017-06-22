@@ -164,15 +164,6 @@ set_edge_attributes <- function(x, value) {
   edge_attr(x) <- as.list(value)
   x
 }
-#' @importFrom igraph as.igraph
-#' @export
-as.igraph.tbl_graph <- function(x, ...) {
-  class(x) <- 'igraph'
-  attr(x, 'active') <- NULL
-  x
-}
-#' @export
-igraph::as.igraph
 #' @importFrom dplyr tbl_vars
 #' @export
 tbl_vars.tbl_graph <- function(x) {

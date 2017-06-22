@@ -5,3 +5,13 @@ as_tbl_graph.igraph <- function(x, ...) {
   attr(x, 'active') <- 'nodes'
   x
 }
+
+#' @importFrom igraph as.igraph
+#' @export
+as.igraph.tbl_graph <- function(x, ...) {
+  class(x) <- 'igraph'
+  attr(x, 'active') <- NULL
+  x
+}
+#' @export
+igraph::as.igraph
