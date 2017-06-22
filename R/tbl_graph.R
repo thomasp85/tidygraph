@@ -171,6 +171,8 @@ as.igraph.tbl_graph <- function(x, ...) {
   attr(x, 'active') <- NULL
   x
 }
+#' @export
+igraph::as.igraph
 #' @importFrom dplyr tbl_vars
 #' @export
 tbl_vars.tbl_graph <- function(x) {

@@ -9,6 +9,13 @@ as_tbl_graph.list <- function(x, directed = TRUE, ...) {
   )
   as_tbl_graph(graph)
 }
+#' @export
+as.list.tbl_graph <- function(x, ...) {
+  list(
+    nodes = as_tibble(x, active = 'nodes'),
+    edges = as_tibble(x, active = 'edges')
+  )
+}
 
 guess_list_type <- function(x) {
   if (length(x) == 2 &&

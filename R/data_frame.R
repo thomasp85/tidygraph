@@ -10,3 +10,8 @@ as_tbl_graph.data.frame <- function(x, directed = TRUE, ...) {
   graph <- graph_from_data_frame(x, directed = directed)
   as_tbl_graph(graph)
 }
+
+#' @export
+as.data.frame.tbl_graph <- function(x, row.names = NULL, optional = FALSE, active = NULL, ...) {
+  as.data.frame(as_tibble(x, active = active))
+}

@@ -85,6 +85,8 @@
 \alias{reexports}
 \alias{is_simple}
 \alias{reexports}
+\alias{as.igraph}
+\alias{reexports}
 \alias{as_tibble}
 \alias{reexports}
 \alias{\%>\%}
@@ -97,7 +99,7 @@ below to see their documentation.
 \describe{
   \item{dplyr}{\code{\link[dplyr]{arrange}}, \code{\link[dplyr]{distinct}}, \code{\link[dplyr]{filter}}, \code{\link[dplyr]{top_n}}, \code{\link[dplyr]{group_by}}, \code{\link[dplyr]{ungroup}}, \code{\link[dplyr]{group_size}}, \code{\link[dplyr]{n_groups}}, \code{\link[dplyr]{groups}}, \code{\link[dplyr]{group_vars}}, \code{\link[dplyr]{left_join}}, \code{\link[dplyr]{right_join}}, \code{\link[dplyr]{inner_join}}, \code{\link[dplyr]{full_join}}, \code{\link[dplyr]{semi_join}}, \code{\link[dplyr]{anti_join}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{transmute}}, \code{\link[dplyr]{mutate_all}}, \code{\link[dplyr]{mutate_at}}, \code{\link[dplyr]{n}}, \code{\link[dplyr]{pull}}, \code{\link[dplyr]{rename}}, \code{\link[dplyr]{sample_frac}}, \code{\link[dplyr]{sample_n}}, \code{\link[dplyr]{select}}, \code{\link[dplyr]{contains}}, \code{\link[dplyr]{ends_with}}, \code{\link[dplyr]{everything}}, \code{\link[dplyr]{matches}}, \code{\link[dplyr]{num_range}}, \code{\link[dplyr]{one_of}}, \code{\link[dplyr]{starts_with}}, \code{\link[dplyr]{slice}}}
 
-  \item{igraph}{\code{\link[igraph]{is_bipartite}}, \code{\link[igraph]{is_chordal}}, \code{\link[igraph]{is_connected}}, \code{\link[igraph]{is_dag}}, \code{\link[igraph]{is_directed}}, \code{\link[igraph]{is_simple}}}
+  \item{igraph}{\code{\link[igraph]{is_bipartite}}, \code{\link[igraph]{is_chordal}}, \code{\link[igraph]{is_connected}}, \code{\link[igraph]{is_dag}}, \code{\link[igraph]{is_directed}}, \code{\link[igraph]{is_simple}}, \code{\link[igraph]{as.igraph}}}
 
   \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
 
