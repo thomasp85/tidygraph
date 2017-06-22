@@ -8,6 +8,12 @@ mutate.tbl_graph <- function(.data, ...) {
   set_graph_data(.data, d_tmp)
 }
 #' @export
+#' @importFrom dplyr mutate
+mutate.morphed_tbl_graph <- function(.data, ...) {
+  .data[] <- lapply(.data, protect_ind, .f = mutate, ...)
+  .data
+}
+#' @export
 dplyr::mutate
 
 #' @importFrom dplyr transmute

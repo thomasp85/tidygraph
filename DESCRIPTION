@@ -23,7 +23,8 @@ Imports: tibble,
     R6,
     Rcpp,
     tools,
-    stats
+    stats,
+    tidyr
 URL: https://github.com/thomasp85/tidygraph
 BugReports: https://github.com/thomasp85/tidygraph/issues
 LinkingTo: Rcpp

@@ -37,4 +37,10 @@ distinct.tbl_graph <- function(.data, ..., .keep_all = FALSE) {
   set_graph_data(graph, d_tmp)
 }
 #' @export
+#' @importFrom dplyr distinct
+distinct.morphed_tbl_graph <- function(.data, ..., .keep_all = FALSE) {
+  .data[] <- lapply(.data, distinct, ..., .keep_all = .keep_all)
+  .data
+}
+#' @export
 dplyr::distinct

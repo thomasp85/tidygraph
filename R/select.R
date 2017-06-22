@@ -8,6 +8,12 @@ select.tbl_graph <- function(.data, ...) {
   set_graph_data(.data, d_tmp)
 }
 #' @export
+#' @importFrom dplyr select
+select.morphed_tbl_graph <- function(.data, ...) {
+  .data[] <- lapply(.data, protect_ind, .f = select, ...)
+  .data
+}
+#' @export
 dplyr::select
 
 #' @importFrom dplyr contains

@@ -8,6 +8,12 @@ group_by.tbl_graph <- function(.data, ..., add = FALSE) {
   apply_groups(.data, attributes(d_tmp))
 }
 #' @export
+#' @importFrom dplyr group_by
+group_by.morphed_tbl_graph <- function(.data, ...) {
+  .data[] <- lapply(.data, group_by, ...)
+  .data
+}
+#' @export
 dplyr::group_by
 
 #' @importFrom dplyr ungroup
@@ -15,6 +21,12 @@ dplyr::group_by
 ungroup.grouped_tbl_graph <- function(x, ...) {
   attr(x, paste0(active(x), '_group_attr')) <- NULL
   class(x) <- class(x)[-1]
+  x
+}
+#' @export
+#' @importFrom dplyr ungroup
+ungroup.morphed_tbl_graph <- function(x, ...) {
+  x[] <- lapply(x, ungroup, ...)
   x
 }
 #' @export

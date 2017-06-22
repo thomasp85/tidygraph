@@ -82,6 +82,14 @@ print.tbl_graph <- function(x, ...) {
   print(bottom)
   invisible(x)
 }
+#' @export
+print.morphed_tbl_graph <- function(x, ...) {
+  graph <- attr(x, '.orig_graph')
+  cat('# A tbl_graph temporarily morphed to a ', gsub('_', ' ', sub('to_', '', attr(x, '.morpher'))), ' representation\n', sep = '')
+  cat('# \n')
+  cat('# Original graph is ', tolower(describe_graph(graph)), '\n', sep = '')
+  cat('# consisting of ', gorder(graph), ' nodes and ', gsize(graph), ' edges\n', sep = '')
+}
 #' @importFrom igraph is_simple is_directed is_bipartite is_connected is_dag
 describe_graph <- function(x) {
   prop <- list(simple = is_simple(x), directed = is_directed(x),

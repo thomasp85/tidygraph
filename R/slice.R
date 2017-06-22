@@ -19,4 +19,10 @@ slice.tbl_graph <- function(.data, ...) {
   ) %gr_attr% .data
 }
 #' @export
+#' @importFrom dplyr slice
+slice.morphed_tbl_graph <- function(.data, ...) {
+  .data[] <- lapply(.data, slice, ...)
+  .data
+}
+#' @export
 dplyr::slice

@@ -18,6 +18,14 @@ sample_frac.tbl_graph <- function(tbl, size = 1, replace = FALSE, weight = NULL,
     edges = delete_edges(tbl, remove_ind)
   ) %gr_attr% tbl
 }
+#' @export
+#' @importFrom dplyr sample_frac
+#' @importFrom rlang enquo
+sample_frac.morphed_tbl_graph <- function(tbl, size = 1, replace = FALSE, weight = NULL, .env = parent.frame()) {
+  weight <- enquo(weight)
+  tbl[] <- lapply(tbl, sample_frac, size = size, replace = replace, weight = !! weight, .env = .env)
+  tbl
+}
 
 #' @export
 dplyr::sample_frac

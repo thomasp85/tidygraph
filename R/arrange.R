@@ -18,6 +18,12 @@ arrange.tbl_graph <- function(.data, ...) {
   ) %gr_attr% .data
 }
 #' @export
+#' @importFrom dplyr arrange
+arrange.morphed_tbl_graph <- function(.data, ...) {
+  .data[] <- lapply(.data, arrange, ...)
+  .data
+}
+#' @export
 dplyr::arrange
 
 #' @importFrom igraph graph_from_data_frame is.directed as_data_frame vertex_attr<-

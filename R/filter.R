@@ -19,6 +19,12 @@ filter.tbl_graph <- function(.data, ...) {
   ) %gr_attr% .data
 }
 #' @export
+#' @importFrom dplyr filter
+filter.morphed_tbl_graph <- function(.data, ...) {
+  .data[] <- lapply(.data, filter, ...)
+  .data
+}
+#' @export
 dplyr::filter
 
 #' @importFrom dplyr top_n

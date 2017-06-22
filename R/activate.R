@@ -39,6 +39,12 @@ activate.grouped_tbl_graph <- function(.data, what) {
   message('Ungrouping graph...')
   activate(ungroup(.data), what)
 }
+#' @export
+activate.morphed_tbl_graph <- function(.data, what) {
+  what <- enquo(what)
+  .data[] <- lapply(.data, activate, what = !!what)
+  .data
+}
 
 #' @rdname activate
 #' @export

@@ -8,4 +8,10 @@ rename.tbl_graph <- function(.data, ...) {
   set_graph_data(.data, d_tmp)
 }
 #' @export
+#' @importFrom dplyr rename
+rename.morphed_tbl_graph <- function(.data, ...) {
+  .data[] <- lapply(.data, protect_ind, .f = rename, ...)
+  .data
+}
+#' @export
 dplyr::rename
