@@ -16,7 +16,8 @@ as_tibble.grouped_tbl_graph <- function(x, active = NULL, ...) {
   if (is.null(active)) {
     active <- attr(x, 'active')
   }
-  attributes(tbl) <- attr(x, paste0(active, '_group_attr'))
+  group_attr <- attr(x, paste0(active, '_group_attr'))
+  if (!is.null(group_attr)) attributes(tbl) <- group_attr
   tbl
 }
 #' @export
