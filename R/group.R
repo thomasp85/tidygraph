@@ -1,10 +1,12 @@
-#' Group nodes based on community structure
+#' Group nodes and edges based on community structure
 #'
 #' These functions are wrappers around the various clustering functions provided
 #' by `igraph`. As with the other wrappers they automatically use the graph that
 #' is being computed on, and otherwise passes on its arguments to the relevant
 #' clustering function. The return value is always a numeric vector of group
-#' memberships so that nodes with the same number are part of the same group.
+#' memberships so that nodes or edges with the same number are part of the same
+#' group. Grouping is predominantly made on nodes and currently the only
+#' grouping of edges supported is biconnected components.
 #'
 #' @param ... arguments passed on to the clustering function in question
 #'
@@ -89,4 +91,14 @@ group_spinglass <- function(...) {
 group_walktrap <- function(...) {
   expect_nodes()
   membership(cluster_walktrap(graph = .G(), ...))
+}
+#' @describeIn group_graph Group edges by their membership of the maximal binconnected components using [igraph::biconnected_componenents()]
+#' @importFrom igraph biconnected_components
+#' @export
+group_biconnected_component <- function() {
+  expect_edges()
+  graph <- .G()
+  comp <- biconnected_components(graph)
+  ind <- lapply(comp$component_edges, as.integer)
+  rep(seq_along(ind), lengths(ind))[order(unlist(ind))]
 }
