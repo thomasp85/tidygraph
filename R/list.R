@@ -49,10 +49,14 @@ as_graph_adj_list <- function(x, directed) {
   gr
 }
 
-#' @importFrom igraph graph_from_edgelist vertex_attr<-
+#' @importFrom igraph graph_from_edgelist vertex_attr<- add_vertices gorder
+#' @importFrom tibble tibble
 as_graph_node_edge <- function(x, directed) {
   nodes <- x[[which(names(x) %in% c('nodes', 'vertices'))]]
   edges <- x[[which(names(x) %in% c('edges', 'links'))]]
+  if (is.null(edges)) {
+    edges <- tibble(from = integer(), to = integer())
+  }
   from_ind <- which(names(edges) == 'from')
   if (length(from_ind) == 0) from_ind <- 1
   to_ind <- which(names(edges) == 'to')
@@ -68,6 +72,9 @@ as_graph_node_edge <- function(x, directed) {
   }
   gr <- graph_from_edgelist(as.matrix(edges[, 1:2]), directed = directed)
   edge_attr(gr) <- as.list(edges[, -c(1:2), drop = FALSE])
+  if (gorder(gr) != nrow(nodes)) {
+    gr <- add_vertices(gr, nrow(nodes) - gorder(gr))
+  }
   vertex_attr(gr) <- as.list(nodes)
   gr
 }
