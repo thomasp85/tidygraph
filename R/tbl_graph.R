@@ -62,16 +62,17 @@ is.tbl_graph <- function(x) {
 }
 #' @importFrom tibble trunc_mat
 #' @importFrom tools toTitleCase
+#' @importFrom rlang as_quosure sym
 #' @export
 print.tbl_graph <- function(x, ...) {
   arg_list <- list(...)
   graph_desc <- describe_graph(x)
   not_active <- if (active(x) == 'nodes') 'edges' else 'nodes'
   top <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x), n = 6)))
-  top$summary <- sub('A tibble', toTitleCase(paste0(substr(active(x), 1, 4), ' data')), top$summary)
-  top$summary <- paste0(top$summary, ' (active)')
+  top$summary[1] <- paste0(top$summary[1], ' (active)')
+  names(top$summary)[1] <- toTitleCase(paste0(substr(active(x), 1, 4), ' data'))
   bottom <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x, active = not_active), n = 3)))
-  bottom$summary <- sub('A tibble', toTitleCase(paste0(substr(not_active, 1, 4), ' data')), bottom$summary)
+  names(bottom$summary)[1] <- toTitleCase(paste0(substr(not_active, 1, 4), ' data'))
   cat('# A tbl_graph: ', gorder(x), ' nodes and ', gsize(x), ' edges\n', sep = '')
   cat('#\n')
   cat('# ', graph_desc, '\n', sep = '')
