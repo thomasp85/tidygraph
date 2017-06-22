@@ -38,47 +38,57 @@ NULL
 # Breath First Search -----------------------------------------------------
 
 #' @describeIn search_graph Get the succession in which the nodes are visited in a breath first search
-#' @importFrom igraph bfs
+#' @importFrom igraph bfs gorder
 #' @export
 bfs_rank <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
-  ind <- bfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
+  graph <- .G()
+  root <- as_ind(root, gorder(graph))
+  ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, rank = TRUE)$rank
   as.integer(ind)
 }
 #' @describeIn search_graph Get the nodes from which each node is visited in a breath first search
-#' @importFrom igraph bfs
+#' @importFrom igraph bfs gorder
 #' @export
 bfs_parent <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
-  ind <- bfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
+  graph <- .G()
+  root <- as_ind(root, gorder(graph))
+  ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
       order = FALSE, father = TRUE)$father
   as.integer(ind)
 }
 #' @describeIn search_graph Get the node that was visited before each node in a breath first search
-#' @importFrom igraph bfs
+#' @importFrom igraph bfs gorder
 #' @export
 bfs_before <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
-  ind <- bfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
+  graph <- .G()
+  root <- as_ind(root, gorder(graph))
+  ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, pred = TRUE)$pred
   as.integer(ind)
 }
 #' @describeIn search_graph Get the node that was visited after each node in a breath first search
-#' @importFrom igraph bfs
+#' @importFrom igraph bfs gorder
 #' @export
 bfs_after <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
-  ind <- bfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
+  graph <- .G()
+  root <- as_ind(root, gorder(graph))
+  ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, succ = TRUE)$succ
   as.integer(ind)
 }
 #' @describeIn search_graph Get the number of nodes between the root and each node in a breath first search
-#' @importFrom igraph bfs
+#' @importFrom igraph bfs gorder
 #' @export
 bfs_dist <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
-  ind <- bfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
+  graph <- .G()
+  root <- as_ind(root, gorder(graph))
+  ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, dist = TRUE)$dist
   as.integer(ind)
 }
@@ -86,38 +96,46 @@ bfs_dist <- function(root, mode = 'out', unreachable = FALSE) {
 # Depth First Search ------------------------------------------------------
 
 #' @describeIn search_graph Get the succession in which the nodes are visited in a depth first search
-#' @importFrom igraph dfs
+#' @importFrom igraph dfs gorder
 #' @export
 dfs_rank <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
-  ind <- dfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
+  graph <- .G()
+  root <- as_ind(root, gorder(graph))
+  ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
              order = TRUE)$order
   match(seq_along(ind), as.integer(ind))
 }
 #' @describeIn search_graph Get the succession in which each nodes subtree is completed in a depth first search
-#' @importFrom igraph dfs
+#' @importFrom igraph dfs gorder
 #' @export
 dfs_rank_out <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
-  ind <- dfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
+  graph <- .G()
+  root <- as_ind(root, gorder(graph))
+  ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, order.out = TRUE)$order.out
   match(seq_along(ind), as.integer(ind))
 }
 #' @describeIn search_graph Get the nodes from which each node is visited in a depth first search
-#' @importFrom igraph dfs
+#' @importFrom igraph dfs gorder
 #' @export
 dfs_parent <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
-  ind <- dfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
+  graph <- .G()
+  root <- as_ind(root, gorder(graph))
+  ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, father = TRUE)$father
   as.integer(ind)
 }
 #' @describeIn search_graph Get the number of nodes between the root and each node in a depth first search
-#' @importFrom igraph dfs
+#' @importFrom igraph dfs gorder
 #' @export
 dfs_dist <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
-  ind <- dfs(graph = .G(), root = root, neimode = mode, unreachable = unreachable,
+  graph <- .G()
+  root <- as_ind(root, gorder(graph))
+  ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
              order = FALSE, dist = TRUE)$dist
   as.integer(ind)
 }

@@ -50,9 +50,11 @@
 #' @family node_map
 #'
 #' @export
+#' @importFrom igraph gorder
 map_bfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
+  root <- as_ind(root, gorder(graph))
   dot_params <- list(...)
   search_df <- bfs_df(graph, root, mode, unreachable)
   paths <- get_paths(as.integer(search_df$parent))
@@ -123,9 +125,11 @@ map_bfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' @family node_map
 #'
 #' @export
+#' @importFrom igraph gorder
 map_bfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
+  root <- as_ind(root, gorder(graph))
   dot_params <- list(...)
   search_df <- bfs_df(graph, root, mode, unreachable)
   offspring <- get_offspring(as.integer(search_df$parent), order(search_df$rank))
@@ -195,9 +199,11 @@ map_bfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' @family node_map
 #'
 #' @export
+#' @importFrom igraph gorder
 map_dfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
+  root <- as_ind(root, gorder(graph))
   dot_params <- list(...)
   search_df <- dfs_df(graph, root, mode, unreachable)
   paths <- get_paths(as.integer(search_df$parent))
@@ -267,9 +273,11 @@ map_dfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' @family node_map
 #'
 #' @export
+#' @importFrom igraph gorder
 map_dfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
+  root <- as_ind(root, gorder(graph))
   dot_params <- list(...)
   search_df <- dfs_df(graph, root, mode, unreachable)
   offspring <- get_offspring(as.integer(search_df$parent), order(search_df$rank))

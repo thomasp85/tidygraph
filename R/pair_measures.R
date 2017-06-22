@@ -18,13 +18,14 @@ NULL
 
 #' @describeIn pair_measures Calculate the adhesion to the specified node. Wraps [igraph::edge_connectivity()]
 #' @export
-#' @importFrom igraph edge_connectivity
+#' @importFrom igraph edge_connectivity gorder
 #'
 #' @param nodes The other part of the node pair (the first part is the node
 #' defined by the row). Recycled if necessary.
 node_adhesion_to <- function(nodes) {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   adhesion <- Map(function(s, t) {
@@ -35,10 +36,11 @@ node_adhesion_to <- function(nodes) {
 
 #' @describeIn pair_measures Calculate the adhesion from the specified node. Wraps [igraph::edge_connectivity()]
 #' @export
-#' @importFrom igraph edge_connectivity
+#' @importFrom igraph edge_connectivity gorder
 node_adhesion_from <- function(nodes) {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
   adhesion <- Map(function(s, t) {
@@ -49,10 +51,11 @@ node_adhesion_from <- function(nodes) {
 
 #' @describeIn pair_measures Calculate the cohesion to the specified node. Wraps [igraph::vertex_connectivity()]
 #' @export
-#' @importFrom igraph vertex_connectivity
+#' @importFrom igraph vertex_connectivity gorder
 node_cohesion_to <- function(nodes) {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   adhesion <- Map(function(s, t) {
@@ -63,10 +66,11 @@ node_cohesion_to <- function(nodes) {
 
 #' @describeIn pair_measures Calculate the cohesion from the specified node. Wraps [igraph::vertex_connectivity()]
 #' @export
-#' @importFrom igraph vertex_connectivity
+#' @importFrom igraph vertex_connectivity gorder
 node_cohesion_from <- function(nodes) {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
   adhesion <- Map(function(s, t) {
@@ -77,7 +81,7 @@ node_cohesion_from <- function(nodes) {
 
 #' @describeIn pair_measures Calculate various distance metrics between node pairs. Wraps [igraph::distances()]
 #' @export
-#' @importFrom igraph distances
+#' @importFrom igraph distances gorder
 #'
 #' @param mode How should edges be followed? If `'all'` all edges are
 #' considered, if `'in'` only inbound edges are considered, and if `'out'` only
@@ -89,6 +93,7 @@ node_cohesion_from <- function(nodes) {
 node_distance_to <- function(nodes, mode, weights = NA, algorithm = 'automatic') {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   target_unique <- unique(target)
@@ -98,10 +103,11 @@ node_distance_to <- function(nodes, mode, weights = NA, algorithm = 'automatic')
 
 #' @describeIn pair_measures Calculate various distance metrics between node pairs. Wraps [igraph::distances()]
 #' @export
-#' @importFrom igraph distances
+#' @importFrom igraph distances gorder
 node_distance_from <- function(nodes, mode, weights = NA, algorithm = 'automatic') {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
   source_unique <- unique(source)
@@ -111,10 +117,11 @@ node_distance_from <- function(nodes, mode, weights = NA, algorithm = 'automatic
 
 #' @describeIn pair_measures Calculate node pair cocitation count. Wraps [igraph::cocitation()]
 #' @export
-#' @importFrom igraph cocitation
+#' @importFrom igraph cocitation gorder
 node_cocitation <- function(nodes) {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   cocite <- cocitation(graph)
@@ -123,10 +130,11 @@ node_cocitation <- function(nodes) {
 
 #' @describeIn pair_measures Calculate node pair bibliographic coupling. Wraps [igraph::bibcoupling()]
 #' @export
-#' @importFrom igraph bibcoupling
+#' @importFrom igraph bibcoupling gorder
 node_bibcoupling <- function(nodes) {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   bibc <- bibcoupling(graph)
@@ -135,7 +143,7 @@ node_bibcoupling <- function(nodes) {
 
 #' @describeIn pair_measures Calculate various node pair similarity measures. Wraps [igraph::similarity()]
 #' @export
-#' @importFrom igraph similarity
+#' @importFrom igraph similarity gorder
 #'
 #' @param loops Should loop edges be considered
 #' @param method The similarity measure to calculate. Possible values are:
@@ -143,6 +151,7 @@ node_bibcoupling <- function(nodes) {
 node_similarity <- function(nodes, mode = 'out', loops = FALSE, method = 'jaccard') {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   sim <- similarity(graph, mode = mode, loops = loops, method = method)
@@ -151,12 +160,13 @@ node_similarity <- function(nodes, mode = 'out', loops = FALSE, method = 'jaccar
 
 #' @describeIn pair_measures Calculate the maximum flow to a node. Wraps [igraph::max_flow()]
 #' @export
-#' @importFrom igraph max_flow
+#' @importFrom igraph max_flow gorder
 #'
 #' @param capacity The edge capacity to use
 node_max_flow_to <- function(nodes, capacity = NULL) {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   flow <- Map(function(s, t) {
@@ -167,10 +177,11 @@ node_max_flow_to <- function(nodes, capacity = NULL) {
 
 #' @describeIn pair_measures Calculate the maximum flow from a node. Wraps [igraph::max_flow()]
 #' @export
-#' @importFrom igraph max_flow
+#' @importFrom igraph max_flow gorder
 node_max_flow_from <- function(nodes, capacity = NULL) {
   expect_nodes()
   graph <- .G()
+  nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
   flow <- Map(function(s, t) {
