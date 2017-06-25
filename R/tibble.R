@@ -34,6 +34,8 @@ node_tibble <- function(x) {
   if (length(attr(tbl, 'row.names')) == 0) {
     attr(tbl, 'row.names') <- seq_len(gorder(x))
   }
+  focus <- focus_ind(x, 'nodes')
+  if (!is.null(focus)) tbl <- tbl[focus, ]
   tbl
 }
 #' @importFrom igraph edge_attr gsize as_edgelist
@@ -46,5 +48,8 @@ edge_tibble <- function(x) {
   }
   e_list <- as_tibble(as_edgelist(x, names = FALSE))
   names(e_list) <- c('from', 'to')
-  bind_cols(e_list, tbl)
+  tbl <- bind_cols(e_list, tbl)
+  focus <- focus_ind(x, 'edges')
+  if (!is.null(focus)) tbl <- tbl[focus, ]
+  tbl
 }

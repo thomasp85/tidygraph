@@ -155,11 +155,19 @@ set_graph_data.grouped_tbl_graph <- function(x, value, active = NULL) {
 }
 #' @importFrom igraph vertex_attr<-
 set_node_attributes <- function(x, value) {
+  focus <- focus_ind(x, 'nodes')
+  if (!is.null(focus)) {
+    value <- merge_into(value, as_tibble(x, active = 'nodes'), focus)
+  }
   vertex_attr(x) <- as.list(value)
   x
 }
 #' @importFrom igraph edge_attr<-
 set_edge_attributes <- function(x, value) {
+  focus <- focus_ind(x, 'edges')
+  if (!is.null(focus)) {
+    value <- merge_into(value, as_tibble(x, active = 'edges'), focus)
+  }
   value <- value[, !names(value) %in% c('from', 'to')]
   edge_attr(x) <- as.list(value)
   x
@@ -173,4 +181,12 @@ tbl_vars.tbl_graph <- function(x) {
 #' @export
 groups.tbl_graph <- function(x) {
   NULL
+}
+
+merge_into <- function(new, old, index) {
+  order <- new[integer(0), , drop = FALSE]
+  old <- bind_rows(order, old)
+  old[, !names(old) %in% names(new)] <- NULL
+  old[index, ] <- new
+  old
 }
