@@ -18,9 +18,14 @@ dplyr::group_by
 
 #' @importFrom dplyr ungroup
 #' @export
+ungroup.tbl_graph <- function(x, ...) {
+  x
+}
+#' @importFrom dplyr ungroup
+#' @export
 ungroup.grouped_tbl_graph <- function(x, ...) {
   attr(x, paste0(active(x), '_group_attr')) <- NULL
-  class(x) <- class(x)[-1]
+  class(x) <- class(x)[class(x) != 'grouped_tbl_graph']
   x
 }
 #' @export
