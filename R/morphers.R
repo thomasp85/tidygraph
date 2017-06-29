@@ -196,7 +196,7 @@ to_simple <- function(graph) {
   edges <- as_tibble(graph, active = 'edges')
   graph <- set_edge_attributes(graph, edges[, '.tidygraph_edge_index', drop = FALSE])
   edges$.tidygraph_edge_index <- NULL
-  simple <- as_tbl_graph(simplify(graph, remove.multiple = TRUE, remove.loops = TRUE))
+  simple <- as_tbl_graph(simplify(graph, remove.multiple = TRUE, remove.loops = TRUE, edge.attr.comb = list))
   new_edges <- as_tibble(simple, active = 'edges')
   new_edges$.data <- lapply(new_edges$.tidygraph_edge_index, function(i) edges[i, , drop = FALSE])
   simple <- set_edge_attributes(simple, new_edges)
