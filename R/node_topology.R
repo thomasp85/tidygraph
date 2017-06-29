@@ -29,5 +29,5 @@ node_dominator <- function(root, mode = 'out') {
 node_topo_order <- function(mode) {
   expect_nodes()
   graph <- .G()
-  match(seq_len(gorder(graph)), topo_sort(graph, mode))
+  match(seq_len(gorder(graph)), topo_sort(graph, mode = 'out'))
 }
