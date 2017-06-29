@@ -338,7 +338,7 @@ map_local <- function(order = 1, mode = 'all', mindist = 0, .f, ...) {
   expect_nodes()
   graph <- .G()
   res <- lapply(seq_len(gorder(graph)), function(i) {
-    ego_graph <- make_ego_graph(graph, order = order, nodes = i, mode = mode, mindist = mindist)
+    ego_graph <- make_ego_graph(graph, order = order, nodes = i, mode = mode, mindist = mindist)[[1]]
     .f(neighborhood = as_tbl_graph(ego_graph), graph = graph, node = i, ...)
   })
 }
