@@ -158,7 +158,7 @@ merge_meta <- function(new, into, col) {
     new[[col]] <- NULL
     data <- new$.data
     new$.data <- NULL
-    new <- new[lengths(index), ]
+    new <- new[rep(seq_along(index), lengths(index)), ]
     new[[col]] <- unlist(index)
     if (!is.null(data)) {
       data <- bind_rows(data)
