@@ -74,6 +74,8 @@ morph.tbl_graph <- function(.data, .f, ...) {
     message('Ungrouping prior to morphing')
     .data <- ungroup(.data)
   }
+  .graph_context$set(.data)
+  on.exit(.graph_context$clear())
   morph_name <- quo_text(enquo(.f))
   current_active <- as_quosure(sym(active(.data)))
   .data <- mutate(activate(.data, 'nodes'), .tidygraph_node_index = seq_len(n()))
