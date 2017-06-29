@@ -65,3 +65,8 @@ exclusive and that nodes can thus be of multiple types.
 \item \code{node_center}: does the node have the minimal eccentricity in the graph
 }}
 
+\examples{
+# Find the root and leafs in a tree
+create_tree(40, 2) \%>\%
+  mutate(root = node_root(), leaf = node_leaf())
+}

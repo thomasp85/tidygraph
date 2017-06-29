@@ -69,6 +69,14 @@ of each node in a list.
 Instead of spelling out all of these in the function it is possible to simply
 name the ones needed and use \code{...} to catch the rest.
 }
+\examples{
+# Accumulate values along a search
+create_tree(40, children = 3, directed = TRUE) \%>\%
+  mutate(value = round(runif(40)*100)) \%>\%
+  mutate(value_acc = map_bfs_dbl(node_root(), .f = function(node, path, ...) {
+    sum(.N()$value[c(node, path$node)])
+  }))
+}
 \seealso{
 Other node_map: \code{\link{map_bfs_back}},
   \code{\link{map_dfs_back}}, \code{\link{map_dfs}}

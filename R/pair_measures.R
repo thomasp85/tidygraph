@@ -14,6 +14,11 @@
 #'
 #' @name pair_measures
 #' @rdname pair_measures
+#'
+#' @examples
+#' # Calculate the distance to the center node
+#' create_notable('meredith') %>%
+#'   mutate(dist_to_center = node_distance_to(node_center()))
 NULL
 
 #' @describeIn pair_measures Calculate the adhesion to the specified node. Wraps [igraph::edge_connectivity()]

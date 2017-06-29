@@ -51,6 +51,14 @@
 #'
 #' @export
 #' @importFrom igraph gorder
+#'
+#' @examples
+#' # Accumulate values along a search
+#' create_tree(40, children = 3, directed = TRUE) %>%
+#'   mutate(value = round(runif(40)*100)) %>%
+#'   mutate(value_acc = map_bfs_dbl(node_root(), .f = function(node, path, ...) {
+#'     sum(.N()$value[c(node, path$node)])
+#'   }))
 map_bfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
@@ -126,6 +134,17 @@ map_bfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #'
 #' @export
 #' @importFrom igraph gorder
+#'
+#' @examples
+#' # Collect values from children
+#' create_tree(40, children = 3, directed = TRUE) %>%
+#'   mutate(value = round(runif(40)*100)) %>%
+#'   mutate(child_acc = map_bfs_back_dbl(node_root(), .f = function(node, path, ...) {
+#'     if (nrow(path) == 0) .N()$value[node]
+#'     else {
+#'       sum(unlist(path$result[path$parent == node]))
+#'     }
+#'   }))
 map_bfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
@@ -200,6 +219,14 @@ map_bfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #'
 #' @export
 #' @importFrom igraph gorder
+#'
+#' @examples
+#' # Add a random integer to the last value along a search
+#' create_tree(40, children = 3, directed = TRUE) %>%
+#'   mutate(child_acc = map_dfs_int(node_root(), .f = function(node, path, ...) {
+#'     last_val <- if (nrow(path) == 0) 0L else tail(unlist(path$result), 1)
+#'     last_val + sample(1:10, 1)
+#'   }))
 map_dfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
@@ -274,6 +301,17 @@ map_dfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #'
 #' @export
 #' @importFrom igraph gorder
+#'
+#' @examples
+#' # Collect values from the 2 closest layers of children in a dfs search
+#' create_tree(40, children = 3, directed = TRUE) %>%
+#'   mutate(value = round(runif(40)*100)) %>%
+#'   mutate(child_acc = map_dfs_back(node_root(), .f = function(node, path, dist, ...) {
+#'     if (nrow(path) == 0) .N()$value[node]
+#'     else {
+#'       unlist(path$result[path$dist - dist <= 2])
+#'     }
+#'   }))
 map_dfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
@@ -334,6 +372,14 @@ map_dfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #'
 #' @importFrom igraph gorder make_ego_graph
 #' @export
+#'
+#' @examples
+#' # Smooth out values over a neighborhood
+#' create_notable('meredith') %>%
+#'   mutate(value = rpois(graph_order(), 5)) %>%
+#'   mutate(value_smooth = map_local_dbl(order = 2, .f = function(neighborhood, ...) {
+#'     mean(as_tibble(neighborhood, active = 'nodes')$value)
+#'   }))
 map_local <- function(order = 1, mode = 'all', mindist = 0, .f, ...) {
   expect_nodes()
   graph <- .G()

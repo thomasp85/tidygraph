@@ -12,6 +12,11 @@
 #' @name graph_measures
 #' @rdname graph_measures
 #'
+#' @examples
+#' # Use e.g. to modify computations on nodes and edges
+#' create_notable('meredith') %>%
+#'   activate(nodes) %>%
+#'   mutate(rel_neighbors = centrality_degree()/graph_order())
 NULL
 
 #' @describeIn graph_measures Gives the minimum edge connectivity. Wraps [igraph::edge_connectivity()]

@@ -130,6 +130,16 @@ dplyr::anti_join
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr full_join bind_rows
 #' @export
+#'
+#' @examples
+#' gr1 <- create_notable('bull') %>%
+#'   activate(nodes) %>%
+#'   mutate(name = letters[1:5])
+#' gr2 <- create_ring(10) %>%
+#'   activate(nodes) %>%
+#'   mutate(name = letters[4:13])
+#'
+#' gr1 %>% graph_join(gr2)
 graph_join <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
   stopifnot(is.tbl_graph(x))
   y <- as_tbl_graph(y)

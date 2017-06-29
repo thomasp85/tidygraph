@@ -130,3 +130,10 @@ is evaluated in the same manner as \code{group_by}. When unmorphing all
 data will get merged back.
 }}
 
+\examples{
+# Compute only on a subgraph of every even node
+create_notable('meredith') \%>\%
+  morph(to_subgraph, seq_len(graph_order()) \%\% 2 == 0) \%>\%
+  mutate(neighbour_count = centrality_degree()) \%>\%
+  unmorph()
+}

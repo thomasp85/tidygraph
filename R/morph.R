@@ -51,6 +51,13 @@
 #' @return A `morphed_tbl_graph`
 #'
 #' @export
+#'
+#' @examples
+#' create_notable('meredith') %>%
+#'   mutate(group = group_infomap()) %>%
+#'   morph(to_contracted, group) %>%
+#'   mutate(group_centrality = centrality_pagerank()) %>%
+#'   unmorph()
 morph <- function(.data, .f, ...) {
   UseMethod('morph')
 }

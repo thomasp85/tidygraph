@@ -75,12 +75,12 @@ of the nodes in the graph.
 
 \examples{
 # Get the depth of each node in a tree
-as_tbl_graph(igraph::make_tree(10)) \%>\%
+create_tree(10, 2) \%>\%
   activate(nodes) \%>\%
   mutate(depth = bfs_dist(root = 1))
 
 # Reorder nodes based on a depth first search from node 3
-as_tbl_graph(igraph::make_graph('franklin')) \%>\%
+create_notable('franklin') \%>\%
   activate(nodes) \%>\%
   mutate(order = dfs_rank(root = 3)) \%>\%
   arrange(order)

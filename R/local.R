@@ -13,12 +13,12 @@
 #'
 #' @examples
 #' # Get all neighbors of each graph
-#' as_tbl_graph(igraph::make_graph('chvatal')) %>%
+#' create_notable('chvatal') %>%
 #'   activate(nodes) %>%
 #'   mutate(neighborhood = local_members(mindist = 1))
 #'
 #' # These are equivalent
-#' as_tbl_graph(igraph::make_graph('chvatal')) %>%
+#' create_notable('chvatal') %>%
 #'   activate(nodes) %>%
 #'   mutate(n_neighbors = local_size(mindist = 1),
 #'          degree = centrality_degree()) %>%

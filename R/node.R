@@ -12,6 +12,11 @@
 #'
 #' @name node_types
 #' @rdname node_types
+#'
+#' @examples
+#' # Find the root and leafs in a tree
+#' create_tree(40, 2) %>%
+#'   mutate(root = node_root(), leaf = node_leaf())
 NULL
 
 #' @describeIn node_types is the node a cut node (articaultion node)
@@ -121,6 +126,11 @@ node_center <- function(mode = 'out') {
 #'
 #' @name node_measures
 #' @rdname node_measures
+#'
+#' @examples
+#' # Calculate Burt's Constraint for each node
+#' create_notable('meredith') %>%
+#'   mutate(b_constraint = node_constraint())
 NULL
 
 #' @describeIn node_measures measure the maximum shortest path to all other nodes in the graph

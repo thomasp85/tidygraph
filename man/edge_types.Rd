@@ -31,3 +31,9 @@ in the graph corresponds to the specific type.
 \item \code{edge_mutual}: Query whether each edge has a sibling going in the reverse direction
 }}
 
+\examples{
+create_star(10, directed = TRUE, mutual = TRUE) \%>\%
+  activate(edges) \%>\%
+  sample_frac(0.7) \%>\%
+  mutate(single_edge = !edge_mutual())
+}

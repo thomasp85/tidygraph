@@ -69,6 +69,17 @@ of each node in a list.
 Instead of spelling out all of these in the function it is possible to simply
 name the ones needed and use \code{...} to catch the rest.
 }
+\examples{
+# Collect values from children
+create_tree(40, children = 3, directed = TRUE) \%>\%
+  mutate(value = round(runif(40)*100)) \%>\%
+  mutate(child_acc = map_bfs_back_dbl(node_root(), .f = function(node, path, ...) {
+    if (nrow(path) == 0) .N()$value[node]
+    else {
+      sum(unlist(path$result[path$parent == node]))
+    }
+  }))
+}
 \seealso{
 Other node_map: \code{\link{map_bfs}},
   \code{\link{map_dfs_back}}, \code{\link{map_dfs}}

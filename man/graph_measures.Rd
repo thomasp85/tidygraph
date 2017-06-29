@@ -153,3 +153,9 @@ them.
 \item \code{graph_mean_dist}: Calculates the mean distance between all node pairs in the graph. Wraps \code{\link[igraph:mean_distance]{igraph::mean_distance()}}
 }}
 
+\examples{
+# Use e.g. to modify computations on nodes and edges
+create_notable('meredith') \%>\%
+  activate(nodes) \%>\%
+  mutate(rel_neighbors = centrality_degree()/graph_order())
+}

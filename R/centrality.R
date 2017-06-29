@@ -17,9 +17,14 @@
 #' @rdname centrality
 #'
 #' @examples
-#' as_tbl_graph(igraph::make_graph('bull')) %>%
+#' create_notable('bull') %>%
 #'   activate(nodes) %>%
 #'   mutate(importance = centrality_alpha())
+#'
+#' # Most centrality measures are for nodes but not all
+#' create_notable('bull') %>%
+#'   activate(edges) %>%
+#'   mutate(importance = centrality_edge_betweenness())
 NULL
 
 #' @describeIn centrality Wrapper for [igraph::alpha_centrality()]

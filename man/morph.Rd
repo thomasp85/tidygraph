@@ -68,3 +68,10 @@ columns mapping the new node/edge back to all the nodes/edges it represents.
 Furthermore the original node/edge data should be collapsed to a list of
 tibbles, with the row order matching the order in the index column element.
 }
+\examples{
+create_notable('meredith') \%>\%
+  mutate(group = group_infomap()) \%>\%
+  morph(to_contracted, group) \%>\%
+  mutate(group_centrality = centrality_pagerank()) \%>\%
+  unmorph()
+}

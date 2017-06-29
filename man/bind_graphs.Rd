@@ -36,19 +36,16 @@ always result in a disconnected graph. See \code{\link[=graph_join]{graph_join()
 on common nodes.
 }
 \examples{
-graph <- igraph::make_graph('bull')
-new_graph <- igraph::make_graph('housex')
+graph <- create_notable('bull')
+new_graph <- create_notable('housex')
 
 # Add nodes
-as_tbl_graph(graph) \%>\%
-  bind_nodes(data.frame(new = 1:4))
+graph \%>\% bind_nodes(data.frame(new = 1:4))
 
 # Add edges
-as_tbl_graph(graph) \%>\%
-  bind_edges(data.frame(from = 1, to = 4:5))
+graph \%>\% bind_edges(data.frame(from = 1, to = 4:5))
 
 # Add graphs
-as_tbl_graph(graph) \%>\%
-  bind_graphs(new_graph)
+graph \%>\% bind_graphs(new_graph)
 
 }

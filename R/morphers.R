@@ -14,6 +14,13 @@
 #'
 #' @rdname morphers
 #' @name morphers
+#'
+#' @examples
+#' # Compute only on a subgraph of every even node
+#' create_notable('meredith') %>%
+#'   morph(to_subgraph, seq_len(graph_order()) %% 2 == 0) %>%
+#'   mutate(neighbour_count = centrality_degree()) %>%
+#'   unmorph()
 NULL
 
 #' @describeIn morphers Convert a graph to its line graph. When unmorphing node

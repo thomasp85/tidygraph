@@ -16,7 +16,7 @@
 #' @rdname group_graph
 #'
 #' @examples
-#' as_tbl_graph(igraph::make_graph('tutte')) %>%
+#' create_notable('tutte') %>%
 #'   activate(nodes) %>%
 #'   mutate(group = group_infomap())
 #'

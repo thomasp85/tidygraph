@@ -29,8 +29,7 @@ the currently acitve context.
 Activate will ungroup a grouped_tbl_graph.
 }
 \examples{
-gr <- as_tbl_graph(matrix(sample(5, 16, TRUE), ncol = 2))
-gr <- gr \%>\%
+gr <- create_complete(5) \%>\%
   activate(nodes) \%>\%
   mutate(class = sample(c('a', 'b'), 5, TRUE)) \%>\%
   activate(edges) \%>\%

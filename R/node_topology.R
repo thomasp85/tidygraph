@@ -7,6 +7,13 @@
 #'
 #' @name node_topology
 #' @rdname node_topology
+#'
+#' @examples
+#' # Sort a graph based on its topological order
+#' create_tree(10, 2) %>%
+#'   arrange(sample(graph_order())) %>%
+#'   mutate(old_ind = seq_len(graph_order())) %>%
+#'   arrange(node_topo_order())
 NULL
 
 #' @describeIn node_topology Get the immediate dominator of each node. Wraps [igraph::dominator_tree()].

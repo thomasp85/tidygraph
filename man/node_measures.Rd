@@ -41,3 +41,8 @@ collected under the \code{node_*} umbrella of functions.
 \item \code{node_diversity}: measures the diversity of the node. See \code{\link[igraph:diversity]{igraph::diversity()}}
 }}
 
+\examples{
+# Calculate Burt's Constraint for each node
+create_notable('meredith') \%>\%
+  mutate(b_constraint = node_constraint())
+}

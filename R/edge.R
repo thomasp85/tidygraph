@@ -9,6 +9,12 @@
 #'
 #' @name edge_types
 #' @rdname edge_types
+#'
+#' @examples
+#' create_star(10, directed = TRUE, mutual = TRUE) %>%
+#'   activate(edges) %>%
+#'   sample_frac(0.7) %>%
+#'   mutate(single_edge = !edge_mutual())
 NULL
 
 #' @describeIn edge_types Query whether each edge has any parallel siblings

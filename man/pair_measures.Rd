@@ -23,9 +23,11 @@ node_cohesion_to(nodes)
 
 node_cohesion_from(nodes)
 
-node_distance_to(nodes, mode, weights = NA, algorithm = "automatic")
+node_distance_to(nodes, mode = "out", weights = NA,
+  algorithm = "automatic")
 
-node_distance_from(nodes, mode, weights = NA, algorithm = "automatic")
+node_distance_from(nodes, mode = "out", weights = NA,
+  algorithm = "automatic")
 
 node_cocitation(nodes)
 
@@ -97,3 +99,8 @@ supply the graph being computed on as the context is known.
 \item \code{node_max_flow_from}: Calculate the maximum flow from a node. Wraps \code{\link[igraph:max_flow]{igraph::max_flow()}}
 }}
 
+\examples{
+# Calculate the distance to the center node
+create_notable('meredith') \%>\%
+  mutate(dist_to_center = node_distance_to(node_center()))
+}

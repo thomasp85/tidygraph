@@ -29,3 +29,10 @@ topology of the graph.
 \item \code{node_topo_order}: Get the topological order of nodes in a DAG. Wraps \code{\link[igraph:topo_sort]{igraph::topo_sort()}}.
 }}
 
+\examples{
+# Sort a graph based on its topological order
+create_tree(10, 2) \%>\%
+  arrange(sample(graph_order())) \%>\%
+  mutate(old_ind = seq_len(graph_order())) \%>\%
+  arrange(node_topo_order())
+}

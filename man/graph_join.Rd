@@ -42,3 +42,13 @@ nodes in the resulting graph. Node and edge data is combined using
 \code{\link[dplyr:bind_rows]{dplyr::bind_rows()}} semantic, meaning that data is matched by column name
 and filled with \code{NA} if it is missing in either of the graphs.
 }
+\examples{
+gr1 <- create_notable('bull') \%>\%
+  activate(nodes) \%>\%
+  mutate(name = letters[1:5])
+gr2 <- create_ring(10) \%>\%
+  activate(nodes) \%>\%
+  mutate(name = letters[4:13])
+
+gr1 \%>\% graph_join(gr2)
+}

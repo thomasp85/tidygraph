@@ -58,3 +58,11 @@ addition to those supplied through \code{...}:
 \item \code{node}: The index of the node currently mapped over
 }
 }
+\examples{
+# Smooth out values over a neighborhood
+create_notable('meredith') \%>\%
+  mutate(value = rpois(graph_order(), 5)) \%>\%
+  mutate(value_smooth = map_local_dbl(order = 2, .f = function(neighborhood, ...) {
+    mean(as_tibble(neighborhood, active = 'nodes')$value)
+  }))
+}
