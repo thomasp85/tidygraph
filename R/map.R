@@ -133,7 +133,7 @@ map_bfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   dot_params <- list(...)
   search_df <- bfs_df(graph, root, mode, unreachable)
   offspring <- get_offspring(as.integer(search_df$parent), order(search_df$rank))
-  call_nodes(graph, .f, search_df, offspring, dot_params)
+  call_nodes(graph, .f, search_df, offspring, dot_params, reverse = TRUE)
 }
 #' @rdname map_bfs_back
 #' @export
@@ -281,7 +281,7 @@ map_dfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   dot_params <- list(...)
   search_df <- dfs_df(graph, root, mode, unreachable)
   offspring <- get_offspring(as.integer(search_df$parent), order(search_df$rank))
-  call_nodes(graph, .f, search_df, offspring, dot_params)
+  call_nodes(graph, .f, search_df, offspring, dot_params, reverse = TRUE)
 }
 #' @rdname map_dfs_back
 #' @export
@@ -401,9 +401,11 @@ dfs_df <- function(graph, root, mode, unreachable) {
     result = rep(list(NULL), length(nodes))
   )
 }
-call_nodes <- function(graph, .f, search, connections, dot_params) {
+call_nodes <- function(graph, .f, search, connections, dot_params, reverse = FALSE) {
   not_results <- which(names(search) != 'result')
-  for (i in order(search$rank)) {
+  call_order <- order(search$rank)
+  if (reverse) call_order <- rev(call_order)
+  for (i in call_order) {
     if (is.na(i)) break
 
     conn <- connections[[i]]
