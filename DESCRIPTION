@@ -32,4 +32,5 @@ Suggests: network,
     data.tree,
     ape,
     graph,
-    methods
+    methods,
+    testthat
