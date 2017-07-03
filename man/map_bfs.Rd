@@ -78,6 +78,6 @@ create_tree(40, children = 3, directed = TRUE) \%>\%
   }))
 }
 \seealso{
-Other node_map: \code{\link{map_bfs_back}},
+Other node map functions: \code{\link{map_bfs_back}},
   \code{\link{map_dfs_back}}, \code{\link{map_dfs}}
 }

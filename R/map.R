@@ -47,7 +47,7 @@
 #' These functions will throw an error if they are unsuccesful, so they are type
 #' safe.
 #'
-#' @family node_map
+#' @family node map functions
 #'
 #' @export
 #' @importFrom igraph gorder
@@ -130,7 +130,7 @@ map_bfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' (`map_bfs_back_dbl`). These functions will throw an error if they are
 #' unsuccesful, so they are type safe.
 #'
-#' @family node_map
+#' @family node map functions
 #'
 #' @export
 #' @importFrom igraph gorder
@@ -215,7 +215,7 @@ map_bfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' These functions will throw an error if they are unsuccesful, so they are type
 #' safe.
 #'
-#' @family node_map
+#' @family node map functions
 #'
 #' @export
 #' @importFrom igraph gorder
@@ -297,7 +297,7 @@ map_dfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' (`map_dfs_back_dbl`). These functions will throw an error if they are
 #' unsuccesful, so they are type safe.
 #'
-#' @family node_map
+#' @family node map functions
 #'
 #' @export
 #' @importFrom igraph gorder
