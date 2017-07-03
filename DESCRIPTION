@@ -33,4 +33,5 @@ Suggests: network,
     ape,
     graph,
     methods,
-    testthat
+    testthat,
+    covr
