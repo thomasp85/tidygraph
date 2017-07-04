@@ -58,7 +58,7 @@ given distance. Wraps \code{\link[igraph:ego]{igraph::ego()}}.
 
 \item \code{local_triangles}: The number of triangles each node participate in. Wraps \code{\link[igraph:count_triangles]{igraph::count_triangles()}}.
 
-\item \code{local_ave_degree}: Calculates the average degree of based on the neighborhood of each node. Wraps \code{\link[igraph:knn]{igraph::knn()}}.
+\item \code{local_ave_degree}: Calculates the average degree based on the neighborhood of each node. Wraps \code{\link[igraph:knn]{igraph::knn()}}.
 
 \item \code{local_transitivity}: Calculate the transitivity of each node, that is, the
 propensity for the nodes neighbors to be connected. Wraps \code{\link[igraph:transitivity]{igraph::transitivity()}}

@@ -50,13 +50,13 @@ local_triangles <- function() {
   expect_nodes()
   count_triangles(graph = .G())
 }
-#' @describeIn local_graph Calculates the average degree of based on the neighborhood of each node. Wraps [igraph::knn()].
+#' @describeIn local_graph Calculates the average degree based on the neighborhood of each node. Wraps [igraph::knn()].
 #' @inheritParams igraph::knn
 #' @importFrom igraph knn
 #' @export
 local_ave_degree <- function(weights = NULL) {
   expect_nodes()
-  knn(graph = .G(), weights = weights)
+  knn(graph = .G(), weights = weights)$knn
 }
 #' @describeIn local_graph Calculate the transitivity of each node, that is, the
 #' propensity for the nodes neighbors to be connected. Wraps [igraph::transitivity()]
