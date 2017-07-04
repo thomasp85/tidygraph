@@ -1,6 +1,6 @@
 Package: tidygraph
 Type: Package
-Title: A tidy API for graph manipulation
+Title: A Tidy API for Graph Manipulation
 Version: 0.1.0
 Date: 2017-03-06
 Author: Thomas Lin Pedersen
