@@ -467,7 +467,8 @@ call_nodes <- function(graph, .f, search, connections, dot_params, reverse = FAL
 }
 get_offspring <- function(parent, order) {
   offspring <- rep(list(integer(0)), length(parent))
-  offspring[unique(na.omit(parent))] <- split(seq_along(parent), parent)
+  direct_offspring <- split(seq_along(parent), parent)
+  offspring[as.integer(names(direct_offspring))] <- direct_offspring
   offspring <- collect_offspring(offspring, rev(order))
   lapply(offspring, function(x) x[order(match(x, order))])
 }
