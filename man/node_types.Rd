@@ -2,34 +2,34 @@
 % Please edit documentation in R/node.R
 \name{node_types}
 \alias{node_types}
-\alias{node_cut}
-\alias{node_root}
-\alias{node_leaf}
-\alias{node_sink}
-\alias{node_source}
-\alias{node_isolated}
-\alias{node_universal}
-\alias{node_simplical}
-\alias{node_center}
+\alias{node_is_cut}
+\alias{node_is_root}
+\alias{node_is_leaf}
+\alias{node_is_sink}
+\alias{node_is_source}
+\alias{node_is_isolated}
+\alias{node_is_universal}
+\alias{node_is_simplical}
+\alias{node_is_center}
 \title{Querying node types}
 \usage{
-node_cut()
+node_is_cut()
 
-node_root()
+node_is_root()
 
-node_leaf()
+node_is_leaf()
 
-node_sink()
+node_is_sink()
 
-node_source()
+node_is_source()
 
-node_isolated()
+node_is_isolated()
 
-node_universal(mode = "out")
+node_is_universal(mode = "out")
 
-node_simplical(mode = "out")
+node_is_simplical(mode = "out")
 
-node_center(mode = "out")
+node_is_center(mode = "out")
 }
 \arguments{
 \item{mode}{The way edges should be followed in the case of directed graphs.}
@@ -46,23 +46,23 @@ exclusive and that nodes can thus be of multiple types.
 }
 \section{Functions}{
 \itemize{
-\item \code{node_cut}: is the node a cut node (articaultion node)
+\item \code{node_is_cut}: is the node a cut node (articaultion node)
 
-\item \code{node_root}: is the node a root in a tree
+\item \code{node_is_root}: is the node a root in a tree
 
-\item \code{node_leaf}: is the node a leaf in a tree
+\item \code{node_is_leaf}: is the node a leaf in a tree
 
-\item \code{node_sink}: does the node only have incomming edges
+\item \code{node_is_sink}: does the node only have incomming edges
 
-\item \code{node_source}: does the node only have outgoing edges
+\item \code{node_is_source}: does the node only have outgoing edges
 
-\item \code{node_isolated}: is the node unconnected
+\item \code{node_is_isolated}: is the node unconnected
 
-\item \code{node_universal}: is the node connected to all other nodes in the graph
+\item \code{node_is_universal}: is the node connected to all other nodes in the graph
 
-\item \code{node_simplical}: are all the neighbors of the node connected
+\item \code{node_is_simplical}: are all the neighbors of the node connected
 
-\item \code{node_center}: does the node have the minimal eccentricity in the graph
+\item \code{node_is_center}: does the node have the minimal eccentricity in the graph
 }}
 
 \examples{

@@ -2,16 +2,16 @@
 % Please edit documentation in R/edge.R
 \name{edge_types}
 \alias{edge_types}
-\alias{edge_multiple}
-\alias{edge_loop}
-\alias{edge_mutual}
+\alias{edge_is_multiple}
+\alias{edge_is_loop}
+\alias{edge_is_mutual}
 \title{Querying edge types}
 \usage{
-edge_multiple()
+edge_is_multiple()
 
-edge_loop()
+edge_is_loop()
 
-edge_mutual()
+edge_is_mutual()
 }
 \value{
 A logical vector of the same length as the number of edges in the
@@ -24,11 +24,11 @@ in the graph corresponds to the specific type.
 }
 \section{Functions}{
 \itemize{
-\item \code{edge_multiple}: Query whether each edge has any parallel siblings
+\item \code{edge_is_multiple}: Query whether each edge has any parallel siblings
 
-\item \code{edge_loop}: Query whether each edge is a loop
+\item \code{edge_is_loop}: Query whether each edge is a loop
 
-\item \code{edge_mutual}: Query whether each edge has a sibling going in the reverse direction
+\item \code{edge_is_mutual}: Query whether each edge has a sibling going in the reverse direction
 }}
 
 \examples{

@@ -22,7 +22,7 @@ NULL
 #' @describeIn node_types is the node a cut node (articaultion node)
 #' @importFrom igraph gorder articulation_points
 #' @export
-node_cut <- function() {
+node_is_cut <- function() {
   expect_nodes()
   graph <- .G()
   seq_len(gorder(graph)) %in% articulation_points(graph)
@@ -30,7 +30,7 @@ node_cut <- function() {
 #' @describeIn node_types is the node a root in a tree
 #' @importFrom igraph degree is.directed
 #' @export
-node_root <- function() {
+node_is_root <- function() {
   expect_nodes()
   graph <- .G()
   if ((!is_tree(graph) && !is_forest(graph)) || !is.directed(graph)) {
@@ -43,7 +43,7 @@ node_root <- function() {
 #' @describeIn node_types is the node a leaf in a tree
 #' @importFrom igraph degree is.directed
 #' @export
-node_leaf <- function() {
+node_is_leaf <- function() {
   expect_nodes()
   graph <- .G()
   if ((!is_tree(graph) && !is_forest(graph))) {
@@ -60,7 +60,7 @@ node_leaf <- function() {
 #' @describeIn node_types does the node only have incomming edges
 #' @importFrom igraph degree
 #' @export
-node_sink <- function() {
+node_is_sink <- function() {
   expect_nodes()
   graph <- .G()
   deg_in <- degree(graph, mode = 'in')
@@ -70,7 +70,7 @@ node_sink <- function() {
 #' @describeIn node_types does the node only have outgoing edges
 #' @importFrom igraph degree
 #' @export
-node_source <- function() {
+node_is_source <- function() {
   expect_nodes()
   graph <- .G()
   deg_in <- degree(graph, mode = 'in')
@@ -79,7 +79,7 @@ node_source <- function() {
 }
 #' @describeIn node_types is the node unconnected
 #' @importFrom igraph degree
-node_isolated <- function() {
+node_is_isolated <- function() {
   expect_nodes()
   graph <- .G()
   degree(graph) == 0
@@ -87,7 +87,7 @@ node_isolated <- function() {
 #' @describeIn node_types is the node connected to all other nodes in the graph
 #' @importFrom igraph ego_size gorder
 #' @export
-node_universal <- function(mode = 'out') {
+node_is_universal <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
   ego_size(graph, mode = mode) == gorder(graph)
@@ -95,7 +95,7 @@ node_universal <- function(mode = 'out') {
 #' @describeIn node_types are all the neighbors of the node connected
 #' @importFrom igraph local_scan ecount ego_size
 #' @export
-node_simplical <- function(mode = 'out') {
+node_is_simplical <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
   n_edges <- local_scan(graph, k = 1, mode = mode, FUN = ecount)
@@ -105,7 +105,7 @@ node_simplical <- function(mode = 'out') {
 #' @describeIn node_types does the node have the minimal eccentricity in the graph
 #' @importFrom igraph eccentricity
 #' @export
-node_center <- function(mode = 'out') {
+node_is_center <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
   ecc <- eccentricity(graph, mode = mode)

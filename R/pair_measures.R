@@ -123,7 +123,7 @@ node_distance_from <- function(nodes, mode = 'out', weights = NA, algorithm = 'a
 #' @describeIn pair_measures Calculate node pair cocitation count. Wraps [igraph::cocitation()]
 #' @export
 #' @importFrom igraph cocitation gorder
-node_cocitation <- function(nodes) {
+node_cocitation_with <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
@@ -136,7 +136,7 @@ node_cocitation <- function(nodes) {
 #' @describeIn pair_measures Calculate node pair bibliographic coupling. Wraps [igraph::bibcoupling()]
 #' @export
 #' @importFrom igraph bibcoupling gorder
-node_bibcoupling <- function(nodes) {
+node_bibcoupling_with <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
@@ -153,7 +153,7 @@ node_bibcoupling <- function(nodes) {
 #' @param loops Should loop edges be considered
 #' @param method The similarity measure to calculate. Possible values are:
 #' `"jaccard"`, `"dice"`, and `"invlogweighted"`
-node_similarity <- function(nodes, mode = 'out', loops = FALSE, method = 'jaccard') {
+node_similarity_with <- function(nodes, mode = 'out', loops = FALSE, method = 'jaccard') {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))

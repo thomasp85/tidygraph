@@ -18,26 +18,26 @@
 NULL
 
 #' @describeIn edge_types Query whether each edge has any parallel siblings
-#' @importFrom igraph gsize which_multiple
+#' @importFrom igraph which_multiple
 #' @export
-edge_multiple <- function() {
+edge_is_multiple <- function() {
   expect_edges()
   graph <- .G()
-  seq_len(gsize(graph)) %in% which_multiple(graph)
+  which_multiple(graph)
 }
 #' @describeIn edge_types Query whether each edge is a loop
-#' @importFrom igraph gsize which_loop
+#' @importFrom igraph which_loop
 #' @export
-edge_loop <- function() {
+edge_is_loop <- function() {
   expect_edges()
   graph <- .G()
-  seq_len(gsize(graph)) %in% which_loop(graph)
+  which_loop(graph)
 }
 #' @describeIn edge_types Query whether each edge has a sibling going in the reverse direction
-#' @importFrom igraph gsize which_mutual
+#' @importFrom igraph which_mutual
 #' @export
-edge_mutual <- function() {
+edge_is_mutual <- function() {
   expect_edges()
   graph <- .G()
-  seq_len(gsize(graph)) %in% which_mutual(graph)
+  which_mutual(graph)
 }
