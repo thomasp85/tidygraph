@@ -45,7 +45,7 @@ bfs_rank <- function(root, mode = 'out', unreachable = FALSE) {
   graph <- .G()
   root <- as_ind(root, gorder(graph))
   ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
-             order = FALSE, rank = TRUE)$rank
+             order = TRUE, rank = TRUE)$rank
   as.integer(ind)
 }
 #' @describeIn search_graph Get the nodes from which each node is visited in a breath first search
@@ -56,7 +56,7 @@ bfs_parent <- function(root, mode = 'out', unreachable = FALSE) {
   graph <- .G()
   root <- as_ind(root, gorder(graph))
   ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
-      order = FALSE, father = TRUE)$father
+      order = TRUE, father = TRUE)$father
   as.integer(ind)
 }
 #' @describeIn search_graph Get the node that was visited before each node in a breath first search
@@ -67,7 +67,7 @@ bfs_before <- function(root, mode = 'out', unreachable = FALSE) {
   graph <- .G()
   root <- as_ind(root, gorder(graph))
   ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
-             order = FALSE, pred = TRUE)$pred
+             order = TRUE, pred = TRUE)$pred
   as.integer(ind)
 }
 #' @describeIn search_graph Get the node that was visited after each node in a breath first search
@@ -78,7 +78,7 @@ bfs_after <- function(root, mode = 'out', unreachable = FALSE) {
   graph <- .G()
   root <- as_ind(root, gorder(graph))
   ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
-             order = FALSE, succ = TRUE)$succ
+             order = TRUE, succ = TRUE)$succ
   as.integer(ind)
 }
 #' @describeIn search_graph Get the number of nodes between the root and each node in a breath first search
@@ -89,7 +89,7 @@ bfs_dist <- function(root, mode = 'out', unreachable = FALSE) {
   graph <- .G()
   root <- as_ind(root, gorder(graph))
   ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
-             order = FALSE, dist = TRUE)$dist
+             order = TRUE, dist = TRUE)$dist
   as.integer(ind)
 }
 
@@ -114,7 +114,7 @@ dfs_rank_out <- function(root, mode = 'out', unreachable = FALSE) {
   graph <- .G()
   root <- as_ind(root, gorder(graph))
   ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
-             order = FALSE, order.out = TRUE)$order.out
+             order = TRUE, order.out = TRUE)$order.out
   match(seq_along(ind), as.integer(ind))
 }
 #' @describeIn search_graph Get the nodes from which each node is visited in a depth first search
@@ -125,7 +125,7 @@ dfs_parent <- function(root, mode = 'out', unreachable = FALSE) {
   graph <- .G()
   root <- as_ind(root, gorder(graph))
   ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
-             order = FALSE, father = TRUE)$father
+             order = TRUE, father = TRUE)$father
   as.integer(ind)
 }
 #' @describeIn search_graph Get the number of nodes between the root and each node in a depth first search
@@ -136,6 +136,6 @@ dfs_dist <- function(root, mode = 'out', unreachable = FALSE) {
   graph <- .G()
   root <- as_ind(root, gorder(graph))
   ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
-             order = FALSE, dist = TRUE)$dist
+             order = TRUE, dist = TRUE)$dist
   as.integer(ind)
 }
