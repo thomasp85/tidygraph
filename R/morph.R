@@ -137,9 +137,10 @@ crystallise.morphed_tbl_graph <- function(.data) {
   attr(.data, '.orig_graph') <- NULL
   attr(.data, '.morpher') <- NULL
   name <- names(.data) %||% as.character(seq_along(.data))
+  graph <- unname(.data)
   tibble(
-    name = names(.data),
-    graph = unname(.data)
+    name = name,
+    graph = graph
   )
 }
 # HELPERS -----------------------------------------------------------------
