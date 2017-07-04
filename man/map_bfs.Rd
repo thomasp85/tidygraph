@@ -73,7 +73,7 @@ name the ones needed and use \code{...} to catch the rest.
 # Accumulate values along a search
 create_tree(40, children = 3, directed = TRUE) \%>\%
   mutate(value = round(runif(40)*100)) \%>\%
-  mutate(value_acc = map_bfs_dbl(node_root(), .f = function(node, path, ...) {
+  mutate(value_acc = map_bfs_dbl(node_is_root(), .f = function(node, path, ...) {
     sum(.N()$value[c(node, path$node)])
   }))
 }

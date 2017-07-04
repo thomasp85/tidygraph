@@ -16,7 +16,7 @@
 #' @examples
 #' # Find the root and leafs in a tree
 #' create_tree(40, 2) %>%
-#'   mutate(root = node_root(), leaf = node_leaf())
+#'   mutate(root = node_is_root(), leaf = node_is_leaf())
 NULL
 
 #' @describeIn node_types is the node a cut node (articaultion node)

@@ -35,5 +35,5 @@ in the graph corresponds to the specific type.
 create_star(10, directed = TRUE, mutual = TRUE) \%>\%
   activate(edges) \%>\%
   sample_frac(0.7) \%>\%
-  mutate(single_edge = !edge_mutual())
+  mutate(single_edge = !edge_is_mutual())
 }

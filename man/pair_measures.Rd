@@ -103,5 +103,5 @@ supply the graph being computed on as the context is known.
 \examples{
 # Calculate the distance to the center node
 create_notable('meredith') \%>\%
-  mutate(dist_to_center = node_distance_to(node_center()))
+  mutate(dist_to_center = node_distance_to(node_is_center()))
 }

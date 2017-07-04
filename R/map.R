@@ -56,7 +56,7 @@
 #' # Accumulate values along a search
 #' create_tree(40, children = 3, directed = TRUE) %>%
 #'   mutate(value = round(runif(40)*100)) %>%
-#'   mutate(value_acc = map_bfs_dbl(node_root(), .f = function(node, path, ...) {
+#'   mutate(value_acc = map_bfs_dbl(node_is_root(), .f = function(node, path, ...) {
 #'     sum(.N()$value[c(node, path$node)])
 #'   }))
 map_bfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
@@ -139,7 +139,7 @@ map_bfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' # Collect values from children
 #' create_tree(40, children = 3, directed = TRUE) %>%
 #'   mutate(value = round(runif(40)*100)) %>%
-#'   mutate(child_acc = map_bfs_back_dbl(node_root(), .f = function(node, path, ...) {
+#'   mutate(child_acc = map_bfs_back_dbl(node_is_root(), .f = function(node, path, ...) {
 #'     if (nrow(path) == 0) .N()$value[node]
 #'     else {
 #'       sum(unlist(path$result[path$parent == node]))
@@ -223,7 +223,7 @@ map_bfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' @examples
 #' # Add a random integer to the last value along a search
 #' create_tree(40, children = 3, directed = TRUE) %>%
-#'   mutate(child_acc = map_dfs_int(node_root(), .f = function(node, path, ...) {
+#'   mutate(child_acc = map_dfs_int(node_is_root(), .f = function(node, path, ...) {
 #'     last_val <- if (nrow(path) == 0) 0L else tail(unlist(path$result), 1)
 #'     last_val + sample(1:10, 1)
 #'   }))
@@ -306,7 +306,7 @@ map_dfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' # Collect values from the 2 closest layers of children in a dfs search
 #' create_tree(40, children = 3, directed = TRUE) %>%
 #'   mutate(value = round(runif(40)*100)) %>%
-#'   mutate(child_acc = map_dfs_back(node_root(), .f = function(node, path, dist, ...) {
+#'   mutate(child_acc = map_dfs_back(node_is_root(), .f = function(node, path, dist, ...) {
 #'     if (nrow(path) == 0) .N()$value[node]
 #'     else {
 #'       unlist(path$result[path$dist - dist <= 2])
