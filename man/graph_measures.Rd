@@ -36,7 +36,7 @@ graph_component_count(type = "weak")
 
 graph_motif_count(size = 3, cut.prob = rep(0, size))
 
-graph_diameter(directed = TRUE, unconnected = TRUE, weights = NULL)
+graph_diameter(weights = NULL, directed = TRUE, unconnected = TRUE)
 
 graph_girth()
 
@@ -85,15 +85,15 @@ smallest maximally non-trivially connected non-singleton cell.}
 graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument). By default no cuts are made.}
 
+\item{weights}{Optional positive weight vector for calculating weighted
+distances. If the graph has a \code{weight} edge attribute, then this is
+used by default.}
+
 \item{unconnected}{Logical, what to do if the graph is unconnected. If
 FALSE, the function will return a number that is one larger the largest
 possible diameter, which is always the number of vertices. If TRUE, the
 diameters of the connected components will be calculated and the largest one
 will be returned.}
-
-\item{weights}{Optional positive weight vector for calculating weighted
-distances. If the graph has a \code{weight} edge attribute, then this is
-used by default.}
 
 \item{mode}{How should eccentricity be calculated. If \code{"out"} only outbound edges are followed. If \code{"in"} only inbound are followed. If \code{"all"} all edges are followed. Ignored for undirected graphs.}
 
