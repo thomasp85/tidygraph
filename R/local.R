@@ -74,5 +74,5 @@ local_transitivity <- function(weights = NULL) {
     'local'
   }
   graph <- .G()
-  transitivity(graph = graph, type = type, vids = V(graph), weights = weights, isolates = 0)
+  transitivity(graph = graph, type = type, vids = V(graph), weights = weights, isolates = 'zero')
 }
