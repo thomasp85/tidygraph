@@ -90,7 +90,7 @@ node_is_isolated <- function() {
 node_is_universal <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
-  ego_size(graph, mode = mode) == gorder(graph)
+  ego_size(graph, order = 1, mode = mode) == gorder(graph)
 }
 #' @describeIn node_types are all the neighbors of the node connected
 #' @importFrom igraph local_scan ecount ego_size
@@ -99,7 +99,7 @@ node_is_simplical <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
   n_edges <- local_scan(graph, k = 1, mode = mode, FUN = ecount)
-  n_nodes <- ego_size(graph, mode = mode)
+  n_nodes <- ego_size(graph, order = 1, mode = mode)
   n_edges == n_nodes * (n_nodes - 1) * 0.5
 }
 #' @describeIn node_types does the node have the minimal eccentricity in the graph
