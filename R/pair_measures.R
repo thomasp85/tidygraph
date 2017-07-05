@@ -98,6 +98,8 @@ node_cohesion_from <- function(nodes) {
 node_distance_to <- function(nodes, mode = 'out', weights = NA, algorithm = 'automatic') {
   expect_nodes()
   graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
   nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
@@ -112,6 +114,8 @@ node_distance_to <- function(nodes, mode = 'out', weights = NA, algorithm = 'aut
 node_distance_from <- function(nodes, mode = 'out', weights = NA, algorithm = 'automatic') {
   expect_nodes()
   graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
   nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
@@ -171,6 +175,8 @@ node_similarity_with <- function(nodes, mode = 'out', loops = FALSE, method = 'j
 node_max_flow_to <- function(nodes, capacity = NULL) {
   expect_nodes()
   graph <- .G()
+  capacity <- enquo(capacity)
+  capacity <- eval_tidy(capacity, .E())
   nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
@@ -186,6 +192,8 @@ node_max_flow_to <- function(nodes, capacity = NULL) {
 node_max_flow_from <- function(nodes, capacity = NULL) {
   expect_nodes()
   graph <- .G()
+  capacity <- enquo(capacity)
+  capacity <- eval_tidy(capacity, .E())
   nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))

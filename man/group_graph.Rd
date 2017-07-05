@@ -15,30 +15,53 @@
 \alias{group_biconnected_component}
 \title{Group nodes and edges based on community structure}
 \usage{
-group_components(...)
+group_components(type = "weak")
 
-group_edge_betweenness(...)
+group_edge_betweenness(weights = NULL, directed = TRUE)
 
-group_fast_greedy(...)
+group_fast_greedy(weights = NULL)
 
-group_infomap(...)
+group_infomap(weights = NULL, node_weights = NULL, trials = 10)
 
-group_label_prop(...)
+group_label_prop(weights = NULL, label = NULL, fixed = NULL)
 
-group_leading_eigen(...)
+group_leading_eigen(weights = NULL, steps = -1, label = NULL,
+  options = igraph::arpack_defaults)
 
-group_louvain(...)
+group_louvain(weights = NULL)
 
-group_optimal(...)
+group_optimal(weights = NULL)
 
-group_spinglass(...)
+group_spinglass(weights = NULL, ...)
 
-group_walktrap(...)
+group_walktrap(weights = NULL, steps = 4)
 
 group_biconnected_component()
 }
 \arguments{
-\item{...}{arguments passed on to the clustering function in question}
+\item{type}{The type of component to find. Either \code{'weak'} or \code{'strong'}}
+
+\item{weights}{The weight of the edges to use for the calculation. Will be
+evaluated in the context of the edge data.}
+
+\item{directed}{Should direction of edges be used for the calculations}
+
+\item{node_weights}{The weight of the nodes to use for the calculation. Will
+be evaluated in the context of the node data.}
+
+\item{trials}{Number of times partition of the network should be attempted}
+
+\item{label}{The initial groups of the nodes. Will be evaluated in the
+context of the node data.}
+
+\item{fixed}{A logical vector determining which nodes should keep their
+initial groups. Will be evaluated in the context of the node data.}
+
+\item{steps}{The number of steps in the random walks}
+
+\item{options}{Settings passed on to \code{igraph::arpack()}}
+
+\item{...}{arguments passed on to \code{\link[igraph:cluster_spinglass]{igraph::cluster_spinglass()}}}
 }
 \value{
 a numeric vector with the membership for each node in the graph

@@ -147,6 +147,8 @@ node_eccentricity <- function(mode = 'out') {
 node_constraint <- function(weights = NULL) {
   expect_nodes()
   graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
   constraint(graph, V(graph), weights = weights)
 }
 #' @describeIn node_measures measures the coreness of each node. See [igraph::coreness()]
@@ -163,5 +165,7 @@ node_coreness <- function(mode = 'out') {
 node_diversity <- function(weights = NULL) {
   expect_nodes()
   graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
   diversity(graph, weights = weights, vids = V(graph))
 }

@@ -17,7 +17,7 @@ local_triangles()
 
 local_ave_degree(weights = NULL)
 
-local_transitivity(...)
+local_transitivity(weights = NULL)
 }
 \arguments{
 \item{order}{Integer giving the order of the neighborhood.}
@@ -37,8 +37,6 @@ attribute, then this is used by default. If this argument is given, then
 vertex strength (see \code{\link{strength}}) is used instead of vertex
 degree. But note that \code{knnk} is still given in the function of the
 normal vertex degree.}
-
-\item{...}{Parameters passed on to the \code{igraph} function in question}
 }
 \value{
 A numeric vector or a list (for \code{local_members}) with elements

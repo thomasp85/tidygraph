@@ -3,8 +3,6 @@
 #' These functions wraps a set of functions that all measures quantities of the
 #' local neighborhood of each node.
 #'
-#' @param ... Parameters passed on to the `igraph` function in question
-#'
 #' @return A numeric vector or a list (for `local_members`) with elements
 #' corresponding to the nodes in the graph.
 #'
@@ -56,6 +54,8 @@ local_triangles <- function() {
 #' @export
 local_ave_degree <- function(weights = NULL) {
   expect_nodes()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
   knn(graph = .G(), weights = weights)$knn
 }
 #' @describeIn local_graph Calculate the transitivity of each node, that is, the
@@ -63,14 +63,15 @@ local_ave_degree <- function(weights = NULL) {
 #' @importFrom igraph transitivity V
 #' @importFrom rlang quos
 #' @export
-local_transitivity <- function(...) {
+local_transitivity <- function(weights = NULL) {
   expect_nodes()
-  dots <- quos(...)
-  type <- if (is.null(dots$weights)) {
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  type <- if (is.null(weights)) {
     'weighted'
   } else {
     'local'
   }
   graph <- .G()
-  transitivity(graph = graph, type = type, vids = V(graph), ...)
+  transitivity(graph = graph, type = type, vids = V(graph), weights = weights, isolates = 0)
 }

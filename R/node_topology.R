@@ -33,8 +33,8 @@ node_dominator <- function(root, mode = 'out') {
 #' @describeIn node_topology Get the topological order of nodes in a DAG. Wraps [igraph::topo_sort()].
 #' @importFrom igraph gorder topo_sort
 #' @export
-node_topo_order <- function(mode) {
+node_topo_order <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
-  match(seq_len(gorder(graph)), topo_sort(graph, mode = 'out'))
+  match(seq_len(gorder(graph)), topo_sort(graph, mode = mode))
 }

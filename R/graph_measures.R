@@ -34,7 +34,11 @@ graph_adhesion <- function() {
 #' @export
 graph_assortativity <- function(attr, in_attr = NULL, directed = TRUE) {
   graph <- .G()
+  attr <- enquo(attr)
+  attr <- eval_tidy(attr, .N())
   if (is.numeric(attr)) {
+    in_attr <- enquo(in_attr)
+    in_attr <- eval_tidy(in_attr, .N())
     assortativity(graph, attr, in_attr, directed)
   } else {
     assortativity_nominal(graph, as.factor(attr), directed)
@@ -62,6 +66,8 @@ graph_clique_num <- function() {
 #' @export
 graph_clique_count <- function(min = NULL, max = NULL, subset = NULL) {
   graph <- .G()
+  subset <- enquo(subset)
+  subset <- eval_tidy(subset, .N())
   if (is.logical(subset)) subset <- which(subset)
   count_max_cliques(graph, min, max, subset)
 }
@@ -85,8 +91,10 @@ graph_motif_count <- function(size = 3, cut.prob = rep(0, size)) {
 #' @inheritParams igraph::diameter
 #' @importFrom igraph diameter
 #' @export
-graph_diameter <- function(directed = TRUE, unconnected = TRUE, weights = NULL) {
+graph_diameter <- function(weights = NULL, directed = TRUE, unconnected = TRUE) {
   graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
   diameter(graph, directed, unconnected, weights)
 }
 #' @describeIn graph_measures Measrues the length of the shortest circle in the graph. Wraps [igraph::girth()]
@@ -154,7 +162,9 @@ graph_reciprocity <- function(ignore_loops = TRUE, ratio = FALSE) {
 #' @export
 graph_min_cut <- function(capacity = NULL) {
   graph <- .G()
-  min_cut(graph, capacity = capacity)$value
+  capacity <- enquo(capacity)
+  capacity <- eval_tidy(capacity, .E())
+  min_cut(graph, capacity = capacity)
 }
 #' @describeIn graph_measures Calculates the mean distance between all node pairs in the graph. Wraps [igraph::mean_distance()]
 #' @importFrom igraph mean_distance

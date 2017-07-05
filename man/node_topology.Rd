@@ -8,7 +8,7 @@
 \usage{
 node_dominator(root, mode = "out")
 
-node_topo_order(mode)
+node_topo_order(mode = "out")
 }
 \arguments{
 \item{root}{The node to start the dominator search from}

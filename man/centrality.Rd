@@ -15,30 +15,73 @@
 \alias{centrality_edge_betweenness}
 \title{Calculate node and edge centrality}
 \usage{
-centrality_alpha(...)
+centrality_alpha(weights = NULL, alpha = 1, exo = 1, tol = 1e-07,
+  loops = FALSE)
 
-centrality_authority(...)
+centrality_authority(weights = NULL, scale = TRUE,
+  options = igraph::arpack_defaults)
 
-centrality_betweenness(...)
+centrality_betweenness(weights = NULL, directed = TRUE, cutoff = NULL,
+  nobigint = TRUE, normalized = FALSE)
 
-centrality_power(...)
+centrality_power(exponent = 1, rescale = FALSE, tol = 1e-07,
+  loops = FALSE)
 
-centrality_closeness(...)
+centrality_closeness(weights = NULL, mode = "out", normalized = FALSE,
+  cutoff = NULL)
 
-centrality_eigen(...)
+centrality_eigen(weights = NULL, directed = FALSE, scale = TRUE,
+  options = igraph::arpack_defaults)
 
-centrality_hub(...)
+centrality_hub(weights = NULL, scale = TRUE,
+  options = igraph::arpack_defaults)
 
-centrality_pagerank(...)
+centrality_pagerank(weights = NULL, directed = TRUE, damping = 0.85,
+  personalized = NULL)
 
-centrality_subgraph(...)
+centrality_subgraph(loops = FALSE)
 
-centrality_degree(...)
+centrality_degree(weights = NULL, mode = "out", loops = TRUE,
+  normalized = FALSE)
 
-centrality_edge_betweenness(...)
+centrality_edge_betweenness(weights = NULL, directed = TRUE,
+  cutoff = NULL)
 }
 \arguments{
-\item{...}{Parameters passed on to the \code{igraph} implementation.}
+\item{weights}{The weight of the edges to use for the calculation. Will be
+evaluated in the context of the edge data.}
+
+\item{alpha}{Relative importance of endogenous vs exogenous factors}
+
+\item{exo}{The exogenous factors of the nodes. Either a scalar or a number
+number for each node. Evaluated in the context of the node data.}
+
+\item{tol}{Tolerance for near-singularities during matrix inversion}
+
+\item{loops}{Should loops be included in the calculation}
+
+\item{scale}{Should the output be scaled between 0 and 1}
+
+\item{options}{Settings passed on to \code{igraph::arpack()}}
+
+\item{directed}{Should direction of edges be used for the calculations}
+
+\item{cutoff}{maximum path length to use during calculations}
+
+\item{nobigint}{Should big integers be avoided during calculations}
+
+\item{normalized}{Should the output be normalized}
+
+\item{exponent}{The decay rate for the Bonacich power centrality}
+
+\item{rescale}{Should the output be scaled to sum up to 1}
+
+\item{mode}{How should edges be followed. Ignored for undirected graphs}
+
+\item{damping}{The damping factor of the page rank algorithm}
+
+\item{personalized}{The probability of jumping to a node when abandoning a
+random walk. Evaluated in the context of the node data.}
 }
 \value{
 A numeric vector giving the centrality measure of each node.
