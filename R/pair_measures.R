@@ -34,6 +34,7 @@ node_adhesion_to <- function(nodes) {
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   adhesion <- Map(function(s, t) {
+    if (s == t) return(NA)
     edge_connectivity(graph, source = s, target = t, checks = TRUE)
   }, s = source, t = target)
   unlist(adhesion)
@@ -49,6 +50,7 @@ node_adhesion_from <- function(nodes) {
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
   adhesion <- Map(function(s, t) {
+    if (s == t) return(NA)
     edge_connectivity(graph, source = s, target = t, checks = TRUE)
   }, s = source, t = target)
   unlist(adhesion)
@@ -63,7 +65,10 @@ node_cohesion_to <- function(nodes) {
   nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
+  neigh <- lapply(ego(graph, 1, source, 'out', mindist = 1), as.integer)
   adhesion <- Map(function(s, t) {
+    if (s == t) return(NA)
+    if (t %in% neigh[[s]]) return(NA)
     vertex_connectivity(graph, source = s, target = t, checks = TRUE)
   }, s = source, t = target)
   unlist(adhesion)
@@ -71,14 +76,17 @@ node_cohesion_to <- function(nodes) {
 
 #' @describeIn pair_measures Calculate the cohesion from the specified node. Wraps [igraph::vertex_connectivity()]
 #' @export
-#' @importFrom igraph vertex_connectivity gorder
+#' @importFrom igraph vertex_connectivity gorder ego
 node_cohesion_from <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
+  neigh <- lapply(ego(graph, 1, source, 'out', mindist = 1), as.integer)
   adhesion <- Map(function(s, t) {
+    if (s == t) return(NA)
+    if (t %in% neigh[[s]]) return(NA)
     vertex_connectivity(graph, source = s, target = t, checks = TRUE)
   }, s = source, t = target)
   unlist(adhesion)
@@ -181,6 +189,7 @@ node_max_flow_to <- function(nodes, capacity = NULL) {
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   flow <- Map(function(s, t) {
+    if (s == t) return(NA)
     max_flow(graph, source = s, target = t, capacity = capacity)$value
   }, s = source, t = target)
   unlist(flow)
@@ -198,6 +207,7 @@ node_max_flow_from <- function(nodes, capacity = NULL) {
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
   flow <- Map(function(s, t) {
+    if (s == t) return(NA)
     max_flow(graph, source = s, target = t, capacity = capacity)$value
   }, s = source, t = target)
   unlist(flow)
