@@ -44,7 +44,8 @@ corresponding to the nodes in the graph.
 }
 \description{
 These functions wraps a set of functions that all measures quantities of the
-local neighborhood of each node.
+local neighborhood of each node. They all return a vector or list matching
+the node position.
 }
 \section{Functions}{
 \itemize{

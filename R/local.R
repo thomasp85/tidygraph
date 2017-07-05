@@ -1,7 +1,8 @@
 #' Measures based on the neighborhood of each node
 #'
 #' These functions wraps a set of functions that all measures quantities of the
-#' local neighborhood of each node.
+#' local neighborhood of each node. They all return a vector or list matching
+#' the node position.
 #'
 #' @return A numeric vector or a list (for `local_members`) with elements
 #' corresponding to the nodes in the graph.
