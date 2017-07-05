@@ -25,9 +25,10 @@ NULL
 node_dominator <- function(root, mode = 'out') {
   expect_nodes()
   graph <- .G()
-  dom <- dominator_tree(graph, root, mode)$dom
-  dom[is.nan(dom)] <- NA
-  dom[root] <- NA
+  root <- as_ind(root, gorder(graph))
+  domtree <- as_edgelist(dominator_tree(graph, root, mode)$domtree)
+  dom <- rep(NA, gorder(graph))
+  dom[domtree[, 2]] <- domtree[, 1]
   dom
 }
 #' @describeIn node_topology Get the topological order of nodes in a DAG. Wraps [igraph::topo_sort()].
