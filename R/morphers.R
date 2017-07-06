@@ -122,7 +122,7 @@ to_local_neighborhood <- function(graph, node, order = 1, mode = 'all') {
   node <- as_ind(node, gorder(graph))
   ego <- make_ego_graph(graph, order = order, nodes = node, mode = mode)
   list(
-    neighborhood = as_tbl_graph(ego)
+    neighborhood = as_tbl_graph(ego[[1]])
   )
 }
 #' @describeIn morphers Convert a graph into its dominator tree based on a
@@ -178,9 +178,9 @@ to_shortest_path <- function(graph, from, to, mode = 'out', weights = NULL) {
 to_bfs_tree <- function(graph, root, mode = 'out', unreachable = FALSE) {
   root <- as_ind(root, gorder(graph))
   search <- bfs(graph, root, neimode = mode, unreachable = unreachable, father = TRUE)
-  dfs_graph <- search_to_graph(graph, search)
+  bfs_graph <- search_to_graph(graph, search)
   list(
-    dfs, dfs_graph
+    bfs = bfs_graph
   )
 }
 #' @describeIn morphers Convert a graph into a depth-first search tree based on
@@ -192,7 +192,7 @@ to_dfs_tree <- function(graph, root, mode = 'out', unreachable = FALSE) {
   search <- dfs(graph, root, neimode = mode, unreachable = unreachable, father = TRUE)
   dfs_graph <- search_to_graph(graph, search)
   list(
-    dfs, dfs_graph
+    dfs = dfs_graph
   )
 }
 #' @describeIn morphers Collapse parallel edges and remove loops in a graph.
