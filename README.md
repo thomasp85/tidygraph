@@ -7,56 +7,82 @@ tidygraph
 
 This package provides a tidy API for graph/network manipulation. While network data itself is not tidy, it can be envisioned as two tidy tables, one for node data and one for edge data. `tidygraph` provides a way to switch between the two tables and provides `dplyr` verbs for manipulating them. Furthermore it provides access to a lot of graph algorithms with return values that facilitate their use in a tidy workflow.
 
-**This is a work in progress**
-
 An example
 ----------
 
 ``` r
-library(igraph)
 library(tidygraph)
 
-gr <- as_tbl_graph(erdos.renyi.game(10, 0.5)) %>% 
+play_erdos_renyi(10, 0.5) %>% 
   activate(nodes) %>% 
-  mutate(rand = sample(n()), even = rand %% 2 == 0) %>% 
+  mutate(degree = centrality_degree()) %>% 
   activate(edges) %>% 
-  arrange(desc(to))
+  mutate(centrality = centrality_edge_betweenness()) %>% 
+  arrange(centrality)
+#> # A tbl_graph: 10 nodes and 46 edges
+#> #
+#> # A directed simple graph with 1 component
+#> #
+#> # Edge Data: 46 x 3 (active)
+#>    from    to centrality
+#>   <int> <int>      <dbl>
+#> 1     4     2   1.250000
+#> 2     4     7   1.333333
+#> 3     4     9   1.333333
+#> 4     3     2   1.583333
+#> 5     4     5   1.583333
+#> 6    10     9   1.583333
+#> # ... with 40 more rows
+#> #
+#> # Node Data: 10 x 1
+#>   degree
+#>    <dbl>
+#> 1      3
+#> 2      4
+#> 3      7
+#> # ... with 7 more rows
 ```
 
-Roadmap
--------
+Overview
+--------
 
-### 1. Support relevant dplyr verbs
+`tidygraph` is a huge package that exports 280 different functions and methods. It more or less wraps the full functionality of `igraph` in a tidy API giving you access to almost all of the `dplyr` verbs plus a few more, developed for use with relational data.
 
-The goal is to support all verbs from dplyr that make sense, which is almost all of them. It is definitely easier to list the ones that won't get supported and describe why:
+### More verbs
 
-1.  **All summarise functions:** Summarising nodes and edges in a graph context is ill-defined as it is unclear how the resulting graph should be created. A summarise operation modifies the number of rows in the data, but unlike filtering there are no specific rows that are retained. An alternative `collapse` functionality is under consideration where nodes (and edges) can be merged. If data summaries are needed these can be obtained by extracting the node or edge data using `as_tibble` prior to using `summarise` (note that this will remove the graph context)
+`tidygraph` adds some extra verbs for specific use in network analysis and manipulation. The `activate()` defines wether one is manipulating node or edge data at the moment as shown in the example above. `bind_edges()`, `bind_nodes()`, and `bind_graphs()` lets you expand the graph structure you're working with, while `graph_join()` lets you merge two graphs on some node identifier. `reroute()` on the other hand lets you change the terminal nodes of the edges in the graph.
 
-2.  **do:** The rationale is really just like the above - `do` can potentially modify the data in ways that do not make sense in a graph context. The solution is again to extract the data prior to the `do` call.
+### More algorithms
 
-### 2. Provide Constructors for all general relational data structures
+`tidygraph` wraps almost all of `igraph`s graph algorithms and provides a consistent interface and output that always matches the sequence of nodes and edges. All `tidygraph` algorithm wrappers are intended for use inside verbs where they know the context they are being called in. In the example above it is not necessary to supply the graph nor the node/edge ids to `centrality_degree()` and `centrality_edge_betweenness()` as they are aware of that already. This leads to much clearer code and less typing.
 
-The goal is to be able to feed any relational data structure into `as_tbl_graph` - this entails conversion functions into `igraph` format, which is the underlying data structure that powers `tidygraph`. Currently the following is supported:
+### More maps
 
--   **`igraph`** --- well duh
--   **`list`** depending on the format it will either be parsed as an adjacency list or a list containing a `nodes` data frame and an `edges` data frame
--   **`data.frame`** parsed as an edgelist with additional edge attributes
--   **`matrix`** depending on the format it will either be parsed as a plain edgelist, an adjacency matrix, or an incidence matrix.
+`tidygraph` goes beyond `dplyr` and also implement graph centric version of the `purrr` map functions. You can now call a function on the nodes in the order of a breath or depth first search while getting access to the result of the previous calls.
 
-The following data structures are planned for support:
+### More morphs
 
--   `stats::hclust` and `stats::dendrogram`
--   `network::network`
--   `ape::phylo`
--   `data.tree::data.tree`
--   `graph::graph` from bioconductor
+`tidygraph` lets you temporarily change the representation of your graph, do some manipulation of the node and edge data, and then change back to the original graph with the changes being merged in automatically. This is powered by the new `morph()`/`unmorph()` verbs hat lets you e.g. contract nodes, work on the linegraph representation, split communities to seperate graphs etc. If you wish to continue with the morphed version, the `crystallise()` verb lets you *freeze* the temporary representation into a proper `tbl_graph`.
 
-Some of these might already work if they contain an `as.igraph` method as this is attempted by default.
+### More data structure support
 
-### 3. Provide verbs specific to graph analysis
+While `tidygraph` is powered by igraph underneath it wants everyone to join the fun. the `as_tbl_graph()` function can easily convert relational data from all your favourite objects, such as `network`, `phylo`, `dendrogram`, `data.tree`, `graph`, etc. More conversion will be added in the order I get aware of them.
 
-As discussed above, `collapse` could be provided to combine nodes and automatically update the edges to fit, combining parallel edges. Another plan is to provide a `split_by` method that creates temporary sub-graphs based on either edge or node attributes (kind of like `group_by` but updating the underlying graph structure as well). More ideas to come in time.
+Visualisation
+-------------
 
-### 4. Provide a tidy interface to all igraph algorithms
+`tidygraph` itself does not provide any means of visualisation, but it works flawlessly with `ggraph`. This division makes it easy to develop the visualisation and manipulation code at different speeds depending on where the needs arise.
 
-Where it makes sense, all algorithms should get a wrapper so that it is not necessary to specify the graph object and which nodes or edges are being referenced. For example, inside a `mutate` call it should be possible to just call `degree()` and get a vector of node degrees returned in the correct order. This last point is probably where the most work is required.
+Installation
+------------
+
+`tidygraph` is available on CRAN and can be installed simply, using `install.packages(tidygraph)`. For the development version available on GitHub, use the `devtools` package for installation:
+
+``` r
+devtools::install_github('thomasp85/tidygraph')
+```
+
+Thanks
+------
+
+`tidygraph` stands on the shoulders of particularly the `igraph` and `dplyr`/tidyverse teams. It would not have happened without them, so thanks so much to them.
