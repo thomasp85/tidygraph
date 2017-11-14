@@ -21,7 +21,7 @@ map_local_dbl(order = 1, mode = "all", mindist = 0, .f, ...)
 \arguments{
 \item{order}{Integer giving the order of the neighborhood.}
 
-\item{mode}{Character constatnt, it specifies how to use the direction of
+\item{mode}{Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For \sQuote{out} only the
 outgoing edges are followed, so all vertices reachable from the source
 vertex in at most \code{order} steps are counted. For \sQuote{"in"} all
