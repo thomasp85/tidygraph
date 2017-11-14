@@ -2,10 +2,10 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 get_paths <- function(parent) {
-    .Call('tidygraph_get_paths', PACKAGE = 'tidygraph', parent)
+    .Call('_tidygraph_get_paths', PACKAGE = 'tidygraph', parent)
 }
 
 collect_offspring <- function(offspring, order) {
-    .Call('tidygraph_collect_offspring', PACKAGE = 'tidygraph', offspring, order)
+    .Call('_tidygraph_collect_offspring', PACKAGE = 'tidygraph', offspring, order)
 }
 

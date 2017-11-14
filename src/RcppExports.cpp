@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // get_paths
 List get_paths(IntegerVector parent);
-RcppExport SEXP tidygraph_get_paths(SEXP parentSEXP) {
+RcppExport SEXP _tidygraph_get_paths(SEXP parentSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -18,7 +18,7 @@ END_RCPP
 }
 // collect_offspring
 List collect_offspring(ListOf<IntegerVector> offspring, IntegerVector order);
-RcppExport SEXP tidygraph_collect_offspring(SEXP offspringSEXP, SEXP orderSEXP) {
+RcppExport SEXP _tidygraph_collect_offspring(SEXP offspringSEXP, SEXP orderSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -30,8 +30,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"tidygraph_get_paths", (DL_FUNC) &tidygraph_get_paths, 1},
-    {"tidygraph_collect_offspring", (DL_FUNC) &tidygraph_collect_offspring, 2},
+    {"_tidygraph_get_paths", (DL_FUNC) &_tidygraph_get_paths, 1},
+    {"_tidygraph_collect_offspring", (DL_FUNC) &_tidygraph_collect_offspring, 2},
     {NULL, NULL, 0}
 };
 
