@@ -79,6 +79,7 @@ node_is_source <- function() {
 }
 #' @describeIn node_types is the node unconnected
 #' @importFrom igraph degree
+#' @export
 node_is_isolated <- function() {
   expect_nodes()
   graph <- .G()
