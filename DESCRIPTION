@@ -1,8 +1,8 @@
 Package: tidygraph
 Type: Package
 Title: A Tidy API for Graph Manipulation
-Version: 1.0.0
-Date: 2017-07-06
+Version: 1.0.0.9999
+Date: 2017-12-12
 Author: Thomas Lin Pedersen
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
 Description: A graph, while not "tidy" in itself, can be thought of as two tidy
@@ -10,7 +10,7 @@ Description: A graph, while not "tidy" in itself, can be thought of as two tidy
     provides an approach to manipulate these two virtual data frames using the
     API defined in the 'dplyr' package, as well as provides tidy interfaces to 
     a lot of common graph algorithms.
-License: GPL (>=2)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
