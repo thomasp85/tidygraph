@@ -8,7 +8,10 @@
 #' See Details for the requirement for custom morphers. The `crystallise` verb
 #' is used to extract the temporary graph representation into a tibble
 #' containing one separate graph per row and a `name` and `graph` column holding
-#' the name of each graph and the graph itself respectively.
+#' the name of each graph and the graph itself respectively. `convert()` is a
+#' shorthand for performing both `morph` and `crystallise` along with extracting
+#' a single `tbl_graph` (defaults to the first). For morphs were you know they
+#' only create a single graph, and you want to keep it, this is an easy way.
 #'
 #' @details
 #' It is only possible to change and add to node and edge data from a
@@ -48,6 +51,9 @@
 #'
 #' @param ... Arguments passed on to the morpher
 #'
+#' @param .select The graph to return during `convert()`. Either an index or the
+#' name as created during `crystallise()`.
+#'
 #' @return A `morphed_tbl_graph`
 #'
 #' @export
@@ -74,6 +80,11 @@ crystallise <- function(.data) {
 #' @rdname morph
 #' @export
 crystallize <- crystallise
+#' @rdname morph
+#' @export
+convert <- function(.data, .f, ..., .select = 1) {
+  UseMethod('convert')
+}
 #' @export
 #' @importFrom rlang as_quosure sym quo_text enquo
 morph.tbl_graph <- function(.data, .f, ...) {
@@ -142,6 +153,17 @@ crystallise.morphed_tbl_graph <- function(.data) {
     name = name,
     graph = graph
   )
+}
+#' @export
+convert.tbl_graph <- function(.data, .f, ..., .select = 1) {
+  stopifnot(length(.select) == 1)
+  graphs <- crystallise(morph(.data, .f, ...))
+  if (is.character(.select)) {
+    .select <- which(.select == graphs$name)[1]
+    if (is.na(.select)) stop('.select does not match any named graph', call. = FALSE)
+  }
+  if (.select > nrow(graphs)) stop('convert did not create ', .select, ' graphs', call. = FALSE)
+  graphs$graph[[.select]]
 }
 # HELPERS -----------------------------------------------------------------
 
