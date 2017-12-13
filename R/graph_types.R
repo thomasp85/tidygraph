@@ -8,6 +8,9 @@
 #'
 #' @param method The algorithm to use for comparison
 #'
+#' @param ... Arguments passed on to the comparison methods. See
+#' [igraph::is_isomorphic_to()] and [igraph::is_subgraph_isomorphic_to()]
+#'
 #' @return A logical scalar
 #'
 #' @name graph_types

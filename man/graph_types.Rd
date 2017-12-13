@@ -38,6 +38,9 @@ graph_is_subgraph_isomorphic_to(graph, method = "auto", ...)
 \item{graph}{The graph to compare structure to}
 
 \item{method}{The algorithm to use for comparison}
+
+\item{...}{Arguments passed on to the comparison methods. See
+\code{\link[igraph:is_isomorphic_to]{igraph::is_isomorphic_to()}} and \code{\link[igraph:is_subgraph_isomorphic_to]{igraph::is_subgraph_isomorphic_to()}}}
 }
 \value{
 A logical scalar
