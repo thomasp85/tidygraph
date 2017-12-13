@@ -10,3 +10,4 @@
   many tidyverse verbs (**BREAKING**)
 * `as_tbl_graph.data.frame` now recognises set tables (each column gives eachs
   rows membership to that set)
+* Add `with_graph` to allow computation of algorithms outside of verbs

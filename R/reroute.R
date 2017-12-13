@@ -33,8 +33,7 @@ reroute <- function(.data, from = NULL, to = NULL, subset = NULL) {
 #' @importFrom rlang enquo eval_tidy
 #' @importFrom igraph is.directed
 reroute.tbl_graph <- function(.data, from = NULL, to = NULL, subset = NULL) {
-  .graph_context$set(.data)
-  on.exit(.graph_context$clear())
+  .register_graph_context(.data)
   expect_edges()
   from <- enquo(from)
   to <- enquo(to)
