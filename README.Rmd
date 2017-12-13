@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidygraph
+# tidygraph <img src="man/figures/tidygraph_logo.jpg" align="right" />
 
 [![Travis-CI Build Status](https://travis-ci.org/thomasp85/tidygraph.svg?branch=master)](https://travis-ci.org/thomasp85/tidygraph)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/thomasp85/tidygraph?branch=master&svg=true)](https://ci.appveyor.com/project/thomasp85/tidygraph)

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-tidygraph
-=========
+tidygraph <img src="man/figures/tidygraph_logo.jpg" align="right" />
+====================================================================
 
 [![Travis-CI Build Status](https://travis-ci.org/thomasp85/tidygraph.svg?branch=master)](https://travis-ci.org/thomasp85/tidygraph) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/thomasp85/tidygraph?branch=master&svg=true)](https://ci.appveyor.com/project/thomasp85/tidygraph) [![CRAN\_Release\_Badge](http://www.r-pkg.org/badges/version-ago/tidygraph)](https://CRAN.R-project.org/package=tidygraph) [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/tidygraph)](https://CRAN.R-project.org/package=tidygraph) [![Coverage Status](https://img.shields.io/codecov/c/github/thomasp85/tidygraph/master.svg)](https://codecov.io/github/thomasp85/tidygraph?branch=master)
 
@@ -19,27 +19,27 @@ play_erdos_renyi(10, 0.5) %>%
   activate(edges) %>% 
   mutate(centrality = centrality_edge_betweenness()) %>% 
   arrange(centrality)
-#> # A tbl_graph: 10 nodes and 46 edges
+#> # A tbl_graph: 10 nodes and 47 edges
 #> #
 #> # A directed simple graph with 1 component
 #> #
-#> # Edge Data: 46 x 3 (active)
+#> # Edge Data: 47 x 3 (active)
 #>    from    to centrality
 #>   <int> <int>      <dbl>
-#> 1     4     2   1.250000
-#> 2     4     7   1.333333
-#> 3     4     9   1.333333
-#> 4     3     2   1.583333
-#> 5     4     5   1.583333
-#> 6    10     9   1.583333
-#> # ... with 40 more rows
+#> 1     5     1   1.000000
+#> 2     5     6   1.250000
+#> 3     5    10   1.333333
+#> 4     7    10   1.333333
+#> 5     5     8   1.450000
+#> 6     2     3   1.583333
+#> # ... with 41 more rows
 #> #
 #> # Node Data: 10 x 1
 #>   degree
 #>    <dbl>
-#> 1      3
-#> 2      4
-#> 3      7
+#> 1      5
+#> 2      6
+#> 3      3
 #> # ... with 7 more rows
 ```
 
