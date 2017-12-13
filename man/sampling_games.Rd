@@ -90,3 +90,4 @@ plot(play_erdos_renyi(20, 0.3))
 Other graph games: \code{\link{component_games}},
   \code{\link{evolution_games}}, \code{\link{type_games}}
 }
+\concept{graph games}

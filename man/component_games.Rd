@@ -76,3 +76,4 @@ plot(play_islands(4, 10, 0.7, 3))
 Other graph games: \code{\link{evolution_games}},
   \code{\link{sampling_games}}, \code{\link{type_games}}
 }
+\concept{graph games}

@@ -91,3 +91,4 @@ Other graph games: \code{\link{component_games}},
   \code{\link{evolution_games}},
   \code{\link{sampling_games}}
 }
+\concept{graph games}

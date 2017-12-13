@@ -100,3 +100,4 @@ algorithm based on different node types
 Other graph games: \code{\link{component_games}},
   \code{\link{sampling_games}}, \code{\link{type_games}}
 }
+\concept{graph games}
