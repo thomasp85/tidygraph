@@ -205,7 +205,7 @@ to_simple <- function(graph) {
   edges$.tidygraph_edge_index <- NULL
   simple <- as_tbl_graph(simplify(graph, remove.multiple = TRUE, remove.loops = TRUE, edge.attr.comb = list))
   new_edges <- as_tibble(simple, active = 'edges')
-  new_edges$.data <- lapply(new_edges$.tidygraph_edge_index, function(i) edges[i, , drop = FALSE])
+  new_edges$.orig_data <- lapply(new_edges$.tidygraph_edge_index, function(i) edges[i, , drop = FALSE])
   simple <- set_edge_attributes(simple, new_edges)
   list(
     simple = simple
@@ -225,9 +225,9 @@ to_contracted <- function(graph, ..., simplify = TRUE) {
   ind <- attr(nodes, 'indices')
   ind <- rep(seq_along(ind), lengths(ind))[order(unlist(ind))]
   contracted <- as_tbl_graph(contract(graph, ind, vertex.attr.comb = 'ignore'))
-  nodes <- nest(nodes, .key = '.data')
-  ind <- lapply(nodes$.data, `[[`, '.tidygraph_node_index')
-  nodes$.data <- lapply(nodes$.data, function(x) {x$.tidygraph_node_index <- NULL; x})
+  nodes <- nest(nodes, .key = '.orig_data')
+  ind <- lapply(nodes$.orig_data, `[[`, '.tidygraph_node_index')
+  nodes$.orig_data <- lapply(nodes$.orig_data, function(x) {x$.tidygraph_node_index <- NULL; x})
   nodes$.tidygraph_node_index <- ind
   contracted <- set_node_attributes(contracted, nodes)
   if (simplify) {

@@ -186,8 +186,8 @@ merge_meta <- function(new, into, col) {
   if (is.list(new[[col]])) {
     index <- new[[col]]
     new[[col]] <- NULL
-    data <- new$.data
-    new$.data <- NULL
+    data <- new$.orig_data
+    new$.orig_data <- NULL
     new <- new[rep(seq_along(index), lengths(index)), ]
     new[[col]] <- unlist(index)
     if (!is.null(data)) {
