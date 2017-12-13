@@ -54,6 +54,9 @@
 #' @param .select The graph to return during `convert()`. Either an index or the
 #' name as created during `crystallise()`.
 #'
+#' @param .clean Should references to the node and edge indexes in the original
+#' graph be removed when using `convert`
+#'
 #' @return A `morphed_tbl_graph`
 #'
 #' @export
@@ -82,7 +85,7 @@ crystallise <- function(.data) {
 crystallize <- crystallise
 #' @rdname morph
 #' @export
-convert <- function(.data, .f, ..., .select = 1) {
+convert <- function(.data, .f, ..., .select = 1, .clean = FALSE) {
   UseMethod('convert')
 }
 #' @export
@@ -92,8 +95,7 @@ morph.tbl_graph <- function(.data, .f, ...) {
     message('Ungrouping prior to morphing')
     .data <- ungroup(.data)
   }
-  .graph_context$set(.data)
-  on.exit(.graph_context$clear())
+  .register_graph_context(.data)
   morph_name <- quo_text(enquo(.f))
   current_active <- as_quosure(sym(active(.data)))
   .data <- mutate(activate(.data, 'nodes'), .tidygraph_node_index = seq_len(n()))
@@ -155,7 +157,7 @@ crystallise.morphed_tbl_graph <- function(.data) {
   )
 }
 #' @export
-convert.tbl_graph <- function(.data, .f, ..., .select = 1) {
+convert.tbl_graph <- function(.data, .f, ..., .select = 1, .clean = FALSE) {
   stopifnot(length(.select) == 1)
   graphs <- crystallise(morph(.data, .f, ...))
   if (is.character(.select)) {
@@ -163,7 +165,16 @@ convert.tbl_graph <- function(.data, .f, ..., .select = 1) {
     if (is.na(.select)) stop('.select does not match any named graph', call. = FALSE)
   }
   if (.select > nrow(graphs)) stop('convert did not create ', .select, ' graphs', call. = FALSE)
-  graphs$graph[[.select]]
+  graph <- graphs$graph[[.select]]
+  if (.clean) {
+    nodes <- as_tibble(graph, active = 'nodes')
+    edges <- as_tibble(graph, active = 'edges')
+    nodes$.tidygraph_node_index <- NULL
+    edges$.tidygraph_edge_index <- NULL
+    graph <- set_node_attributes(graph, nodes)
+    graph <- set_edge_attributes(graph, edges)
+  }
+  graph
 }
 # HELPERS -----------------------------------------------------------------
 

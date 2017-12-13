@@ -16,7 +16,7 @@ crystallise(.data)
 
 crystallize(.data)
 
-convert(.data, .f, ..., .select = 1)
+convert(.data, .f, ..., .select = 1, .clean = FALSE)
 }
 \arguments{
 \item{.data}{A \code{tbl_graph} or a \code{morphed_tbl_graph}}
@@ -27,6 +27,9 @@ convert(.data, .f, ..., .select = 1)
 
 \item{.select}{The graph to return during \code{convert()}. Either an index or the
 name as created during \code{crystallise()}.}
+
+\item{.clean}{Should references to the node and edge indexes in the original
+graph be removed when using \code{convert}}
 }
 \value{
 A \code{morphed_tbl_graph}
