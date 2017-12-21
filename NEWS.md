@@ -15,3 +15,7 @@
   scalars.
 * Add `%N>%` and `%E>%` for activating nodes and edges respectively as part of
   the piping.
+* `mutate` now lets you reference created columns in graph algorithms so it 
+  behaves in line with expected `mutate` behaviour. This has led to a slight
+  performance decrease (millisecond scale). The old behaviour can be accessed
+  using `mutate_as_tbl` where the graph will only get updated in the end.
