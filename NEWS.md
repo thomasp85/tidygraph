@@ -13,4 +13,5 @@
 * Add `with_graph` to allow computation of algorithms outside of verbs
 * `graph_is_*` set of querying functions has been added that all returns logical
   scalars.
-  
+* Add `%N>%` and `%E>%` for activating nodes and edges respectively as part of
+  the piping.
