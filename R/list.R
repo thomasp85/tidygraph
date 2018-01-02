@@ -47,7 +47,7 @@ guess_list_type <- function(x) {
 as_graph_adj_list <- function(x, directed) {
   x <- lapply(x, function(el) el[!is.na(el)])
   if (inherits(x[[1]], 'character')) {
-    x <- split(match(unlist(x), names(x)), rep(factor(names(x)), lengths(x)))
+    x <- split(match(unlist(x), names(x)), rep(factor(names(x), levels = names(x)), lengths(x)))
   }
   if (any(unlist(x) == 0)) {
     x <- lapply(x, `+`, 1)
