@@ -52,7 +52,7 @@ to_subgraph <- function(graph, ..., subset_by = NULL) {
   subset <- switch(
     subset_by,
     nodes = induced_subgraph(graph, ind),
-    edges = subgraph.edges(graph, ind)
+    edges = subgraph.edges(graph, ind, delete.vertices = FALSE)
   )
   list(
     subgraph = as_tbl_graph(subset)

@@ -19,3 +19,4 @@
   behaves in line with expected `mutate` behaviour. This has led to a slight
   performance decrease (millisecond scale). The old behaviour can be accessed
   using `mutate_as_tbl` where the graph will only get updated in the end.
+* When using to_subgraph with edges, isolated nodes are no longer deleted
