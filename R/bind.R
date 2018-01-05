@@ -40,6 +40,7 @@
 bind_graphs <- function(.data, ...) {
   stopifnot(is.tbl_graph(.data))
   dots <- lapply(list(...), as_tbl_graph)
+  if (length(dots) == 0) return(.data)
   n_nodes <- sapply(dots, gorder)
   n_edges <- sapply(dots, gsize)
   offset <- rep(c(gorder(.data), gorder(.data) + cumsum(n_nodes)[-length(n_nodes)]), n_edges)
