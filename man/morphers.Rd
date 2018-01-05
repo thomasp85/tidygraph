@@ -15,6 +15,9 @@
 \alias{to_dfs_tree}
 \alias{to_simple}
 \alias{to_contracted}
+\alias{to_unfolded_tree}
+\alias{to_directed}
+\alias{to_undirected}
 \title{Functions to generate alternate representations of graphs}
 \usage{
 to_linegraph(graph)
@@ -42,6 +45,12 @@ to_dfs_tree(graph, root, mode = "out", unreachable = FALSE)
 to_simple(graph)
 
 to_contracted(graph, ..., simplify = TRUE)
+
+to_unfolded_tree(graph, root, mode = "out")
+
+to_directed(graph)
+
+to_undirected(graph)
 }
 \arguments{
 \item{graph}{A \code{tbl_graph}}
@@ -128,6 +137,14 @@ When unmorphing all data will get merged back
 \item \code{to_contracted}: Combine multiple nodes into one. \code{...}
 is evaluated in the same manner as \code{group_by}. When unmorphing all
 data will get merged back.
+
+\item \code{to_unfolded_tree}: Unfold a graph to a tree or forest starting from
+multiple roots (or one), potentially duplicating nodes and edges.
+
+\item \code{to_directed}: Make a graph directed in the direction given by from and
+to
+
+\item \code{to_undirected}: Make a graph undirected
 }}
 
 \examples{

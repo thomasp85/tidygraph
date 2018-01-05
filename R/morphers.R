@@ -237,6 +237,32 @@ to_contracted <- function(graph, ..., simplify = TRUE) {
     contracted = contracted
   )
 }
+#' @describeIn morphers Unfold a graph to a tree or forest starting from
+#' multiple roots (or one), potentially duplicating nodes and edges.
+#' @importFrom igraph unfold_tree
+#' @export
+to_unfolded_tree <- function(graph, root, mode = 'out') {
+  roots <- as_ind(root, gorder(graph))
+  graph <- unfold_tree(graph, mode, roots)
+  list(
+    tree = as_tbl_graph(graph$tree)
+  )
+}
+#' @describeIn morphers Make a graph directed in the direction given by from and
+#' to
+#' @export
+to_directed <- function(graph) {
+  tbl_graph(as_tibble(graph, active = 'nodes'),
+            as_tibble(graph, active = 'edges'),
+            directed = TRUE) %gr_attr% graph
+}
+#' @describeIn morphers Make a graph undirected
+#' @export
+to_undirected <- function(graph) {
+  tbl_graph(as_tibble(graph, active = 'nodes'),
+            as_tibble(graph, active = 'edges'),
+            directed = FALSE) %gr_attr% graph
+}
 
 # HELPERS -----------------------------------------------------------------
 

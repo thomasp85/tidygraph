@@ -23,3 +23,4 @@
 * `bind_graphs` now work with a single `tbl_graph`
 * Added `.register_graph_context` to allow the use of tidygraph algorithms in
   external functions.
+* Added `to_unfolded_tree`, `to_directed`, and `to_undirected` morphers
