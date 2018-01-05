@@ -113,7 +113,7 @@ is_tree <- function(x) {
 }
 #' @importFrom igraph is_connected is_simple gorder gsize count_components
 is_forest <- function(x) {
-  !is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) - count_components(x) == 1)
+  !is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) - count_components(x) == 0)
 }
 #' @export
 as_tbl_graph.tbl_graph <- function(x, ...) {
