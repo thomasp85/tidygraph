@@ -40,6 +40,7 @@ ContextBuilder <- R6Class(
     }
   )
 )
+#' @export
 .graph_context <- ContextBuilder$new()
 expect_nodes <- function() {
   if (!.graph_context$free() && .graph_context$active() != 'nodes') {
