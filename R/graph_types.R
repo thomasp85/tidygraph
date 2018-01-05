@@ -69,6 +69,11 @@ graph_is_dag <- function() {
 graph_is_chordal <- function() {
   is_chordal(.G())$chordal
 }
+#' @describeIn graph_types Is the graph fully connected
+#' @export
+graph_is_complete <- function() {
+  graph_is_simple() && all(centrality_degree(mode = 'all', loops = FALSE) == graph_order() - 1)
+}
 #' @describeIn graph_types Is the graph isomorphic to another graph. See [igraph::is_isomorphic_to()]
 #' @importFrom igraph is_isomorphic_to
 #' @export

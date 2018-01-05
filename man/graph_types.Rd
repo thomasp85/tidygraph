@@ -10,6 +10,7 @@
 \alias{graph_is_forest}
 \alias{graph_is_dag}
 \alias{graph_is_chordal}
+\alias{graph_is_complete}
 \alias{graph_is_isomorphic_to}
 \alias{graph_is_subgraph_isomorphic_to}
 \title{Querying graph types}
@@ -29,6 +30,8 @@ graph_is_forest()
 graph_is_dag()
 
 graph_is_chordal()
+
+graph_is_complete()
 
 graph_is_isomorphic_to(graph, method = "auto", ...)
 
@@ -67,6 +70,8 @@ properties and will all return a logical scalar.
 \item \code{graph_is_dag}: Is the graph a directed acyclic graph
 
 \item \code{graph_is_chordal}: Is the graph chordal
+
+\item \code{graph_is_complete}: Is the graph fully connected
 
 \item \code{graph_is_isomorphic_to}: Is the graph isomorphic to another graph. See \code{\link[igraph:is_isomorphic_to]{igraph::is_isomorphic_to()}}
 
