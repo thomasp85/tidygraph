@@ -3,7 +3,7 @@ Type: Package
 Title: A Tidy API for Graph Manipulation
 Version: 1.0.0.9999
 Date: 2017-12-12
-Authors@R: 
+Authors@R:
     person(given = "Thomas Lin",
            family = "Pedersen",
            role = c("cre", "aut"),
@@ -39,4 +39,5 @@ Suggests: network,
     graph,
     methods,
     testthat,
-    covr
+    covr,
+    seriation
