@@ -30,8 +30,7 @@ it is a potentially expensive operation so you must opt into it.}
 \code{y}, these suffixes will be added to the output to disambiguate them.
 Should be a character vector of length 2.}
 
-\item{...}{other parameters passed onto methods, for instance, \code{na_matches}
-to control how \code{NA} values are matched.  See \link{join.tbl_df} for more.}
+\item{...}{other parameters passed onto methods}
 }
 \value{
 A \code{tbl_graph} containing the merged graph
