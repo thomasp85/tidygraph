@@ -190,7 +190,7 @@ node_rank_dendser <- function(... , dist = 'shortest', mode = 'out', weights = N
 # HELPERS -----------------------------------------------------------------
 
 #' @importFrom igraph distances as_adjacency_matrix
-#' @importFrom stats dist
+#' @importFrom stats dist as.dist
 to_dist <- function(graph, dist, mode, weights, algorithm) {
   if (is.function(dist)) {
     mat <- dist(graph)
