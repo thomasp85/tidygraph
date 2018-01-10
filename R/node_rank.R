@@ -3,7 +3,8 @@
 #' This set of functions tries to calculate a ranking of the nodes in a graph so
 #' that nodes sharing certain topological traits are in proximity in the
 #' resulting order. These functions are of great value when composing matrix
-#' layouts but could concievably be used for other things as well.
+#' layouts and arc diagrams but could concievably be used for other things as
+#' well.
 #'
 #' @param dist The algorithm to use for deriving a distance matrix from the
 #' graph. One of
@@ -35,6 +36,10 @@
 #'
 #' @rdname node_rank
 #' @name node_rank
+#'
+#' @examples
+#' graph <- create_notable('zachary') %>%
+#'   mutate(rank = node_rank_hclust())
 #'
 NULL
 

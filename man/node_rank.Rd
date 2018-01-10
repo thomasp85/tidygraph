@@ -129,7 +129,8 @@ An integer vector giving the position of each node in the ranking
 This set of functions tries to calculate a ranking of the nodes in a graph so
 that nodes sharing certain topological traits are in proximity in the
 resulting order. These functions are of great value when composing matrix
-layouts but could concievably be used for other things as well.
+layouts and arc diagrams but could concievably be used for other things as
+well.
 }
 \section{Functions}{
 \itemize{
@@ -162,3 +163,8 @@ layouts but could concievably be used for other things as well.
 \item \code{node_rank_dendser}: Optimizes different criteria based on heuristic dendrogram seriation. Uses the "DendSer" method from \code{seriation}. See \code{register_DendSer} for an overview of relevant arguments
 }}
 
+\examples{
+graph <- create_notable('zachary') \%>\%
+  mutate(rank = node_rank_hclust())
+
+}
