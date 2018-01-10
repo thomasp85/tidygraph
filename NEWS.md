@@ -24,3 +24,4 @@
 * Added `.register_graph_context` to allow the use of tidygraph algorithms in
   external functions.
 * Added `to_unfolded_tree`, `to_directed`, and `to_undirected` morphers
+* Add the `node_rank_*` family of algorithms for seriation of nodes
