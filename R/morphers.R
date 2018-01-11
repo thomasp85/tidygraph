@@ -6,7 +6,9 @@
 #'
 #' @param graph A `tbl_graph`
 #'
-#' @param ... Arguments to pass on to [filter()] or [group_by()]
+#' @param ... Arguments to pass on to [filter()], [group_by()], or the cluster
+#' algorithm (see [igraph::cluster_walktrap()], [igraph::cluster_leading_eigen()],
+#' and [igraph::cluster_edge_betweenness()])
 #'
 #' @param subset_by,split_by Whether to create subgraphs based on nodes or edges
 #'
@@ -265,8 +267,6 @@ to_undirected <- function(graph) {
 }
 #' @describeIn morphers Convert a graph into a hierarchical clustering based on a grouping
 #' @param method The clustering method to use. Either `'walktrap'`, `'leading_eigen'`, or `'edge_betweenness'`
-#' @param weights The edge weights to use for the clustering
-#' @param ... Parameters passed on to the clustering algorithm, see [igraph::cluster_walktrap()], [igraph::cluster_leading_eigen()], and [igraph::cluster_edge_betweenness()]
 #' @importFrom igraph cluster_walktrap cluster_leading_eigen cluster_edge_betweenness
 #' @importFrom stats as.dendrogram
 #' @importFrom rlang .data enquo eval_tidy

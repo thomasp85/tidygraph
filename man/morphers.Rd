@@ -58,7 +58,9 @@ to_hierarchical_clusters(graph, method = "walktrap", weights = NA, ...)
 \arguments{
 \item{graph}{A \code{tbl_graph}}
 
-\item{...}{Arguments to pass on to \code{\link[=filter]{filter()}} or \code{\link[=group_by]{group_by()}}}
+\item{...}{Arguments to pass on to \code{\link[=filter]{filter()}}, \code{\link[=group_by]{group_by()}}, or the cluster
+algorithm (see \code{\link[igraph:cluster_walktrap]{igraph::cluster_walktrap()}}, \code{\link[igraph:cluster_leading_eigen]{igraph::cluster_leading_eigen()}},
+and \code{\link[igraph:cluster_edge_betweenness]{igraph::cluster_edge_betweenness()}})}
 
 \item{subset_by, split_by}{Whether to create subgraphs based on nodes or edges}
 
@@ -87,10 +89,6 @@ stuck.}
 to \code{TRUE}}
 
 \item{method}{The clustering method to use. Either \code{'walktrap'}, \code{'leading_eigen'}, or \code{'edge_betweenness'}}
-
-\item{weights}{The edge weights to use for the clustering}
-
-\item{...}{Parameters passed on to the clustering algorithm, see \code{\link[igraph:cluster_walktrap]{igraph::cluster_walktrap()}}, \code{\link[igraph:cluster_leading_eigen]{igraph::cluster_leading_eigen()}}, and \code{\link[igraph:cluster_edge_betweenness]{igraph::cluster_edge_betweenness()}}}
 }
 \value{
 A list of \code{tbl_graph}s
