@@ -263,6 +263,30 @@ to_undirected <- function(graph) {
             as_tibble(graph, active = 'edges'),
             directed = FALSE) %gr_attr% graph
 }
+#' @describeIn morphers Convert a graph into a hierarchical clustering based on a grouping
+#' @param method The clustering method to use. Either `'walktrap'`, `'leading_eigen'`, or `'edge_betweenness'`
+#' @param weights The edge weights to use for the clustering
+#' @param ... Parameters passed on to the clustering algorithm, see [igraph::cluster_walktrap()], [igraph::cluster_leading_eigen()], and [igraph::cluster_edge_betweenness()]
+#' @importFrom igraph cluster_walktrap cluster_leading_eigen cluster_edge_betweenness
+#' @importFrom stats as.dendrogram
+#' @importFrom rlang .data enquo eval_tidy
+#' @export
+to_hierarchical_clusters <- function(graph, method = 'walktrap', weights = NA, ...) {
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  hierarchy <- switch(
+    method,
+    walktrap = cluster_walktrap(graph, weights = weights, ...),
+    leading_eigen = cluster_leading_eigen(graph, weights = weights, ...),
+    edge_betweenness = cluster_edge_betweenness(graph, weights = weights, ...)
+  )
+  hierarchy <- as_tbl_graph(as.dendrogram(hierarchy))
+  hierarchy <- mutate(hierarchy, .tidygraph_node_index = as.integer(as.character(.data$label)),
+                      label = NULL)
+  hierarchy <- left_join(hierarchy, as_tibble(graph, active = 'nodes'),
+                         by = c('.tidygraph_node_index' = '.tidygraph_node_index'))
+  hierarchy %gr_attr% graph
+}
 
 # HELPERS -----------------------------------------------------------------
 
