@@ -212,6 +212,7 @@ to_dist <- function(graph, dist, mode, weights, algorithm) {
       if (mode == 'both') mat <- (dist(mat, dist) + dist(t(mat), dist))/2
     }
   }
+  mat
 }
 
 seriate <- function(mat, method, control) {
