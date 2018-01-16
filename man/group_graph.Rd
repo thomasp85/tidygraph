@@ -64,7 +64,9 @@ initial groups. Will be evaluated in the context of the node data.}
 \item{...}{arguments passed on to \code{\link[igraph:cluster_spinglass]{igraph::cluster_spinglass()}}}
 }
 \value{
-a numeric vector with the membership for each node in the graph
+a numeric vector with the membership for each node in the graph. The
+enumeration happens in order based on group size progressing from the largest
+to the smallest group
 }
 \description{
 These functions are wrappers around the various clustering functions provided

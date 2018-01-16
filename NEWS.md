@@ -27,3 +27,6 @@
 * Add the `node_rank_*` family of algorithms for seriation of nodes
 * Added `to_hierarchical_clusters` morpher to work with hierarchical 
   representations of community detection algorithms.
+* All `group_*` algorithms now ensure that the groups are enumerated in 
+  descending order based on size, i.e. members of the largest group/community
+  will always have `1`, etc.
