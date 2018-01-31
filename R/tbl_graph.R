@@ -90,8 +90,9 @@ print.morphed_tbl_graph <- function(x, ...) {
   cat('# Original graph is ', tolower(describe_graph(graph)), '\n', sep = '')
   cat('# consisting of ', gorder(graph), ' nodes and ', gsize(graph), ' edges\n', sep = '')
 }
-#' @importFrom igraph is_simple is_directed is_bipartite is_connected is_dag
+#' @importFrom igraph is_simple is_directed is_bipartite is_connected is_dag gorder
 describe_graph <- function(x) {
+  if (gorder(x) == 0) return('An empty graph')
   prop <- list(simple = is_simple(x), directed = is_directed(x),
                   bipartite = is_bipartite(x), connected = is_connected(x),
                   tree = is_tree(x), forest = is_forest(x), DAG = is_dag(x))
