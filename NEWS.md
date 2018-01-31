@@ -32,3 +32,5 @@
   will always have `1`, etc.
 * Fix a bug when filtering all nodes or edges where no nodes/edges would be 
   removed (#42)
+* Added interface to `netrankr` resulting in 19 new centrality scores and a 
+  manual mode for composing new centrality scores
