@@ -10,7 +10,7 @@ filter.tbl_graph <- function(.data, ...) {
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
   d_tmp <- filter(d_tmp, ...)
-  remove_ind <- orig_ind[-d_tmp$.tbl_graph_index]
+  remove_ind <- if (nrow(d_tmp) == 0) orig_ind else orig_ind[-d_tmp$.tbl_graph_index]
   switch(
     active(.data),
     nodes = delete_vertices(.data, remove_ind),
