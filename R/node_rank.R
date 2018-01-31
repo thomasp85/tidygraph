@@ -63,6 +63,7 @@ node_rank_hclust <- function(method = 'average', dist = 'shortest', mode = 'out'
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_anneal <- function(cool = 0.5, tmin = 1e-4, swap_to_inversion = 0.5, step_multiplier = 100, reps = 1, dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -74,6 +75,7 @@ node_rank_anneal <- function(cool = 0.5, tmin = 1e-4, swap_to_inversion = 0.5, s
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_branch_bound <- function(weighted_gradient = FALSE, dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -84,6 +86,7 @@ node_rank_branch_bound <- function(weighted_gradient = FALSE, dist = 'shortest',
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_traveller <- function(method = 'two_opt', ..., dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -94,6 +97,7 @@ node_rank_traveller <- function(method = 'two_opt', ..., dist = 'shortest', mode
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_two <- function(dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -103,6 +107,7 @@ node_rank_two <- function(dist = 'shortest', mode = 'out', weights = NA, algorit
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_mds <- function(method = 'cmdscale', dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -113,6 +118,7 @@ node_rank_mds <- function(method = 'cmdscale', dist = 'shortest', mode = 'out', 
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_leafsort <- function(method = 'average', type = 'OLO', dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -122,6 +128,7 @@ node_rank_leafsort <- function(method = 'average', type = 'OLO', dist = 'shortes
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_visual <- function(dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -132,6 +139,7 @@ node_rank_visual <- function(dist = 'shortest', mode = 'out', weights = NA, algo
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_spectral <- function(normalized = FALSE, dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -144,6 +152,7 @@ node_rank_spectral <- function(normalized = FALSE, dist = 'shortest', mode = 'ou
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_spin_out <- function(step = 25, nstart = 10, dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -154,6 +163,7 @@ node_rank_spin_out <- function(step = 25, nstart = 10, dist = 'shortest', mode =
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_spin_in <- function(step = 5, sigma = seq(20, 1, length.out = 10), dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -166,6 +176,7 @@ node_rank_spin_in <- function(step = 5, sigma = seq(20, 1, length.out = 10), dis
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_quadratic <- function(criterion = '2SUM', reps = 1, step = 2 * graph_order(), step_multiplier = 1.1, temp_multiplier  = 0.5, maxsteps = 50, dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -177,6 +188,7 @@ node_rank_quadratic <- function(criterion = '2SUM', reps = 1, step = 2 * graph_o
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_genetic <- function(... , dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
@@ -186,6 +198,7 @@ node_rank_genetic <- function(... , dist = 'shortest', mode = 'out', weights = N
 #' @importFrom rlang enquo eval_tidy
 #' @export
 node_rank_dendser <- function(... , dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
