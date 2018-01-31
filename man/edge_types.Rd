@@ -5,6 +5,10 @@
 \alias{edge_is_multiple}
 \alias{edge_is_loop}
 \alias{edge_is_mutual}
+\alias{edge_is_from}
+\alias{edge_is_to}
+\alias{edge_is_between}
+\alias{edge_is_incident}
 \title{Querying edge types}
 \usage{
 edge_is_multiple()
@@ -12,6 +16,19 @@ edge_is_multiple()
 edge_is_loop()
 
 edge_is_mutual()
+
+edge_is_from(from)
+
+edge_is_to(to)
+
+edge_is_between(from, to, ignore_dir = !graph_is_directed())
+
+edge_is_incident(i)
+}
+\arguments{
+\item{from, to, i}{A vector giving node indices}
+
+\item{ignore_dir}{Is both directions of the edge allowed}
 }
 \value{
 A logical vector of the same length as the number of edges in the
@@ -29,6 +46,14 @@ in the graph corresponds to the specific type.
 \item \code{edge_is_loop}: Query whether each edge is a loop
 
 \item \code{edge_is_mutual}: Query whether each edge has a sibling going in the reverse direction
+
+\item \code{edge_is_from}: Query whether an edge goes from a set of nodes
+
+\item \code{edge_is_to}: Query whether an edge goes to a set of nodes
+
+\item \code{edge_is_between}: Query whether an edge goes between two sets of nodes
+
+\item \code{edge_is_incident}: Query whether an edge goes from or to a set of nodes
 }}
 
 \examples{
