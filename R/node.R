@@ -198,3 +198,24 @@ node_effective_network_size <- function() {
   expect_nodes()
   influenceR::ens(.G())
 }
+#' @describeIn node_measures measures the impact on connectivity when removing the node (`NetSwan`)
+#' @export
+node_connectivity_impact <- function() {
+  expect_netswan()
+  expect_nodes()
+  NetSwan::swan_connectivity(.G())
+}
+#' @describeIn node_measures measures the impact on closeness when removing the node (`NetSwan`)
+#' @export
+node_closeness_impact <- function() {
+  expect_netswan()
+  expect_nodes()
+  NetSwan::swan_closeness(.G())
+}
+#' @describeIn node_measures measures the impact on fareness (distance between all node pairs) when removing the node (`NetSwan`)
+#' @export
+node_fareness_impact <- function() {
+  expect_netswan()
+  expect_nodes()
+  NetSwan::swan_efficiency(.G())
+}

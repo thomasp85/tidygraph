@@ -42,4 +42,5 @@ Suggests: network,
     covr,
     seriation,
     netrankr,
-    influenceR
+    influenceR,
+    NetSwan

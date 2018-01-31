@@ -24,3 +24,8 @@ expect_seriation <- function() {
     stop('The `seriation` package is required for this functionality')
   }
 }
+expect_netswan <- function() {
+  if (!requireNamespace('NetSwan', quietly = TRUE)) {
+    stop('The `NetSwan` package is required for this functionality')
+  }
+}
