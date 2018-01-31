@@ -40,4 +40,5 @@ Suggests: network,
     methods,
     testthat,
     covr,
-    seriation
+    seriation,
+    netrankr

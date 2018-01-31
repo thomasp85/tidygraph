@@ -13,6 +13,26 @@
 \alias{centrality_subgraph}
 \alias{centrality_degree}
 \alias{centrality_edge_betweenness}
+\alias{centrality_manual}
+\alias{centrality_closeness_harmonic}
+\alias{centrality_closeness_residual}
+\alias{centrality_closeness_generalised}
+\alias{centrality_integration}
+\alias{centrality_communicability}
+\alias{centrality_communicability_odd}
+\alias{centrality_communicability_even}
+\alias{centrality_subgraph_odd}
+\alias{centrality_subgraph_even}
+\alias{centrality_katz}
+\alias{centrality_betweenness_network}
+\alias{centrality_betweenness_current}
+\alias{centrality_betweenness_communicability}
+\alias{centrality_betweenness_rsp_simple}
+\alias{centrality_betweenness_rsp_net}
+\alias{centrality_information}
+\alias{centrality_decay}
+\alias{centrality_random_walk}
+\alias{centrality_expected}
 \title{Calculate node and edge centrality}
 \usage{
 centrality_alpha(weights = NULL, alpha = 1, exo = 1, tol = 1e-07,
@@ -46,12 +66,52 @@ centrality_degree(weights = NULL, mode = "out", loops = TRUE,
 
 centrality_edge_betweenness(weights = NULL, directed = TRUE,
   cutoff = NULL)
+
+centrality_manual(relation = "dist_sp", aggregation = "sum", ...)
+
+centrality_closeness_harmonic()
+
+centrality_closeness_residual()
+
+centrality_closeness_generalised(alpha)
+
+centrality_integration()
+
+centrality_communicability()
+
+centrality_communicability_odd()
+
+centrality_communicability_even()
+
+centrality_subgraph_odd()
+
+centrality_subgraph_even()
+
+centrality_katz(alpha = NULL)
+
+centrality_betweenness_network(netflowmode = "raw")
+
+centrality_betweenness_current()
+
+centrality_betweenness_communicability()
+
+centrality_betweenness_rsp_simple(rspxparam = 1)
+
+centrality_betweenness_rsp_net(rspxparam = 1)
+
+centrality_information()
+
+centrality_decay(alpha = 1)
+
+centrality_random_walk()
+
+centrality_expected()
 }
 \arguments{
 \item{weights}{The weight of the edges to use for the calculation. Will be
 evaluated in the context of the edge data.}
 
-\item{alpha}{Relative importance of endogenous vs exogenous factors}
+\item{alpha}{Relative importance of endogenous vs exogenous factors (\code{centrality_alpha}), the exponent to the power transformation of the distance metric (\code{centrality_closeness_generalised}), the base of power transformation (\code{centrality_decay}), or the attenuation factor (\code{centrality_katz})}
 
 \item{exo}{The exogenous factors of the nodes. Either a scalar or a number
 number for each node. Evaluated in the context of the node data.}
@@ -82,6 +142,16 @@ number for each node. Evaluated in the context of the node data.}
 
 \item{personalized}{The probability of jumping to a node when abandoning a
 random walk. Evaluated in the context of the node data.}
+
+\item{relation}{The indirect relation measure type to be used in \code{netrankr::indirect_relations}}
+
+\item{aggregation}{The aggregation type to use on the indirect relations to be used in \code{netrankr::aggregate_positions}}
+
+\item{...}{Arguments to pass on to \code{netrankr::indirect_relations}}
+
+\item{netflowmode}{The return type of the network flow distance, either \code{'raw'} or \code{'frac'}}
+
+\item{rspxparam}{inverse temperature parameter}
 }
 \value{
 A numeric vector giving the centrality measure of each node.
@@ -94,7 +164,10 @@ the questions under consideration, many centrality measures exist.
 measures implemented in \code{igraph} for use inside \code{\link[dplyr:mutate]{dplyr::mutate()}} and other
 relevant verbs. All functions provided by \code{tidygraph} have a consistent
 naming scheme and automatically calls the function on the graph, returning a
-vector with measures ready to be added to the node data.
+vector with measures ready to be added to the node data. Further \code{tidygraph}
+provides access to the \code{netrankr} engine for centrality calculations and
+define a number of centrality measures based on that, as well as provide a
+manual mode for specifying more-or-less any centrality score.
 }
 \section{Functions}{
 \itemize{
@@ -119,6 +192,46 @@ vector with measures ready to be added to the node data.
 \item \code{centrality_degree}: Wrapper for \code{\link[igraph:degree]{igraph::degree()}} and \code{\link[igraph:strength]{igraph::strength()}}
 
 \item \code{centrality_edge_betweenness}: Wrapper for \code{\link[igraph:edge_betweenness]{igraph::edge_betweenness()}}
+
+\item \code{centrality_manual}: Manually specify your centrality score using the \code{netrankr} framework (\code{netrankr})
+
+\item \code{centrality_closeness_harmonic}: centrality based on inverse shortest path (\code{netrankr})
+
+\item \code{centrality_closeness_residual}: centrality based on 2-to-the-power-of negative shortest path (\code{netrankr})
+
+\item \code{centrality_closeness_generalised}: centrality based on alpha-to-the-power-of negative shortest path (\code{netrankr})
+
+\item \code{centrality_integration}: centrality based on \eqn{1 - (x - 1)/max(x)} transformation of shortest path (\code{netrankr})
+
+\item \code{centrality_communicability}: centrality an exponential tranformation of walk counts (\code{netrankr})
+
+\item \code{centrality_communicability_odd}: centrality an exponential tranformation of odd walk counts (\code{netrankr})
+
+\item \code{centrality_communicability_even}: centrality an exponential tranformation of even walk counts (\code{netrankr})
+
+\item \code{centrality_subgraph_odd}: subgraph centrality based on odd walk counts (\code{netrankr})
+
+\item \code{centrality_subgraph_even}: subgraph centrality based on even walk counts (\code{netrankr})
+
+\item \code{centrality_katz}: centrality based on walks penalizing distant nodes (\code{netrankr})
+
+\item \code{centrality_betweenness_network}: Betweenness centrality based on network flow (\code{netrankr})
+
+\item \code{centrality_betweenness_current}: Betweenness centrality based on current flow (\code{netrankr})
+
+\item \code{centrality_betweenness_communicability}: Betweenness centrality based on communicability (\code{netrankr})
+
+\item \code{centrality_betweenness_rsp_simple}: Betweenness centrality based on simple randomised shortest path dependencies (\code{netrankr})
+
+\item \code{centrality_betweenness_rsp_net}: Betweenness centrality based on net randomised shortest path dependencies (\code{netrankr})
+
+\item \code{centrality_information}: centrality based on inverse sum of resistance distance between nodes (\code{netrankr})
+
+\item \code{centrality_decay}: based on a power transformation of the shortest path (\code{netrankr})
+
+\item \code{centrality_random_walk}: centrality based on the inverse sum of expected random walk length between nodes (\code{netrankr})
+
+\item \code{centrality_expected}: Expected centrality ranking based on exact rank probability (\code{netrankr})
 }}
 
 \examples{

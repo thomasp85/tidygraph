@@ -30,3 +30,5 @@
 * All `group_*` algorithms now ensure that the groups are enumerated in 
   descending order based on size, i.e. members of the largest group/community
   will always have `1`, etc.
+* Fix a bug when filtering all nodes or edges where no nodes/edges would be 
+  removed (#42)
