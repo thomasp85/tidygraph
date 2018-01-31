@@ -6,6 +6,8 @@
 \alias{node_constraint}
 \alias{node_coreness}
 \alias{node_diversity}
+\alias{node_bridging_score}
+\alias{node_effective_network_size}
 \title{Querying node measures}
 \usage{
 node_eccentricity(mode = "out")
@@ -15,6 +17,10 @@ node_constraint(weights = NULL)
 node_coreness(mode = "out")
 
 node_diversity(weights = NULL)
+
+node_bridging_score()
+
+node_effective_network_size()
 }
 \arguments{
 \item{mode}{The way edges should be followed in the case of directed graphs.}
@@ -39,6 +45,10 @@ collected under the \code{node_*} umbrella of functions.
 \item \code{node_coreness}: measures the coreness of each node. See \code{\link[igraph:coreness]{igraph::coreness()}}
 
 \item \code{node_diversity}: measures the diversity of the node. See \code{\link[igraph:diversity]{igraph::diversity()}}
+
+\item \code{node_bridging_score}: measures Valente's Bridging measures for detecting structural bridges (\code{influenceR})
+
+\item \code{node_effective_network_size}: measures Burt's Effective Network Size indicating access to structural holes in the network (\code{influenceR})
 }}
 
 \examples{

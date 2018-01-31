@@ -112,7 +112,21 @@ node_is_center <- function(mode = 'out') {
   ecc <- eccentricity(graph, mode = mode)
   ecc == min(ecc)
 }
-
+#' @describeIn node_types Is a node part of the keyplayers in the graph (`influenceR`)
+#' @param k The number of keyplayers to identify
+#' @param p The probability to accept a lesser state
+#' @param tol Optimisation tolerance, below which the optimisation will stop
+#' @param maxsec The total computation budget for the optimization, in seconds
+#' @param roundsec Number of seconds in between synchronizing workers' answer
+#' @importFrom igraph gorder
+#' @export
+node_is_keyplayer <- function(k, p = 0, tol = 1e-4, maxsec = 120, roundsec = 30) {
+  expect_influencer()
+  expect_nodes()
+  graph <- .G()
+  ind <- influenceR::keyplayer(graph, k = k, prob = p, tol = tol, maxsec = maxsec, roundsec = roundsec)
+  seq_len(gorder(graph)) %in% ind
+}
 #' Querying node measures
 #'
 #' These functions are a collection of node measures that do not really fall
@@ -169,4 +183,18 @@ node_diversity <- function(weights = NULL) {
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   diversity(graph, weights = weights, vids = V(graph))
+}
+#' @describeIn node_measures measures Valente's Bridging measures for detecting structural bridges (`influenceR`)
+#' @export
+node_bridging_score <- function() {
+  expect_influencer()
+  expect_nodes()
+  influenceR::bridging(.G())
+}
+#' @describeIn node_measures measures Burt's Effective Network Size indicating access to structural holes in the network (`influenceR`)
+#' @export
+node_effective_network_size <- function() {
+  expect_influencer()
+  expect_nodes()
+  influenceR::ens(.G())
 }

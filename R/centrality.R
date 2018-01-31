@@ -180,9 +180,7 @@ centrality_edge_betweenness <- function(weights = NULL, directed = TRUE, cutoff 
 #' @param ... Arguments to pass on to `netrankr::indirect_relations`
 #' @export
 centrality_manual <- function(relation = 'dist_sp', aggregation = 'sum', ...) {
-  if (!requireNamespace('netrankr', quietly = TRUE)) {
-    stop('The `netrankr` package is required for this functionality')
-  }
+  expect_netrankr()
   expect_nodes()
   graph <- .G()
   rel <- netrankr::indirect_relations(graph, type = relation, ...)
@@ -287,9 +285,7 @@ centrality_random_walk <- function() {
 #' @describeIn centrality Expected centrality ranking based on exact rank probability (`netrankr`)
 #' @export
 centrality_expected <- function() {
-  if (!requireNamespace('netrankr', quietly = TRUE)) {
-    stop('The `netrankr` package is required for this functionality')
-  }
+  expect_netrankr()
   expect_nodes()
   graph <- .G()
   P <- netrankr::neighborhood_inclusion()

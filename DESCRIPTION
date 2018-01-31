@@ -41,4 +41,5 @@ Suggests: network,
     testthat,
     covr,
     seriation,
-    netrankr
+    netrankr,
+    influenceR

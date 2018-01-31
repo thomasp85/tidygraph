@@ -11,6 +11,7 @@
 \alias{node_is_universal}
 \alias{node_is_simplical}
 \alias{node_is_center}
+\alias{node_is_keyplayer}
 \title{Querying node types}
 \usage{
 node_is_cut()
@@ -30,9 +31,21 @@ node_is_universal(mode = "out")
 node_is_simplical(mode = "out")
 
 node_is_center(mode = "out")
+
+node_is_keyplayer(k, p = 0, tol = 1e-04, maxsec = 120, roundsec = 30)
 }
 \arguments{
 \item{mode}{The way edges should be followed in the case of directed graphs.}
+
+\item{k}{The number of keyplayers to identify}
+
+\item{p}{The probability to accept a lesser state}
+
+\item{tol}{Optimisation tolerance, below which the optimisation will stop}
+
+\item{maxsec}{The total computation budget for the optimization, in seconds}
+
+\item{roundsec}{Number of seconds in between synchronizing workers' answer}
 }
 \value{
 A logical vector of the same length as the number of nodes in the
@@ -63,6 +76,8 @@ exclusive and that nodes can thus be of multiple types.
 \item \code{node_is_simplical}: are all the neighbors of the node connected
 
 \item \code{node_is_center}: does the node have the minimal eccentricity in the graph
+
+\item \code{node_is_keyplayer}: Is a node part of the keyplayers in the graph (\code{influenceR})
 }}
 
 \examples{

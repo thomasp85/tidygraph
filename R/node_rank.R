@@ -216,9 +216,7 @@ to_dist <- function(graph, dist, mode, weights, algorithm) {
 }
 
 seriate <- function(mat, method, control) {
-  if (!requireNamespace('seriation', quietly = TRUE)) {
-    stop('The `seriation` package is required for this functionality')
-  }
+  expect_seriation()
   if (method == 'GA') seriation::register_GA()
   if (method == 'DendSer') seriation::register_DendSer()
   ser <- seriation::seriate(mat, method, control)
