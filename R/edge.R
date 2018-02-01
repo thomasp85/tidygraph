@@ -46,13 +46,13 @@ edge_is_mutual <- function() {
 #' @export
 edge_is_from <- function(from) {
   expect_edges()
-  .E()$from %in% from
+  .E()$from %in% as_ind(from, graph_order())
 }
 #' @describeIn edge_types Query whether an edge goes to a set of nodes
 #' @export
 edge_is_to <- function(to) {
   expect_edges()
-  .E()$to %in% to
+  .E()$to %in% as_ind(to, graph_order())
 }
 #' @describeIn edge_types Query whether an edge goes between two sets of nodes
 #' @param ignore_dir Is both directions of the edge allowed
@@ -60,6 +60,8 @@ edge_is_to <- function(to) {
 edge_is_between <- function(from, to, ignore_dir = !graph_is_directed()) {
   expect_edges()
   edges <- .E()
+  from <- as_ind(from, graph_order())
+  to <- as_ind(to, graph_order())
   include <- edges$from %in% from & edges$to %in% to
   if (ignore_dir) {
     include2 <- edges$to %in% from & edges$from %in% to
@@ -72,5 +74,6 @@ edge_is_between <- function(from, to, ignore_dir = !graph_is_directed()) {
 edge_is_incident <- function(i) {
   expect_edges()
   edges <- .E()
+  i <- as_ind(i, graph_order())
   edges$from %in% i | edges$to %in% i
 }
