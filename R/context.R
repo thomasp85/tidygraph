@@ -28,11 +28,18 @@ ContextBuilder <- R6Class(
       active(self$graph())
     },
     free = function() {
-      inherits(self$graph(), 'free_context_tbl_graph')
+      private$FREE != 0 || inherits(self$graph(), 'free_context_tbl_graph')
+    },
+    force_free = function() {
+      private$FREE <- private$FREE + 1
+    },
+    force_unfree = function() {
+      private$FREE <- private$FREE - 1
     }
   ),
   private = list(
     context = list(),
+    FREE = 0,
     check = function() {
       if (!self$alive()) {
         stop('This function should not be called directly', call. = FALSE)
@@ -118,7 +125,14 @@ NULL
   do.call(on.exit, alist(expr = .graph_context$clear(), add = TRUE), envir = env)
   invisible(NULL)
 }
-
+.free_graph_context <- function(env = parent.frame()) {
+  if (identical(env, .GlobalEnv)) {
+    stop('A context cannot be freed in the global environment', call. = FALSE)
+  }
+  .graph_context$force_free()
+  do.call(on.exit, alist(expr = .graph_context$force_unfree(), add = TRUE), envir = env)
+  invisible(NULL)
+}
 #' Evaluate a tidygraph algorithm in the context of a graph
 #'
 #' All tidygraph algorithms are meant to be called inside tidygraph verbs such

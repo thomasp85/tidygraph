@@ -46,12 +46,14 @@ edge_is_mutual <- function() {
 #' @export
 edge_is_from <- function(from) {
   expect_edges()
+  .free_graph_context()
   .E()$from %in% as_ind(from, graph_order())
 }
 #' @describeIn edge_types Query whether an edge goes to a set of nodes
 #' @export
 edge_is_to <- function(to) {
   expect_edges()
+  .free_graph_context()
   .E()$to %in% as_ind(to, graph_order())
 }
 #' @describeIn edge_types Query whether an edge goes between two sets of nodes
@@ -59,6 +61,7 @@ edge_is_to <- function(to) {
 #' @export
 edge_is_between <- function(from, to, ignore_dir = !graph_is_directed()) {
   expect_edges()
+  .free_graph_context()
   edges <- .E()
   from <- as_ind(from, graph_order())
   to <- as_ind(to, graph_order())
@@ -73,6 +76,7 @@ edge_is_between <- function(from, to, ignore_dir = !graph_is_directed()) {
 #' @export
 edge_is_incident <- function(i) {
   expect_edges()
+  .free_graph_context()
   edges <- .E()
   i <- as_ind(i, graph_order())
   edges$from %in% i | edges$to %in% i
