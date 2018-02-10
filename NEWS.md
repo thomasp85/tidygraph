@@ -34,3 +34,5 @@
   removed (#42)
 * Added interface to `netrankr` resulting in 19 new centrality scores and a 
   manual mode for composing new centrality scores
+* Added `edge_is_[from|to|between|incident]()` to help find edges related to
+  certain nodes

@@ -1,5 +1,5 @@
-# context("centrality")
-#
+context("centrality")
+
 get_cent <- function(gr, fn) {
   gr %>% mutate(cent = fn) %>% pull(cent)
 }
