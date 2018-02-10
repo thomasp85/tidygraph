@@ -19,7 +19,7 @@
 #' @examples
 #' gr <- create_tree(50, 4)
 #'
-#' with_graph(gr, graph_is_tree)
+#' with_graph(gr, graph_is_tree())
 #'
 NULL
 
