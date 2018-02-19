@@ -28,7 +28,10 @@ as_graph_set_df <- function(x, simple = TRUE) {
   if (simple) {
     x <- as.matrix(x)
     mode(x) <- 'integer'
-    adj_mat <- x %*% t(x)
+    adj_mat <- x
+    if (nrow(x) != ncol(x)) {
+      adj_mat <- x %*% t(x)
+    }
     if (!is.null(attr(x, 'row.names'))) {
       colnames(adj_mat) <- rownames(adj_mat) <- row.names(x)
     }
