@@ -23,7 +23,9 @@ guess_list_type <- function(x) {
       any(names(x) %in% c('edges', 'links'))) {
     return('node_edge')
   }
-  elements <- sapply(x, function(el) class(el)[1])
+  x <- lapply(x, function(el) el[!is.na(el)])
+  x[lengths(x) == 0] <- list(NULL)
+  elements <- sapply(x[lengths(x) != 0], function(el) class(el)[1])
   if (all(elements == 'character') &&
       all(unlist(x) %in% names(x))) {
     return('adjacency')
@@ -43,8 +45,9 @@ guess_list_type <- function(x) {
 
 #' @importFrom igraph graph_from_adj_list set_vertex_attr
 as_graph_adj_list <- function(x, directed) {
+  x <- lapply(x, function(el) el[!is.na(el)])
   if (inherits(x[[1]], 'character')) {
-    x <- split(match(unlist(x), names(x)), rep(names(x), lengths(x)))
+    x <- split(match(unlist(x), names(x)), rep(factor(names(x), levels = names(x)), lengths(x)))
   }
   if (any(unlist(x) == 0)) {
     x <- lapply(x, `+`, 1)

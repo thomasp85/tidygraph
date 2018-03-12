@@ -1,3 +1,3 @@
 #' @useDynLib tidygraph
 #' @importFrom Rcpp sourceCpp
-NULL
+'_PACKAGE'

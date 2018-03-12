@@ -1,8 +1,7 @@
 #' @export
 #' @importFrom dplyr arrange
 arrange.tbl_graph <- function(.data, ...) {
-  .graph_context$set(.data)
-  on.exit(.graph_context$clear())
+  .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
     stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)

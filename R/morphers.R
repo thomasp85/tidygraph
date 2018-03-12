@@ -6,7 +6,9 @@
 #'
 #' @param graph A `tbl_graph`
 #'
-#' @param ... Arguments to pass on to [filter()] or [group_by()]
+#' @param ... Arguments to pass on to [filter()], [group_by()], or the cluster
+#' algorithm (see [igraph::cluster_walktrap()], [igraph::cluster_leading_eigen()],
+#' and [igraph::cluster_edge_betweenness()])
 #'
 #' @param subset_by,split_by Whether to create subgraphs based on nodes or edges
 #'
@@ -52,7 +54,7 @@ to_subgraph <- function(graph, ..., subset_by = NULL) {
   subset <- switch(
     subset_by,
     nodes = induced_subgraph(graph, ind),
-    edges = subgraph.edges(graph, ind)
+    edges = subgraph.edges(graph, ind, delete.vertices = FALSE)
   )
   list(
     subgraph = as_tbl_graph(subset)
@@ -205,7 +207,7 @@ to_simple <- function(graph) {
   edges$.tidygraph_edge_index <- NULL
   simple <- as_tbl_graph(simplify(graph, remove.multiple = TRUE, remove.loops = TRUE, edge.attr.comb = list))
   new_edges <- as_tibble(simple, active = 'edges')
-  new_edges$.data <- lapply(new_edges$.tidygraph_edge_index, function(i) edges[i, , drop = FALSE])
+  new_edges$.orig_data <- lapply(new_edges$.tidygraph_edge_index, function(i) edges[i, , drop = FALSE])
   simple <- set_edge_attributes(simple, new_edges)
   list(
     simple = simple
@@ -225,9 +227,9 @@ to_contracted <- function(graph, ..., simplify = TRUE) {
   ind <- attr(nodes, 'indices')
   ind <- rep(seq_along(ind), lengths(ind))[order(unlist(ind))]
   contracted <- as_tbl_graph(contract(graph, ind, vertex.attr.comb = 'ignore'))
-  nodes <- nest(nodes, .key = '.data')
-  ind <- lapply(nodes$.data, `[[`, '.tidygraph_node_index')
-  nodes$.data <- lapply(nodes$.data, function(x) {x$.tidygraph_node_index <- NULL; x})
+  nodes <- nest(nodes, .key = '.orig_data')
+  ind <- lapply(nodes$.orig_data, `[[`, '.tidygraph_node_index')
+  nodes$.orig_data <- lapply(nodes$.orig_data, function(x) {x$.tidygraph_node_index <- NULL; x})
   nodes$.tidygraph_node_index <- ind
   contracted <- set_node_attributes(contracted, nodes)
   if (simplify) {
@@ -236,6 +238,54 @@ to_contracted <- function(graph, ..., simplify = TRUE) {
   list(
     contracted = contracted
   )
+}
+#' @describeIn morphers Unfold a graph to a tree or forest starting from
+#' multiple roots (or one), potentially duplicating nodes and edges.
+#' @importFrom igraph unfold_tree
+#' @export
+to_unfolded_tree <- function(graph, root, mode = 'out') {
+  roots <- as_ind(root, gorder(graph))
+  graph <- unfold_tree(graph, mode, roots)
+  list(
+    tree = as_tbl_graph(graph$tree)
+  )
+}
+#' @describeIn morphers Make a graph directed in the direction given by from and
+#' to
+#' @export
+to_directed <- function(graph) {
+  tbl_graph(as_tibble(graph, active = 'nodes'),
+            as_tibble(graph, active = 'edges'),
+            directed = TRUE) %gr_attr% graph
+}
+#' @describeIn morphers Make a graph undirected
+#' @export
+to_undirected <- function(graph) {
+  tbl_graph(as_tibble(graph, active = 'nodes'),
+            as_tibble(graph, active = 'edges'),
+            directed = FALSE) %gr_attr% graph
+}
+#' @describeIn morphers Convert a graph into a hierarchical clustering based on a grouping
+#' @param method The clustering method to use. Either `'walktrap'`, `'leading_eigen'`, or `'edge_betweenness'`
+#' @importFrom igraph cluster_walktrap cluster_leading_eigen cluster_edge_betweenness
+#' @importFrom stats as.dendrogram
+#' @importFrom rlang .data enquo eval_tidy
+#' @export
+to_hierarchical_clusters <- function(graph, method = 'walktrap', weights = NA, ...) {
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  hierarchy <- switch(
+    method,
+    walktrap = cluster_walktrap(graph, weights = weights, ...),
+    leading_eigen = cluster_leading_eigen(graph, weights = weights, ...),
+    edge_betweenness = cluster_edge_betweenness(graph, weights = weights, ...)
+  )
+  hierarchy <- as_tbl_graph(as.dendrogram(hierarchy))
+  hierarchy <- mutate(hierarchy, .tidygraph_node_index = as.integer(as.character(.data$label)),
+                      label = NULL)
+  hierarchy <- left_join(hierarchy, as_tibble(graph, active = 'nodes'),
+                         by = c('.tidygraph_node_index' = '.tidygraph_node_index'))
+  hierarchy %gr_attr% graph
 }
 
 # HELPERS -----------------------------------------------------------------

@@ -26,10 +26,20 @@ ContextBuilder <- R6Class(
     active = function() {
       private$check()
       active(self$graph())
+    },
+    free = function() {
+      private$FREE != 0 || inherits(self$graph(), 'free_context_tbl_graph')
+    },
+    force_free = function() {
+      private$FREE <- private$FREE + 1
+    },
+    force_unfree = function() {
+      private$FREE <- private$FREE - 1
     }
   ),
   private = list(
     context = list(),
+    FREE = 0,
     check = function() {
       if (!self$alive()) {
         stop('This function should not be called directly', call. = FALSE)
@@ -37,14 +47,15 @@ ContextBuilder <- R6Class(
     }
   )
 )
+#' @export
 .graph_context <- ContextBuilder$new()
 expect_nodes <- function() {
-  if (.graph_context$active() != 'nodes') {
+  if (!.graph_context$free() && .graph_context$active() != 'nodes') {
     stop('This call requires nodes to be active', call. = FALSE)
   }
 }
 expect_edges <- function() {
-  if (.graph_context$active() != 'edges') {
+  if (!.graph_context$free() && .graph_context$active() != 'edges') {
     stop('This call requires edges to be active', call. = FALSE)
   }
 }
@@ -86,4 +97,65 @@ NULL
 #' @export
 .E <- function() {
   .graph_context$edges()
+}
+
+#' Register a graph context for the duration of the current frame
+#'
+#' This function sets the provided graph to be the context for tidygraph
+#' algorithms, such as e.g. [node_is_center()], for the duration of the current
+#' environment. It automatically removes the graph once the environment exits.
+#'
+#' @param graph A `tbl_graph` object
+#'
+#' @param free Should the active state of the graph be ignored?
+#'
+#' @param env The environment where the context should be active
+#'
+#' @export
+#' @keywords internal
+.register_graph_context <- function(graph, free = FALSE, env = parent.frame()) {
+  stopifnot(is.tbl_graph(graph))
+  if (identical(env, .GlobalEnv)) {
+    stop('A context cannot be registered to the global environment', call. = FALSE)
+  }
+  if (free) {
+    class(graph) <- c('free_context_tbl_graph', class(graph))
+  }
+  .graph_context$set(graph)
+  do.call(on.exit, alist(expr = .graph_context$clear(), add = TRUE), envir = env)
+  invisible(NULL)
+}
+.free_graph_context <- function(env = parent.frame()) {
+  if (identical(env, .GlobalEnv)) {
+    stop('A context cannot be freed in the global environment', call. = FALSE)
+  }
+  .graph_context$force_free()
+  do.call(on.exit, alist(expr = .graph_context$force_unfree(), add = TRUE), envir = env)
+  invisible(NULL)
+}
+#' Evaluate a tidygraph algorithm in the context of a graph
+#'
+#' All tidygraph algorithms are meant to be called inside tidygraph verbs such
+#' as `mutate()`, where the graph that is currently being worked on is known and
+#' thus not needed as an argument to the function. In the off chance that you
+#' want to use an algorithm outside of the tidygraph framework you can use
+#' `with_graph()` to set the graph context temporarily while the algorithm is
+#' being evaluated.
+#'
+#' @param graph The `tbl_graph` to use as context
+#'
+#' @param expr The expression to evaluate
+#'
+#' @return The value of `expr`
+#'
+#' @export
+#'
+#' @examples
+#' gr <- play_erdos_renyi(10, 0.3)
+#'
+#' with_graph(gr, centrality_degree())
+#'
+with_graph <- function(graph, expr) {
+  .register_graph_context(graph, free = TRUE)
+  expr
 }

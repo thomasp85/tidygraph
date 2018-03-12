@@ -15,6 +15,10 @@
 \alias{to_dfs_tree}
 \alias{to_simple}
 \alias{to_contracted}
+\alias{to_unfolded_tree}
+\alias{to_directed}
+\alias{to_undirected}
+\alias{to_hierarchical_clusters}
 \title{Functions to generate alternate representations of graphs}
 \usage{
 to_linegraph(graph)
@@ -42,11 +46,21 @@ to_dfs_tree(graph, root, mode = "out", unreachable = FALSE)
 to_simple(graph)
 
 to_contracted(graph, ..., simplify = TRUE)
+
+to_unfolded_tree(graph, root, mode = "out")
+
+to_directed(graph)
+
+to_undirected(graph)
+
+to_hierarchical_clusters(graph, method = "walktrap", weights = NA, ...)
 }
 \arguments{
 \item{graph}{A \code{tbl_graph}}
 
-\item{...}{Arguments to pass on to \code{\link[=filter]{filter()}} or \code{\link[=group_by]{group_by()}}}
+\item{...}{Arguments to pass on to \code{\link[=filter]{filter()}}, \code{\link[=group_by]{group_by()}}, or the cluster
+algorithm (see \code{\link[igraph:cluster_walktrap]{igraph::cluster_walktrap()}}, \code{\link[igraph:cluster_leading_eigen]{igraph::cluster_leading_eigen()}},
+and \code{\link[igraph:cluster_edge_betweenness]{igraph::cluster_edge_betweenness()}})}
 
 \item{subset_by, split_by}{Whether to create subgraphs based on nodes or edges}
 
@@ -73,6 +87,8 @@ stuck.}
 
 \item{simplify}{Should edges in the contracted graph be simplified? Defaults
 to \code{TRUE}}
+
+\item{method}{The clustering method to use. Either \code{'walktrap'}, \code{'leading_eigen'}, or \code{'edge_betweenness'}}
 }
 \value{
 A list of \code{tbl_graph}s
@@ -128,6 +144,16 @@ When unmorphing all data will get merged back
 \item \code{to_contracted}: Combine multiple nodes into one. \code{...}
 is evaluated in the same manner as \code{group_by}. When unmorphing all
 data will get merged back.
+
+\item \code{to_unfolded_tree}: Unfold a graph to a tree or forest starting from
+multiple roots (or one), potentially duplicating nodes and edges.
+
+\item \code{to_directed}: Make a graph directed in the direction given by from and
+to
+
+\item \code{to_undirected}: Make a graph undirected
+
+\item \code{to_hierarchical_clusters}: Convert a graph into a hierarchical clustering based on a grouping
 }}
 
 \examples{

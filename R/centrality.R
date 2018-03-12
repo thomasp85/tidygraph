@@ -7,7 +7,10 @@
 #' measures implemented in `igraph` for use inside [dplyr::mutate()] and other
 #' relevant verbs. All functions provided by `tidygraph` have a consistent
 #' naming scheme and automatically calls the function on the graph, returning a
-#' vector with measures ready to be added to the node data.
+#' vector with measures ready to be added to the node data. Further `tidygraph`
+#' provides access to the `netrankr` engine for centrality calculations and
+#' define a number of centrality measures based on that, as well as provide a
+#' manual mode for specifying more-or-less any centrality score.
 #'
 #' @param weights The weight of the edges to use for the calculation. Will be
 #' evaluated in the context of the edge data.
@@ -21,7 +24,7 @@
 #' @param options Settings passed on to `igraph::arpack()`
 #' @param cutoff maximum path length to use during calculations
 #' @param nobigint Should big integers be avoided during calculations
-#' @param alpha Relative importance of endogenous vs exogenous factors
+#' @param alpha Relative importance of endogenous vs exogenous factors (`centrality_alpha`), the exponent to the power transformation of the distance metric (`centrality_closeness_generalised`), the base of power transformation (`centrality_decay`), or the attenuation factor (`centrality_katz`)
 #' @param exo The exogenous factors of the nodes. Either a scalar or a number
 #' number for each node. Evaluated in the context of the node data.
 #' @param exponent The decay rate for the Bonacich power centrality
@@ -170,4 +173,122 @@ centrality_edge_betweenness <- function(weights = NULL, directed = TRUE, cutoff 
   } else {
     estimate_edge_betweenness(graph = graph, e = E(graph), directed = directed, cutoff = cutoff, weights = weights)
   }
+}
+#' @describeIn centrality Manually specify your centrality score using the `netrankr` framework (`netrankr`)
+#' @param relation The indirect relation measure type to be used in `netrankr::indirect_relations`
+#' @param aggregation The aggregation type to use on the indirect relations to be used in `netrankr::aggregate_positions`
+#' @param ... Arguments to pass on to `netrankr::indirect_relations`
+#' @export
+centrality_manual <- function(relation = 'dist_sp', aggregation = 'sum', ...) {
+  expect_netrankr()
+  expect_nodes()
+  graph <- .G()
+  rel <- netrankr::indirect_relations(graph, type = relation, ...)
+  netrankr::aggregate_positions(rel, type = aggregation)
+}
+#' @describeIn centrality centrality based on inverse shortest path (`netrankr`)
+#' @export
+centrality_closeness_harmonic <- function() {
+  centrality_manual('dist_sp', FUN = netrankr::dist_inv)
+}
+#' @describeIn centrality centrality based on 2-to-the-power-of negative shortest path (`netrankr`)
+#' @export
+centrality_closeness_residual <- function() {
+  centrality_manual('dist_sp', FUN = netrankr::dist_2pow)
+}
+#' @describeIn centrality centrality based on alpha-to-the-power-of negative shortest path (`netrankr`)
+#' @export
+centrality_closeness_generalised <- function(alpha) {
+  centrality_manual('dist_sp', FUN = netrankr::dist_dpow, alpha = alpha)
+}
+#' @describeIn centrality centrality based on \eqn{1 - (x - 1)/max(x)} transformation of shortest path (`netrankr`)
+#' @export
+centrality_integration <- function() {
+  centrality_manual('dist_sp', FUN = function(x) 1 - (x - 1)/max(x))
+}
+#' @describeIn centrality centrality an exponential tranformation of walk counts (`netrankr`)
+#' @export
+centrality_communicability <- function() {
+  centrality_manual('walks', FUN = netrankr::walks_exp)
+}
+#' @describeIn centrality centrality an exponential tranformation of odd walk counts (`netrankr`)
+#' @export
+centrality_communicability_odd <- function() {
+  centrality_manual('walks', FUN = netrankr::walks_exp_odd)
+}
+#' @describeIn centrality centrality an exponential tranformation of even walk counts (`netrankr`)
+#' @export
+centrality_communicability_even <- function() {
+  centrality_manual('walks', FUN = netrankr::walks_exp_even)
+}
+#' @describeIn centrality subgraph centrality based on odd walk counts (`netrankr`)
+#' @export
+centrality_subgraph_odd <- function() {
+  centrality_manual('walks', 'self', FUN = netrankr::walks_exp_odd)
+}
+#' @describeIn centrality subgraph centrality based on even walk counts (`netrankr`)
+#' @export
+centrality_subgraph_even <- function() {
+  centrality_manual('walks', 'self', FUN = netrankr::walks_exp_even)
+}
+#' @describeIn centrality centrality based on walks penalizing distant nodes (`netrankr`)
+#' @export
+centrality_katz <- function(alpha = NULL) {
+  if (is.null(alpha)) {
+    centrality_manual('walks', FUN = netrankr::walks_attenuated)
+  } else {
+    centrality_manual('walks', FUN = netrankr::walks_attenuated, alpha = alpha)
+  }
+}
+#' @describeIn centrality Betweenness centrality based on network flow (`netrankr`)
+#' @param netflowmode The return type of the network flow distance, either `'raw'` or `'frac'`
+#' @export
+centrality_betweenness_network <- function(netflowmode = 'raw') {
+  centrality_manual('depend_netflow', netflowmode = netflowmode)
+}
+#' @describeIn centrality Betweenness centrality based on current flow (`netrankr`)
+#' @export
+centrality_betweenness_current <- function() {
+  centrality_manual('depend_curflow')
+}
+#' @describeIn centrality Betweenness centrality based on communicability (`netrankr`)
+#' @export
+centrality_betweenness_communicability <- function() {
+  centrality_manual('depend_exp')
+}
+#' @describeIn centrality Betweenness centrality based on simple randomised shortest path dependencies (`netrankr`)
+#' @param rspxparam inverse temperature parameter
+#' @export
+centrality_betweenness_rsp_simple <- function(rspxparam = 1) {
+  centrality_manual('depend_rsps', rspxparam = rspxparam)
+}
+#' @describeIn centrality Betweenness centrality based on net randomised shortest path dependencies (`netrankr`)
+#' @export
+centrality_betweenness_rsp_net <- function(rspxparam = 1) {
+  centrality_manual('depend_rspn', rspxparam = rspxparam)
+}
+#' @describeIn centrality centrality based on inverse sum of resistance distance between nodes (`netrankr`)
+#' @export
+centrality_information <- function() {
+  centrality_manual('dist_resist', 'invsum')
+}
+#' @describeIn centrality based on a power transformation of the shortest path (`netrankr`)
+#' @export
+centrality_decay <- function(alpha = 1) {
+  centrality_manual('dist_sp', FUN = netrankr::dist_powd, alpha = alpha)
+}
+#' @describeIn centrality centrality based on the inverse sum of expected random walk length between nodes (`netrankr`)
+#' @export
+centrality_random_walk <- function() {
+  centrality_manual('dist_rwalk', 'invsum')
+}
+#' @describeIn centrality Expected centrality ranking based on exact rank probability (`netrankr`)
+#' @export
+centrality_expected <- function() {
+  expect_netrankr()
+  expect_nodes()
+  graph <- .G()
+  P <- netrankr::neighborhood_inclusion()
+  ranks <- netrankr::exact_rank_prob(P)
+  ranks$expected.rank
 }

@@ -98,7 +98,7 @@ supported.
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{as_tbl_graph}: Method for edge table
+\item \code{as_tbl_graph}: Method for edge table and set membership table
 
 \item \code{as_tbl_graph}: Method to deal with Node objects from the data.tree package
 

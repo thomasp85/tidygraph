@@ -3,17 +3,25 @@
 \name{activate}
 \alias{activate}
 \alias{active}
+\alias{\%N>\%}
+\alias{\%E>\%}
 \title{Determine the context of subsequent manipulations}
 \usage{
 activate(.data, what)
 
 active(x)
+
+lhs \%N>\% rhs
+
+lhs \%E>\% rhs
 }
 \arguments{
-\item{.data, x}{A tbl_graph or a grouped_tbl_graph}
+\item{.data, x, lhs}{A tbl_graph or a grouped_tbl_graph}
 
 \item{what}{What should get activated? Possible values are \code{nodes} or
 \code{edges}.}
+
+\item{rhs}{A function to pipe into}
 }
 \value{
 A tbl_graph
@@ -23,7 +31,11 @@ As a \link{tbl_graph} can be considered as a collection of two linked tables it 
 necessary to specify which table is referenced during manipulations. The
 \code{activate} verb does just that and needs affects all subsequent manipulations
 until a new table is activated. \code{active} is a simple query function to get
-the currently acitve context.
+the currently acitve context. In addition to the use of \code{activate} it is also
+possible to activate nodes or edges as part of the piping using the \code{\%N&gt;\%}
+and \code{\%E&gt;\%} pipes respectively. Do note that this approach somewhat obscures
+what is going on and is thus only recommended for quick, one-line, fixes in
+interactive use.
 }
 \note{
 Activate will ungroup a grouped_tbl_graph.
@@ -34,5 +46,11 @@ gr <- create_complete(5) \%>\%
   mutate(class = sample(c('a', 'b'), 5, TRUE)) \%>\%
   activate(edges) \%>\%
   arrange(from)
+
+# The above could be achieved using the special pipes as well
+gr <- create_complete(5) \%N>\%
+  mutate(class = sample(c('a', 'b'), 5, TRUE)) \%E>\%
+  arrange(from)
+# But as you can see it obscures what part of the graph is being targeted
 
 }

@@ -5,6 +5,7 @@
 \alias{unmorph}
 \alias{crystallise}
 \alias{crystallize}
+\alias{convert}
 \title{Create a temporary alternative representation of the graph to compute on}
 \usage{
 morph(.data, .f, ...)
@@ -14,6 +15,8 @@ unmorph(.data)
 crystallise(.data)
 
 crystallize(.data)
+
+convert(.data, .f, ..., .select = 1, .clean = FALSE)
 }
 \arguments{
 \item{.data}{A \code{tbl_graph} or a \code{morphed_tbl_graph}}
@@ -21,6 +24,12 @@ crystallize(.data)
 \item{.f}{A morphing function. See \link{morphers} for a list of provided one.}
 
 \item{...}{Arguments passed on to the morpher}
+
+\item{.select}{The graph to return during \code{convert()}. Either an index or the
+name as created during \code{crystallise()}.}
+
+\item{.clean}{Should references to the node and edge indexes in the original
+graph be removed when using \code{convert}}
 }
 \value{
 A \code{morphed_tbl_graph}
@@ -34,7 +43,10 @@ comes with a range of \link{morphers}, but is it also possible to supply your ow
 See Details for the requirement for custom morphers. The \code{crystallise} verb
 is used to extract the temporary graph representation into a tibble
 containing one separate graph per row and a \code{name} and \code{graph} column holding
-the name of each graph and the graph itself respectively.
+the name of each graph and the graph itself respectively. \code{convert()} is a
+shorthand for performing both \code{morph} and \code{crystallise} along with extracting
+a single \code{tbl_graph} (defaults to the first). For morphs were you know they
+only create a single graph, and you want to keep it, this is an easy way.
 }
 \details{
 It is only possible to change and add to node and edge data from a

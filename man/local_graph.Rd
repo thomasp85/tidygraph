@@ -22,7 +22,7 @@ local_transitivity(weights = NULL)
 \arguments{
 \item{order}{Integer giving the order of the neighborhood.}
 
-\item{mode}{Character constatnt, it specifies how to use the direction of
+\item{mode}{Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For \sQuote{out} only the
 outgoing edges are followed, so all vertices reachable from the source
 vertex in at most \code{order} steps are counted. For \sQuote{"in"} all
@@ -36,7 +36,9 @@ argument is ignored for undirected graphs.}
 attribute, then this is used by default. If this argument is given, then
 vertex strength (see \code{\link{strength}}) is used instead of vertex
 degree. But note that \code{knnk} is still given in the function of the
-normal vertex degree.}
+normal vertex degree.
+Weights are are used to calculate a weighted degree (also called
+\code{\link{strength}}) instead of the degree.}
 }
 \value{
 A numeric vector or a list (for \code{local_members}) with elements
@@ -50,7 +52,7 @@ the node position.
 \section{Functions}{
 \itemize{
 \item \code{local_size}: The size of the neighborhood in a given distance from
-the node. (Note that the node itself is included unless \code{mindist > 0}). Wraps \code{\link[igraph:ego_size]{igraph::ego_size()}}.
+the node. (Note that the node itself is included unless \code{mindist &gt; 0}). Wraps \code{\link[igraph:ego_size]{igraph::ego_size()}}.
 
 \item \code{local_members}: The members of the neighborhood of each node in a
 given distance. Wraps \code{\link[igraph:ego]{igraph::ego()}}.
