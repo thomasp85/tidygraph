@@ -28,7 +28,7 @@ node_is_cut <- function() {
   seq_len(gorder(graph)) %in% articulation_points(graph)
 }
 #' @describeIn node_types is the node a root in a tree
-#' @importFrom igraph degree is.directed
+#' @importFrom igraph degree is.directed get.graph.attribute
 #' @export
 node_is_root <- function() {
   expect_nodes()
@@ -38,10 +38,14 @@ node_is_root <- function() {
   }
   deg_in <- degree(graph, mode = 'in') == 0
   deg_out <- degree(graph, mode = 'out') == 0
-  if (sum(deg_in) > sum(deg_out)) deg_out else deg_in
+  if(sum(deg_out == sum(deg_in))){
+    if (get.graph.attribute(graph, "mode")=="in") deg_out else deg_in
+  }else{
+    if (sum(deg_in) > sum(deg_out)) deg_out else deg_in
+  }
 }
 #' @describeIn node_types is the node a leaf in a tree
-#' @importFrom igraph degree is.directed
+#' @importFrom igraph degree is.directed get.graph.attribute
 #' @export
 node_is_leaf <- function() {
   expect_nodes()
@@ -52,7 +56,11 @@ node_is_leaf <- function() {
   if (is.directed(graph)) {
     deg_in <- degree(graph, mode = 'in') == 0
     deg_out <- degree(graph, mode = 'out') == 0
-    if (sum(deg_out) > sum(deg_in)) deg_out else deg_in
+    if(sum(deg_out == sum(deg_in))){
+      if (get.graph.attribute(graph, "mode")=="out") deg_out else deg_in
+    }else{
+      if (sum(deg_out) > sum(deg_in)) deg_out else deg_in
+    }
   } else {
     degree(graph, mode = 'all') == 1
   }
