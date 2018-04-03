@@ -63,6 +63,7 @@ is.tbl_graph <- function(x) {
 #' @importFrom tibble trunc_mat
 #' @importFrom tools toTitleCase
 #' @importFrom rlang as_quosure sym
+#' @importFrom pillar style_subtle
 #' @export
 print.tbl_graph <- function(x, ...) {
   arg_list <- list(...)
@@ -73,12 +74,13 @@ print.tbl_graph <- function(x, ...) {
   names(top$summary)[1] <- toTitleCase(paste0(substr(active(x), 1, 4), ' data'))
   bottom <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x, active = not_active), n = 3)))
   names(bottom$summary)[1] <- toTitleCase(paste0(substr(not_active, 1, 4), ' data'))
-  cat('# A tbl_graph: ', gorder(x), ' nodes and ', gsize(x), ' edges\n', sep = '')
-  cat('#\n')
-  cat('# ', graph_desc, '\n', sep = '')
-  cat('#\n')
+  cat_subtle <- function(...) cat(style_subtle(paste(...)))
+  cat_subtle('# A tbl_graph: ', gorder(x), ' nodes and ', gsize(x), ' edges\n', sep = '')
+  cat_subtle('#\n')
+  cat_subtle('# ', graph_desc, '\n', sep = '')
+  cat_subtle('#\n')
   print(top)
-  cat('#\n')
+  cat_subtle('#\n')
   print(bottom)
   invisible(x)
 }
