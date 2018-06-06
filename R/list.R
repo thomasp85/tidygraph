@@ -77,11 +77,11 @@ as_graph_node_edge <- function(x, directed) {
   if (!is.null(nodes)) {
     name_ind <- which(names(nodes) == 'name')
     if (length(name_ind) == 0) name_ind <- 1
-    if (is.character(edges[, 1])) {
-      edges[, 1] <- match(edges[, 1], nodes[, name_ind])
+    if (is.character(edges[[1]])) {
+      edges[, 1] <- match(edges[[1]], nodes[[name_ind]])
     }
-    if (is.character(edges[, 2])) {
-      edges[, 2] <- match(edges[, 2], nodes[, name_ind])
+    if (is.character(edges[[2]])) {
+      edges[, 2] <- match(edges[[2]], nodes[[name_ind]])
     }
   }
   gr <- graph_from_edgelist(as.matrix(edges[, 1:2]), directed = directed)
