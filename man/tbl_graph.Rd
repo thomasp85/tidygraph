@@ -71,7 +71,8 @@ graph.}
 
 \item{edges}{A \code{data.frame} containing information about the edges in the
 graph. The terminal nodes of each edge must either be encoded in a \code{to} and
-\code{from} column, or in the two first columns, as integers.}
+\code{from} column, or in the two first columns, as integers. These integers refer to
+\code{nodes} index.}
 }
 \value{
 A \code{tbl_graph} object
@@ -128,3 +129,9 @@ package. Requires this packages to work.
 \item \code{as_tbl_graph}: Default method. tries to call \code{\link[igraph:as.igraph]{igraph::as.igraph()}} on the input.
 }}
 
+\examples{
+rstat_nodes <- data.frame(name = c("Hadley", "David", "Romain", "Julia"))
+rstat_edges <- data.frame(from = c(1, 1, 1, 2, 3, 3, 4, 4, 4), 
+                            to = c(2, 3, 4, 1, 1, 2, 1, 2, 3))
+tbl_graph(nodes = rstat_nodes, edges = rstat_edges)
+}
