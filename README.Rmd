@@ -47,42 +47,42 @@ with relational data.
 
 ### More verbs
 `tidygraph` adds some extra verbs for specific use in network analysis and 
-manipulation. The `activate()` defines wether one is manipulating node or edge
+manipulation. The `activate()` function defines whether one is manipulating node or edge
 data at the moment as shown in the example above. `bind_edges()`, `bind_nodes()`,
-and `bind_graphs()` lets you expand the graph structure you're working with,
+and `bind_graphs()` let you expand the graph structure you're working with,
 while `graph_join()` lets you merge two graphs on some node identifier. 
-`reroute()` on the other hand lets you change the terminal nodes of the edges in
+`reroute()`, on the other hand, lets you change the terminal nodes of the edges in
 the graph.
 
 ### More algorithms
-`tidygraph` wraps almost all of `igraph`s graph algorithms and provides a 
+`tidygraph` wraps almost all of the graph algorithms from `igraph` and provides a 
 consistent interface and output that always matches the sequence of nodes and 
 edges. All `tidygraph` algorithm wrappers are intended for use inside verbs 
 where they know the context they are being called in. In the example above it is
-not necessary to supply the graph nor the node/edge ids to `centrality_degree()`
-and `centrality_edge_betweenness()` as they are aware of that already. This 
+not necessary to supply the graph nor the node/edge IDs to `centrality_degree()`
+and `centrality_edge_betweenness()` as they are aware of them already. This 
 leads to much clearer code and less typing.
 
 ### More maps
-`tidygraph` goes beyond `dplyr` and also implement graph centric version of the
+`tidygraph` goes beyond `dplyr` and also implements graph centric version of the
 `purrr` map functions. You can now call a function on the nodes in the order of
-a breath or depth first search while getting access to the result of the 
+a breadth or depth first search while getting access to the result of the 
 previous calls.
 
 ### More morphs
 `tidygraph` lets you temporarily change the representation of your graph, do
 some manipulation of the node and edge data, and then change back to the
 original graph with the changes being merged in automatically. This is powered
-by the new `morph()`/`unmorph()` verbs hat lets you e.g. contract nodes, work on
-the linegraph representation, split communities to seperate graphs etc. If you
+by the new `morph()`/`unmorph()` verbs that let you e.g. contract nodes, work on
+the linegraph representation, split communities to separate graphs etc. If you
 wish to continue with the morphed version, the `crystallise()` verb lets you
 *freeze* the temporary representation into a proper `tbl_graph`.
 
 ### More data structure support
 While `tidygraph` is powered by igraph underneath it wants everyone to join the
-fun. the `as_tbl_graph()` function can easily convert relational data from all
+fun. The `as_tbl_graph()` function can easily convert relational data from all
 your favourite objects, such as `network`, `phylo`, `dendrogram`, `data.tree`,
-`graph`, etc. More conversion will be added in the order I get aware of them.
+`graph`, etc. More conversion will be added in the order I become aware of them.
 
 ## Visualisation
 `tidygraph` itself does not provide any means of visualisation, but it works
@@ -92,7 +92,7 @@ needs arise.
 
 ## Installation
 `tidygraph` is available on CRAN and can be installed simply, using 
-`install.packages(tidygraph)`. For the development version available on GitHub,
+`install.packages('tidygraph')`. For the development version available on GitHub,
 use the `devtools` package for installation:
 
 ```{r, eval=FALSE}
@@ -101,5 +101,5 @@ devtools::install_github('thomasp85/tidygraph')
 
 ## Thanks
 `tidygraph` stands on the shoulders of particularly the `igraph` and 
-`dplyr`/tidyverse teams. It would not have happened without them, so thanks so
+`dplyr`/`tidyverse` teams. It would not have happened without them, so thanks so
 much to them.
