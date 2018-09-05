@@ -30,7 +30,7 @@ network_to_igraph <- function(graph) {
     stop('Hypergraphs are currently unsupported', call. = FALSE)
   }
   
-  node_attrs <- dplyr::bind_rows(lapply(graph$val, `[`))
+  node_attrs <- bind_rows(lapply(graph$val, `[`))
   # {igraph} doesn't track "missing"/"na" vertices.
   node_attrs <- node_attrs[colnames(node_attrs) != "na"]
   # {network} assumes vertex names are assigned to an attribute called "vertex.names"
@@ -80,7 +80,7 @@ network_to_igraph <- function(graph) {
                          rep(FALSE, metadata$n - metadata$bipartite))
   }
   
-  edge_attrs <- dplyr::bind_rows(lapply(graph$mel, `[[`, "atl"))
+  edge_attrs <- bind_rows(lapply(graph$mel, `[[`, "atl"))
   # {igraph} doesn't track "missing"/"na" edges.
   edge_attrs <- edge_attrs[colnames(edge_attrs) != "na"]
   
@@ -96,16 +96,16 @@ network_to_igraph <- function(graph) {
   # vectorizing edges allows them to be added to an empty graph
   el_vec <- as.vector(t(el))
   # starting with an empty graph allows for isolates
-  new_graph <- igraph::graph.empty(graph$gal$n, directed = graph$gal$directed)
-  new_graph <- igraph::add_edges(new_graph, edges = el_vec)
+  new_graph <- graph.empty(graph$gal$n, directed = graph$gal$directed)
+  new_graph <- add_edges(new_graph, edges = el_vec)
   if (length(graph_attrs)) {
-    igraph::graph_attr(new_graph) <- graph_attrs
+    graph_attr(new_graph) <- graph_attrs
     }
   if (nrow(node_attrs)) {
-    igraph::vertex_attr(new_graph) <- node_attrs
+    vertex_attr(new_graph) <- node_attrs
     }
   if (nrow(edge_attrs)) {
-    igraph::edge_attr(new_graph) <- edge_attrs
+    edge_attr(new_graph) <- edge_attrs
     }
   
   new_graph
