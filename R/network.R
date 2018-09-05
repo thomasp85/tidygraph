@@ -16,51 +16,97 @@ as_tbl_graph.network <- function(x, ...) {
 #' @return A representation of the same graph as given in the function call but
 #' as an igraph object.
 #'
-#' @importFrom igraph graph_from_edgelist graph_attr<- edge_attr<- vertex_attr<-
+#' @importFrom dplyr bind_rows
+#' @importFrom igraph graph_attr<- graph.empty edge_attr<- vertex_attr<-
 #' @importFrom utils modifyList
 #' @noRd
 #'
 network_to_igraph <- function(graph) {
-  if (!requireNamespace("network", quietly = TRUE)) {
-    stop('The "network" package is needed for this functionality to work', call. = FALSE)
-  }
-  graph_attr_names <- network::list.network.attributes(graph)
-  graph_attr <- lapply(graph_attr_names, function(n) {
-    network::get.network.attribute(graph, n)
-  })
-  names(graph_attr) <- graph_attr_names
-  if (graph_attr$hyper) {
+  metadata <- graph$gal
+  # graph-level "attributes" to drop as they're better described as metadata
+  metadata_names <- c("n", "directed", "hyper", "loops", "multiple", "bipartite", "mnext")
+  graph_attrs <- metadata[!names(metadata) %in% metadata_names]
+  if (metadata$hyper) {
     stop('Hypergraphs are currently unsupported', call. = FALSE)
   }
-
-  node_attr_names <- network::list.vertex.attributes(graph)
-  node_attr <- lapply(node_attr_names, function(n) {
-    network::get.vertex.attribute(graph, n)
-  })
-  names(node_attr) <- node_attr_names
-
-  edge_attr_names <- network::list.edge.attributes(graph)
-  edge_attr <- lapply(edge_attr_names, function(n) {
-    network::get.edge.attribute(graph, n)
-  })
-  names(edge_attr) <- edge_attr_names
-
-  edges <- network::as.edgelist(graph)
-  class(edges) <- 'matrix'
-  attributes(edges) <- attributes(edges)[c('dim', 'class')]
-
-  new_graph <- graph_from_edgelist(edges, graph_attr$directed)
-  graph_attr(new_graph) <- modifyList(
-    graph_attr,
-    list(bipartite = NULL, directed = NULL, hyper = NULL, loops = NULL,
-         mnext = NULL, multiple = NULL, n = NULL)
-  )
-  if (is.character(node_attr$vertex.names)) {
-    node_attr$name <- node_attr$vertex.names
+  
+  node_attrs <- dplyr::bind_rows(lapply(graph$val, `[`))
+  # {igraph} doesn't track "missing"/"na" vertices.
+  node_attrs <- node_attrs[colnames(node_attrs) != "na"]
+  # {network} assumes vertex names are assigned to an attribute called "vertex.names"
+  # {igraph} assumes they are assigned to an attribute called "name"
+  names(node_attrs)[names(node_attrs) == "vertex.names"] <- "name"
+  # both packages have instances where they expect vertex names to be their first attribute
+  node_attrs <- node_attrs[, c("name", names(node_attrs)[names(node_attrs) != "name"])]
+  
+  # "bipartite" networks are the weak spot:
+  #
+  # Both packages are problematic in conflating bipartite and two-mode networks, but do
+  # so in different ways. They are also both insufficiently strict about handling graphs 
+  # that are inherently not bipartite (e.g. they allow bipartite networks to have loops).
+  #
+  # {network} tracks the number of vertices belonging to the "actors" mode as a graph-level 
+  # attribute: `<network-object>$gal$bipartite`.
+  # 
+  # The count of vertices of the "non-actors" mode (e.g events, locations, etc.) are then 
+  # `<network-object>$gal$n - <network-object>$gal$bipartite`.
+  # 
+  # If `<network-object>$gal$bipartite` is numeric, it's considered "bipartite".
+  # If it's `FALSE` OR `NULL`, it's not. 
+  #
+  # This is in conflict with {igraph}, which explicitly uses a `logical` vertex attribute
+  # to track vertex modes, conventionally named "type".
+  # 
+  # The solution I've implemented in my own package is to assign "actors" (vertices with 
+  # IDs < `<network-object>$gal$bipartite`) as `TRUE`.
+  # This simplifies things when converting back to network-class objects as the "type"
+  # attribute can then be interpreted as "is_actor". This facilitates consistently accurate
+  # round-trip conversions.
+  if (is.numeric(metadata$bipartite)) {
+    if ("type" %in% names(node_attrs)) {
+      if(is.logical(node_attrs$type)) {
+        warning('This network object is bipartite and uses a `logical` vertex attribute
+                 named "type". igraph will assume that "type" is intended to label vertex 
+                 modes in the resulting graph. Rename this vertex attribute if this is not 
+                 intentional.')
+        }
+      if(!is.logical(node_attrs$type)) {
+        stop('This network object is bipartite, but uses a non-`logical` vertex attribute 
+              named "type". igraph uses a `logical` vertex attribute named "type" for 
+              bipartite mapping. Rename this vertex attribute.', call. = FALSE)
+      }
+    }
+    node_attrs$type <- c(rep(TRUE, metadata$bipartite), 
+                         rep(FALSE, metadata$n - metadata$bipartite))
   }
-  node_attr$vertex.names <- NULL
-  vertex_attr(new_graph) <- node_attr
-  edge_attr(new_graph) <- edge_attr
-
+  
+  edge_attrs <- dplyr::bind_rows(lapply(graph$mel, `[[`, "atl"))
+  # {igraph} doesn't track "missing"/"na" edges.
+  edge_attrs <- edge_attrs[colnames(edge_attrs) != "na"]
+  
+  outl <- vapply(graph$mel, `[[`, numeric(1), "outl") # may be integer or double
+  inl <- vapply(graph$mel, `[[`, numeric(1), "inl")
+  if (metadata$directed) {
+    el <- cbind(outl, inl)
+  } else {
+    # {network} reverses egos and alters for undirected edge lists. Controling this allows
+    # validation of round-trip conversions.
+    el <- cbind(inl, outl)
+  }
+  # vectorizing edges allows them to be added to an empty graph
+  el_vec <- as.vector(t(el))
+  # starting with an empty graph allows for isolates
+  new_graph <- igraph::graph.empty(graph$gal$n, directed = graph$gal$directed)
+  new_graph <- igraph::add_edges(new_graph, edges = el_vec)
+  if (length(graph_attrs)) {
+    igraph::graph_attr(new_graph) <- graph_attrs
+    }
+  if (nrow(node_attrs)) {
+    igraph::vertex_attr(new_graph) <- node_attrs
+    }
+  if (nrow(edge_attrs)) {
+    igraph::edge_attr(new_graph) <- edge_attrs
+    }
+  
   new_graph
 }
