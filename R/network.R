@@ -17,7 +17,7 @@ as_tbl_graph.network <- function(x, ...) {
 #' as an igraph object.
 #'
 #' @importFrom dplyr bind_rows
-#' @importFrom igraph graph.empty graph_attr<- edge_attr<- vertex_attr<-
+#' @importFrom igraph graph_attr<- edge_attr<- vertex_attr<-
 #' @noRd
 #'
 network_to_igraph <- function(graph) {
@@ -95,7 +95,7 @@ network_to_igraph <- function(graph) {
   # vectorizing edges allows them to be added to an empty graph
   el_vec <- as.vector(t(el))
   # starting with an empty graph allows for isolates
-  new_graph <- graph.empty(graph$gal$n, directed = graph$gal$directed)
+  new_graph <- igraph::graph.empty(graph$gal$n, directed = graph$gal$directed)
   new_graph <- add_edges(new_graph, edges = el_vec)
   if (length(graph_attrs)) {
     graph_attr(new_graph) <- graph_attrs
