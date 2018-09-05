@@ -17,8 +17,7 @@ as_tbl_graph.network <- function(x, ...) {
 #' as an igraph object.
 #'
 #' @importFrom dplyr bind_rows
-#' @importFrom igraph graph_attr<- graph.empty edge_attr<- vertex_attr<-
-#' @importFrom utils modifyList
+#' @importFrom igraph graph.empty graph_attr<- edge_attr<- vertex_attr<-
 #' @noRd
 #'
 network_to_igraph <- function(graph) {
