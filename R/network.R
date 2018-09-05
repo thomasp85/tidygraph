@@ -69,7 +69,7 @@ network_to_igraph <- function(graph) {
                  modes in the resulting graph. Rename this vertex attribute if this is not 
                  intentional.')
         }
-      if(!is.logical(node_attrs$type)) {
+      if (!is.logical(node_attrs$type)) {
         stop('This network object is bipartite, but uses a non-`logical` vertex attribute 
               named "type". igraph uses a `logical` vertex attribute named "type" for 
               bipartite mapping. Rename this vertex attribute.', call. = FALSE)
@@ -99,13 +99,13 @@ network_to_igraph <- function(graph) {
   new_graph <- add_edges(new_graph, edges = el_vec)
   if (length(graph_attrs)) {
     graph_attr(new_graph) <- graph_attrs
-    }
+  }
   if (nrow(node_attrs)) {
     vertex_attr(new_graph) <- node_attrs
-    }
+  }
   if (nrow(edge_attrs)) {
     edge_attr(new_graph) <- edge_attrs
-    }
+  }
   
   new_graph
 }
