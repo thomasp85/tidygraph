@@ -46,7 +46,7 @@ edge_tibble <- function(x) {
   }
   e_list <- as_edgelist(x, names = FALSE)
   mode(e_list) <- 'integer'
+  colnames(e_list) <- c('from', 'to')
   e_list <- as_tibble(e_list)
-  names(e_list) <- c('from', 'to')
   bind_cols(e_list, tbl)
 }
