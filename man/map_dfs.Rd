@@ -59,7 +59,7 @@ addition to those supplied through \code{...}:
 \item \code{rank_out}: The rank of the completion of the nodes subtree
 \item \code{parent}: The index of the node that led to the current node
 \item \code{dist}: The distance of the current node from the root
-\item \code{path}: A table containing \code{node}, \code{rank}, \code{rank_out}, \code{parent}, dist\code{, and}result\code{columns giving the values for each node leading to the current node. The}result` column will contain the result of the mapping
+\item \code{path}: A table containing \code{node}, \code{rank}, \code{rank_out}, \code{parent}, dist\code{, and }result\code{columns giving the values for each node leading to the current node. The}result` column will contain the result of the mapping
 of each node in a list.
 }
 

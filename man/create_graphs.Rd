@@ -37,7 +37,8 @@ create_notable(name)
 
 create_kautz(alphabet_size, label_size)
 
-create_lattice(dim, directed = FALSE, mutual = FALSE, circular = FALSE)
+create_lattice(dim, directed = FALSE, mutual = FALSE,
+  circular = FALSE)
 
 create_star(n, directed = FALSE, mutual = FALSE, mode = "out")
 

@@ -37,14 +37,15 @@ node_rank_two(dist = "shortest", mode = "out", weights = NA,
 node_rank_mds(method = "cmdscale", dist = "shortest", mode = "out",
   weights = NA, algorithm = "automatic")
 
-node_rank_leafsort(method = "average", type = "OLO", dist = "shortest",
-  mode = "out", weights = NA, algorithm = "automatic")
+node_rank_leafsort(method = "average", type = "OLO",
+  dist = "shortest", mode = "out", weights = NA,
+  algorithm = "automatic")
 
 node_rank_visual(dist = "shortest", mode = "out", weights = NA,
   algorithm = "automatic")
 
-node_rank_spectral(normalized = FALSE, dist = "shortest", mode = "out",
-  weights = NA, algorithm = "automatic")
+node_rank_spectral(normalized = FALSE, dist = "shortest",
+  mode = "out", weights = NA, algorithm = "automatic")
 
 node_rank_spin_out(step = 25, nstart = 10, dist = "shortest",
   mode = "out", weights = NA, algorithm = "automatic")
@@ -82,7 +83,7 @@ or a function that takes a \code{tbl_graph} and return a \code{dist} object with
 matching the order of the graph.}
 
 \item{mode}{Which edges should be included in the distance calculation. For
-distance measures based on the adjacency matrix, \code{'out'} will use the matrix
+distance measures based on the adjacency matrix, \code{'out' } will use the matrix
 as is, \code{'in'} will use the transpose, and \code{'all'} will take the mean of the
 two. Defaults to \code{'out'}. Ignored for undirected graphs.}
 

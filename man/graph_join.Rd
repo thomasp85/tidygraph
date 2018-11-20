@@ -4,7 +4,8 @@
 \alias{graph_join}
 \title{Join graphs on common nodes}
 \usage{
-graph_join(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...)
+graph_join(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"),
+  ...)
 }
 \arguments{
 \item{x}{A \code{tbl_graph}}
@@ -30,7 +31,8 @@ it is a potentially expensive operation so you must opt into it.}
 \code{y}, these suffixes will be added to the output to disambiguate them.
 Should be a character vector of length 2.}
 
-\item{...}{other parameters passed onto methods}
+\item{...}{other parameters passed onto methods, for instance, \code{na_matches}
+to control how \code{NA} values are matched.  See \link{join.tbl_df} for more.}
 }
 \value{
 A \code{tbl_graph} containing the merged graph

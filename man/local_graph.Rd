@@ -52,7 +52,7 @@ the node position.
 \section{Functions}{
 \itemize{
 \item \code{local_size}: The size of the neighborhood in a given distance from
-the node. (Note that the node itself is included unless \code{mindist &gt; 0}). Wraps \code{\link[igraph:ego_size]{igraph::ego_size()}}.
+the node. (Note that the node itself is included unless \code{mindist > 0}). Wraps \code{\link[igraph:ego_size]{igraph::ego_size()}}.
 
 \item \code{local_members}: The members of the neighborhood of each node in a
 given distance. Wraps \code{\link[igraph:ego]{igraph::ego()}}.

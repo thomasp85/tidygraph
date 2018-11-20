@@ -14,7 +14,8 @@ play_degree(out_degree, in_degree = NULL, method = "simple")
 
 play_dotprod(position, directed = TRUE)
 
-play_fitness(m, out_fit, in_fit = NULL, loops = FALSE, multiple = FALSE)
+play_fitness(m, out_fit, in_fit = NULL, loops = FALSE,
+  multiple = FALSE)
 
 play_fitness_power(n, m, out_exp, in_exp = -1, loops = FALSE,
   multiple = FALSE, correct = TRUE)
