@@ -112,6 +112,17 @@ node_is_center <- function(mode = 'out') {
   ecc <- eccentricity(graph, mode = mode)
   ecc == min(ecc)
 }
+#' @importFrom igraph gorder adjacent_vertices
+#' @export
+node_is_adjacent <- function(to, mode = 'all', include_to = TRUE) {
+  expect_nodes()
+  graph <- .G()
+  n_nodes <- gorder(graph)
+  to <- as_ind(to, n_nodes)
+  include <- unlist(adjacent_vertices(graph, to, mode))
+  if (include_to) include <- union(to, include)
+  seq_len(n_nodes) %in% include
+}
 #' @describeIn node_types Is a node part of the keyplayers in the graph (`influenceR`)
 #' @param k The number of keyplayers to identify
 #' @param p The probability to accept a lesser state
