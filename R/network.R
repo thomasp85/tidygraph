@@ -45,7 +45,7 @@ network_to_igraph <- function(graph) {
   })
   names(edge_attr) <- edge_attr_names
 
-  edges <- network::as.matrix(graph, 'edgelist')
+  edges <- as.matrix(graph, matrix.type = 'edgelist')
   class(edges) <- 'matrix'
   attributes(edges) <- attributes(edges)[c('dim', 'class')]
 
