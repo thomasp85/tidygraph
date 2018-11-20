@@ -4,6 +4,7 @@
 \alias{morphers}
 \alias{to_linegraph}
 \alias{to_subgraph}
+\alias{to_subcomponent}
 \alias{to_split}
 \alias{to_components}
 \alias{to_complement}
@@ -24,6 +25,8 @@
 to_linegraph(graph)
 
 to_subgraph(graph, ..., subset_by = NULL)
+
+to_subcomponent(graph, node)
 
 to_split(graph, ..., split_by = NULL)
 
@@ -64,11 +67,12 @@ and \code{\link[igraph:cluster_edge_betweenness]{igraph::cluster_edge_betweennes
 
 \item{subset_by, split_by}{Whether to create subgraphs based on nodes or edges}
 
+\item{node}{The center of the neighborhood for \code{to_local_neighborhood()} and
+the node to that should be included in the component for \code{to_subcomponent()}}
+
 \item{type}{The type of component to split into. Either \code{'weak'} or \code{'strong'}}
 
 \item{loops}{Should loops be included. Defaults to \code{FALSE}}
-
-\item{node}{The center of the neighborhood}
 
 \item{order}{The radius of the neighborhood}
 
@@ -107,6 +111,8 @@ ignored.
 \item \code{to_subgraph}: Convert a graph to a single subgraph. \code{...} is evaluated
 in the same manner as \code{filter}. When unmorphing all data in the subgraph
 will get merged back.
+
+\item \code{to_subcomponent}: Convert a graph to a single component containing the specified node
 
 \item \code{to_split}: Convert a graph into a list of separate subgraphs. \code{...}
 is evaluated in the same manner as \code{group_by}. When unmorphing all data in

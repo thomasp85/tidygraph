@@ -60,6 +60,18 @@ to_subgraph <- function(graph, ..., subset_by = NULL) {
     subgraph = as_tbl_graph(subset)
   )
 }
+#' @describeIn morphers Convert a graph to a single component containing the specified node
+#' @param node The center of the neighborhood for `to_local_neighborhood()` and
+#' the node to that should be included in the component for `to_subcomponent()`
+#' @importFrom igraph gorder components
+#' @export
+to_subcomponent <- function(graph, node) {
+  node <- eval_tidy(enquo(node), as_tibble(graph, 'nodes'))
+  node <- as_ind(node, gorder(graph))
+  if (length(node) != 1) stop('Please provide a single node for defining the subcomponent', call. = FALSE)
+  component_membership <- components(graph)$membership == components(graph)$membership[node]
+  to_subgraph(graph, component_membership, subset_by = 'nodes')
+}
 #' @describeIn morphers Convert a graph into a list of separate subgraphs. `...`
 #' is evaluated in the same manner as `group_by`. When unmorphing all data in
 #' the subgraphs will get merged back, but in the case of `split_by = 'edges'`
@@ -113,7 +125,6 @@ to_complement <- function(graph, loops = FALSE) {
 }
 #' @describeIn morphers Convert a graph into the local neighborhood around a
 #' single node. When unmorphing all data will be merged back.
-#' @param node The center of the neighborhood
 #' @param order The radius of the neighborhood
 #' @param mode How should edges be followed? `'out'` only follows outbound
 #' edges, `'in'` only follows inbound edges, and `'all'` follows all edges. This
