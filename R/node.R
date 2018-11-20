@@ -112,6 +112,9 @@ node_is_center <- function(mode = 'out') {
   ecc <- eccentricity(graph, mode = mode)
   ecc == min(ecc)
 }
+#' @describeIn node_types is a node adjacent to any of the nodes given in `to`
+#' @param to The nodes to test for adjacency to
+#' @param include_to Should the nodes in `to` be marked as adjacent as well
 #' @importFrom igraph gorder adjacent_vertices
 #' @export
 node_is_adjacent <- function(to, mode = 'all', include_to = TRUE) {

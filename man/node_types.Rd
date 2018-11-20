@@ -11,6 +11,7 @@
 \alias{node_is_universal}
 \alias{node_is_simplical}
 \alias{node_is_center}
+\alias{node_is_adjacent}
 \alias{node_is_keyplayer}
 \title{Querying node types}
 \usage{
@@ -32,11 +33,17 @@ node_is_simplical(mode = "out")
 
 node_is_center(mode = "out")
 
+node_is_adjacent(to, mode = "all", include_to = TRUE)
+
 node_is_keyplayer(k, p = 0, tol = 1e-04, maxsec = 120,
   roundsec = 30)
 }
 \arguments{
 \item{mode}{The way edges should be followed in the case of directed graphs.}
+
+\item{to}{The nodes to test for adjacency to}
+
+\item{include_to}{Should the nodes in \code{to} be marked as adjacent as well}
 
 \item{k}{The number of keyplayers to identify}
 
@@ -77,6 +84,8 @@ exclusive and that nodes can thus be of multiple types.
 \item \code{node_is_simplical}: are all the neighbors of the node connected
 
 \item \code{node_is_center}: does the node have the minimal eccentricity in the graph
+
+\item \code{node_is_adjacent}: is a node adjacent to any of the nodes given in \code{to}
 
 \item \code{node_is_keyplayer}: Is a node part of the keyplayers in the graph (\code{influenceR})
 }}
