@@ -1,4 +1,19 @@
-# tidygraph 1.0.0.9999
+# tidygraph 1.1.1
+
+* Better conversion of `network` objects. Old conversion could mess up edge 
+  attributes.
+* Changes to anticipate new version of `tibble` and `dplyr`
+* `tibble`-like dimming of non-data text in printing
+* Edge-length is now preserved when converting from `phylo`
+* Added `to_subcomponent` morpher to work with a single component containing a 
+  specified node
+* Morphers that reference nodes now correctly tidy eval the node argument
+* Add `node_is_adjacent` to query which nodes are directly connected to a set of
+  nodes
+* Add `fortify` method for `tbl_graph` object for plotting as regular data with 
+  `ggplot2`
+
+# tidygraph 1.1.0
 
 * Fix bug when coercing to `tbl_graph` from an adjacency list containing `NULL`
   or `NA` elements.
