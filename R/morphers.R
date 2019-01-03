@@ -262,9 +262,12 @@ to_contracted <- function(graph, ..., simplify = TRUE) {
 to_unfolded_tree <- function(graph, root, mode = 'out') {
   root <- eval_tidy(enquo(root), as_tibble(graph, 'nodes'))
   roots <- as_ind(root, gorder(graph))
-  graph <- unfold_tree(graph, mode, roots)
+  unfolded <- unfold_tree(graph, mode, roots)
+  tree <- as_tbl_graph(unfolded$tree)
+  tree <- set_node_attributes(tree, as_tibble(graph, 'nodes')[unfolded$vertex_index, ])
+  tree <- set_edge_attributes(tree, as_tibble(graph, 'edges'))
   list(
-    tree = as_tbl_graph(graph$tree)
+    tree = tree
   )
 }
 #' @describeIn morphers Make a graph directed in the direction given by from and
