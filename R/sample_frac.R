@@ -2,7 +2,7 @@
 #' @importFrom dplyr sample_frac
 #' @importFrom igraph delete_vertices delete_edges
 #' @importFrom rlang enquo
-sample_frac.tbl_graph <- function(tbl, size = 1, replace = FALSE, weight = NULL, .env = parent.frame()) {
+sample_frac.tbl_graph <- function(tbl, size = 1, replace = FALSE, weight = NULL, .env = parent.frame(), ...) {
   d_tmp <- as_tibble(tbl)
   weight <- enquo(weight)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
@@ -21,7 +21,7 @@ sample_frac.tbl_graph <- function(tbl, size = 1, replace = FALSE, weight = NULL,
 #' @export
 #' @importFrom dplyr sample_frac
 #' @importFrom rlang enquo
-sample_frac.morphed_tbl_graph <- function(tbl, size = 1, replace = FALSE, weight = NULL, .env = parent.frame()) {
+sample_frac.morphed_tbl_graph <- function(tbl, size = 1, replace = FALSE, weight = NULL, .env = parent.frame(), ...) {
   weight <- enquo(weight)
   tbl[] <- lapply(tbl, sample_frac, size = size, replace = replace, weight = !! weight, .env = .env)
   tbl
