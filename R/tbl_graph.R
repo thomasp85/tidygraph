@@ -75,10 +75,10 @@ print.tbl_graph <- function(x, ...) {
   arg_list <- list(...)
   graph_desc <- describe_graph(x)
   not_active <- if (active(x) == 'nodes') 'edges' else 'nodes'
-  top <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x), n = 6)))
+  top <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x))))
   top$summary[1] <- paste0(top$summary[1], ' (active)')
   names(top$summary)[1] <- toTitleCase(paste0(substr(active(x), 1, 4), ' data'))
-  bottom <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x, active = not_active), n = 3)))
+  bottom <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x, active = not_active))))
   names(bottom$summary)[1] <- toTitleCase(paste0(substr(not_active, 1, 4), ' data'))
   cat_subtle('# A tbl_graph: ', gorder(x), ' nodes and ', gsize(x), ' edges\n', sep = '')
   cat_subtle('#\n')
