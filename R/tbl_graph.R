@@ -37,10 +37,10 @@
 #' @param ... Arguments passed on to the conversion function
 #'
 #' @return A `tbl_graph` object
-#' 
-#' @examples 
+#'
+#' @examples
 #' rstat_nodes <- data.frame(name = c("Hadley", "David", "Romain", "Julia"))
-#' rstat_edges <- data.frame(from = c(1, 1, 1, 2, 3, 3, 4, 4, 4), 
+#' rstat_edges <- data.frame(from = c(1, 1, 1, 2, 3, 3, 4, 4, 4),
 #'                             to = c(2, 3, 4, 1, 1, 2, 1, 2, 3))
 #' tbl_graph(nodes = rstat_nodes, edges = rstat_edges)
 #' @export
@@ -120,11 +120,11 @@ describe_graph <- function(x) {
 }
 #' @importFrom igraph is_connected is_simple gorder gsize is_directed
 is_tree <- function(x) {
-  is_directed(x) && is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) == 1)
+  is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) == 1)
 }
 #' @importFrom igraph is_connected is_simple gorder gsize count_components is_directed
 is_forest <- function(x) {
-  is_directed(x) && !is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) - count_components(x) == 0)
+  !is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) - count_components(x) == 0)
 }
 #' @export
 as_tbl_graph.tbl_graph <- function(x, ...) {

@@ -1,13 +1,13 @@
 Package: tidygraph
 Type: Package
 Title: A Tidy API for Graph Manipulation
-Version: 1.1.1
-Date: 2018-11-20
+Version: 1.1.2.9999
 Authors@R:
     person(given = "Thomas Lin",
            family = "Pedersen",
            role = c("cre", "aut"),
-           email = "thomasp85@gmail.com")
+           email = "thomasp85@gmail.com",
+           comment = c(ORCID = "0000-0002-5147-4711"))
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
 Description: A graph, while not "tidy" in itself, can be thought of as two tidy
     data frames describing node and edge data respectively. 'tidygraph'
@@ -21,7 +21,7 @@ RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Imports: 
     tibble,
-    dplyr (>= 0.7),
+    dplyr (>= 0.8),
     igraph,
     magrittr,
     utils,

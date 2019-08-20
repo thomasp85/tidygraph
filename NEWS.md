@@ -1,3 +1,11 @@
+# tidygraph (development version)
+
+* graph description now recognise undirected trees
+
+# tidygraph 1.1.2
+
+* Compatibility with `dplyr` 0.8
+
 # tidygraph 1.1.1
 
 * Better conversion of `network` objects. Old conversion could mess up edge 
