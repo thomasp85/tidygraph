@@ -149,8 +149,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-new-verbs" class="hasAnchor"><a href="#section-new-verbs" class="anchor"></a>New verbs</h2>
+          <p class="section-desc"><p>While tidygraph mainly works by allowing you to use well known dplyr verbs on relational data, it provides a few new verbs special to working with this type of data.</p></p>
         </th>
       </tr>
       <tr>
@@ -168,21 +168,41 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="centrality.html">centrality_alpha()</a></code> <code><a href="centrality.html">centrality_authority()</a></code> <code><a href="centrality.html">centrality_betweenness()</a></code> <code><a href="centrality.html">centrality_power()</a></code> <code><a href="centrality.html">centrality_closeness()</a></code> <code><a href="centrality.html">centrality_eigen()</a></code> <code><a href="centrality.html">centrality_hub()</a></code> <code><a href="centrality.html">centrality_pagerank()</a></code> <code><a href="centrality.html">centrality_subgraph()</a></code> <code><a href="centrality.html">centrality_degree()</a></code> <code><a href="centrality.html">centrality_edge_betweenness()</a></code> <code><a href="centrality.html">centrality_manual()</a></code> <code><a href="centrality.html">centrality_closeness_harmonic()</a></code> <code><a href="centrality.html">centrality_closeness_residual()</a></code> <code><a href="centrality.html">centrality_closeness_generalised()</a></code> <code><a href="centrality.html">centrality_integration()</a></code> <code><a href="centrality.html">centrality_communicability()</a></code> <code><a href="centrality.html">centrality_communicability_odd()</a></code> <code><a href="centrality.html">centrality_communicability_even()</a></code> <code><a href="centrality.html">centrality_subgraph_odd()</a></code> <code><a href="centrality.html">centrality_subgraph_even()</a></code> <code><a href="centrality.html">centrality_katz()</a></code> <code><a href="centrality.html">centrality_betweenness_network()</a></code> <code><a href="centrality.html">centrality_betweenness_current()</a></code> <code><a href="centrality.html">centrality_betweenness_communicability()</a></code> <code><a href="centrality.html">centrality_betweenness_rsp_simple()</a></code> <code><a href="centrality.html">centrality_betweenness_rsp_net()</a></code> <code><a href="centrality.html">centrality_information()</a></code> <code><a href="centrality.html">centrality_decay()</a></code> <code><a href="centrality.html">centrality_random_walk()</a></code> <code><a href="centrality.html">centrality_expected()</a></code> </p>
+          <p><code><a href="graph_join.html">graph_join()</a></code> </p>
         </td>
-        <td><p>Calculate node and edge centrality</p></td>
+        <td><p>Join graphs on common nodes</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="component_games.html">play_blocks()</a></code> <code><a href="component_games.html">play_blocks_hierarchy()</a></code> <code><a href="component_games.html">play_islands()</a></code> <code><a href="component_games.html">play_smallworld()</a></code> </p>
+          <p><code><a href="reroute.html">reroute()</a></code> </p>
         </td>
-        <td><p>Graph games based on connected components</p></td>
+        <td><p>Change terminal nodes of edges</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="context_accessors.html">.G()</a></code> <code><a href="context_accessors.html">.N()</a></code> <code><a href="context_accessors.html">.E()</a></code> </p>
+          <p><code><a href="morph.html">morph()</a></code> <code><a href="morph.html">unmorph()</a></code> <code><a href="morph.html">crystallise()</a></code> <code><a href="morph.html">crystallize()</a></code> <code><a href="morph.html">convert()</a></code> </p>
         </td>
-        <td><p>Access graph, nodes, and edges directly inside verbs</p></td>
+        <td><p>Create a temporary alternative representation of the graph to compute on</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="morphers.html">to_linegraph()</a></code> <code><a href="morphers.html">to_subgraph()</a></code> <code><a href="morphers.html">to_subcomponent()</a></code> <code><a href="morphers.html">to_split()</a></code> <code><a href="morphers.html">to_components()</a></code> <code><a href="morphers.html">to_complement()</a></code> <code><a href="morphers.html">to_local_neighborhood()</a></code> <code><a href="morphers.html">to_dominator_tree()</a></code> <code><a href="morphers.html">to_minimum_spanning_tree()</a></code> <code><a href="morphers.html">to_shortest_path()</a></code> <code><a href="morphers.html">to_bfs_tree()</a></code> <code><a href="morphers.html">to_dfs_tree()</a></code> <code><a href="morphers.html">to_simple()</a></code> <code><a href="morphers.html">to_contracted()</a></code> <code><a href="morphers.html">to_unfolded_tree()</a></code> <code><a href="morphers.html">to_directed()</a></code> <code><a href="morphers.html">to_undirected()</a></code> <code><a href="morphers.html">to_hierarchical_clusters()</a></code> </p>
+        </td>
+        <td><p>Functions to generate alternate representations of graphs</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-graph-creation" class="hasAnchor"><a href="#section-graph-creation" class="anchor"></a>Graph creation</h2>
+          <p class="section-desc"><p>Graphs and networks can come from many sources, or be created by simulation or deterministacally. Tidygraph provides conversions from all well-known structures in R, as well as a range of <code>create_()</code> and <code>play_*()</code> functions for creating well-defined or simulated graphs.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="tbl_graph.html">tbl_graph()</a></code> <code><a href="tbl_graph.html">as_tbl_graph()</a></code> <code><a href="tbl_graph.html">is.tbl_graph()</a></code> </p>
+        </td>
+        <td><p>A data structure for tidy graph manipulation</p></td>
       </tr><tr>
         
         <td>
@@ -192,9 +212,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="edge_types.html">edge_is_multiple()</a></code> <code><a href="edge_types.html">edge_is_loop()</a></code> <code><a href="edge_types.html">edge_is_mutual()</a></code> <code><a href="edge_types.html">edge_is_from()</a></code> <code><a href="edge_types.html">edge_is_to()</a></code> <code><a href="edge_types.html">edge_is_between()</a></code> <code><a href="edge_types.html">edge_is_incident()</a></code> </p>
+          <p><code><a href="sampling_games.html">play_degree()</a></code> <code><a href="sampling_games.html">play_dotprod()</a></code> <code><a href="sampling_games.html">play_fitness()</a></code> <code><a href="sampling_games.html">play_fitness_power()</a></code> <code><a href="sampling_games.html">play_erdos_renyi()</a></code> <code><a href="sampling_games.html">play_geometry()</a></code> </p>
         </td>
-        <td><p>Querying edge types</p></td>
+        <td><p>Graph games based on direct sampling</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="component_games.html">play_blocks()</a></code> <code><a href="component_games.html">play_blocks_hierarchy()</a></code> <code><a href="component_games.html">play_islands()</a></code> <code><a href="component_games.html">play_smallworld()</a></code> </p>
+        </td>
+        <td><p>Graph games based on connected components</p></td>
       </tr><tr>
         
         <td>
@@ -204,34 +230,18 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="graph_join.html">graph_join()</a></code> </p>
+          <p><code><a href="type_games.html">play_preference()</a></code> <code><a href="type_games.html">play_preference_asym()</a></code> <code><a href="type_games.html">play_bipartite()</a></code> <code><a href="type_games.html">play_traits()</a></code> <code><a href="type_games.html">play_citation_type()</a></code> </p>
         </td>
-        <td><p>Join graphs on common nodes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="graph_measures.html">graph_adhesion()</a></code> <code><a href="graph_measures.html">graph_assortativity()</a></code> <code><a href="graph_measures.html">graph_automorphisms()</a></code> <code><a href="graph_measures.html">graph_clique_num()</a></code> <code><a href="graph_measures.html">graph_clique_count()</a></code> <code><a href="graph_measures.html">graph_component_count()</a></code> <code><a href="graph_measures.html">graph_motif_count()</a></code> <code><a href="graph_measures.html">graph_diameter()</a></code> <code><a href="graph_measures.html">graph_girth()</a></code> <code><a href="graph_measures.html">graph_radius()</a></code> <code><a href="graph_measures.html">graph_mutual_count()</a></code> <code><a href="graph_measures.html">graph_asym_count()</a></code> <code><a href="graph_measures.html">graph_unconn_count()</a></code> <code><a href="graph_measures.html">graph_size()</a></code> <code><a href="graph_measures.html">graph_order()</a></code> <code><a href="graph_measures.html">graph_reciprocity()</a></code> <code><a href="graph_measures.html">graph_min_cut()</a></code> <code><a href="graph_measures.html">graph_mean_dist()</a></code> </p>
-        </td>
-        <td><p>Graph measurements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="graph_types.html">graph_is_simple()</a></code> <code><a href="graph_types.html">graph_is_directed()</a></code> <code><a href="graph_types.html">graph_is_bipartite()</a></code> <code><a href="graph_types.html">graph_is_connected()</a></code> <code><a href="graph_types.html">graph_is_tree()</a></code> <code><a href="graph_types.html">graph_is_forest()</a></code> <code><a href="graph_types.html">graph_is_dag()</a></code> <code><a href="graph_types.html">graph_is_chordal()</a></code> <code><a href="graph_types.html">graph_is_complete()</a></code> <code><a href="graph_types.html">graph_is_isomorphic_to()</a></code> <code><a href="graph_types.html">graph_is_subgraph_isomorphic_to()</a></code> </p>
-        </td>
-        <td><p>Querying graph types</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="group_graph.html">group_components()</a></code> <code><a href="group_graph.html">group_edge_betweenness()</a></code> <code><a href="group_graph.html">group_fast_greedy()</a></code> <code><a href="group_graph.html">group_infomap()</a></code> <code><a href="group_graph.html">group_label_prop()</a></code> <code><a href="group_graph.html">group_leading_eigen()</a></code> <code><a href="group_graph.html">group_louvain()</a></code> <code><a href="group_graph.html">group_optimal()</a></code> <code><a href="group_graph.html">group_spinglass()</a></code> <code><a href="group_graph.html">group_walktrap()</a></code> <code><a href="group_graph.html">group_biconnected_component()</a></code> </p>
-        </td>
-        <td><p>Group nodes and edges based on community structure</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="local_graph.html">local_size()</a></code> <code><a href="local_graph.html">local_members()</a></code> <code><a href="local_graph.html">local_triangles()</a></code> <code><a href="local_graph.html">local_ave_degree()</a></code> <code><a href="local_graph.html">local_transitivity()</a></code> </p>
-        </td>
-        <td><p>Measures based on the neighborhood of each node</p></td>
-      </tr><tr>
+        <td><p>Graph games based on different node types</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-mapping-over-nodes" class="hasAnchor"><a href="#section-mapping-over-nodes" class="anchor"></a>Mapping over nodes</h2>
+          <p class="section-desc"><p>Mapping functions over nodes for relational data is different than for standard tabular data as you often want to recurse over a search or in other ways use the graph structure as part of your map.</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="map_bfs.html">map_bfs()</a></code> <code><a href="map_bfs.html">map_bfs_lgl()</a></code> <code><a href="map_bfs.html">map_bfs_chr()</a></code> <code><a href="map_bfs.html">map_bfs_int()</a></code> <code><a href="map_bfs.html">map_bfs_dbl()</a></code> </p>
@@ -261,18 +271,48 @@
           <p><code><a href="map_local.html">map_local()</a></code> <code><a href="map_local.html">map_local_lgl()</a></code> <code><a href="map_local.html">map_local_chr()</a></code> <code><a href="map_local.html">map_local_int()</a></code> <code><a href="map_local.html">map_local_dbl()</a></code> </p>
         </td>
         <td><p>Map a function over a graph representing the neighborhood of each node</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-centrality" class="hasAnchor"><a href="#section-centrality" class="anchor"></a>Centrality</h2>
+          <p class="section-desc"><p>Centrality is a key measure in network analysis, and while it is mainly calculated for nodes, a few algorithms exists for calculating edge centrality as well.</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
-          <p><code><a href="morph.html">morph()</a></code> <code><a href="morph.html">unmorph()</a></code> <code><a href="morph.html">crystallise()</a></code> <code><a href="morph.html">crystallize()</a></code> <code><a href="morph.html">convert()</a></code> </p>
+          <p><code><a href="centrality.html">centrality_alpha()</a></code> <code><a href="centrality.html">centrality_authority()</a></code> <code><a href="centrality.html">centrality_betweenness()</a></code> <code><a href="centrality.html">centrality_power()</a></code> <code><a href="centrality.html">centrality_closeness()</a></code> <code><a href="centrality.html">centrality_eigen()</a></code> <code><a href="centrality.html">centrality_hub()</a></code> <code><a href="centrality.html">centrality_pagerank()</a></code> <code><a href="centrality.html">centrality_subgraph()</a></code> <code><a href="centrality.html">centrality_degree()</a></code> <code><a href="centrality.html">centrality_edge_betweenness()</a></code> <code><a href="centrality.html">centrality_manual()</a></code> <code><a href="centrality.html">centrality_closeness_harmonic()</a></code> <code><a href="centrality.html">centrality_closeness_residual()</a></code> <code><a href="centrality.html">centrality_closeness_generalised()</a></code> <code><a href="centrality.html">centrality_integration()</a></code> <code><a href="centrality.html">centrality_communicability()</a></code> <code><a href="centrality.html">centrality_communicability_odd()</a></code> <code><a href="centrality.html">centrality_communicability_even()</a></code> <code><a href="centrality.html">centrality_subgraph_odd()</a></code> <code><a href="centrality.html">centrality_subgraph_even()</a></code> <code><a href="centrality.html">centrality_katz()</a></code> <code><a href="centrality.html">centrality_betweenness_network()</a></code> <code><a href="centrality.html">centrality_betweenness_current()</a></code> <code><a href="centrality.html">centrality_betweenness_communicability()</a></code> <code><a href="centrality.html">centrality_betweenness_rsp_simple()</a></code> <code><a href="centrality.html">centrality_betweenness_rsp_net()</a></code> <code><a href="centrality.html">centrality_information()</a></code> <code><a href="centrality.html">centrality_decay()</a></code> <code><a href="centrality.html">centrality_random_walk()</a></code> <code><a href="centrality.html">centrality_expected()</a></code> </p>
         </td>
-        <td><p>Create a temporary alternative representation of the graph to compute on</p></td>
-      </tr><tr>
+        <td><p>Calculate node and edge centrality</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-community-detection" class="hasAnchor"><a href="#section-community-detection" class="anchor"></a>Community detection</h2>
+          <p class="section-desc"><p>Social network analysis is especially interested in detecting groups or communities within a graph, but such algorithms are also useful in other areas of network research. No single algorithm can provide the correct grouping of nodes so several exists that weigh certain features differently.</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
-          <p><code><a href="morphers.html">to_linegraph()</a></code> <code><a href="morphers.html">to_subgraph()</a></code> <code><a href="morphers.html">to_subcomponent()</a></code> <code><a href="morphers.html">to_split()</a></code> <code><a href="morphers.html">to_components()</a></code> <code><a href="morphers.html">to_complement()</a></code> <code><a href="morphers.html">to_local_neighborhood()</a></code> <code><a href="morphers.html">to_dominator_tree()</a></code> <code><a href="morphers.html">to_minimum_spanning_tree()</a></code> <code><a href="morphers.html">to_shortest_path()</a></code> <code><a href="morphers.html">to_bfs_tree()</a></code> <code><a href="morphers.html">to_dfs_tree()</a></code> <code><a href="morphers.html">to_simple()</a></code> <code><a href="morphers.html">to_contracted()</a></code> <code><a href="morphers.html">to_unfolded_tree()</a></code> <code><a href="morphers.html">to_directed()</a></code> <code><a href="morphers.html">to_undirected()</a></code> <code><a href="morphers.html">to_hierarchical_clusters()</a></code> </p>
+          <p><code><a href="group_graph.html">group_components()</a></code> <code><a href="group_graph.html">group_edge_betweenness()</a></code> <code><a href="group_graph.html">group_fast_greedy()</a></code> <code><a href="group_graph.html">group_infomap()</a></code> <code><a href="group_graph.html">group_label_prop()</a></code> <code><a href="group_graph.html">group_leading_eigen()</a></code> <code><a href="group_graph.html">group_louvain()</a></code> <code><a href="group_graph.html">group_optimal()</a></code> <code><a href="group_graph.html">group_spinglass()</a></code> <code><a href="group_graph.html">group_walktrap()</a></code> <code><a href="group_graph.html">group_biconnected_component()</a></code> </p>
         </td>
-        <td><p>Functions to generate alternate representations of graphs</p></td>
+        <td><p>Group nodes and edges based on community structure</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-node-measures" class="hasAnchor"><a href="#section-node-measures" class="anchor"></a>Node measures</h2>
+          <p class="section-desc"><p>Tidygraph provides a wide range of algorithms for extracting differnt information about the nodes in a graph, from calculating local measures, to defining whether they are part of certain topological features.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="local_graph.html">local_size()</a></code> <code><a href="local_graph.html">local_members()</a></code> <code><a href="local_graph.html">local_triangles()</a></code> <code><a href="local_graph.html">local_ave_degree()</a></code> <code><a href="local_graph.html">local_transitivity()</a></code> </p>
+        </td>
+        <td><p>Measures based on the neighborhood of each node</p></td>
       </tr><tr>
         
         <td>
@@ -303,42 +343,54 @@
           <p><code><a href="pair_measures.html">node_adhesion_to()</a></code> <code><a href="pair_measures.html">node_adhesion_from()</a></code> <code><a href="pair_measures.html">node_cohesion_to()</a></code> <code><a href="pair_measures.html">node_cohesion_from()</a></code> <code><a href="pair_measures.html">node_distance_to()</a></code> <code><a href="pair_measures.html">node_distance_from()</a></code> <code><a href="pair_measures.html">node_cocitation_with()</a></code> <code><a href="pair_measures.html">node_bibcoupling_with()</a></code> <code><a href="pair_measures.html">node_similarity_with()</a></code> <code><a href="pair_measures.html">node_max_flow_to()</a></code> <code><a href="pair_measures.html">node_max_flow_from()</a></code> </p>
         </td>
         <td><p>Calculate node pair properties</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-edge-measures" class="hasAnchor"><a href="#section-edge-measures" class="anchor"></a>Edge measures</h2>
+          <p class="section-desc"><p>Fewer quantitative measures exist for edges, but they can still be queried for topological features such as which nodes they link, etc.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="edge_types.html">edge_is_multiple()</a></code> <code><a href="edge_types.html">edge_is_loop()</a></code> <code><a href="edge_types.html">edge_is_mutual()</a></code> <code><a href="edge_types.html">edge_is_from()</a></code> <code><a href="edge_types.html">edge_is_to()</a></code> <code><a href="edge_types.html">edge_is_between()</a></code> <code><a href="edge_types.html">edge_is_incident()</a></code> </p>
+        </td>
+        <td><p>Querying edge types</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-graph-measures" class="hasAnchor"><a href="#section-graph-measures" class="anchor"></a>Graph measures</h2>
+          <p class="section-desc"><p>The graph under investigation can also have properties of its own that can be summarised into quantitative or qualitative values.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="graph_types.html">graph_is_simple()</a></code> <code><a href="graph_types.html">graph_is_directed()</a></code> <code><a href="graph_types.html">graph_is_bipartite()</a></code> <code><a href="graph_types.html">graph_is_connected()</a></code> <code><a href="graph_types.html">graph_is_tree()</a></code> <code><a href="graph_types.html">graph_is_forest()</a></code> <code><a href="graph_types.html">graph_is_dag()</a></code> <code><a href="graph_types.html">graph_is_chordal()</a></code> <code><a href="graph_types.html">graph_is_complete()</a></code> <code><a href="graph_types.html">graph_is_isomorphic_to()</a></code> <code><a href="graph_types.html">graph_is_subgraph_isomorphic_to()</a></code> </p>
+        </td>
+        <td><p>Querying graph types</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="reroute.html">reroute()</a></code> </p>
+          <p><code><a href="graph_measures.html">graph_adhesion()</a></code> <code><a href="graph_measures.html">graph_assortativity()</a></code> <code><a href="graph_measures.html">graph_automorphisms()</a></code> <code><a href="graph_measures.html">graph_clique_num()</a></code> <code><a href="graph_measures.html">graph_clique_count()</a></code> <code><a href="graph_measures.html">graph_component_count()</a></code> <code><a href="graph_measures.html">graph_motif_count()</a></code> <code><a href="graph_measures.html">graph_diameter()</a></code> <code><a href="graph_measures.html">graph_girth()</a></code> <code><a href="graph_measures.html">graph_radius()</a></code> <code><a href="graph_measures.html">graph_mutual_count()</a></code> <code><a href="graph_measures.html">graph_asym_count()</a></code> <code><a href="graph_measures.html">graph_unconn_count()</a></code> <code><a href="graph_measures.html">graph_size()</a></code> <code><a href="graph_measures.html">graph_order()</a></code> <code><a href="graph_measures.html">graph_reciprocity()</a></code> <code><a href="graph_measures.html">graph_min_cut()</a></code> <code><a href="graph_measures.html">graph_mean_dist()</a></code> </p>
         </td>
-        <td><p>Change terminal nodes of edges</p></td>
-      </tr><tr>
+        <td><p>Graph measurements</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-misc" class="hasAnchor"><a href="#section-misc" class="anchor"></a>Misc</h2>
+          <p class="section-desc"><p>Outside of the verbs and algorithms there is a few helper functions available to streamline graph manipulation.</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
-          <p><code><a href="sampling_games.html">play_degree()</a></code> <code><a href="sampling_games.html">play_dotprod()</a></code> <code><a href="sampling_games.html">play_fitness()</a></code> <code><a href="sampling_games.html">play_fitness_power()</a></code> <code><a href="sampling_games.html">play_erdos_renyi()</a></code> <code><a href="sampling_games.html">play_geometry()</a></code> </p>
+          <p><code><a href="context_accessors.html">.G()</a></code> <code><a href="context_accessors.html">.N()</a></code> <code><a href="context_accessors.html">.E()</a></code> </p>
         </td>
-        <td><p>Graph games based on direct sampling</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="search_graph.html">bfs_rank()</a></code> <code><a href="search_graph.html">bfs_parent()</a></code> <code><a href="search_graph.html">bfs_before()</a></code> <code><a href="search_graph.html">bfs_after()</a></code> <code><a href="search_graph.html">bfs_dist()</a></code> <code><a href="search_graph.html">dfs_rank()</a></code> <code><a href="search_graph.html">dfs_rank_out()</a></code> <code><a href="search_graph.html">dfs_parent()</a></code> <code><a href="search_graph.html">dfs_dist()</a></code> </p>
-        </td>
-        <td><p>Search a graph with depth first and breath first</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tbl_graph.html">tbl_graph()</a></code> <code><a href="tbl_graph.html">as_tbl_graph()</a></code> <code><a href="tbl_graph.html">is.tbl_graph()</a></code> </p>
-        </td>
-        <td><p>A data structure for tidy graph manipulation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tidygraph-package.html">tidygraph-package</a></code> </p>
-        </td>
-        <td><p>tidygraph: A Tidy API for Graph Manipulation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="type_games.html">play_preference()</a></code> <code><a href="type_games.html">play_preference_asym()</a></code> <code><a href="type_games.html">play_bipartite()</a></code> <code><a href="type_games.html">play_traits()</a></code> <code><a href="type_games.html">play_citation_type()</a></code> </p>
-        </td>
-        <td><p>Graph games based on different node types</p></td>
+        <td><p>Access graph, nodes, and edges directly inside verbs</p></td>
       </tr><tr>
         
         <td>
@@ -353,7 +405,15 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-new-verbs">New verbs</a></li>
+      <li><a href="#section-graph-creation">Graph creation</a></li>
+      <li><a href="#section-mapping-over-nodes">Mapping over nodes</a></li>
+      <li><a href="#section-centrality">Centrality</a></li>
+      <li><a href="#section-community-detection">Community detection</a></li>
+      <li><a href="#section-node-measures">Node measures</a></li>
+      <li><a href="#section-edge-measures">Edge measures</a></li>
+      <li><a href="#section-graph-measures">Graph measures</a></li>
+      <li><a href="#section-misc">Misc</a></li>
     </ul>
   </div>
 </div>
