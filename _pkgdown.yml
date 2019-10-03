@@ -1,0 +1,32 @@
+destination: docs
+url: https://tidygraph.data-imaginist.com
+
+authors:
+  Thomas Lin Pedersen:
+    href: https://data-imaginist.com
+
+template:
+  params:
+    bootswatch: journal
+
+navbar:
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: Reference
+      href: reference/index.html
+    - text: News
+      menu:
+      - text: "Release notes"
+      - text: "Version 1.1.0"
+        href: https://www.data-imaginist.com/2018/tidygraph-1-1-a-tidy-hope/
+      - text: "Version 1.0.0"
+        href: https://www.data-imaginist.com/2017/introducing-tidygraph/
+      - text: "------------------"
+      - text: "Change log"
+        href: news/index.html
+  right:
+    - text: ggraph
+      href: https://ggraph.data-imaginist.com
+    - icon: fa-github fa-lg
+      href: https://github.com/thomasp85/tidygraph
