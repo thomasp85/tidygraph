@@ -2,6 +2,8 @@ language: r
 sudo: true
 cache: packages
 
+bioc_packages: graph
+
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
   provider: script
