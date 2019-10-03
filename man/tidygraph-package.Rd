@@ -17,12 +17,14 @@ A graph, while not "tidy" in itself, can be thought of as two tidy
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://tidygraph.data-imaginist.com}
   \item \url{https://github.com/thomasp85/tidygraph}
   \item Report bugs at \url{https://github.com/thomasp85/tidygraph/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Thomas Lin Pedersen \email{thomasp85@gmail.com}
+\strong{Maintainer}: Thomas Lin Pedersen \email{thomasp85@gmail.com} (0000-0002-5147-4711)
 
 }
+\keyword{internal}

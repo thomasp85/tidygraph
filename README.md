@@ -31,27 +31,27 @@ play_erdos_renyi(10, 0.5) %>%
   activate(edges) %>% 
   mutate(centrality = centrality_edge_betweenness()) %>% 
   arrange(centrality)
-#> # A tbl_graph: 10 nodes and 50 edges
+#> # A tbl_graph: 10 nodes and 43 edges
 #> #
 #> # A directed simple graph with 1 component
 #> #
-#> # Edge Data: 50 x 3 (active)
+#> # Edge Data: 43 x 3 (active)
 #>    from    to centrality
 #>   <int> <int>      <dbl>
-#> 1     6     5       1   
-#> 2     2     8       1   
-#> 3     2    10       1.25
-#> 4     2     5       1.45
-#> 5     3     5       1.5 
-#> 6     4     8       1.53
-#> # … with 44 more rows
+#> 1     8     7       1.5 
+#> 2     8    10       1.5 
+#> 3     9     7       1.58
+#> 4     1     7       1.67
+#> 5     4     7       1.75
+#> 6     2     1       1.83
+#> # … with 37 more rows
 #> #
 #> # Node Data: 10 x 1
 #>   degree
 #>    <dbl>
-#> 1      5
-#> 2      7
-#> 3      7
+#> 1      4
+#> 2      5
+#> 3      3
 #> # … with 7 more rows
 ```
 
@@ -137,5 +137,6 @@ thanks so much to them.
 ## Code of Conduct
 
 Please note that the ‘tidygraph’ project is released with a [Contributor
-Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
-you agree to abide by its terms.
+Code of
+Conduct](https://tidygraph.data-imaginist.com/CODE_OF_CONDUCT.html). By
+contributing to this project, you agree to abide by its terms.

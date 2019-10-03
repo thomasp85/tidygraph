@@ -32,7 +32,7 @@ Imports:
     stats,
     tidyr,
     pillar
-URL: https://github.com/thomasp85/tidygraph
+URL: https://tidygraph.data-imaginist.com, https://github.com/thomasp85/tidygraph
 BugReports: https://github.com/thomasp85/tidygraph/issues
 LinkingTo: Rcpp
 Suggests: network,

@@ -30,3 +30,89 @@ navbar:
       href: https://ggraph.data-imaginist.com
     - icon: fa-github fa-lg
       href: https://github.com/thomasp85/tidygraph
+
+reference:
+  - title: New verbs
+    desc: >
+      While tidygraph mainly works by allowing you to use well known dplyr verbs
+      on relational data, it provides a few new verbs special to working with
+      this type of data.
+    contents:
+      - activate
+      - bind_graphs
+      - graph_join
+      - reroute
+      - morph
+      - to_simple
+  - title: Graph creation
+    desc: >
+      Graphs and networks can come from many sources, or be created by
+      simulation or deterministacally. Tidygraph provides conversions from all
+      well-known structures in R, as well as a range of `create_()` and
+      `play_*()` functions for creating well-defined or simulated graphs.
+    contents:
+      - tbl_graph
+      - create_notable
+      - play_degree
+      - play_smallworld
+      - play_forestfire
+      - play_preference
+  - title: Mapping over nodes
+    desc: >
+      Mapping functions over nodes for relational data is different than for
+      standard tabular data as you often want to recurse over a search or in
+      other ways use the graph structure as part of your map.
+    contents:
+      - map_bfs
+      - map_bfs_back
+      - map_dfs
+      - map_dfs_back
+      - map_local
+  - title: Centrality
+    desc: >
+      Centrality is a key measure in network analysis, and while it is mainly
+      calculated for nodes, a few algorithms exists for calculating edge
+      centrality as well.
+    contents:
+      - centrality_alpha
+  - title: Community detection
+    desc: >
+      Social network analysis is especially interested in detecting groups or
+      communities within a graph, but such algorithms are also useful in other
+      areas of network research. No single algorithm can provide the correct
+      grouping of nodes so several exists that weigh certain features
+      differently.
+    contents:
+      - group_components
+  - title: Node measures
+    desc: >
+      Tidygraph provides a wide range of algorithms for extracting differnt
+      information about the nodes in a graph, from calculating local measures,
+      to defining whether they are part of certain topological features.
+    contents:
+      - local_size
+      - node_constraint
+      - node_rank_hclust
+      - node_dominator
+      - node_is_cut
+      - node_adhesion_to
+  - title: Edge measures
+    desc: >
+      Fewer quantitative measures exist for edges, but they can still be queried
+      for topological features such as which nodes they link, etc.
+    contents:
+      - edge_is_mutual
+  - title: Graph measures
+    desc: >
+      The graph under investigation can also have properties of its own that can
+      be summarised into quantitative or qualitative values.
+    contents:
+      - graph_is_simple
+      - graph_radius
+  - title: Misc
+    desc: >
+      Outside of the verbs and algorithms there is a few helper functions
+      available to streamline graph manipulation.
+    contents:
+      - .N
+      - with_graph
