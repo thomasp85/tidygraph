@@ -34,6 +34,10 @@
 #' # Add edges
 #' graph %>% bind_edges(data.frame(from = 1, to = 4:5))
 #'
+#' Add edges by name
+#' graph2 = graph %>% activate(nodes) %>% mutate(name = LETTERS[1:gorder(graph)])
+#' graph2 %>% bind_edges(data.frame(from = LETTERS[1], to = LETTERS[4:5], stringsAsFactors = FALSE))
+#'
 #' # Add graphs
 #' graph %>% bind_graphs(new_graph)
 #'
@@ -72,13 +76,22 @@ bind_edges <- function(.data, ...) {
   stopifnot(is.tbl_graph(.data))
   d_tmp <- as_tibble(.data, active = 'edges')
   new_edges <- bind_rows(...)
-  all_edges <- bind_rows(d_tmp, new_edges)
-  if (any(is.na(all_edges$from)) || any(is.na(all_edges$to))) {
+  if(!all(c("from", "to") %in% names(new_edges))){
     stop('Edges can only be added if they contain a "to" and "from" node', call. = FALSE)
   }
-  if (max(c(new_edges$to, new_edges$from)) > gorder(.data)) {
+  if(any(is.character(c(new_edges$from, new_edges$to)))) {
+    d_tmp2 <- as_tibble(.data, active = 'nodes')
+    new_edges$from <- match(new_edges$from, d_tmp2$name)
+    new_edges$to <- match(new_edges$to, d_tmp2$name)
+    if (any(is.na(new_edges$from)) || any(is.na(new_edges$to))) {
     stop('Edges can only be added if they refer to existing nodes', call. = FALSE)
-  }
+    }
+  } else {
+    if (max(c(new_edges$to, new_edges$from)) > gorder(.data)) {
+      stop('Edges can only be added if they refer to existing nodes', call. = FALSE)
+    }  
+  }  
+  all_edges <- bind_rows(d_tmp, new_edges)
   .data <- add_edges(.data, rbind(new_edges$from, new_edges$to)) %gr_attr% .data
   set_graph_data(.data, all_edges, active = 'edges')
 }
