@@ -5,5 +5,5 @@ as_tbl_graph.Node <- function(x, directed = TRUE, mode = 'out', ...) {
     stop('The "data.tree" package is needed for this functionality to work', call. = FALSE)
   }
   direction <- if (mode == 'out') 'climb' else 'descend'
-  data.tree::as.igraph.Node(x, directed = directed, direction = direction, ...)
+  as_tbl_graph(data.tree::as.igraph.Node(x, directed = directed, direction = direction, ...))
 }
