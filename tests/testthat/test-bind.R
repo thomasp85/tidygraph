@@ -16,7 +16,7 @@ test_that('bind_nodes works', {
   gr1 <- tbl_graph(head(mtcars))
   gr1 <- bind_nodes(gr1, tail(mtcars))
   tbl <- dplyr::bind_rows(head(mtcars), tail(mtcars))
-  expect_equal(as_tibble(gr1), tbl)
+  expect_equivalent(as_tibble(gr1), tbl)
 })
 test_that('bind_edges works', {
   gr1 <- create_notable('bull') %>%
