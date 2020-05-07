@@ -14,11 +14,12 @@ knitr::opts_chunk$set(
 
 # tidygraph <img src="man/figures/logo.png" align="right" width="140px"/>
 
-[![Travis-CI Build Status](https://travis-ci.org/thomasp85/tidygraph.svg?branch=master)](https://travis-ci.org/thomasp85/tidygraph)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/thomasp85/tidygraph?branch=master&svg=true)](https://ci.appveyor.com/project/thomasp85/tidygraph)
+<!-- badges: start -->
+[![R build status](https://github.com/thomasp85/tidygraph/workflows/R-CMD-check/badge.svg)](https://github.com/thomasp85/tidygraph/actions)
 [![CRAN_Release_Badge](http://www.r-pkg.org/badges/version-ago/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
 [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
 [![Coverage Status](https://img.shields.io/codecov/c/github/thomasp85/tidygraph/master.svg)](https://codecov.io/github/thomasp85/tidygraph?branch=master)
+<!-- badges: end -->
 
 This package provides a tidy API for graph/network manipulation. While network 
 data itself is not tidy, it can be envisioned as two tidy tables, one for node

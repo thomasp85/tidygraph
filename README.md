@@ -3,14 +3,15 @@
 
 # tidygraph <img src="man/figures/logo.png" align="right" width="140px"/>
 
-[![Travis-CI Build
-Status](https://travis-ci.org/thomasp85/tidygraph.svg?branch=master)](https://travis-ci.org/thomasp85/tidygraph)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/thomasp85/tidygraph?branch=master&svg=true)](https://ci.appveyor.com/project/thomasp85/tidygraph)
+<!-- badges: start -->
+
+[![R build
+status](https://github.com/thomasp85/tidygraph/workflows/R-CMD-check/badge.svg)](https://github.com/thomasp85/tidygraph/actions)
 [![CRAN\_Release\_Badge](http://www.r-pkg.org/badges/version-ago/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
 [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/thomasp85/tidygraph/master.svg)](https://codecov.io/github/thomasp85/tidygraph?branch=master)
+<!-- badges: end -->
 
 This package provides a tidy API for graph/network manipulation. While
 network data itself is not tidy, it can be envisioned as two tidy
@@ -31,27 +32,27 @@ play_erdos_renyi(10, 0.5) %>%
   activate(edges) %>% 
   mutate(centrality = centrality_edge_betweenness()) %>% 
   arrange(centrality)
-#> # A tbl_graph: 10 nodes and 43 edges
+#> # A tbl_graph: 10 nodes and 42 edges
 #> #
 #> # A directed simple graph with 1 component
 #> #
-#> # Edge Data: 43 x 3 (active)
+#> # Edge Data: 42 x 3 (active)
 #>    from    to centrality
-#>   <int> <int>      <dbl>
-#> 1     8     7       1.5 
-#> 2     8    10       1.5 
-#> 3     9     7       1.58
-#> 4     1     7       1.67
-#> 5     4     7       1.75
-#> 6     2     1       1.83
-#> # … with 37 more rows
+#> * <int> <int>      <dbl>
+#> 1     5     3       1   
+#> 2     9     8       1   
+#> 3     4     1       1.2 
+#> 4     7     3       1.2 
+#> 5    10     8       1.2 
+#> 6    10     3       1.25
+#> # … with 36 more rows
 #> #
 #> # Node Data: 10 x 1
 #>   degree
 #>    <dbl>
-#> 1      4
-#> 2      5
-#> 3      3
+#> 1      3
+#> 2      3
+#> 3      2
 #> # … with 7 more rows
 ```
 
