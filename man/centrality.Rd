@@ -35,37 +35,63 @@
 \alias{centrality_expected}
 \title{Calculate node and edge centrality}
 \usage{
-centrality_alpha(weights = NULL, alpha = 1, exo = 1, tol = 1e-07,
-  loops = FALSE)
+centrality_alpha(
+  weights = NULL,
+  alpha = 1,
+  exo = 1,
+  tol = 1e-07,
+  loops = FALSE
+)
 
-centrality_authority(weights = NULL, scale = TRUE,
-  options = igraph::arpack_defaults)
+centrality_authority(
+  weights = NULL,
+  scale = TRUE,
+  options = igraph::arpack_defaults
+)
 
-centrality_betweenness(weights = NULL, directed = TRUE,
-  cutoff = NULL, nobigint = TRUE, normalized = FALSE)
+centrality_betweenness(
+  weights = NULL,
+  directed = TRUE,
+  cutoff = NULL,
+  nobigint = TRUE,
+  normalized = FALSE
+)
 
-centrality_power(exponent = 1, rescale = FALSE, tol = 1e-07,
-  loops = FALSE)
+centrality_power(exponent = 1, rescale = FALSE, tol = 1e-07, loops = FALSE)
 
-centrality_closeness(weights = NULL, mode = "out",
-  normalized = FALSE, cutoff = NULL)
+centrality_closeness(
+  weights = NULL,
+  mode = "out",
+  normalized = FALSE,
+  cutoff = NULL
+)
 
-centrality_eigen(weights = NULL, directed = FALSE, scale = TRUE,
-  options = igraph::arpack_defaults)
+centrality_eigen(
+  weights = NULL,
+  directed = FALSE,
+  scale = TRUE,
+  options = igraph::arpack_defaults
+)
 
-centrality_hub(weights = NULL, scale = TRUE,
-  options = igraph::arpack_defaults)
+centrality_hub(weights = NULL, scale = TRUE, options = igraph::arpack_defaults)
 
-centrality_pagerank(weights = NULL, directed = TRUE, damping = 0.85,
-  personalized = NULL)
+centrality_pagerank(
+  weights = NULL,
+  directed = TRUE,
+  damping = 0.85,
+  personalized = NULL
+)
 
 centrality_subgraph(loops = FALSE)
 
-centrality_degree(weights = NULL, mode = "out", loops = TRUE,
-  normalized = FALSE)
+centrality_degree(
+  weights = NULL,
+  mode = "out",
+  loops = TRUE,
+  normalized = FALSE
+)
 
-centrality_edge_betweenness(weights = NULL, directed = TRUE,
-  cutoff = NULL)
+centrality_edge_betweenness(weights = NULL, directed = TRUE, cutoff = NULL)
 
 centrality_manual(relation = "dist_sp", aggregation = "sum", ...)
 

@@ -14,8 +14,14 @@ play_blocks_hierarchy(n, size_blocks, rho, p_within, p_between)
 
 play_islands(n_islands, size_islands, p_within, m_between)
 
-play_smallworld(n_dim, dim_size, order, p_rewire, loops = FALSE,
-  multiple = FALSE)
+play_smallworld(
+  n_dim,
+  dim_size,
+  order,
+  p_rewire,
+  loops = FALSE,
+  multiple = FALSE
+)
 }
 \arguments{
 \item{n}{The number of nodes in the graph.}
@@ -73,7 +79,9 @@ plot(play_islands(4, 10, 0.7, 3))
 
 }
 \seealso{
-Other graph games: \code{\link{evolution_games}},
-  \code{\link{sampling_games}}, \code{\link{type_games}}
+Other graph games: 
+\code{\link{evolution_games}},
+\code{\link{sampling_games}},
+\code{\link{type_games}}
 }
 \concept{graph games}

@@ -35,7 +35,7 @@ is completed without visiting all nodes.}
 \value{
 \code{map_bfs()} returns a list of the same length as the number of nodes
 in the graph, in the order matching the node order in the graph (that is, not
-in the order they are called). \code{map_bfs_*()} tries to coerce its result into
+in the order they are called). \verb{map_bfs_*()} tries to coerce its result into
 a vector of the classes \code{logical} (\code{map_bfs_lgl}), \code{character}
 (\code{map_bfs_chr}), \code{integer} (\code{map_bfs_int}), or \code{double} (\code{map_bfs_dbl}).
 These functions will throw an error if they are unsuccesful, so they are type
@@ -78,7 +78,9 @@ create_tree(40, children = 3, directed = TRUE) \%>\%
   }))
 }
 \seealso{
-Other node map functions: \code{\link{map_bfs_back}},
-  \code{\link{map_dfs_back}}, \code{\link{map_dfs}}
+Other node map functions: 
+\code{\link{map_bfs_back}()},
+\code{\link{map_dfs_back}()},
+\code{\link{map_dfs}()}
 }
 \concept{node map functions}

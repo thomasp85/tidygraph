@@ -38,7 +38,7 @@ argument is ignored for undirected graphs.}
 \value{
 \code{map_local()} returns a list of the same length as the number of
 nodes in the graph, in the order matching the node order in the graph.
-\code{map_local_*()} tries to coerce its result into a vector of the classes
+\verb{map_local_*()} tries to coerce its result into a vector of the classes
 \code{logical} (\code{map_local_lgl}), \code{character} (\code{map_local_chr}), \code{integer}
 (\code{map_local_int}), or \code{double} (\code{map_local_dbl}). These functions will throw
 an error if they are unsuccesful, so they are type safe.

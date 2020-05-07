@@ -35,7 +35,7 @@ is completed without visiting all nodes.}
 \value{
 \code{map_dfs()} returns a list of the same length as the number of nodes
 in the graph, in the order matching the node order in the graph (that is, not
-in the order they are called). \code{map_dfs_*()} tries to coerce its result into
+in the order they are called). \verb{map_dfs_*()} tries to coerce its result into
 a vector of the classes \code{logical} (\code{map_dfs_lgl}), \code{character}
 (\code{map_dfs_chr}), \code{integer} (\code{map_dfs_int}), or \code{double} (\code{map_dfs_dbl}).
 These functions will throw an error if they are unsuccesful, so they are type
@@ -59,7 +59,7 @@ addition to those supplied through \code{...}:
 \item \code{rank_out}: The rank of the completion of the nodes subtree
 \item \code{parent}: The index of the node that led to the current node
 \item \code{dist}: The distance of the current node from the root
-\item \code{path}: A table containing \code{node}, \code{rank}, \code{rank_out}, \code{parent}, dist\code{, and }result\code{columns giving the values for each node leading to the current node. The}result` column will contain the result of the mapping
+\item \code{path}: A table containing \code{node}, \code{rank}, \code{rank_out}, \code{parent}, dist\verb{, and }result\verb{columns giving the values for each node leading to the current node. The}result` column will contain the result of the mapping
 of each node in a list.
 }
 
@@ -75,7 +75,9 @@ create_tree(40, children = 3, directed = TRUE) \%>\%
   }))
 }
 \seealso{
-Other node map functions: \code{\link{map_bfs_back}},
-  \code{\link{map_bfs}}, \code{\link{map_dfs_back}}
+Other node map functions: 
+\code{\link{map_bfs_back}()},
+\code{\link{map_bfs}()},
+\code{\link{map_dfs_back}()}
 }
 \concept{node map functions}

@@ -26,8 +26,7 @@
 
 \method{as_tbl_graph}{Node}(x, directed = TRUE, mode = "out", ...)
 
-\method{as_tbl_graph}{dendrogram}(x, directed = TRUE, mode = "out",
-  ...)
+\method{as_tbl_graph}{dendrogram}(x, directed = TRUE, mode = "out", ...)
 
 \method{as_tbl_graph}{graphNEL}(x, ...)
 

@@ -25,8 +25,12 @@ group_infomap(weights = NULL, node_weights = NULL, trials = 10)
 
 group_label_prop(weights = NULL, label = NULL, fixed = NULL)
 
-group_leading_eigen(weights = NULL, steps = -1, label = NULL,
-  options = igraph::arpack_defaults)
+group_leading_eigen(
+  weights = NULL,
+  steps = -1,
+  label = NULL,
+  options = igraph::arpack_defaults
+)
 
 group_louvain(weights = NULL)
 

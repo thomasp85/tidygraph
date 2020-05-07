@@ -35,8 +35,7 @@ node_is_center(mode = "out")
 
 node_is_adjacent(to, mode = "all", include_to = TRUE)
 
-node_is_keyplayer(k, p = 0, tol = 1e-04, maxsec = 120,
-  roundsec = 30)
+node_is_keyplayer(k, p = 0, tol = 1e-04, maxsec = 120, roundsec = 30)
 }
 \arguments{
 \item{mode}{The way edges should be followed in the case of directed graphs.}

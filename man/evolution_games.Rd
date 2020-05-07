@@ -9,22 +9,50 @@
 \alias{play_barabasi_albert_aging}
 \title{Graph games based on evolution}
 \usage{
-play_citation_age(n, growth = 1, bins = n/7100, p_pref = (1:(bins +
-  1))^-3, directed = TRUE)
+play_citation_age(
+  n,
+  growth = 1,
+  bins = n/7100,
+  p_pref = (1:(bins + 1))^-3,
+  directed = TRUE
+)
 
-play_forestfire(n, p_forward, p_backward = p_forward, growth = 1,
-  directed = TRUE)
+play_forestfire(
+  n,
+  p_forward,
+  p_backward = p_forward,
+  growth = 1,
+  directed = TRUE
+)
 
 play_growing(n, growth = 1, directed = TRUE, citation = FALSE)
 
-play_barabasi_albert(n, power, growth = 1, growth_dist = NULL,
-  use_out = FALSE, appeal_zero = 1, directed = TRUE,
-  method = "psumtree")
+play_barabasi_albert(
+  n,
+  power,
+  growth = 1,
+  growth_dist = NULL,
+  use_out = FALSE,
+  appeal_zero = 1,
+  directed = TRUE,
+  method = "psumtree"
+)
 
-play_barabasi_albert_aging(n, power, power_age, growth = 1,
-  growth_dist = NULL, bins = 300, use_out = FALSE, appeal_zero = 1,
-  appeal_zero_age = 0, directed = TRUE, coefficient = 1,
-  coefficient_age = 1, window = NULL)
+play_barabasi_albert_aging(
+  n,
+  power,
+  power_age,
+  growth = 1,
+  growth_dist = NULL,
+  bins = 300,
+  use_out = FALSE,
+  appeal_zero = 1,
+  appeal_zero_age = 0,
+  directed = TRUE,
+  coefficient = 1,
+  coefficient_age = 1,
+  window = NULL
+)
 }
 \arguments{
 \item{n}{The number of nodes in the graph.}
@@ -97,7 +125,9 @@ plot(play_forestfire(50, 0.5))
 \code{\link[=play_traits]{play_traits()}} and \code{\link[=play_citation_type]{play_citation_type()}} for an evolutionary
 algorithm based on different node types
 
-Other graph games: \code{\link{component_games}},
-  \code{\link{sampling_games}}, \code{\link{type_games}}
+Other graph games: 
+\code{\link{component_games}},
+\code{\link{sampling_games}},
+\code{\link{type_games}}
 }
 \concept{graph games}

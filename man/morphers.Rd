@@ -46,7 +46,7 @@ to_bfs_tree(graph, root, mode = "out", unreachable = FALSE)
 
 to_dfs_tree(graph, root, mode = "out", unreachable = FALSE)
 
-to_simple(graph)
+to_simple(graph, remove_multiples = TRUE, remove_loops = TRUE)
 
 to_contracted(graph, ..., simplify = TRUE)
 
@@ -88,6 +88,11 @@ parameter is ignored for undirected graphs.}
 
 \item{unreachable}{Should the search jump to a node in a new component when
 stuck.}
+
+\item{remove_multiples}{Should edges that run between the same nodes be
+reduced to one}
+
+\item{remove_loops}{Should edges that start and end at the same node be removed}
 
 \item{simplify}{Should edges in the contracted graph be simplified? Defaults
 to \code{TRUE}}

@@ -9,21 +9,43 @@
 \alias{play_citation_type}
 \title{Graph games based on different node types}
 \usage{
-play_preference(n, n_types, p_type = rep(1, n_types),
-  p_pref = matrix(1, n_types, n_types), fixed = FALSE,
-  directed = TRUE, loops = FALSE)
+play_preference(
+  n,
+  n_types,
+  p_type = rep(1, n_types),
+  p_pref = matrix(1, n_types, n_types),
+  fixed = FALSE,
+  directed = TRUE,
+  loops = FALSE
+)
 
-play_preference_asym(n, n_types, p_type = matrix(1, n_types, n_types),
-  p_pref = matrix(1, n_types, n_types), loops = FALSE)
+play_preference_asym(
+  n,
+  n_types,
+  p_type = matrix(1, n_types, n_types),
+  p_pref = matrix(1, n_types, n_types),
+  loops = FALSE
+)
 
 play_bipartite(n1, n2, p, m, directed = TRUE, mode = "out")
 
-play_traits(n, n_types, growth = 1, p_type = rep(1, n_types),
-  p_pref = matrix(1, n_types, n_types), callaway = TRUE,
-  directed = TRUE)
+play_traits(
+  n,
+  n_types,
+  growth = 1,
+  p_type = rep(1, n_types),
+  p_pref = matrix(1, n_types, n_types),
+  callaway = TRUE,
+  directed = TRUE
+)
 
-play_citation_type(n, growth, types = rep(0, n), p_pref = rep(1,
-  length(unique(types))), directed = TRUE)
+play_citation_type(
+  n,
+  growth,
+  types = rep(0, n),
+  p_pref = rep(1, length(unique(types))),
+  directed = TRUE
+)
 }
 \arguments{
 \item{n, n1, n2}{The number of nodes in the graph. For bipartite graphs \code{n1}
@@ -89,8 +111,9 @@ plot(play_bipartite(20, 30, 0.4))
 
 }
 \seealso{
-Other graph games: \code{\link{component_games}},
-  \code{\link{evolution_games}},
-  \code{\link{sampling_games}}
+Other graph games: 
+\code{\link{component_games}},
+\code{\link{evolution_games}},
+\code{\link{sampling_games}}
 }
 \concept{graph games}

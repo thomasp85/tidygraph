@@ -23,18 +23,15 @@ node_cohesion_to(nodes)
 
 node_cohesion_from(nodes)
 
-node_distance_to(nodes, mode = "out", weights = NA,
-  algorithm = "automatic")
+node_distance_to(nodes, mode = "out", weights = NA, algorithm = "automatic")
 
-node_distance_from(nodes, mode = "out", weights = NA,
-  algorithm = "automatic")
+node_distance_from(nodes, mode = "out", weights = NA, algorithm = "automatic")
 
 node_cocitation_with(nodes)
 
 node_bibcoupling_with(nodes)
 
-node_similarity_with(nodes, mode = "out", loops = FALSE,
-  method = "jaccard")
+node_similarity_with(nodes, mode = "out", loops = FALSE, method = "jaccard")
 
 node_max_flow_to(nodes, capacity = NULL)
 
@@ -68,9 +65,9 @@ graph
 \description{
 This set of functions can be used for calculations that involve node pairs.
 If the calculateable measure is not symmetric the function will come in two
-flavours, differentiated with \code{_to}/\code{_from} suffix. The \code{*_to()} functions
+flavours, differentiated with \verb{_to}/\verb{_from} suffix. The \verb{*_to()} functions
 will take the provided node indexes as the target node (recycling if
-necessary). For the \code{*_from()} functions the provided nodes are taken as
+necessary). For the \verb{*_from()} functions the provided nodes are taken as
 the source. As for the other wrappers provided, they are intended
 for use inside the \code{tidygraph} framework and it is thus not necessary to
 supply the graph being computed on as the context is known.

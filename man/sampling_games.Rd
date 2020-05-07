@@ -14,11 +14,17 @@ play_degree(out_degree, in_degree = NULL, method = "simple")
 
 play_dotprod(position, directed = TRUE)
 
-play_fitness(m, out_fit, in_fit = NULL, loops = FALSE,
-  multiple = FALSE)
+play_fitness(m, out_fit, in_fit = NULL, loops = FALSE, multiple = FALSE)
 
-play_fitness_power(n, m, out_exp, in_exp = -1, loops = FALSE,
-  multiple = FALSE, correct = TRUE)
+play_fitness_power(
+  n,
+  m,
+  out_exp,
+  in_exp = -1,
+  loops = FALSE,
+  multiple = FALSE,
+  correct = TRUE
+)
 
 play_erdos_renyi(n, p, m, directed = TRUE, loops = FALSE)
 
@@ -88,7 +94,9 @@ torus and connecting nearby ones. See \code{\link[igraph:sample_grg]{igraph::sam
 plot(play_erdos_renyi(20, 0.3))
 }
 \seealso{
-Other graph games: \code{\link{component_games}},
-  \code{\link{evolution_games}}, \code{\link{type_games}}
+Other graph games: 
+\code{\link{component_games}},
+\code{\link{evolution_games}},
+\code{\link{type_games}}
 }
 \concept{graph games}

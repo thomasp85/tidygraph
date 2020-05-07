@@ -32,8 +32,8 @@ necessary to specify which table is referenced during manipulations. The
 \code{activate} verb does just that and needs affects all subsequent manipulations
 until a new table is activated. \code{active} is a simple query function to get
 the currently acitve context. In addition to the use of \code{activate} it is also
-possible to activate nodes or edges as part of the piping using the \code{\%N>\%}
-and \code{\%E>\%} pipes respectively. Do note that this approach somewhat obscures
+possible to activate nodes or edges as part of the piping using the \verb{\%N>\%}
+and \verb{\%E>\%} pipes respectively. Do note that this approach somewhat obscures
 what is going on and is thus only recommended for quick, one-line, fixes in
 interactive use.
 }

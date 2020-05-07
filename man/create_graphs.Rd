@@ -37,8 +37,7 @@ create_notable(name)
 
 create_kautz(alphabet_size, label_size)
 
-create_lattice(dim, directed = FALSE, mutual = FALSE,
-  circular = FALSE)
+create_lattice(dim, directed = FALSE, mutual = FALSE, circular = FALSE)
 
 create_star(n, directed = FALSE, mutual = FALSE, mode = "out")
 
@@ -77,7 +76,7 @@ A tbl_graph
 \description{
 These functions creates a long list of different types of well-defined graphs,
 that is, their structure is not based on any randomisation. All of these
-functions are shallow wrappers around a range of \code{igraph::make_*} functions
+functions are shallow wrappers around a range of \verb{igraph::make_*} functions
 but returns \code{tbl_graph} rather than \code{igraph} objects.
 }
 \section{Functions}{

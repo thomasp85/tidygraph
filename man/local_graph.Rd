@@ -34,11 +34,11 @@ argument is ignored for undirected graphs.}
 
 \item{weights}{Weight vector. If the graph has a \code{weight} edge
 attribute, then this is used by default. If this argument is given, then
-vertex strength (see \code{\link{strength}}) is used instead of vertex
+vertex strength (see \code{\link[igraph]{strength}}) is used instead of vertex
 degree. But note that \code{knnk} is still given in the function of the
 normal vertex degree.
 Weights are are used to calculate a weighted degree (also called
-\code{\link{strength}}) instead of the degree.}
+\code{\link[igraph]{strength}}) instead of the degree.}
 }
 \value{
 A numeric vector or a list (for \code{local_members}) with elements

@@ -215,13 +215,16 @@ to_dfs_tree <- function(graph, root, mode = 'out', unreachable = FALSE) {
 }
 #' @describeIn morphers Collapse parallel edges and remove loops in a graph.
 #' When unmorphing all data will get merged back
+#' @param remove_multiples Should edges that run between the same nodes be
+#' reduced to one
+#' @param remove_loops Should edges that start and end at the same node be removed
 #' @importFrom igraph simplify
 #' @export
-to_simple <- function(graph) {
+to_simple <- function(graph, remove_multiples = TRUE, remove_loops = TRUE) {
   edges <- as_tibble(graph, active = 'edges')
   graph <- set_edge_attributes(graph, edges[, '.tidygraph_edge_index', drop = FALSE])
   edges$.tidygraph_edge_index <- NULL
-  simple <- as_tbl_graph(simplify(graph, remove.multiple = TRUE, remove.loops = TRUE, edge.attr.comb = list))
+  simple <- as_tbl_graph(simplify(graph, remove.multiple = remove_multiples, remove.loops = remove_loops, edge.attr.comb = list))
   new_edges <- as_tibble(simple, active = 'edges')
   new_edges$.orig_data <- lapply(new_edges$.tidygraph_edge_index, function(i) edges[i, , drop = FALSE])
   simple <- set_edge_attributes(simple, new_edges)

@@ -18,52 +18,128 @@
 \alias{node_rank_dendser}
 \title{Calculate node ranking}
 \usage{
-node_rank_hclust(method = "average", dist = "shortest", mode = "out",
-  weights = NA, algorithm = "automatic")
+node_rank_hclust(
+  method = "average",
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_anneal(cool = 0.5, tmin = 1e-04, swap_to_inversion = 0.5,
-  step_multiplier = 100, reps = 1, dist = "shortest", mode = "out",
-  weights = NA, algorithm = "automatic")
+node_rank_anneal(
+  cool = 0.5,
+  tmin = 1e-04,
+  swap_to_inversion = 0.5,
+  step_multiplier = 100,
+  reps = 1,
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_branch_bound(weighted_gradient = FALSE, dist = "shortest",
-  mode = "out", weights = NA, algorithm = "automatic")
+node_rank_branch_bound(
+  weighted_gradient = FALSE,
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_traveller(method = "two_opt", ..., dist = "shortest",
-  mode = "out", weights = NA, algorithm = "automatic")
+node_rank_traveller(
+  method = "two_opt",
+  ...,
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_two(dist = "shortest", mode = "out", weights = NA,
-  algorithm = "automatic")
+node_rank_two(
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_mds(method = "cmdscale", dist = "shortest", mode = "out",
-  weights = NA, algorithm = "automatic")
+node_rank_mds(
+  method = "cmdscale",
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_leafsort(method = "average", type = "OLO",
-  dist = "shortest", mode = "out", weights = NA,
-  algorithm = "automatic")
+node_rank_leafsort(
+  method = "average",
+  type = "OLO",
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_visual(dist = "shortest", mode = "out", weights = NA,
-  algorithm = "automatic")
+node_rank_visual(
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_spectral(normalized = FALSE, dist = "shortest",
-  mode = "out", weights = NA, algorithm = "automatic")
+node_rank_spectral(
+  normalized = FALSE,
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_spin_out(step = 25, nstart = 10, dist = "shortest",
-  mode = "out", weights = NA, algorithm = "automatic")
+node_rank_spin_out(
+  step = 25,
+  nstart = 10,
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_spin_in(step = 5, sigma = seq(20, 1, length.out = 10),
-  dist = "shortest", mode = "out", weights = NA,
-  algorithm = "automatic")
+node_rank_spin_in(
+  step = 5,
+  sigma = seq(20, 1, length.out = 10),
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_quadratic(criterion = "2SUM", reps = 1, step = 2 *
-  graph_order(), step_multiplier = 1.1, temp_multiplier = 0.5,
-  maxsteps = 50, dist = "shortest", mode = "out", weights = NA,
-  algorithm = "automatic")
+node_rank_quadratic(
+  criterion = "2SUM",
+  reps = 1,
+  step = 2 * graph_order(),
+  step_multiplier = 1.1,
+  temp_multiplier = 0.5,
+  maxsteps = 50,
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_genetic(..., dist = "shortest", mode = "out", weights = NA,
-  algorithm = "automatic")
+node_rank_genetic(
+  ...,
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 
-node_rank_dendser(..., dist = "shortest", mode = "out", weights = NA,
-  algorithm = "automatic")
+node_rank_dendser(
+  ...,
+  dist = "shortest",
+  mode = "out",
+  weights = NA,
+  algorithm = "automatic"
+)
 }
 \arguments{
 \item{method}{The method to use. See \emph{Functions} section for reference}
