@@ -35,6 +35,7 @@ jobs:
         run: |
           install.packages(c("remotes"))
           remotes::install_deps(dependencies = TRUE)
+          remotes::install_bioc('graph')
           remotes::install_cran("covr")
         shell: Rscript {0}
 
