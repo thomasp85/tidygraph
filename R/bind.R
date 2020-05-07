@@ -22,6 +22,7 @@
 #'
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble as_tibble
+#' @importFrom igraph is_directed
 #' @export
 #'
 #' @examples
@@ -49,7 +50,7 @@ bind_graphs <- function(.data, ...) {
   edges$from <- edges$from + offset
   edges$to <- edges$to + offset
   edges <- bind_rows(as_tibble(.data, active = 'edges'), edges)
-  as_tbl_graph(list(nodes = nodes, edges = edges)) %gr_attr% .data
+  as_tbl_graph(list(nodes = nodes, edges = edges), directed = is_directed(.data)) %gr_attr% .data
 }
 #' @rdname bind_graphs
 #' @importFrom igraph add_vertices
