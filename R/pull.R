@@ -1,15 +1,17 @@
 #' @export
 #' @importFrom dplyr pull
-pull.tbl_graph <- function(.data, var = -1) {
+pull.tbl_graph <- function(.data, var = -1, name = NULL) {
   d_tmp <- as_tibble(.data)
   var <- enquo(var)
-  pull(d_tmp, !! var)
+  name <- enquo(name)
+  pull(d_tmp, !! var, !! name)
 }
 #' @export
 #' @importFrom dplyr pull
-pull.morphed_tbl_graph <- function(.data, var) {
+pull.morphed_tbl_graph <- function(.data, var, name = NULL) {
   var <- enquo(var)
-  lapply(.data, pull, !! var)
+  name <- enquo(var)
+  lapply(.data, pull, !! var, !! name)
 }
 #' @export
 dplyr::pull
