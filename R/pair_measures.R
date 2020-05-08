@@ -103,7 +103,7 @@ node_cohesion_from <- function(nodes) {
 #' @param algorithm The distance algorithms to use. By default it will try to
 #' select the fastest suitable algorithm. Possible values are `"automatic"`,
 #' `"unweighted"`, `"dijkstra"`, `"bellman-ford"`, and `"johnson"`
-node_distance_to <- function(nodes, mode = 'out', weights = NA, algorithm = 'automatic') {
+node_distance_to <- function(nodes, mode = 'out', weights = NA, algorithm = 'automatic', fun=NULL, ...) {
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
@@ -113,13 +113,18 @@ node_distance_to <- function(nodes, mode = 'out', weights = NA, algorithm = 'aut
   target <- rep(nodes, length.out = length(source))
   target_unique <- unique(target)
   dist <- distances(graph, v = source, to = target_unique, mode = mode, weights = weights, algorithm = algorithm)
-  unlist(Map(function(s, t) {dist[s, t]}, s = source, t = match(target, target_unique)))
+  if (is.null(fun)){
+      unlist(Map(function(s, t) {dist[s, t]}, s = source, t = match(target, target_unique)))
+    }else{ 
+      is.na(dist) <- do.call(cbind,lapply(dist, is.infinite))
+      unlist(Map(function(s) {fun(dist[s, ], ...)}, s = source))
+    }
 }
 
 #' @describeIn pair_measures Calculate various distance metrics between node pairs. Wraps [igraph::distances()]
 #' @export
 #' @importFrom igraph distances gorder
-node_distance_from <- function(nodes, mode = 'out', weights = NA, algorithm = 'automatic') {
+node_distance_from <- function(nodes, mode = 'out', weights = NA, algorithm = 'automatic', fun=NULL, ...) {
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
@@ -129,7 +134,12 @@ node_distance_from <- function(nodes, mode = 'out', weights = NA, algorithm = 'a
   source <- rep(nodes, length.out = length(target))
   source_unique <- unique(source)
   dist <- distances(graph, v = source_unique, to = target, mode = mode, weights = weights, algorithm = algorithm)
-  unlist(Map(function(s, t) {dist[s, t]}, s = match(source, source_unique), t = target))
+  if (is.null(fun)){
+    unlist(Map(function(s, t) {dist[s, t]}, s = match(source, source_unique), t = target))
+  }else{
+    is.na(dist) <- do.call(cbind,lapply(dist, is.infinite))
+    unlist(Map(function(t) {fun(dist[, t], ...)}, t = target))
+  }
 }
 
 #' @describeIn pair_measures Calculate node pair cocitation count. Wraps [igraph::cocitation()]
