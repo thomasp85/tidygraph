@@ -20,7 +20,9 @@
 #' supported.
 #'
 #' @param nodes A `data.frame` containing information about the nodes in the
-#' graph.
+#' graph. If `edges$to` and/or `edges$from` are characters then they will be
+#' matched to the column named according to `node_key` in nodes, if it exists.
+#' If not, they will be matched to the first column.
 #'
 #' @param edges A `data.frame` containing information about the edges in the
 #' graph. The terminal nodes of each edge must either be encoded in a `to` and
@@ -30,6 +32,11 @@
 #' @param x An object convertible to a `tbl_graph`
 #'
 #' @param directed Should the constructed graph be directed (defaults to `TRUE`)
+#'
+#' @param node_key The name of the column in `nodes` that character represented
+#' `to` and `from` columns should be matched against. If `NA` the first column
+#' is always chosen. This setting has no effect if `to` and `from` are given as
+#' integers.
 #'
 #' @param mode In case `directed = TRUE` should the edge direction be away from
 #' node or towards. Possible values are `"out"` (default) or `"in"`.
@@ -45,8 +52,8 @@
 #' tbl_graph(nodes = rstat_nodes, edges = rstat_edges)
 #' @export
 #'
-tbl_graph <- function(nodes = NULL, edges = NULL, directed = TRUE) {
-  as_tbl_graph(list(nodes = nodes, edges = edges), directed = directed)
+tbl_graph <- function(nodes = NULL, edges = NULL, directed = TRUE, node_key = 'name') {
+  as_tbl_graph(list(nodes = nodes, edges = edges), directed = directed, node_key = node_key)
 }
 #' @rdname tbl_graph
 #' @export

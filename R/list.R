@@ -1,10 +1,10 @@
 #' @describeIn tbl_graph Method for adjacency lists and lists of node and edge tables
 #' @export
-as_tbl_graph.list <- function(x, directed = TRUE, ...) {
+as_tbl_graph.list <- function(x, directed = TRUE, node_key = 'name', ...) {
   graph <- switch(
     guess_list_type(x),
     adjacency = as_graph_adj_list(x, directed = directed),
-    node_edge = as_graph_node_edge(x, directed = directed),
+    node_edge = as_graph_node_edge(x, directed = directed, node_key = node_key),
     unknown = stop("Unknown list format", call. = FALSE)
   )
   as_tbl_graph(graph)
@@ -61,7 +61,7 @@ as_graph_adj_list <- function(x, directed) {
 
 #' @importFrom igraph graph_from_edgelist vertex_attr<- add_vertices gorder
 #' @importFrom tibble tibble
-as_graph_node_edge <- function(x, directed) {
+as_graph_node_edge <- function(x, directed, node_key = 'name') {
   nodes <- x[[which(names(x) %in% c('nodes', 'vertices'))]]
   edges <- x[[which(names(x) %in% c('edges', 'links'))]]
   if (is.null(edges)) {
@@ -71,12 +71,14 @@ as_graph_node_edge <- function(x, directed) {
   if (length(from_ind) == 0) from_ind <- 1
   to_ind <- which(names(edges) == 'to')
   if (length(to_ind) == 0) to_ind <- 2
-  name_ind <- which(names(nodes) == 'name')
-  if (length(name_ind) == 0) name_ind <- 1
   edges <- edges[, c(from_ind, to_ind, seq_along(edges)[-c(from_ind, to_ind)]), drop = FALSE]
   if (!is.null(nodes)) {
-    name_ind <- which(names(nodes) == 'name')
-    if (length(name_ind) == 0) name_ind <- 1
+    if (is.na(node_key)) {
+      name_ind <- 1L
+    } else {
+      name_ind <- which(names(nodes) == node_key)
+      if (length(name_ind) == 0) name_ind <- 1
+    }
     if (is.character(edges[[1]])) {
       edges[, 1] <- match(edges[[1]], nodes[[name_ind]])
     }

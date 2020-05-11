@@ -38,7 +38,7 @@
 
 \method{as_tbl_graph}{igraph}(x, ...)
 
-\method{as_tbl_graph}{list}(x, directed = TRUE, ...)
+\method{as_tbl_graph}{list}(x, directed = TRUE, node_key = "name", ...)
 
 \method{as_tbl_graph}{matrix}(x, directed = TRUE, ...)
 
@@ -48,7 +48,7 @@
 
 \method{as_tbl_graph}{evonet}(x, directed = TRUE, ...)
 
-tbl_graph(nodes = NULL, edges = NULL, directed = TRUE)
+tbl_graph(nodes = NULL, edges = NULL, directed = TRUE, node_key = "name")
 
 as_tbl_graph(x, ...)
 
@@ -66,8 +66,15 @@ is.tbl_graph(x)
 \item{mode}{In case \code{directed = TRUE} should the edge direction be away from
 node or towards. Possible values are \code{"out"} (default) or \code{"in"}.}
 
+\item{node_key}{The name of the column in \code{nodes} that character represented
+\code{to} and \code{from} columns should be matched against. If \code{NA} the first column
+is always chosen. This setting has no effect if \code{to} and \code{from} are given as
+integers.}
+
 \item{nodes}{A \code{data.frame} containing information about the nodes in the
-graph.}
+graph. If \code{edges$to} and/or \code{edges$from} are characters then they will be
+matched to the column named according to \code{node_key} in nodes, if it exists.
+If not, they will be matched to the first column.}
 
 \item{edges}{A \code{data.frame} containing information about the edges in the
 graph. The terminal nodes of each edge must either be encoded in a \code{to} and
