@@ -79,6 +79,7 @@ to_subcomponent <- function(graph, node) {
 #' present in multiple subgraphs).
 #' @importFrom igraph induced_subgraph subgraph.edges
 #' @importFrom stats setNames
+#' @importFrom dplyr group_rows
 #' @export
 to_split <- function(graph, ..., split_by = NULL) {
   if (is.null(split_by)) {
@@ -87,7 +88,7 @@ to_split <- function(graph, ..., split_by = NULL) {
   }
   ind <- as_tibble(graph, active = split_by)
   ind <- group_by(ind, ...)
-  splits <- lapply(group_indices(ind), function(i) {
+  splits <- lapply(group_rows(ind), function(i) {
     g <- switch(
       split_by,
       nodes = induced_subgraph(graph, i),
@@ -95,7 +96,7 @@ to_split <- function(graph, ..., split_by = NULL) {
     )
     as_tbl_graph(g)
   })
-  split_names <- group_labels(ind)
+  split_names <- group_keys(ind)
   split_names <- lapply(names(split_names), function(n) {
     paste(n, split_names[[n]], sep = ': ')
   })
@@ -244,7 +245,6 @@ to_contracted <- function(graph, ..., simplify = TRUE) {
   nodes <- as_tibble(graph, active = 'nodes')
   nodes <- group_by(nodes, ...)
   ind <- group_indices(nodes)
-  ind <- rep(seq_along(ind), lengths(ind))[order(unlist(ind))]
   contracted <- as_tbl_graph(contract(graph, ind, vertex.attr.comb = 'ignore'))
   nodes <- nest(nodes, .key = '.orig_data')
   ind <- lapply(nodes$.orig_data, `[[`, '.tidygraph_node_index')

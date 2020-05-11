@@ -21,7 +21,7 @@ RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Imports: 
     tibble,
-    dplyr (>= 0.8),
+    dplyr (>= 0.8.5),
     igraph,
     magrittr,
     utils,

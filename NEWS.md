@@ -2,6 +2,7 @@
 
 * graph description now recognise undirected trees
 * Added pkgdown site at https://tidygraph.data-imaginist.com
+* Prepare tidygraph for dplyr 1.0.0 (#118 and #119)
 
 # tidygraph 1.1.2
 

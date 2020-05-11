@@ -160,10 +160,7 @@ set_edge_attributes <- function(x, value) {
 #' @importFrom dplyr tbl_vars
 #' @export
 tbl_vars.tbl_graph <- function(x) {
-  names(as_tibble(x))
+  tbl_vars(as_tibble(x))
 }
-#' @importFrom dplyr groups
 #' @export
-groups.tbl_graph <- function(x) {
-  NULL
-}
+dplyr::tbl_vars
