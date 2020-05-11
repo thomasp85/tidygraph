@@ -12,6 +12,9 @@
 * Edge weights are now handled more consistently to avoid igraph using a 
   possible `weight` edge attribute. `weights = NULL` will always mean that no
   edge weight is used (#106).
+* Neighborhood graph in `map_local()` and siblings will now contain a 
+  `.central_node` node attribute that will identify the node from which the 
+  local graph has been calculated (#107)
 
 # tidygraph 1.1.2
 

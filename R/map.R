@@ -360,6 +360,10 @@ map_dfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' * `graph`: The full `tbl_graph` object
 #' * `node`: The index of the node currently mapped over
 #'
+#' The `neighborhood` graph will contain an extra node attribute called
+#' `.central_node`, which will be `TRUE` for the node that the neighborhood is
+#' expanded from and `FALSE` for everything else.
+#'
 #' @inheritParams igraph::ego
 #' @inheritParams map_bfs
 #'
@@ -383,7 +387,9 @@ map_dfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 map_local <- function(order = 1, mode = 'all', mindist = 0, .f, ...) {
   expect_nodes()
   graph <- .G()
+  V(graph)$.central_node <- FALSE
   res <- lapply(seq_len(gorder(graph)), function(i) {
+    V(graph)$.central_node[i] <- TRUE
     ego_graph <- make_ego_graph(graph, order = order, nodes = i, mode = mode, mindist = mindist)[[1]]
     .f(neighborhood = as_tbl_graph(ego_graph), graph = graph, node = i, ...)
   })
