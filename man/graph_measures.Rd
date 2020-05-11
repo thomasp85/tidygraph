@@ -20,6 +20,7 @@
 \alias{graph_reciprocity}
 \alias{graph_min_cut}
 \alias{graph_mean_dist}
+\alias{graph_modularity}
 \title{Graph measurements}
 \usage{
 graph_adhesion()
@@ -57,6 +58,8 @@ graph_reciprocity(ignore_loops = TRUE, ratio = FALSE)
 graph_min_cut(capacity = NULL)
 
 graph_mean_dist(directed = TRUE, unconnected = TRUE)
+
+graph_modularity(group, weights = NULL)
 }
 \arguments{
 \item{attr}{The node attribute to measure on}
@@ -102,6 +105,8 @@ will be returned.}
 \item{ratio}{Should the old "ratio" approach from igraph < v0.6 be used}
 
 \item{capacity}{The capacity of the edges}
+
+\item{group}{The node grouping to calculate the modularity on}
 }
 \value{
 A scalar, the type depending on the function
@@ -151,6 +156,8 @@ them.
 \item \code{graph_min_cut}: Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps \code{\link[igraph:min_cut]{igraph::min_cut()}}
 
 \item \code{graph_mean_dist}: Calculates the mean distance between all node pairs in the graph. Wraps \code{\link[igraph:mean_distance]{igraph::mean_distance()}}
+
+\item \code{graph_modularity}: Calculates the modularity of the graph contingent on a provided node grouping
 }}
 
 \examples{

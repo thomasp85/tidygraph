@@ -3,6 +3,12 @@
 * graph description now recognise undirected trees
 * Added pkgdown site at https://tidygraph.data-imaginist.com
 * Prepare tidygraph for dplyr 1.0.0 (#118 and #119)
+* Add possibility of controlling which column in `nodes` are used for matching
+  if the `to` and `from` columns in edges are character vectors during 
+  construction (#89)
+* `bind_graph()` now accepts a list of graphs as its first argument (#88)
+* Add `graph_modularity()` for calculating modularity contingent on a node 
+  grouping (#97)
 
 # tidygraph 1.1.2
 

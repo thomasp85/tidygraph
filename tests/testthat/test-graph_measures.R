@@ -19,6 +19,7 @@ test_that("graph measures returns scalars", {
   expect_length(graph_radius(), 1)
   expect_length(graph_reciprocity(), 1)
   expect_length(graph_size(), 1)
+  expect_length(graph_modularity(type), 1)
   .graph_context$clear()
   gr <- create_ring(5, TRUE) %>%
     mutate(type = c(1, 1, 1, 2, 2))
