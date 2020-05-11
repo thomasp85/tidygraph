@@ -97,7 +97,7 @@ morph.tbl_graph <- function(.data, .f, ...) {
   }
   .register_graph_context(.data)
   morph_name <- quo_text(enquo(.f))
-  current_active <- as_quosure(sym(active(.data)))
+  current_active <- as_quosure(sym(active(.data)), environment())
   .data <- mutate(activate(.data, 'nodes'), .tidygraph_node_index = seq_len(n()))
   .data <- mutate(activate(.data, 'edges'), .tidygraph_edge_index = seq_len(n()))
   .data <- activate(.data, !! current_active)
@@ -120,7 +120,7 @@ morph.morphed_tbl_graph <- function(.data, .f, ...) {
 }
 #' @export
 unmorph.morphed_tbl_graph <- function(.data) {
-  current_active <- as_quosure(sym(active(.data[[1]])))
+  current_active <- as_quosure(sym(active(.data[[1]])), environment())
   nodes <- bind_rows(lapply(.data, as_tibble, active = 'nodes'))
   edges <- bind_rows(lapply(.data, as_tibble, active = 'edges'))
   graph <- attr(.data, '.orig_graph')
