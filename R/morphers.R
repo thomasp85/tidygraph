@@ -238,7 +238,7 @@ to_simple <- function(graph, remove_multiples = TRUE, remove_loops = TRUE) {
 #' data will get merged back.
 #' @param simplify Should edges in the contracted graph be simplified? Defaults
 #' to `TRUE`
-#' @importFrom tidyr nest
+#' @importFrom tidyr nest_legacy
 #' @importFrom igraph contract
 #' @export
 to_contracted <- function(graph, ..., simplify = TRUE) {
@@ -246,7 +246,7 @@ to_contracted <- function(graph, ..., simplify = TRUE) {
   nodes <- group_by(nodes, ...)
   ind <- group_indices(nodes)
   contracted <- as_tbl_graph(contract(graph, ind, vertex.attr.comb = 'ignore'))
-  nodes <- nest(nodes, .key = '.orig_data')
+  nodes <- nest_legacy(nodes, .key = '.orig_data')
   ind <- lapply(nodes$.orig_data, `[[`, '.tidygraph_node_index')
   nodes$.orig_data <- lapply(nodes$.orig_data, function(x) {x$.tidygraph_node_index <- NULL; x})
   nodes$.tidygraph_node_index <- ind
