@@ -87,7 +87,7 @@ dplyr::group_indices
 #' @importFrom dplyr group_keys
 #' @export
 group_keys.tbl_graph <- function(.tbl, ...) {
-  group_keys(as_tibble(.data), ...)
+  group_keys(as_tibble(.data))
 }
 #' @export
 dplyr::group_keys

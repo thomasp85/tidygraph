@@ -12,7 +12,8 @@
 #' always result in a disconnected graph. See [graph_join()] for merging graphs
 #' on common nodes.
 #'
-#' @param .data A `tbl_graph`
+#' @param .data A `tbl_graph`, or a list of `tbl_graph` objects (for
+#' `bind_graphs()`).
 #'
 #' @param ... In case of `bind_nodes()` and `bind_edges()` data.frames to add.
 #' In the case of `bind_graphs()` objects that are convertible to `tbl_graph`
@@ -23,6 +24,7 @@
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble as_tibble
 #' @importFrom igraph is_directed
+#' @importFrom rlang is_bare_list list2
 #' @export
 #'
 #' @examples
@@ -39,8 +41,14 @@
 #' graph %>% bind_graphs(new_graph)
 #'
 bind_graphs <- function(.data, ...) {
-  stopifnot(is.tbl_graph(.data))
-  dots <- lapply(list(...), as_tbl_graph)
+  if (is_bare_list(.data)) {
+    .data <- lapply(c(.data, list2(...)), as_tbl_graph)
+    dots <- .data[-1]
+    .data <- .data[[1]]
+  } else {
+    .data <- as_tbl_graph(.data)
+    dots <- lapply(list2(...), as_tbl_graph)
+  }
   if (length(dots) == 0) return(.data)
   n_nodes <- sapply(dots, gorder)
   n_edges <- sapply(dots, gsize)

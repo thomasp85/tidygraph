@@ -13,7 +13,8 @@ bind_nodes(.data, ...)
 bind_edges(.data, ...)
 }
 \arguments{
-\item{.data}{A \code{tbl_graph}}
+\item{.data}{A \code{tbl_graph}, or a list of \code{tbl_graph} objects (for
+\code{bind_graphs()}).}
 
 \item{...}{In case of \code{bind_nodes()} and \code{bind_edges()} data.frames to add.
 In the case of \code{bind_graphs()} objects that are convertible to \code{tbl_graph}
