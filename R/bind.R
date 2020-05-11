@@ -19,6 +19,11 @@
 #' In the case of `bind_graphs()` objects that are convertible to `tbl_graph`
 #' using `as_tbl_graph()`.
 #'
+#' @param node_key The name of the column in `nodes` that character represented
+#' `to` and `from` columns should be matched against. If `NA` the first column
+#' is always chosen. This setting has no effect if `to` and `from` are given as
+#' integers.
+#'
 #' @return A `tbl_graph` containing the new data
 #'
 #' @importFrom dplyr bind_rows
@@ -77,13 +82,26 @@ bind_nodes <- function(.data, ...) {
 #' @importFrom dplyr bind_rows
 #' @importFrom igraph gorder add_edges
 #' @export
-bind_edges <- function(.data, ...) {
+bind_edges <- function(.data, ..., node_key = 'name') {
   stopifnot(is.tbl_graph(.data))
   d_tmp <- as_tibble(.data, active = 'edges')
+  nodes <- as_tibble(.data, active = 'nodes')
+  if (is.na(node_key)) {
+    name_ind <- 1L
+  } else {
+    name_ind <- which(names(nodes) == node_key)
+    if (length(name_ind) == 0) name_ind <- 1
+  }
   new_edges <- bind_rows(...)
+  if (is.character(new_edges$from)) {
+    new_edges$from <- match(new_edges$from, nodes[[name_ind]])
+  }
+  if (is.character(new_edges$to)) {
+    new_edges$to <- match(new_edges$to, nodes[[name_ind]])
+  }
   all_edges <- bind_rows(d_tmp, new_edges)
   if (any(is.na(all_edges$from)) || any(is.na(all_edges$to))) {
-    stop('Edges can only be added if they contain a "to" and "from" node', call. = FALSE)
+    stop('Edges can only be added if they contain a valid "to" and "from" column', call. = FALSE)
   }
   if (max(c(new_edges$to, new_edges$from)) > gorder(.data)) {
     stop('Edges can only be added if they refer to existing nodes', call. = FALSE)

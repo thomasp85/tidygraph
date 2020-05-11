@@ -10,7 +10,7 @@ bind_graphs(.data, ...)
 
 bind_nodes(.data, ...)
 
-bind_edges(.data, ...)
+bind_edges(.data, ..., node_key = "name")
 }
 \arguments{
 \item{.data}{A \code{tbl_graph}, or a list of \code{tbl_graph} objects (for
@@ -19,6 +19,11 @@ bind_edges(.data, ...)
 \item{...}{In case of \code{bind_nodes()} and \code{bind_edges()} data.frames to add.
 In the case of \code{bind_graphs()} objects that are convertible to \code{tbl_graph}
 using \code{as_tbl_graph()}.}
+
+\item{node_key}{The name of the column in \code{nodes} that character represented
+\code{to} and \code{from} columns should be matched against. If \code{NA} the first column
+is always chosen. This setting has no effect if \code{to} and \code{from} are given as
+integers.}
 }
 \value{
 A \code{tbl_graph} containing the new data
