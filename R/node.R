@@ -178,6 +178,9 @@ node_constraint <- function(weights = NULL) {
   graph <- .G()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- rep_len(1L, gsize(graph))
+  }
   constraint(graph, V(graph), weights = weights)
 }
 #' @describeIn node_measures measures the coreness of each node. See [igraph::coreness()]
@@ -191,11 +194,14 @@ node_coreness <- function(mode = 'out') {
 #' @describeIn node_measures measures the diversity of the node. See [igraph::diversity()]
 #' @importFrom igraph diversity
 #' @export
-node_diversity <- function(weights = NULL) {
+node_diversity <- function(weights) {
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    stop('weights must evaluate to a valid vector', call. = FALSE)
+  }
   diversity(graph, weights = weights, vids = V(graph))
 }
 #' @describeIn node_measures measures Valente's Bridging measures for detecting structural bridges (`influenceR`)

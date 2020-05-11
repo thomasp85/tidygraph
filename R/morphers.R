@@ -161,7 +161,8 @@ to_dominator_tree <- function(graph, root, mode = 'out') {
 #' @export
 to_minimum_spanning_tree <- function(graph, weights = NULL) {
   weights <- eval_tidy(enquo(weights), as_tibble(graph, 'edges'))
-  mst <- mst(graph, weights = weights)
+  algorithm <- if (is.null(weights)) 'unweighted' else 'prim'
+  mst <- mst(graph, weights = weights, algorithm = algorithm)
   list(
     mst = as_tbl_graph(mst)
   )
@@ -179,6 +180,9 @@ to_shortest_path <- function(graph, from, to, mode = 'out', weights = NULL) {
   to <- eval_tidy(enquo(to), nodes)
   to <- as_ind(to, gorder(graph))
   weights <- eval_tidy(enquo(weights), as_tibble(graph, active = 'edges'))
+  if (is.null(weights)) {
+    weights <- NA
+  }
   path <- shortest_paths(graph, from = from, to = to, mode = mode, weights = weights, output = 'both')
   short_path <- slice(activate(graph, 'edges'), as.integer(path$epath[[1]]))
   short_path <- slice(activate(short_path, 'nodes'), as.integer(path$vpath[[1]]))
@@ -294,9 +298,12 @@ to_undirected <- function(graph) {
 #' @importFrom stats as.dendrogram
 #' @importFrom rlang .data enquo eval_tidy
 #' @export
-to_hierarchical_clusters <- function(graph, method = 'walktrap', weights = NA, ...) {
+to_hierarchical_clusters <- function(graph, method = 'walktrap', weights = NULL, ...) {
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   hierarchy <- switch(
     method,
     walktrap = cluster_walktrap(graph, weights = weights, ...),

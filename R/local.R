@@ -57,6 +57,9 @@ local_ave_degree <- function(weights = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   knn(graph = .G(), weights = weights)$knn
 }
 #' @describeIn local_graph Calculate the transitivity of each node, that is, the

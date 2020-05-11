@@ -48,9 +48,12 @@ NULL
 #' @importFrom rlang enquo eval_tidy
 #' @importFrom stats hclust
 #' @export
-node_rank_hclust <- function(method = 'average', dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_hclust <- function(method = 'average', dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   order(hclust(mat, method)$order)
 }
@@ -62,10 +65,13 @@ node_rank_hclust <- function(method = 'average', dist = 'shortest', mode = 'out'
 #' @param reps Number of repeats with random initialisation
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_anneal <- function(cool = 0.5, tmin = 1e-4, swap_to_inversion = 0.5, step_multiplier = 100, reps = 1, dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_anneal <- function(cool = 0.5, tmin = 1e-4, swap_to_inversion = 0.5, step_multiplier = 100, reps = 1, dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   control <- list(cool = cool, tmin = tmin, swap_to_inversion = swap_to_inversion, try_multiplier = step_multiplier, reps = reps)
   seriate(mat, 'ARSA', control)
@@ -74,10 +80,13 @@ node_rank_anneal <- function(cool = 0.5, tmin = 1e-4, swap_to_inversion = 0.5, s
 #' @param weighted_gradient minimize the weighted gradient measure? Defaults to `FALSE`
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_branch_bound <- function(weighted_gradient = FALSE, dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_branch_bound <- function(weighted_gradient = FALSE, dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   method <- if (weighted_gradient) 'BBWRCG' else "BBURCG"
   seriate(mat, method, list())
@@ -85,10 +94,13 @@ node_rank_branch_bound <- function(weighted_gradient = FALSE, dist = 'shortest',
 #' @describeIn node_rank Minimize hamiltonian path length using a travelling salesperson solver. See the the `solve_TSP` function in `TSP` for an overview of possible arguments
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_traveller <- function(method = 'two_opt', ..., dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_traveller <- function(method = 'two_opt', ..., dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   control <- list(method = method, ...)
   seriate(mat, 'TSP', control)
@@ -96,20 +108,26 @@ node_rank_traveller <- function(method = 'two_opt', ..., dist = 'shortest', mode
 #' @describeIn node_rank Use Rank-two ellipse seriation to rank the nodes. Uses "R2E" method in `seriation`
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_two <- function(dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_two <- function(dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'R2E', list())
 }
 #' @describeIn node_rank Rank by multidimensional scaling onto one dimension. `method = 'cmdscale'` will use the classic scaling from `stats`, `method = 'isoMDS'` will use `isoMDS` from `MASS`, and `method = 'sammon'` will use `sammon` from `MASS`
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_mds <- function(method = 'cmdscale', dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_mds <- function(method = 'cmdscale', dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'MDS', list(method = method))
 }
@@ -117,20 +135,26 @@ node_rank_mds <- function(method = 'cmdscale', dist = 'shortest', mode = 'out', 
 #' @param type The type of leaf reordering, either `'GW'` to use the "GW" method or `'OLO'` to use the "OLO" method (both in `seriation`)
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_leafsort <- function(method = 'average', type = 'OLO', dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_leafsort <- function(method = 'average', type = 'OLO', dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, type, list(method = method))
 }
 #' @describeIn node_rank Use Prim's algorithm to find a minimum spanning tree giving the rank. Uses the "VAT" method in `seriation`
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_visual <- function(dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_visual <- function(dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'VAT', list())
 }
@@ -138,10 +162,13 @@ node_rank_visual <- function(dist = 'shortest', mode = 'out', weights = NA, algo
 #' @param normalized Should the normalized laplacian of the similarity matrix be used?
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_spectral <- function(normalized = FALSE, dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_spectral <- function(normalized = FALSE, dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   method <- if(normalized) 'Spectral_norm' else 'Spectral'
   seriate(mat, method, list())
@@ -151,10 +178,13 @@ node_rank_spectral <- function(normalized = FALSE, dist = 'shortest', mode = 'ou
 #' @param nstart The number of random initialisations to perform
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_spin_out <- function(step = 25, nstart = 10, dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_spin_out <- function(step = 25, nstart = 10, dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'SPIN_STS', list(step = step, nstart = nstart))
 }
@@ -162,10 +192,13 @@ node_rank_spin_out <- function(step = 25, nstart = 10, dist = 'shortest', mode =
 #' @param sigma The variance around the diagonal to use for the weight matrix. Either a single number or a decreasing sequence.
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_spin_in <- function(step = 5, sigma = seq(20, 1, length.out = 10), dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_spin_in <- function(step = 5, sigma = seq(20, 1, length.out = 10), dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'SPIN_NH', list(step = step, sigma = sigma))
 }
@@ -175,10 +208,13 @@ node_rank_spin_in <- function(step = 5, sigma = seq(20, 1, length.out = 10), dis
 #' @param maxsteps The upper bound of iterations
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_quadratic <- function(criterion = '2SUM', reps = 1, step = 2 * graph_order(), step_multiplier = 1.1, temp_multiplier  = 0.5, maxsteps = 50, dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_quadratic <- function(criterion = '2SUM', reps = 1, step = 2 * graph_order(), step_multiplier = 1.1, temp_multiplier  = 0.5, maxsteps = 50, dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   control = list(rep = reps, miter = step, fiter = step_multiplier, ft  = temp_multiplier, maxsteps = maxsteps)
   method = paste0('QAP_', toupper(criterion))
@@ -187,20 +223,26 @@ node_rank_quadratic <- function(criterion = '2SUM', reps = 1, step = 2 * graph_o
 #' @describeIn node_rank Optimizes different criteria based on a genetic algorithm. Uses the "GA" method from `seriation`. See `register_GA` for an overview of relevant arguments
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_genetic <- function(... , dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_genetic <- function(... , dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'GA', list())
 }
 #' @describeIn node_rank Optimizes different criteria based on heuristic dendrogram seriation. Uses the "DendSer" method from `seriation`. See `register_DendSer` for an overview of relevant arguments
 #' @importFrom rlang enquo eval_tidy
 #' @export
-node_rank_dendser <- function(... , dist = 'shortest', mode = 'out', weights = NA, algorithm = 'automatic') {
+node_rank_dendser <- function(... , dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'DendSer', list())
 }

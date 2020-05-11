@@ -56,6 +56,9 @@ centrality_alpha <- function(weights = NULL, alpha = 1, exo = 1, tol = 1e-7, loo
   graph <- .G()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   exo <- enquo(exo)
   exo <- eval_tidy(exo, .N())
   alpha_centrality(graph = graph, nodes = V(graph), alpha = alpha, exo = exo, weights = weights, tol = tol, loops = loops)
@@ -67,6 +70,9 @@ centrality_authority <- function(weights = NULL, scale = TRUE, options = igraph:
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   authority_score(graph = .G(), scale = scale, weights = weights, options = options)$vector
 }
 #' @describeIn centrality Wrapper for [igraph::betweenness()] and [igraph::estimate_betweenness()]
@@ -78,6 +84,9 @@ centrality_betweenness <- function(weights = NULL, directed = TRUE, cutoff = NUL
   graph <- .G()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   if (is.null(cutoff)) {
     betweenness(graph = graph, v = V(graph), directed = directed, weights = weights, nobigint = nobigint, normalized = normalized)
   } else {
@@ -101,6 +110,9 @@ centrality_closeness <- function(weights = NULL, mode = 'out', normalized = FALS
   graph <- .G()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   if (is.null(cutoff)) {
     closeness(graph = graph, vids = V(graph), mode = mode, weights = weights, normalized = normalized)
   } else {
@@ -114,6 +126,9 @@ centrality_eigen <- function(weights = NULL, directed = FALSE, scale = TRUE, opt
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   eigen_centrality(graph = .G(), directed = directed, scale = scale, weights = weights, options = options)$vector
 }
 #' @describeIn centrality Wrapper for [igraph::hub_score()]
@@ -123,6 +138,9 @@ centrality_hub <- function(weights = NULL, scale = TRUE, options = igraph::arpac
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   hub_score(graph = .G(), scale = scale, weights = weights, options = options)$vector
 }
 #' @describeIn centrality Wrapper for [igraph::page_rank()]
@@ -133,6 +151,9 @@ centrality_pagerank <- function(weights = NULL, directed = TRUE, damping = 0.85,
   graph <- .G()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   personalized <- enquo(personalized)
   personalized <- eval_tidy(personalized, .N())
   page_rank(graph = graph, vids = V(graph), directed = directed, damping = damping, personalized = personalized, weights = weights)$vector
@@ -154,6 +175,9 @@ centrality_degree <- function(weights = NULL, mode = 'out', loops = TRUE, normal
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   if (is.null(weights)) {
+    weights <- NA
+  }
+  if (is.null(weights)) {
     degree(graph = graph, v = V(graph), mode = mode, loops = loops, normalized = normalized)
   } else {
     strength(graph = graph, vids = V(graph), mode = mode, loops = loops, weights = weights)
@@ -168,6 +192,9 @@ centrality_edge_betweenness <- function(weights = NULL, directed = TRUE, cutoff 
   graph <- .G()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   if (is.null(cutoff)) {
     edge_betweenness(graph = graph, e = E(graph), directed = directed, weights = weights)
   } else {

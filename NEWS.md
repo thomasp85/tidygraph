@@ -9,6 +9,9 @@
 * `bind_graph()` now accepts a list of graphs as its first argument (#88)
 * Add `graph_modularity()` for calculating modularity contingent on a node 
   grouping (#97)
+* Edge weights are now handled more consistently to avoid igraph using a 
+  possible `weight` edge attribute. `weights = NULL` will always mean that no
+  edge weight is used (#106).
 
 # tidygraph 1.1.2
 

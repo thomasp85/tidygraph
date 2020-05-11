@@ -103,11 +103,14 @@ node_cohesion_from <- function(nodes) {
 #' @param algorithm The distance algorithms to use. By default it will try to
 #' select the fastest suitable algorithm. Possible values are `"automatic"`,
 #' `"unweighted"`, `"dijkstra"`, `"bellman-ford"`, and `"johnson"`
-node_distance_to <- function(nodes, mode = 'out', weights = NA, algorithm = 'automatic') {
+node_distance_to <- function(nodes, mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
@@ -119,11 +122,14 @@ node_distance_to <- function(nodes, mode = 'out', weights = NA, algorithm = 'aut
 #' @describeIn pair_measures Calculate various distance metrics between node pairs. Wraps [igraph::distances()]
 #' @export
 #' @importFrom igraph distances gorder
-node_distance_from <- function(nodes, mode = 'out', weights = NA, algorithm = 'automatic') {
+node_distance_from <- function(nodes, mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
