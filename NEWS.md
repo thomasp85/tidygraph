@@ -1,4 +1,4 @@
-# tidygraph (development version)
+# tidygraph 1.2.0
 
 * graph description now recognise undirected trees
 * Added pkgdown site at https://tidygraph.data-imaginist.com
