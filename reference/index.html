@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,7 +48,6 @@
 
 <meta property="og:title" content="Function reference" />
 <meta property="og:image" content="https://tidygraph.data-imaginist.com/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -62,7 +65,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
       </span>
     </div>
 
@@ -153,10 +156,15 @@
           <p class="section-desc"><p>While tidygraph mainly works by allowing you to use well known dplyr verbs on relational data, it provides a few new verbs special to working with this type of data.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
-          <p><code><a href="activate.html">activate()</a></code> <code><a href="activate.html">active()</a></code> <code><a href="activate.html">`%N>%`</a></code> <code><a href="activate.html">`%E>%`</a></code> </p>
+          <p><code><a href="activate.html">activate()</a></code> <code><a href="activate.html">active()</a></code> <code><a href="activate.html">`%N&gt;%`</a></code> <code><a href="activate.html">`%E&gt;%`</a></code> </p>
         </td>
         <td><p>Determine the context of subsequent manipulations</p></td>
       </tr><tr>
@@ -197,6 +205,11 @@
           <p class="section-desc"><p>Graphs and networks can come from many sources, or be created by simulation or deterministacally. Tidygraph provides conversions from all well-known structures in R, as well as a range of <code>create_()</code> and <code>play_*()</code> functions for creating well-defined or simulated graphs.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -241,6 +254,11 @@
           <p class="section-desc"><p>Mapping functions over nodes for relational data is different than for standard tabular data as you often want to recurse over a search or in other ways use the graph structure as part of your map.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -279,6 +297,11 @@
           <p class="section-desc"><p>Centrality is a key measure in network analysis, and while it is mainly calculated for nodes, a few algorithms exists for calculating edge centrality as well.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -293,6 +316,11 @@
           <p class="section-desc"><p>Social network analysis is especially interested in detecting groups or communities within a graph, but such algorithms are also useful in other areas of network research. No single algorithm can provide the correct grouping of nodes so several exists that weigh certain features differently.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -307,6 +335,11 @@
           <p class="section-desc"><p>Tidygraph provides a wide range of algorithms for extracting differnt information about the nodes in a graph, from calculating local measures, to defining whether they are part of certain topological features.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -351,6 +384,11 @@
           <p class="section-desc"><p>Fewer quantitative measures exist for edges, but they can still be queried for topological features such as which nodes they link, etc.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -365,6 +403,11 @@
           <p class="section-desc"><p>The graph under investigation can also have properties of its own that can be summarised into quantitative or qualitative values.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -374,7 +417,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="graph_measures.html">graph_adhesion()</a></code> <code><a href="graph_measures.html">graph_assortativity()</a></code> <code><a href="graph_measures.html">graph_automorphisms()</a></code> <code><a href="graph_measures.html">graph_clique_num()</a></code> <code><a href="graph_measures.html">graph_clique_count()</a></code> <code><a href="graph_measures.html">graph_component_count()</a></code> <code><a href="graph_measures.html">graph_motif_count()</a></code> <code><a href="graph_measures.html">graph_diameter()</a></code> <code><a href="graph_measures.html">graph_girth()</a></code> <code><a href="graph_measures.html">graph_radius()</a></code> <code><a href="graph_measures.html">graph_mutual_count()</a></code> <code><a href="graph_measures.html">graph_asym_count()</a></code> <code><a href="graph_measures.html">graph_unconn_count()</a></code> <code><a href="graph_measures.html">graph_size()</a></code> <code><a href="graph_measures.html">graph_order()</a></code> <code><a href="graph_measures.html">graph_reciprocity()</a></code> <code><a href="graph_measures.html">graph_min_cut()</a></code> <code><a href="graph_measures.html">graph_mean_dist()</a></code> </p>
+          <p><code><a href="graph_measures.html">graph_adhesion()</a></code> <code><a href="graph_measures.html">graph_assortativity()</a></code> <code><a href="graph_measures.html">graph_automorphisms()</a></code> <code><a href="graph_measures.html">graph_clique_num()</a></code> <code><a href="graph_measures.html">graph_clique_count()</a></code> <code><a href="graph_measures.html">graph_component_count()</a></code> <code><a href="graph_measures.html">graph_motif_count()</a></code> <code><a href="graph_measures.html">graph_diameter()</a></code> <code><a href="graph_measures.html">graph_girth()</a></code> <code><a href="graph_measures.html">graph_radius()</a></code> <code><a href="graph_measures.html">graph_mutual_count()</a></code> <code><a href="graph_measures.html">graph_asym_count()</a></code> <code><a href="graph_measures.html">graph_unconn_count()</a></code> <code><a href="graph_measures.html">graph_size()</a></code> <code><a href="graph_measures.html">graph_order()</a></code> <code><a href="graph_measures.html">graph_reciprocity()</a></code> <code><a href="graph_measures.html">graph_min_cut()</a></code> <code><a href="graph_measures.html">graph_mean_dist()</a></code> <code><a href="graph_measures.html">graph_modularity()</a></code> </p>
         </td>
         <td><p>Graph measurements</p></td>
       </tr>
@@ -385,6 +428,11 @@
           <p class="section-desc"><p>Outside of the verbs and algorithms there is a few helper functions available to streamline graph manipulation.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -402,19 +450,10 @@
     </table>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-new-verbs">New verbs</a></li>
-      <li><a href="#section-graph-creation">Graph creation</a></li>
-      <li><a href="#section-mapping-over-nodes">Mapping over nodes</a></li>
-      <li><a href="#section-centrality">Centrality</a></li>
-      <li><a href="#section-community-detection">Community detection</a></li>
-      <li><a href="#section-node-measures">Node measures</a></li>
-      <li><a href="#section-edge-measures">Edge measures</a></li>
-      <li><a href="#section-graph-measures">Graph measures</a></li>
-      <li><a href="#section-misc">Misc</a></li>
-    </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -425,7 +464,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

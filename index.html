@@ -12,10 +12,11 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A Tidy API for Graph Manipulation">
 <meta property="og:description" content='A graph, while not "tidy" in itself, can be thought of as two tidy
     data frames describing node and edge data respectively. tidygraph
@@ -23,13 +24,12 @@
     API defined in the dplyr package, as well as provides tidy interfaces to 
     a lot of common graph algorithms.'>
 <meta property="og:image" content="https://tidygraph.data-imaginist.com/logo.png">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidygraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
       </span>
     </div>
 
@@ -100,45 +100,46 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="tidygraph" class="section level1">
+<div id="tidygraph-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#tidygraph" class="anchor"></a>tidygraph <img src="reference/figures/logo.png" align="right" width="140px">
+<a href="#tidygraph-" class="anchor"></a>tidygraph <img src="reference/figures/logo.png" align="right" width="140px">
 </h1></div>
+<!-- badges: start -->
 
 <p>This package provides a tidy API for graph/network manipulation. While network data itself is not tidy, it can be envisioned as two tidy tables, one for node data and one for edge data. <code>tidygraph</code> provides a way to switch between the two tables and provides <code>dplyr</code> verbs for manipulating them. Furthermore it provides access to a lot of graph algorithms with return values that facilitate their use in a tidy workflow.</p>
 <div id="an-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#an-example" class="anchor"></a>An example</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidygraph)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="reference/sampling_games.html">play_erdos_renyi</a></span>(<span class="dv">10</span>, <span class="fl">0.5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/activate.html">activate</a></span>(nodes) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">degree =</span> <span class="kw"><a href="reference/centrality.html">centrality_degree</a></span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/activate.html">activate</a></span>(edges) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">centrality =</span> <span class="kw"><a href="reference/centrality.html">centrality_edge_betweenness</a></span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(centrality)</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; # A tbl_graph: 10 nodes and 43 edges</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; #</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; # A directed simple graph with 1 component</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; #</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; # Edge Data: 43 x 3 (active)</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt;    from    to centrality</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt;   &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; 1     8     7       1.5 </span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; 2     8    10       1.5 </span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt; 3     9     7       1.58</span></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt; 4     1     7       1.67</span></a>
-<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt; 5     4     7       1.75</span></a>
-<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt; 6     2     1       1.83</span></a>
-<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt; # … with 37 more rows</span></a>
-<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co">#&gt; #</span></a>
-<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co">#&gt; # Node Data: 10 x 1</span></a>
-<a class="sourceLine" id="cb1-25" data-line-number="25"><span class="co">#&gt;   degree</span></a>
-<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co">#&gt;    &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co">#&gt; 1      4</span></a>
-<a class="sourceLine" id="cb1-28" data-line-number="28"><span class="co">#&gt; 2      5</span></a>
-<a class="sourceLine" id="cb1-29" data-line-number="29"><span class="co">#&gt; 3      3</span></a>
-<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="co">#&gt; # … with 7 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidygraph</span>)
+
+<span class="fu"><a href="reference/sampling_games.html">play_erdos_renyi</a></span>(<span class="fl">10</span>, <span class="fl">0.5</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/activate.html">activate</a></span>(<span class="no">nodes</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">degree</span> <span class="kw">=</span> <span class="fu"><a href="reference/centrality.html">centrality_degree</a></span>()) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/activate.html">activate</a></span>(<span class="no">edges</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">centrality</span> <span class="kw">=</span> <span class="fu"><a href="reference/centrality.html">centrality_edge_betweenness</a></span>()) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="no">centrality</span>)
+<span class="co">#&gt; # A tbl_graph: 10 nodes and 46 edges</span>
+<span class="co">#&gt; #</span>
+<span class="co">#&gt; # A directed simple graph with 1 component</span>
+<span class="co">#&gt; #</span>
+<span class="co">#&gt; # Edge Data: 46 x 3 (active)</span>
+<span class="co">#&gt;    from    to centrality</span>
+<span class="co">#&gt; * &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     1     8       1.33</span>
+<span class="co">#&gt; 2     5     8       1.42</span>
+<span class="co">#&gt; 3     5     3       1.75</span>
+<span class="co">#&gt; 4     3     7       1.75</span>
+<span class="co">#&gt; 5     5     7       1.92</span>
+<span class="co">#&gt; 6     5     1       2.00</span>
+<span class="co">#&gt; # … with 40 more rows</span>
+<span class="co">#&gt; #</span>
+<span class="co">#&gt; # Node Data: 10 x 1</span>
+<span class="co">#&gt;   degree</span>
+<span class="co">#&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1      5</span>
+<span class="co">#&gt; 2      6</span>
+<span class="co">#&gt; 3      4</span>
+<span class="co">#&gt; # … with 7 more rows</span></pre></div>
 </div>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
@@ -179,8 +180,8 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p><code>tidygraph</code> is available on CRAN and can be installed simply, using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages('tidygraph')</a></code>. For the development version available on GitHub, use the <code>devtools</code> package for installation:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages('devtools')</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'thomasp85/tidygraph'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages('devtools')</span>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">'thomasp85/tidygraph'</span>)</pre></div>
 </div>
 <div id="thanks" class="section level2">
 <h2 class="hasAnchor">
@@ -195,13 +196,13 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=tidygraph">https://​cloud.r-project.org/​package=tidygraph</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/thomasp85/tidygraph">https://​github.com/​thomasp85/​tidygraph</a>
+<li>Browse source code at <br><a href="https://github.com/thomasp85/tidygraph/">https://​github.com/​thomasp85/​tidygraph/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/thomasp85/tidygraph/issues">https://​github.com/​thomasp85/​tidygraph/​issues</a>
 </li>
@@ -225,15 +226,14 @@
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://data-imaginist.com">Thomas Lin Pedersen</a> <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-5147-4711" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<a href="https://data-imaginist.com">Thomas Lin Pedersen</a> <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-5147-4711" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/thomasp85/tidygraph"><img src="https://travis-ci.org/thomasp85/tidygraph.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/thomasp85/tidygraph"><img src="https://ci.appveyor.com/api/projects/status/github/thomasp85/tidygraph?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://github.com/thomasp85/tidygraph/actions"><img src="https://github.com/thomasp85/tidygraph/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://CRAN.R-project.org/package=tidygraph"><img src="http://www.r-pkg.org/badges/version-ago/tidygraph" alt="CRAN_Release_Badge"></a></li>
 <li><a href="https://CRAN.R-project.org/package=tidygraph"><img src="http://cranlogs.r-pkg.org/badges/tidygraph" alt="CRAN_Download_Badge"></a></li>
 <li><a href="https://codecov.io/github/thomasp85/tidygraph?branch=master"><img src="https://img.shields.io/codecov/c/github/thomasp85/tidygraph/master.svg" alt="Coverage Status"></a></li>
@@ -248,7 +248,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -46,7 +50,7 @@
 <meta property="og:description" content="These objects are imported from other packages. Follow the links
 below to see their documentation.
 
-  dplyrarrange, distinct, filter, top_n, group_by, ungroup, group_size, n_groups, groups, group_vars, left_join, right_join, inner_join, full_join, semi_join, anti_join, mutate, transmute, mutate_all, mutate_at, n, pull, rename, sample_frac, sample_n, select, contains, ends_with, everything, matches, num_range, one_of, starts_with, slice
+  dplyranti_join, arrange, contains, distinct, ends_with, everything, filter, full_join, group_by, group_data, group_indices, group_keys, group_size, group_vars, groups, inner_join, left_join, matches, mutate, mutate_all, mutate_at, n, n_groups, num_range, one_of, pull, rename, right_join, sample_frac, sample_n, select, semi_join, slice, starts_with, tbl_vars, top_n, transmute, ungroup
 
   igraphas.igraph
 
@@ -56,7 +60,6 @@ below to see their documentation.
 
 " />
 <meta property="og:image" content="https://tidygraph.data-imaginist.com/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -74,7 +77,7 @@ below to see their documentation.
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -88,7 +91,7 @@ below to see their documentation.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
       </span>
     </div>
 
@@ -155,8 +158,8 @@ below to see their documentation.
     <div class="ref-description">
     <p>These objects are imported from other packages. Follow the links
 below to see their documentation.</p>
-<dl class='dl-horizontal'>
-  <dt>dplyr</dt><dd><p><code><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/distinct.html'>distinct</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/top_n.html'>top_n</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_size.html'>group_size</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_size.html'>n_groups</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/groups.html'>groups</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/groups.html'>group_vars</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>left_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>right_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>inner_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>full_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>semi_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>anti_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>transmute</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_all</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/n.html'>n</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/pull.html'>pull</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/select.html'>rename</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/sample.html'>sample_frac</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/sample.html'>sample_n</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>contains</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>ends_with</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>everything</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>matches</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>num_range</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>one_of</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>starts_with</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice</a></code></p></dd>
+<dl>
+  <dt>dplyr</dt><dd><p><code><a href='https://dplyr.tidyverse.org/reference/join.html'>anti_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>contains</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/distinct.html'>distinct</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>ends_with</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>everything</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>full_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_data.html'>group_data</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_indices.html'>group_indices</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_split.html'>group_keys</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_size.html'>group_size</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/groups.html'>group_vars</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/groups.html'>groups</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>inner_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>left_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>matches</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_all</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/n.html'>n</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_size.html'>n_groups</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>num_range</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>one_of</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/pull.html'>pull</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/select.html'>rename</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>right_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/sample.html'>sample_frac</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/sample.html'>sample_n</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/join.html'>semi_join</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/reexports.html'>starts_with</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/tbl_vars.html'>tbl_vars</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/top_n.html'>top_n</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>transmute</a></code>, <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></code></p></dd>
 
   <dt>igraph</dt><dd><p><code><a href='https://rdrr.io/pkg/igraph/man/as.igraph.html'>as.igraph</a></code></p></dd>
 
@@ -171,11 +174,10 @@ below to see their documentation.</p>
 
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -186,7 +188,7 @@ below to see their documentation.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

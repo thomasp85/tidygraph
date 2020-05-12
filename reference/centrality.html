@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -55,7 +59,6 @@ provides access to the netrankr engine for centrality calculations and
 define a number of centrality measures based on that, as well as provide a
 manual mode for specifying more-or-less any centrality score." />
 <meta property="og:image" content="https://tidygraph.data-imaginist.com/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -73,7 +76,7 @@ manual mode for specifying more-or-less any centrality score." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -87,7 +90,7 @@ manual mode for specifying more-or-less any centrality score." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
       </span>
     </div>
 
@@ -165,37 +168,63 @@ define a number of centrality measures based on that, as well as provide a
 manual mode for specifying more-or-less any centrality score.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>centrality_alpha</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>exo</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-07</span>,
-  <span class='kw'>loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>centrality_alpha</span>(
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>exo</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-07</span>,
+  <span class='kw'>loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
-<span class='fu'>centrality_authority</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/igraph/man/arpack.html'>arpack_defaults</a></span>)
+<span class='fu'>centrality_authority</span>(
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/igraph/man/arpack.html'>arpack_defaults</a></span>
+)
 
-<span class='fu'>centrality_betweenness</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>nobigint</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>normalized</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>centrality_betweenness</span>(
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>nobigint</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>normalized</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
-<span class='fu'>centrality_power</span>(<span class='kw'>exponent</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rescale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-07</span>,
-  <span class='kw'>loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>centrality_power</span>(<span class='kw'>exponent</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rescale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-07</span>, <span class='kw'>loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>centrality_closeness</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"out"</span>,
-  <span class='kw'>normalized</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>centrality_closeness</span>(
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"out"</span>,
+  <span class='kw'>normalized</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
 
-<span class='fu'>centrality_eigen</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/igraph/man/arpack.html'>arpack_defaults</a></span>)
+<span class='fu'>centrality_eigen</span>(
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/igraph/man/arpack.html'>arpack_defaults</a></span>
+)
 
-<span class='fu'>centrality_hub</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/igraph/man/arpack.html'>arpack_defaults</a></span>)
+<span class='fu'>centrality_hub</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/igraph/man/arpack.html'>arpack_defaults</a></span>)
 
-<span class='fu'>centrality_pagerank</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>damping</span> <span class='kw'>=</span> <span class='fl'>0.85</span>,
-  <span class='kw'>personalized</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>centrality_pagerank</span>(
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>damping</span> <span class='kw'>=</span> <span class='fl'>0.85</span>,
+  <span class='kw'>personalized</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
 
 <span class='fu'>centrality_subgraph</span>(<span class='kw'>loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>centrality_degree</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"out"</span>, <span class='kw'>loops</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>normalized</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>centrality_degree</span>(
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"out"</span>,
+  <span class='kw'>loops</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>normalized</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
-<span class='fu'>centrality_edge_betweenness</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>centrality_edge_betweenness</span>(<span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='fu'>centrality_manual</span>(<span class='kw'>relation</span> <span class='kw'>=</span> <span class='st'>"dist_sp"</span>, <span class='kw'>aggregation</span> <span class='kw'>=</span> <span class='st'>"sum"</span>, <span class='no'>...</span>)
 
@@ -309,15 +338,15 @@ random walk. Evaluated in the context of the node data.</p></td>
     </tr>
     <tr>
       <th>relation</th>
-      <td><p>The indirect relation measure type to be used in <code><a href='https://schochastics.github.io/netrankr/reference/indirect_relations.html'>netrankr::indirect_relations</a></code></p></td>
+      <td><p>The indirect relation measure type to be used in <code><a href='https://rdrr.io/pkg/netrankr/man/indirect_relations.html'>netrankr::indirect_relations</a></code></p></td>
     </tr>
     <tr>
       <th>aggregation</th>
-      <td><p>The aggregation type to use on the indirect relations to be used in <code><a href='https://schochastics.github.io/netrankr/reference/aggregate_positions.html'>netrankr::aggregate_positions</a></code></p></td>
+      <td><p>The aggregation type to use on the indirect relations to be used in <code><a href='https://rdrr.io/pkg/netrankr/man/aggregate_positions.html'>netrankr::aggregate_positions</a></code></p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments to pass on to <code><a href='https://schochastics.github.io/netrankr/reference/indirect_relations.html'>netrankr::indirect_relations</a></code></p></td>
+      <td><p>Arguments to pass on to <code><a href='https://rdrr.io/pkg/netrankr/man/indirect_relations.html'>netrankr::indirect_relations</a></code></p></td>
     </tr>
     <tr>
       <th>netflowmode</th>
@@ -372,53 +401,48 @@ random walk. Evaluated in the context of the node data.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='create_graphs.html'>create_notable</a></span>(<span class='st'>'bull'</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='activate.html'>activate</a></span>(<span class='no'>nodes</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>importance</span> <span class='kw'>=</span> <span class='fu'>centrality_alpha</span>())</div><div class='output co'>#&gt; # A tbl_graph: 5 nodes and 5 edges
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>importance</span> <span class='kw'>=</span> <span class='fu'>centrality_alpha</span>())</div><div class='output co'>#&gt; <span style='color: #555555;'># A tbl_graph: 5 nodes and 5 edges
 #&gt; #
 #&gt; # An undirected simple graph with 1 component
 #&gt; #
-#&gt; # Node Data: 5 x 1 (active)
+#&gt; # Node Data: 5 x 1 (active)</span><span>
 #&gt;   importance
-#&gt;        &lt;dbl&gt;
-#&gt; 1         -1
-#&gt; 2         -1
-#&gt; 3         -1
-#&gt; 4          0
-#&gt; 5          0
-#&gt; #
-#&gt; # Edge Data: 5 x 2
+#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>         -</span><span style='color: #BB0000;'>1</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span>         -</span><span style='color: #BB0000;'>1</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>         -</span><span style='color: #BB0000;'>1</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span>          0
+#&gt; </span><span style='color: #555555;'>5</span><span>          0
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Edge Data: 5 x 2</span><span>
 #&gt;    from    to
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     2
-#&gt; 2     1     3
-#&gt; 3     2     3
-#&gt; # … with 2 more rows</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2
+#&gt; </span><span style='color: #555555;'>2</span><span>     1     3
+#&gt; </span><span style='color: #555555;'>3</span><span>     2     3
+#&gt; </span><span style='color: #555555;'># … with 2 more rows</span><span></div><div class='input'>
 <span class='co'># Most centrality measures are for nodes but not all</span>
 <span class='fu'><a href='create_graphs.html'>create_notable</a></span>(<span class='st'>'bull'</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='activate.html'>activate</a></span>(<span class='no'>edges</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>importance</span> <span class='kw'>=</span> <span class='fu'>centrality_edge_betweenness</span>())</div><div class='output co'>#&gt; # A tbl_graph: 5 nodes and 5 edges
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>importance</span> <span class='kw'>=</span> <span class='fu'>centrality_edge_betweenness</span>())</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tbl_graph: 5 nodes and 5 edges
 #&gt; #
 #&gt; # An undirected simple graph with 1 component
 #&gt; #
-#&gt; # Edge Data: 5 x 3 (active)
+#&gt; # Edge Data: 5 x 3 (active)</span><span>
 #&gt;    from    to importance
-#&gt;   &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;
-#&gt; 1     1     2          2
-#&gt; 2     1     3          2
-#&gt; 3     2     3          4
-#&gt; 4     2     4          4
-#&gt; 5     3     5          4
-#&gt; #
-#&gt; # Node Data: 5 x 0</div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2          2
+#&gt; </span><span style='color: #555555;'>2</span><span>     1     3          2
+#&gt; </span><span style='color: #555555;'>3</span><span>     2     3          4
+#&gt; </span><span style='color: #555555;'>4</span><span>     2     4          4
+#&gt; </span><span style='color: #555555;'>5</span><span>     3     5          4
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Node Data: 5 x 0</span><span></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#functions">Functions</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -429,7 +453,7 @@ random walk. Evaluated in the context of the node data.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

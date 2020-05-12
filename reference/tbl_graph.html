@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -57,7 +61,6 @@ just returns a tbl_df or a grouped_df depending on the state of the
 tbl_graph. The returned context can be overriden by using the active
 argument in as_tibble()." />
 <meta property="og:image" content="https://tidygraph.data-imaginist.com/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -75,7 +78,7 @@ argument in as_tibble()." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -89,7 +92,7 @@ argument in as_tibble()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
       </span>
     </div>
 
@@ -149,7 +152,7 @@ argument in as_tibble()." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>A data structure for tidy graph manipulation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thomasp85/tidygraph/blob/master/R/data_frame.R'><code>R/data_frame.R</code></a>, <a href='https://github.com/thomasp85/tidygraph/blob/master/R/data_tree.R'><code>R/data_tree.R</code></a>, <a href='https://github.com/thomasp85/tidygraph/blob/master/R/dendrogram.R'><code>R/dendrogram.R</code></a>, and 9 more</small>
+    <small class="dont-index">Source: <a href='https://github.com/thomasp85/tidygraph/blob/master/R/data_frame.R'><code>R/data_frame.R</code></a>, <a href='https://github.com/thomasp85/tidygraph/blob/master/R/data_tree.R'><code>R/data_tree.R</code></a>, <a href='https://github.com/thomasp85/tidygraph/blob/master/R/dendrogram.R'><code>R/dendrogram.R</code></a>, and 8 more</small>
     <div class="hidden name"><code>tbl_graph.Rd</code></div>
     </div>
 
@@ -176,8 +179,7 @@ argument in <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html
 <span class='fu'>as_tbl_graph</span>(<span class='no'>x</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"out"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for dendrogram</span>
-<span class='fu'>as_tbl_graph</span>(<span class='no'>x</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"out"</span>,
-  <span class='no'>...</span>)
+<span class='fu'>as_tbl_graph</span>(<span class='no'>x</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"out"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for graphNEL</span>
 <span class='fu'>as_tbl_graph</span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -195,7 +197,7 @@ argument in <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html
 <span class='fu'>as_tbl_graph</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for list</span>
-<span class='fu'>as_tbl_graph</span>(<span class='no'>x</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'>as_tbl_graph</span>(<span class='no'>x</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>node_key</span> <span class='kw'>=</span> <span class='st'>"name"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for matrix</span>
 <span class='fu'>as_tbl_graph</span>(<span class='no'>x</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
@@ -209,7 +211,7 @@ argument in <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html
 <span class='co'># S3 method for evonet</span>
 <span class='fu'>as_tbl_graph</span>(<span class='no'>x</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
-<span class='fu'>tbl_graph</span>(<span class='kw'>nodes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>edges</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>tbl_graph</span>(<span class='kw'>nodes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>edges</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>node_key</span> <span class='kw'>=</span> <span class='st'>"name"</span>)
 
 <span class='fu'>as_tbl_graph</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
@@ -239,9 +241,18 @@ argument in <code><a href='https://tibble.tidyverse.org/reference/as_tibble.html
 node or towards. Possible values are <code>"out"</code> (default) or <code>"in"</code>.</p></td>
     </tr>
     <tr>
+      <th>node_key</th>
+      <td><p>The name of the column in <code>nodes</code> that character represented
+<code>to</code> and <code>from</code> columns should be matched against. If <code>NA</code> the first column
+is always chosen. This setting has no effect if <code>to</code> and <code>from</code> are given as
+integers.</p></td>
+    </tr>
+    <tr>
       <th>nodes</th>
       <td><p>A <code>data.frame</code> containing information about the nodes in the
-graph.</p></td>
+graph. If <code>edges$to</code> and/or <code>edges$from</code> are characters then they will be
+matched to the column named according to <code>node_key</code> in nodes, if it exists.
+If not, they will be matched to the first column.</p></td>
     </tr>
     <tr>
       <th>edges</th>
@@ -285,36 +296,30 @@ package. Requires this packages to work.</p></li>
     <pre class="examples"><div class='input'><span class='no'>rstat_nodes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Hadley"</span>, <span class='st'>"David"</span>, <span class='st'>"Romain"</span>, <span class='st'>"Julia"</span>))
 <span class='no'>rstat_edges</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>4</span>, <span class='fl'>4</span>),
                             <span class='kw'>to</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>))
-<span class='fu'>tbl_graph</span>(<span class='kw'>nodes</span> <span class='kw'>=</span> <span class='no'>rstat_nodes</span>, <span class='kw'>edges</span> <span class='kw'>=</span> <span class='no'>rstat_edges</span>)</div><div class='output co'>#&gt; # A tbl_graph: 4 nodes and 9 edges
+<span class='fu'>tbl_graph</span>(<span class='kw'>nodes</span> <span class='kw'>=</span> <span class='no'>rstat_nodes</span>, <span class='kw'>edges</span> <span class='kw'>=</span> <span class='no'>rstat_edges</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tbl_graph: 4 nodes and 9 edges
 #&gt; #
 #&gt; # A directed simple graph with 1 component
 #&gt; #
-#&gt; # Node Data: 4 x 1 (active)
+#&gt; # Node Data: 4 x 1 (active)</span><span>
 #&gt;   name  
-#&gt;   &lt;fct&gt; 
-#&gt; 1 Hadley
-#&gt; 2 David 
-#&gt; 3 Romain
-#&gt; 4 Julia 
-#&gt; #
-#&gt; # Edge Data: 9 x 2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
+#&gt; </span><span style='color: #555555;'>1</span><span> Hadley
+#&gt; </span><span style='color: #555555;'>2</span><span> David 
+#&gt; </span><span style='color: #555555;'>3</span><span> Romain
+#&gt; </span><span style='color: #555555;'>4</span><span> Julia 
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Edge Data: 9 x 2</span><span>
 #&gt;    from    to
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     2
-#&gt; 2     1     3
-#&gt; 3     1     4
-#&gt; # … with 6 more rows</div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2
+#&gt; </span><span style='color: #555555;'>2</span><span>     1     3
+#&gt; </span><span style='color: #555555;'>3</span><span>     1     4
+#&gt; </span><span style='color: #555555;'># … with 6 more rows</span><span></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#methods-by-generic-">Methods (by generic)</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -325,7 +330,7 @@ package. Requires this packages to work.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -49,7 +53,6 @@ nodes in the resulting graph. Node and edge data is combined using
 dplyr::bind_rows() semantic, meaning that data is matched by column name
 and filled with NA if it is missing in either of the graphs." />
 <meta property="og:image" content="https://tidygraph.data-imaginist.com/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -67,7 +70,7 @@ and filled with NA if it is missing in either of the graphs." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -81,7 +84,7 @@ and filled with NA if it is missing in either of the graphs." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
       </span>
     </div>
 
@@ -153,8 +156,7 @@ nodes in the resulting graph. Node and edge data is combined using
 and filled with <code>NA</code> if it is missing in either of the graphs.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>graph_join</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>copy</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>suffix</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>".x"</span>, <span class='st'>".y"</span>),
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>graph_join</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>copy</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>suffix</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>".x"</span>, <span class='st'>".y"</span>), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,14 +171,19 @@ and filled with <code>NA</code> if it is missing in either of the graphs.</p>
     </tr>
     <tr>
       <th>by</th>
-      <td><p>a character vector of variables to join by.  If <code>NULL</code>, the
-default, <code>*_join()</code> will do a natural join, using all variables with
-common names across the two tables. A message lists the variables so
-that you can check they're right (to suppress the message, simply
-explicitly list the variables that you want to join).</p>
-<p>To join by different variables on x and y use a named vector.
-For example, <code>by = c("a" = "b")</code> will match <code>x.a</code> to
-<code>y.b</code>.</p></td>
+      <td><p>A character vector of variables to join by.</p>
+<p>If <code>NULL</code>, the default, <code>*_join()</code> will perform a natural join, using all
+variables in common across <code>x</code> and <code>y</code>. A message lists the variables so that you
+can check they're correct; suppress the message by supplying <code>by</code> explicitly.</p>
+<p>To join by different variables on <code>x</code> and <code>y</code>, use a named vector.
+For example, <code>by = c("a" = "b")</code> will match <code>x$a</code> to <code>y$b</code>.</p>
+<p>To join by multiple variables, use a vector with length &gt; 1.
+For example, <code>by = c("a", "b")</code> will match <code>x$a</code> to <code>y$a</code> and <code>x$b</code> to
+<code>y$b</code>. Use a named vector to match different variables in <code>x</code> and <code>y</code>.
+For example, <code>by = c("a" = "b", "c" = "d")</code> will match <code>x$a</code> to <code>y$b</code> and
+<code>x$c</code> to <code>y$d</code>.</p>
+<p>To perform a cross-join, generating all combinations of <code>x</code> and <code>y</code>,
+use <code>by = character()</code>.</p></td>
     </tr>
     <tr>
       <th>copy</th>
@@ -193,8 +200,7 @@ Should be a character vector of length 2.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>other parameters passed onto methods, for instance, <code>na_matches</code>
-to control how <code>NA</code> values are matched.  See join.tbl_df for more.</p></td>
+      <td><p>Other parameters passed onto methods.</p></td>
     </tr>
     </table>
 
@@ -210,37 +216,33 @@ to control how <code>NA</code> values are matched.  See join.tbl_df for more.</p
   <span class='fu'><a href='activate.html'>activate</a></span>(<span class='no'>nodes</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>4</span>:<span class='fl'>13</span>])
 
-<span class='no'>gr1</span> <span class='kw'>%&gt;%</span> <span class='fu'>graph_join</span>(<span class='no'>gr2</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = "name"</span></div><div class='output co'>#&gt; # A tbl_graph: 13 nodes and 15 edges
+<span class='no'>gr1</span> <span class='kw'>%&gt;%</span> <span class='fu'>graph_join</span>(<span class='no'>gr2</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = "name"</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tbl_graph: 13 nodes and 15 edges
 #&gt; #
 #&gt; # A directed acyclic simple graph with 1 component
 #&gt; #
-#&gt; # Node Data: 13 x 1 (active)
+#&gt; # Node Data: 13 x 1 (active)</span><span>
 #&gt;   name 
-#&gt;   &lt;chr&gt;
-#&gt; 1 a    
-#&gt; 2 b    
-#&gt; 3 c    
-#&gt; 4 d    
-#&gt; 5 e    
-#&gt; 6 f    
-#&gt; # … with 7 more rows
-#&gt; #
-#&gt; # Edge Data: 15 x 2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> a    
+#&gt; </span><span style='color: #555555;'>2</span><span> b    
+#&gt; </span><span style='color: #555555;'>3</span><span> c    
+#&gt; </span><span style='color: #555555;'>4</span><span> d    
+#&gt; </span><span style='color: #555555;'>5</span><span> e    
+#&gt; </span><span style='color: #555555;'>6</span><span> f    
+#&gt; </span><span style='color: #555555;'># … with 7 more rows</span><span>
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Edge Data: 15 x 2</span><span>
 #&gt;    from    to
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     2
-#&gt; 2     1     3
-#&gt; 3     2     3
-#&gt; # … with 12 more rows</div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2
+#&gt; </span><span style='color: #555555;'>2</span><span>     1     3
+#&gt; </span><span style='color: #555555;'>3</span><span>     2     3
+#&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -251,7 +253,7 @@ to control how <code>NA</code> values are matched.  See join.tbl_df for more.</p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

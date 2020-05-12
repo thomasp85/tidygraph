@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -55,7 +59,6 @@ index of the node in the combined graph. This means the bind_graphs()
 always result in a disconnected graph. See graph_join() for merging graphs
 on common nodes." />
 <meta property="og:image" content="https://tidygraph.data-imaginist.com/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -73,7 +76,7 @@ on common nodes." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -87,7 +90,7 @@ on common nodes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
       </span>
     </div>
 
@@ -169,20 +172,28 @@ on common nodes.</p>
 
 <span class='fu'>bind_nodes</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
 
-<span class='fu'>bind_edges</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>bind_edges</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>node_key</span> <span class='kw'>=</span> <span class='st'>"name"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>A <code>tbl_graph</code></p></td>
+      <td><p>A <code>tbl_graph</code>, or a list of <code>tbl_graph</code> objects (for
+<code>bind_graphs()</code>).</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>In case of <code>bind_nodes()</code> and <code>bind_edges()</code> data.frames to add.
 In the case of <code>bind_graphs()</code> objects that are convertible to <code>tbl_graph</code>
 using <code><a href='tbl_graph.html'>as_tbl_graph()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>node_key</th>
+      <td><p>The name of the column in <code>nodes</code> that character represented
+<code>to</code> and <code>from</code> columns should be matched against. If <code>NA</code> the first column
+is always chosen. This setting has no effect if <code>to</code> and <code>from</code> are given as
+integers.</p></td>
     </tr>
     </table>
 
@@ -195,66 +206,62 @@ using <code><a href='tbl_graph.html'>as_tbl_graph()</a></code>.</p></td>
 <span class='no'>new_graph</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_graphs.html'>create_notable</a></span>(<span class='st'>'housex'</span>)
 
 <span class='co'># Add nodes</span>
-<span class='no'>graph</span> <span class='kw'>%&gt;%</span> <span class='fu'>bind_nodes</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>new</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>))</div><div class='output co'>#&gt; # A tbl_graph: 9 nodes and 5 edges
+<span class='no'>graph</span> <span class='kw'>%&gt;%</span> <span class='fu'>bind_nodes</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>new</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tbl_graph: 9 nodes and 5 edges
 #&gt; #
 #&gt; # An undirected simple graph with 5 components
 #&gt; #
-#&gt; # Node Data: 9 x 1 (active)
+#&gt; # Node Data: 9 x 1 (active)</span><span>
 #&gt;     new
-#&gt;   &lt;int&gt;
-#&gt; 1    NA
-#&gt; 2    NA
-#&gt; 3    NA
-#&gt; 4    NA
-#&gt; 5    NA
-#&gt; 6     1
-#&gt; # … with 3 more rows
-#&gt; #
-#&gt; # Edge Data: 5 x 2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span>     1
+#&gt; </span><span style='color: #555555;'># … with 3 more rows</span><span>
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Edge Data: 5 x 2</span><span>
 #&gt;    from    to
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     2
-#&gt; 2     1     3
-#&gt; 3     2     3
-#&gt; # … with 2 more rows</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2
+#&gt; </span><span style='color: #555555;'>2</span><span>     1     3
+#&gt; </span><span style='color: #555555;'>3</span><span>     2     3
+#&gt; </span><span style='color: #555555;'># … with 2 more rows</span><span></div><div class='input'>
 <span class='co'># Add edges</span>
-<span class='no'>graph</span> <span class='kw'>%&gt;%</span> <span class='fu'>bind_edges</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>5</span>))</div><div class='output co'>#&gt; # A tbl_graph: 5 nodes and 7 edges
+<span class='no'>graph</span> <span class='kw'>%&gt;%</span> <span class='fu'>bind_edges</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>5</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tbl_graph: 5 nodes and 7 edges
 #&gt; #
 #&gt; # An undirected simple graph with 1 component
 #&gt; #
-#&gt; # Node Data: 5 x 0 (active)
-#&gt; #
-#&gt; # Edge Data: 7 x 2
+#&gt; # Node Data: 5 x 0 (active)</span><span>
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Edge Data: 7 x 2</span><span>
 #&gt;    from    to
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     2
-#&gt; 2     1     3
-#&gt; 3     2     3
-#&gt; # … with 4 more rows</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2
+#&gt; </span><span style='color: #555555;'>2</span><span>     1     3
+#&gt; </span><span style='color: #555555;'>3</span><span>     2     3
+#&gt; </span><span style='color: #555555;'># … with 4 more rows</span><span></div><div class='input'>
 <span class='co'># Add graphs</span>
-<span class='no'>graph</span> <span class='kw'>%&gt;%</span> <span class='fu'>bind_graphs</span>(<span class='no'>new_graph</span>)</div><div class='output co'>#&gt; # A tbl_graph: 10 nodes and 13 edges
+<span class='no'>graph</span> <span class='kw'>%&gt;%</span> <span class='fu'>bind_graphs</span>(<span class='no'>new_graph</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tbl_graph: 10 nodes and 13 edges
 #&gt; #
-#&gt; # A directed acyclic simple graph with 2 components
+#&gt; # An undirected simple graph with 2 components
 #&gt; #
-#&gt; # Node Data: 10 x 0 (active)
-#&gt; #
-#&gt; # Edge Data: 13 x 2
+#&gt; # Node Data: 10 x 0 (active)</span><span>
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Edge Data: 13 x 2</span><span>
 #&gt;    from    to
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     2
-#&gt; 2     1     3
-#&gt; 3     2     3
-#&gt; # … with 10 more rows</div><div class='input'>
-</div></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2
+#&gt; </span><span style='color: #555555;'>2</span><span>     1     3
+#&gt; </span><span style='color: #555555;'>3</span><span>     2     3
+#&gt; </span><span style='color: #555555;'># … with 10 more rows</span><span></div><div class='input'>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -265,7 +272,7 @@ using <code><a href='tbl_graph.html'>as_tbl_graph()</a></code>.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

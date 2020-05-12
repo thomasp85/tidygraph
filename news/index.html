@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,7 +48,6 @@
 
 <meta property="og:title" content="Changelog" />
 <meta property="og:image" content="https://tidygraph.data-imaginist.com/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -62,7 +65,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
       </span>
     </div>
 
@@ -135,31 +138,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/thomasp85/tidygraph/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div id="tidygraph-development-version" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="development version">
 <a href="#tidygraph-development-version" class="anchor"></a>tidygraph (development version)<small> Unreleased </small>
+</h1>
+</div>
+    <div id="tidygraph-120" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.0">
+<a href="#tidygraph-120" class="anchor"></a>tidygraph 1.2.0<small> 2020-05-12 </small>
 </h1>
 <ul>
 <li>graph description now recognise undirected trees</li>
 <li>Added pkgdown site at <a href="https://tidygraph.data-imaginist.com" class="uri">https://tidygraph.data-imaginist.com</a>
 </li>
+<li>Prepare tidygraph for dplyr 1.0.0 (<a href='https://github.com/thomasp85/tidygraph/issues/118'>#118</a> and <a href='https://github.com/thomasp85/tidygraph/issues/119'>#119</a>)</li>
+<li>Add possibility of controlling which column in <code>nodes</code> are used for matching if the <code>to</code> and <code>from</code> columns in edges are character vectors during construction (<a href='https://github.com/thomasp85/tidygraph/issues/89'>#89</a>)</li>
+<li>
+<code>bind_graph()</code> now accepts a list of graphs as its first argument (<a href='https://github.com/thomasp85/tidygraph/issues/88'>#88</a>)</li>
+<li>Add <code><a href="../reference/graph_measures.html">graph_modularity()</a></code> for calculating modularity contingent on a node grouping (<a href='https://github.com/thomasp85/tidygraph/issues/97'>#97</a>)</li>
+<li>Edge weights are now handled more consistently to avoid igraph using a possible <code>weight</code> edge attribute. <code>weights = NULL</code> will always mean that no edge weight is used (<a href='https://github.com/thomasp85/tidygraph/issues/106'>#106</a>).</li>
+<li>Neighborhood graph in <code><a href="../reference/map_local.html">map_local()</a></code> and siblings will now contain a <code>.central_node</code> node attribute that will identify the node from which the local graph has been calculated (<a href='https://github.com/thomasp85/tidygraph/issues/107'>#107</a>)</li>
 </ul>
 </div>
-    <div id="tidygraph-1-1-2" class="section level1">
-<h1 class="page-header">
-<a href="#tidygraph-1-1-2" class="anchor"></a>tidygraph 1.1.2<small> 2019-02-18 </small>
+    <div id="tidygraph-112" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.2">
+<a href="#tidygraph-112" class="anchor"></a>tidygraph 1.1.2<small> 2019-02-18 </small>
 </h1>
 <ul>
 <li>Compatibility with <code>dplyr</code> 0.8</li>
 </ul>
 </div>
-    <div id="tidygraph-1-1-1" class="section level1">
-<h1 class="page-header">
-<a href="#tidygraph-1-1-1" class="anchor"></a>tidygraph 1.1.1<small> 2018-11-20 </small>
+    <div id="tidygraph-111" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.1">
+<a href="#tidygraph-111" class="anchor"></a>tidygraph 1.1.1<small> 2018-11-20 </small>
 </h1>
 <ul>
 <li>Better conversion of <code>network</code> objects. Old conversion could mess up edge attributes.</li>
@@ -176,9 +191,9 @@
 </li>
 </ul>
 </div>
-    <div id="tidygraph-1-1-0" class="section level1">
-<h1 class="page-header">
-<a href="#tidygraph-1-1-0" class="anchor"></a>tidygraph 1.1.0<small> 2018-02-10 </small>
+    <div id="tidygraph-110" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.0">
+<a href="#tidygraph-110" class="anchor"></a>tidygraph 1.1.0<small> 2018-02-10 </small>
 </h1>
 <ul>
 <li>Fix bug when coercing to <code>tbl_graph</code> from an adjacency list containing <code>NULL</code> or <code>NA</code> elements.</li>
@@ -210,16 +225,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#tidygraph-development-version">development version</a></li>
-        <li><a href="#tidygraph-1-1-2">1.1.2</a></li>
-        <li><a href="#tidygraph-1-1-1">1.1.1</a></li>
-        <li><a href="#tidygraph-1-1-0">1.1.0</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -231,7 +240,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
