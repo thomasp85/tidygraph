@@ -374,7 +374,7 @@ map_dfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' (`map_local_int`), or `double` (`map_local_dbl`). These functions will throw
 #' an error if they are unsuccesful, so they are type safe.
 #'
-#' @importFrom igraph gorder make_ego_graph
+#' @importFrom igraph gorder make_ego_graph V<-
 #' @export
 #'
 #' @examples
