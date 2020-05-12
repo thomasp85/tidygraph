@@ -23,9 +23,14 @@ node_cohesion_to(nodes)
 
 node_cohesion_from(nodes)
 
-node_distance_to(nodes, mode = "out", weights = NA, algorithm = "automatic")
+node_distance_to(nodes, mode = "out", weights = NULL, algorithm = "automatic")
 
-node_distance_from(nodes, mode = "out", weights = NA, algorithm = "automatic")
+node_distance_from(
+  nodes,
+  mode = "out",
+  weights = NULL,
+  algorithm = "automatic"
+)
 
 node_cocitation_with(nodes)
 

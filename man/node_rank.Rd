@@ -22,7 +22,7 @@ node_rank_hclust(
   method = "average",
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -34,7 +34,7 @@ node_rank_anneal(
   reps = 1,
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -42,7 +42,7 @@ node_rank_branch_bound(
   weighted_gradient = FALSE,
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -51,14 +51,14 @@ node_rank_traveller(
   ...,
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
 node_rank_two(
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -66,7 +66,7 @@ node_rank_mds(
   method = "cmdscale",
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -75,14 +75,14 @@ node_rank_leafsort(
   type = "OLO",
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
 node_rank_visual(
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -90,7 +90,7 @@ node_rank_spectral(
   normalized = FALSE,
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -99,7 +99,7 @@ node_rank_spin_out(
   nstart = 10,
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -108,7 +108,7 @@ node_rank_spin_in(
   sigma = seq(20, 1, length.out = 10),
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -121,7 +121,7 @@ node_rank_quadratic(
   maxsteps = 50,
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -129,7 +129,7 @@ node_rank_genetic(
   ...,
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 
@@ -137,7 +137,7 @@ node_rank_dendser(
   ...,
   dist = "shortest",
   mode = "out",
-  weights = NA,
+  weights = NULL,
   algorithm = "automatic"
 )
 }

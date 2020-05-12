@@ -19,7 +19,7 @@ node_constraint(weights = NULL)
 
 node_coreness(mode = "out")
 
-node_diversity(weights = NULL)
+node_diversity(weights)
 
 node_bridging_score()
 

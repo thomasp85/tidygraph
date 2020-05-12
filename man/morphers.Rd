@@ -56,7 +56,7 @@ to_directed(graph)
 
 to_undirected(graph)
 
-to_hierarchical_clusters(graph, method = "walktrap", weights = NA, ...)
+to_hierarchical_clusters(graph, method = "walktrap", weights = NULL, ...)
 }
 \arguments{
 \item{graph}{A \code{tbl_graph}}

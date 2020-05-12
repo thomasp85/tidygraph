@@ -57,6 +57,10 @@ addition to those supplied through \code{...}:
 \item \code{graph}: The full \code{tbl_graph} object
 \item \code{node}: The index of the node currently mapped over
 }
+
+The \code{neighborhood} graph will contain an extra node attribute called
+\code{.central_node}, which will be \code{TRUE} for the node that the neighborhood is
+expanded from and \code{FALSE} for everything else.
 }
 \examples{
 # Smooth out values over a neighborhood
