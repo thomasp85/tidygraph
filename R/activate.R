@@ -48,9 +48,13 @@ activate.tbl_graph <- function(.data, what) {
 #' @export
 #' @importFrom rlang enquo
 activate.grouped_tbl_graph <- function(.data, what) {
-  message('Ungrouping graph...')
   what <- enquo(what)
-  activate(ungroup(.data), !!what)
+  if (gsub('"', '', quo_text(what)) == active(.data)) {
+    return(.data)
+  }
+  message('Ungrouping graph...')
+  .data <- ungroup(.data)
+  activate(.data, !!what)
 }
 #' @export
 activate.morphed_tbl_graph <- function(.data, what) {
