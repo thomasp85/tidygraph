@@ -1,17 +1,17 @@
-# TODO: Update signature to include `name` once we begin to depend on dplyr 1.0
-
 #' @export
 #' @importFrom dplyr pull
-pull.tbl_graph <- function(.data, var = -1, ...) {
+pull.tbl_graph <- function(.data, var = -1, name = NULL, ...) {
   d_tmp <- as_tibble(.data)
   var <- enquo(var)
-  pull(d_tmp, !! var, ...)
+  name <- enquo(name)
+  pull(d_tmp, !! var, !! name, ...)
 }
 #' @export
 #' @importFrom dplyr pull
-pull.morphed_tbl_graph <- function(.data, var = -1, ...) {
+pull.morphed_tbl_graph <- function(.data, var = -1, name = NULL, ...) {
   var <- enquo(var)
-  lapply(.data, pull, !! var, ...)
+  name <- enquo(name)
+  lapply(.data, pull, !! var, !! name, ...)
 }
 #' @export
 dplyr::pull
