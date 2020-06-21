@@ -72,7 +72,7 @@ bind_graphs <- function(.data, ...) {
 #' @export
 bind_nodes <- function(.data, ...) {
   stopifnot(is.tbl_graph(.data))
-  d_tmp <- as_tibble(.data, acitve = 'nodes')
+  d_tmp <- as_tibble(.data, active = 'nodes')
   new_nodes <- bind_rows(d_tmp, ...)
   .data <- add_vertices(.data, nrow(new_nodes) - nrow(d_tmp)) %gr_attr% .data
   set_graph_data(.data, new_nodes, active = 'nodes')
