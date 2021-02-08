@@ -55,8 +55,8 @@ group_edge_betweenness <- function(weights = NULL, directed = TRUE, n_communitie
   # NULL in weights is for once respected despite a weight attribute
   clusters <- cluster_edge_betweenness(graph = .G(), weights = weights, directed = directed)
   if (!is.null(n_communities)) {
-    clusters <- igraph::cut_at(clusters, no = n_communities)
-    return(clusters %>% as.integer %>% desc_enumeration)
+    #clusters <- igraph::cut_at(clusters, no = n_communities)
+    return(clusters %>% igraph::cut_at(no = n_communities) %>%  as.integer %>% desc_enumeration)
   }
   group <- as.integer(membership(clusters))
   desc_enumeration(group)
@@ -64,10 +64,14 @@ group_edge_betweenness <- function(weights = NULL, directed = TRUE, n_communitie
 #' @describeIn group_graph Group nodes by optimising modularity using [igraph::cluster_fast_greedy()]
 #' @importFrom igraph membership cluster_fast_greedy
 #' @export
-group_fast_greedy <- function(weights = NULL) {
+group_fast_greedy <- function(weights = NULL, n_communities = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
+  clusters <- cluster_fast_greedy(graph = .G(), weights = weights)
+  if (!is.null(n_communities)) {
+    return(clusters %>% igraph::cut_at(no = n_communities) %>% as.integer %>% desc_enumeration) 
+  }
   # NULL in weights is for once respected despite a weight attribute
   group <- as.integer(membership(cluster_fast_greedy(graph = .G(), weights = weights)))
   desc_enumeration(group)
