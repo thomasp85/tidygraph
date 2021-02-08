@@ -3,6 +3,7 @@ context("group")
 get_group <- function(gr, fn) {
   gr %>% mutate(group = fn) %>% pull(group)
 }
+
 test_that("grouping returns integer vector", {
   gr <- create_notable('zachary')
   expect_is(get_group(gr, group_components()), 'integer')
@@ -53,4 +54,13 @@ test_that("grouping requires correct activation", {
 
   skip_on_os('windows')
   expect_error(get_group(gr1, group_leading_eigen()))
+})
+
+test_that("clustering with fixed number of communities works", {
+  gr <- create_notable('zachary')
+  comm <- gr %>%
+    activate(nodes) %>% 
+    mutate(community = group_edge_betweenness(n_communities = 4)) %>%
+    dplyr::as_data_frame(what='vertices') %>% distinct() %>% dplyr::count() %>% dplyr::first()
+  expect_equal(comm, 4)
 })

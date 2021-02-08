@@ -48,12 +48,17 @@ group_components <- function(type = 'weak') {
 #' @describeIn group_graph Group densely connected nodes using [igraph::cluster_edge_betweenness()]
 #' @importFrom igraph membership cluster_edge_betweenness
 #' @export
-group_edge_betweenness <- function(weights = NULL, directed = TRUE) {
+group_edge_betweenness <- function(weights = NULL, directed = TRUE, n_communities = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   # NULL in weights is for once respected despite a weight attribute
-  group <- as.integer(membership(cluster_edge_betweenness(graph = .G(), weights = weights, directed = directed)))
+  clusters <- cluster_edge_betweenness(graph = .G(), weights = weights, directed = directed)
+  if (!is.null(n_communities)) {
+    clusters <- igraph::cut_at(clusters, no = n_communities)
+    return(clusters %>% as.integer %>% desc_enumeration)
+  }
+  group <- as.integer(membership(clusters))
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by optimising modularity using [igraph::cluster_fast_greedy()]
