@@ -170,14 +170,18 @@ group_spinglass <- function(weights = NULL, ...) {
 #' @describeIn group_graph Group nodes via short random walks using [igraph::cluster_walktrap()]
 #' @importFrom igraph membership cluster_walktrap
 #' @export
-group_walktrap <- function(weights = NULL, steps = 4) {
+group_walktrap <- function(weights = NULL, steps = 4, n_communities = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   if (is.null(weights)) {
     weights <- NA
   }
-  group <- as.integer(membership(cluster_walktrap(graph = .G(), weights = weights, steps = steps)))
+  clusters <- cluster_walktrap(graph = .G(), weights = weights, steps = steps)
+  if (!is.null(n_communities)) {
+    return(clusters %>% igraph::cut_at(no = n_communities) %>% as.integer %>% desc_enumeration)
+  }
+  group <- as.integer(membership(clusters))
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group edges by their membership of the maximal binconnected components using [igraph::biconnected_components()]
