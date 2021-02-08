@@ -63,7 +63,7 @@ test_that("grouping requires correct activation", {
   expect_error(get_group(gr1, group_leading_eigen()))
 })
 
-test_that("clustering with fixed number of communities works", {
+test_that("clustering with fixed number of communities", {
   gr <- create_notable('zachary')
   expect_equal(
     get_number_of_communities(gr, group_edge_betweenness(n_communities = 4)), 4
