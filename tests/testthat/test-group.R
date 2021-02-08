@@ -71,4 +71,7 @@ test_that("clustering with fixed number of communities works", {
   expect_equal(
     get_number_of_communities(gr, group_fast_greedy(n_communities = 4)), 4
   )
+  expect_equal(
+    get_number_of_communities(gr, group_leading_eigen(n_communities = 4)), 4
+  )
 })

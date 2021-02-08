@@ -73,7 +73,7 @@ group_fast_greedy <- function(weights = NULL, n_communities = NULL) {
     return(clusters %>% igraph::cut_at(no = n_communities) %>% as.integer %>% desc_enumeration) 
   }
   # NULL in weights is for once respected despite a weight attribute
-  group <- as.integer(membership(cluster_fast_greedy(graph = .G(), weights = weights)))
+  group <- as.integer(membership(clusters))
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by minimizing description length using [igraph::cluster_infomap()]
@@ -112,7 +112,7 @@ group_label_prop <- function(weights = NULL, label = NULL, fixed = NULL) {
 #' @describeIn group_graph Group nodes based on the leading eigenvector of the modularity matrix using [igraph::cluster_leading_eigen()]
 #' @importFrom igraph membership cluster_leading_eigen
 #' @export
-group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, options = igraph::arpack_defaults) {
+group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, options = igraph::arpack_defaults, n_communities = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
@@ -121,7 +121,11 @@ group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, option
   }
   label <- enquo(label)
   label <- eval_tidy(label, .N())
-  group <- as.integer(membership(cluster_leading_eigen(graph = .G(), steps = steps, weights = weights, start = label, options = options)))
+  clusters <- cluster_leading_eigen(graph = .G(), steps = steps, weights = weights, start = label, options = options)
+  if (!is.null(n_communities)) {
+    return(clusters %>% igraph::cut_at(no = n_communities) %>% as.integer %>% desc_enumeration)
+  }
+  group <- as.integer(membership(clusters))
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by multilevel optimisation of modularity using [igraph::cluster_louvain()]
