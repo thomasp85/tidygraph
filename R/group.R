@@ -69,12 +69,14 @@ group_fast_greedy <- function(weights = NULL, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
-  clusters <- cluster_fast_greedy(graph = .G(), weights = weights)
-  if (!is.null(n_groups)) {
-    return(clusters %>% igraph::cut_at(no = n_groups) %>% as.integer %>% desc_enumeration) 
-  }
   # NULL in weights is for once respected despite a weight attribute
-  group <- as.integer(membership(clusters))
+  group <- cluster_fast_greedy(graph = .G(), weights = weights)
+  if (is.null(n_groups)) {
+    group <- memebership(group)
+  } else {
+    group <- cut_at(group, no = n_groups)
+  }
+  group <- as.integer(group)
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by minimizing description length using [igraph::cluster_infomap()]
