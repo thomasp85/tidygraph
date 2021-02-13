@@ -56,7 +56,7 @@ group_edge_betweenness <- function(weights = NULL, directed = TRUE, n_groups = N
   # NULL in weights is for once respected despite a weight attribute
   group <- cluster_edge_betweenness(graph = .G(), weights = weights, directed = directed)
   if (is.null(n_groups)) {
-    group <- memebership(group)
+    group <- membership(group)
   } else {
     group <- cut_at(group, no = n_groups)
   }
@@ -73,7 +73,7 @@ group_fast_greedy <- function(weights = NULL, n_groups = NULL) {
   # NULL in weights is for once respected despite a weight attribute
   group <- cluster_fast_greedy(graph = .G(), weights = weights)
   if (is.null(n_groups)) {
-    group <- memebership(group)
+    group <- membership(group)
   } else {
     group <- cut_at(group, no = n_groups)
   }
