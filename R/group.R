@@ -18,6 +18,7 @@
 #' initial groups. Will be evaluated in the context of the node data.
 #' @param type The type of component to find. Either `'weak'` or `'strong'`
 #' @param directed Should direction of edges be used for the calculations
+#' @param n_groups Integer scalar, the desired number of communities. If too low or two high, then an error message is given.
 #' @param trials Number of times partition of the network should be attempted
 #' @param steps The number of steps in the random walks
 #' @param options Settings passed on to `igraph::arpack()`
