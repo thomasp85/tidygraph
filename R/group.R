@@ -46,31 +46,32 @@ group_components <- function(type = 'weak') {
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group densely connected nodes using [igraph::cluster_edge_betweenness()]
-#' @importFrom igraph membership cluster_edge_betweenness
+#' @importFrom igraph membership cluster_edge_betweenness cut_at
 #' @export
-group_edge_betweenness <- function(weights = NULL, directed = TRUE, n_communities = NULL) {
+group_edge_betweenness <- function(weights = NULL, directed = TRUE, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   # NULL in weights is for once respected despite a weight attribute
-  clusters <- cluster_edge_betweenness(graph = .G(), weights = weights, directed = directed)
-  if (!is.null(n_communities)) {
-    #clusters <- igraph::cut_at(clusters, no = n_communities)
-    return(clusters %>% igraph::cut_at(no = n_communities) %>%  as.integer %>% desc_enumeration)
+  group <- cluster_edge_betweenness(graph = .G(), weights = weights, directed = directed)
+  if (is.null(n_groups)) {
+    group <- memebership(group)
+  } else {
+    group <- cut_at(group, no = n_groups)
   }
-  group <- as.integer(membership(clusters))
+  group <- as.integer(group)
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by optimising modularity using [igraph::cluster_fast_greedy()]
-#' @importFrom igraph membership cluster_fast_greedy
+#' @importFrom igraph membership cluster_fast_greedy cut_at
 #' @export
-group_fast_greedy <- function(weights = NULL, n_communities = NULL) {
+group_fast_greedy <- function(weights = NULL, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   clusters <- cluster_fast_greedy(graph = .G(), weights = weights)
-  if (!is.null(n_communities)) {
-    return(clusters %>% igraph::cut_at(no = n_communities) %>% as.integer %>% desc_enumeration) 
+  if (!is.null(n_groups)) {
+    return(clusters %>% igraph::cut_at(no = n_groups) %>% as.integer %>% desc_enumeration) 
   }
   # NULL in weights is for once respected despite a weight attribute
   group <- as.integer(membership(clusters))
@@ -110,9 +111,9 @@ group_label_prop <- function(weights = NULL, label = NULL, fixed = NULL) {
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes based on the leading eigenvector of the modularity matrix using [igraph::cluster_leading_eigen()]
-#' @importFrom igraph membership cluster_leading_eigen
+#' @importFrom igraph membership cluster_leading_eigen cut_at
 #' @export
-group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, options = igraph::arpack_defaults, n_communities = NULL) {
+group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, options = igraph::arpack_defaults, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
@@ -122,8 +123,8 @@ group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, option
   label <- enquo(label)
   label <- eval_tidy(label, .N())
   clusters <- cluster_leading_eigen(graph = .G(), steps = steps, weights = weights, start = label, options = options)
-  if (!is.null(n_communities)) {
-    return(clusters %>% igraph::cut_at(no = n_communities) %>% as.integer %>% desc_enumeration)
+  if (!is.null(n_groups)) {
+    return(clusters %>% igraph::cut_at(no = n_groups) %>% as.integer %>% desc_enumeration)
   }
   group <- as.integer(membership(clusters))
   desc_enumeration(group)
@@ -168,20 +169,22 @@ group_spinglass <- function(weights = NULL, ...) {
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes via short random walks using [igraph::cluster_walktrap()]
-#' @importFrom igraph membership cluster_walktrap
+#' @importFrom igraph membership cluster_walktrap cut_at
 #' @export
-group_walktrap <- function(weights = NULL, steps = 4, n_communities = NULL) {
+group_walktrap <- function(weights = NULL, steps = 4, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   if (is.null(weights)) {
     weights <- NA
   }
-  clusters <- cluster_walktrap(graph = .G(), weights = weights, steps = steps)
-  if (!is.null(n_communities)) {
-    return(clusters %>% igraph::cut_at(no = n_communities) %>% as.integer %>% desc_enumeration)
+  group <- cluster_walktrap(graph = .G(), weights = weights, steps = steps)
+  if (is.null(n_groups)) {
+    group <- membership(group)
+  } else {
+    group <- cut_at(group, no = n_groups)
   }
-  group <- as.integer(membership(clusters))
+  group <- as.integer(group)
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group edges by their membership of the maximal binconnected components using [igraph::biconnected_components()]
