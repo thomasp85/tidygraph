@@ -124,11 +124,13 @@ group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, option
   }
   label <- enquo(label)
   label <- eval_tidy(label, .N())
-  clusters <- cluster_leading_eigen(graph = .G(), steps = steps, weights = weights, start = label, options = options)
-  if (!is.null(n_groups)) {
-    return(clusters %>% igraph::cut_at(no = n_groups) %>% as.integer %>% desc_enumeration)
+  group <- cluster_leading_eigen(graph = .G(), steps = steps, weights = weights, start = label, options = options)
+  if (is.null(n_groups)) {
+    group <- membership(group)
+  } else {
+    group <- cut_at(group, no = n_groups)
   }
-  group <- as.integer(membership(clusters))
+  group <- as.integer(group)
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by multilevel optimisation of modularity using [igraph::cluster_louvain()]
