@@ -63,7 +63,7 @@ test_that("grouping requires correct activation", {
   expect_error(get_group(gr1, group_leading_eigen()))
 })
 
-test_that("clustering with fixed number of groups", {
+test_that("grouping with fixed number of groups", {
   gr <- create_notable('zachary')
   expect_equal(
     get_number_of_groups(gr, group_edge_betweenness(n_groups = 4)), 4
