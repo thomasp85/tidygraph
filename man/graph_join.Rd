@@ -47,7 +47,7 @@ A \code{tbl_graph} containing the merged graph
 This graph-specific join method makes a full join on the nodes data and
 updates the edges in the joining graph so they matches the new indexes of the
 nodes in the resulting graph. Node and edge data is combined using
-\code{\link[dplyr:bind_rows]{dplyr::bind_rows()}} semantic, meaning that data is matched by column name
+\code{\link[dplyr:bind]{dplyr::bind_rows()}} semantic, meaning that data is matched by column name
 and filled with \code{NA} if it is missing in either of the graphs.
 }
 \examples{
