@@ -92,18 +92,18 @@ detail at the linked igraph documentation.
 based on a defined probability. See \code{\link[igraph:sample_pref]{igraph::sample_pref()}}
 
 \item \code{play_preference_asym}: Create graphs by linking nodes of different types
-based on an asymmetric probability. See \code{\link[igraph:sample_asym_pref]{igraph::sample_asym_pref()}}
+based on an asymmetric probability. See \code{\link[igraph:sample_pref]{igraph::sample_asym_pref()}}
 
 \item \code{play_bipartite}: Create bipartite graphs of fixed size and edge count
 or probability. See \code{\link[igraph:sample_bipartite]{igraph::sample_bipartite()}}
 
 \item \code{play_traits}: Create graphs by evolving a graph with type based edge
-probabilities. See \code{\link[igraph:sample_traits]{igraph::sample_traits()}} and
+probabilities. See \code{\link[igraph:sample_traits_callaway]{igraph::sample_traits()}} and
 \code{\link[igraph:sample_traits_callaway]{igraph::sample_traits_callaway()}}
 
 \item \code{play_citation_type}: Create citation graphs by evolving with type based
-linking probability. See \code{\link[igraph:sample_cit_types]{igraph::sample_cit_types()}} and
-\code{\link[igraph:sample_cit_cit_types]{igraph::sample_cit_cit_types()}}
+linking probability. See \code{\link[igraph:sample_last_cit]{igraph::sample_cit_types()}} and
+\code{\link[igraph:sample_last_cit]{igraph::sample_cit_cit_types()}}
 }}
 
 \examples{

@@ -127,11 +127,11 @@ them.
 
 \item \code{graph_automorphisms}: Calculate the number of automorphisms of the graph. Wraps \code{\link[igraph:automorphisms]{igraph::automorphisms()}}
 
-\item \code{graph_clique_num}: Get the size of the largest clique. Wraps \code{\link[igraph:clique_num]{igraph::clique_num()}}
+\item \code{graph_clique_num}: Get the size of the largest clique. Wraps \code{\link[igraph:cliques]{igraph::clique_num()}}
 
-\item \code{graph_clique_count}: Get the number of maximal cliques in the graph. Wraps \code{\link[igraph:count_max_cliques]{igraph::count_max_cliques()}}
+\item \code{graph_clique_count}: Get the number of maximal cliques in the graph. Wraps \code{\link[igraph:cliques]{igraph::count_max_cliques()}}
 
-\item \code{graph_component_count}: Count the number of unconnected componenets in the graph. Wraps \code{\link[igraph:count_components]{igraph::count_components()}}
+\item \code{graph_component_count}: Count the number of unconnected componenets in the graph. Wraps \code{\link[igraph:components]{igraph::count_components()}}
 
 \item \code{graph_motif_count}: Count the number of motifs in a graph. Wraps \code{\link[igraph:count_motifs]{igraph::count_motifs()}}
 
@@ -155,7 +155,7 @@ them.
 
 \item \code{graph_min_cut}: Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps \code{\link[igraph:min_cut]{igraph::min_cut()}}
 
-\item \code{graph_mean_dist}: Calculates the mean distance between all node pairs in the graph. Wraps \code{\link[igraph:mean_distance]{igraph::mean_distance()}}
+\item \code{graph_mean_dist}: Calculates the mean distance between all node pairs in the graph. Wraps \code{\link[igraph:distances]{igraph::mean_distance()}}
 
 \item \code{graph_modularity}: Calculates the modularity of the graph contingent on a provided node grouping
 }}

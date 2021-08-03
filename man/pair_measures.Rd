@@ -93,7 +93,7 @@ supply the graph being computed on as the context is known.
 
 \item \code{node_cocitation_with}: Calculate node pair cocitation count. Wraps \code{\link[igraph:cocitation]{igraph::cocitation()}}
 
-\item \code{node_bibcoupling_with}: Calculate node pair bibliographic coupling. Wraps \code{\link[igraph:bibcoupling]{igraph::bibcoupling()}}
+\item \code{node_bibcoupling_with}: Calculate node pair bibliographic coupling. Wraps \code{\link[igraph:cocitation]{igraph::bibcoupling()}}
 
 \item \code{node_similarity_with}: Calculate various node pair similarity measures. Wraps \code{\link[igraph:similarity]{igraph::similarity()}}
 

@@ -17,9 +17,9 @@
 \usage{
 group_components(type = "weak")
 
-group_edge_betweenness(weights = NULL, directed = TRUE)
+group_edge_betweenness(weights = NULL, directed = TRUE, n_groups = NULL)
 
-group_fast_greedy(weights = NULL)
+group_fast_greedy(weights = NULL, n_groups = NULL)
 
 group_infomap(weights = NULL, node_weights = NULL, trials = 10)
 
@@ -29,7 +29,8 @@ group_leading_eigen(
   weights = NULL,
   steps = -1,
   label = NULL,
-  options = igraph::arpack_defaults
+  options = igraph::arpack_defaults,
+  n_groups = NULL
 )
 
 group_louvain(weights = NULL)
@@ -38,7 +39,7 @@ group_optimal(weights = NULL)
 
 group_spinglass(weights = NULL, ...)
 
-group_walktrap(weights = NULL, steps = 4)
+group_walktrap(weights = NULL, steps = 4, n_groups = NULL)
 
 group_biconnected_component()
 }
@@ -49,6 +50,8 @@ group_biconnected_component()
 evaluated in the context of the edge data.}
 
 \item{directed}{Should direction of edges be used for the calculations}
+
+\item{n_groups}{Integer scalar, the desired number of communities. If too low or two high, then an error message is given.}
 
 \item{node_weights}{The weight of the nodes to use for the calculation. Will
 be evaluated in the context of the node data.}

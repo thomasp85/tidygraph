@@ -29,7 +29,7 @@ integers.}
 A \code{tbl_graph} containing the new data
 }
 \description{
-These functions are tbl_graph pendants to \code{\link[dplyr:bind_rows]{dplyr::bind_rows()}} that allows
+These functions are tbl_graph pendants to \code{\link[dplyr:bind]{dplyr::bind_rows()}} that allows
 you to grow your \code{tbl_graph} by adding rows to either the nodes data, the
 edges data, or both. As with \code{bind_rows()} columns are matched by name and
 are automatically filled with \code{NA} if the column doesn't exist in some
