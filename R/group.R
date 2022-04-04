@@ -180,9 +180,6 @@ group_walktrap <- function(weights = NULL, steps = 4, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
   group <- cluster_walktrap(graph = .G(), weights = weights, steps = steps)
   if (is.null(n_groups)) {
     group <- membership(group)
