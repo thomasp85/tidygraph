@@ -3,7 +3,7 @@
 group_by.tbl_graph <- function(.data, ..., add = FALSE) {
   .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
-  d_tmp <- group_by(d_tmp, ..., add = add)
+  d_tmp <- group_by(d_tmp, ..., .add = add)
   apply_groups(.data, attributes(d_tmp))
 }
 #' @export
