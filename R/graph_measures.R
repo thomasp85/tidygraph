@@ -50,7 +50,7 @@ graph_assortativity <- function(attr, in_attr = NULL, directed = TRUE) {
 #' @export
 graph_automorphisms <- function(sh = 'fm') {
   graph <- .G()
-  as.numeric(automorphisms(graph, sh)$group_size)
+  as.numeric(automorphisms(graph, sh = sh)$group_size)
 }
 #' @describeIn graph_measures Get the size of the largest clique. Wraps [igraph::clique_num()]
 #' @importFrom igraph clique_num
