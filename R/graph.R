@@ -18,11 +18,7 @@ as_tbl_graph.graphNEL <- function(x, ...) {
 
   graph_nd <- graph::nodeData(x)
   graph_nd <- lapply(names(graph_nd), function(n) {
-    if (length(graph_nd[[n]]) == 0) {
-      tibble(name = n)
-    } else {
-      as_tibble(list(name = n, graph_nd[[n]]))
-    }
+    tibble(name = n, !!!graph_nd[[n]])
   })
   node_data <- bind_rows(graph_nd)
   node_data <- node_data[match(node_data$name, V(graph)$name), ]
