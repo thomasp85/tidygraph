@@ -249,6 +249,7 @@ to_contracted <- function(graph, ..., simplify = TRUE) {
   nodes <- as_tibble(graph, active = 'nodes')
   nodes <- group_by(nodes, ...)
   ind <- group_indices(nodes)
+  ind <- match(ind, unique(ind))
   contracted <- as_tbl_graph(contract(graph, ind, vertex.attr.comb = 'ignore'))
   nodes <- nest_legacy(nodes, .key = '.orig_data')
   ind <- lapply(nodes$.orig_data, `[[`, '.tidygraph_node_index')
