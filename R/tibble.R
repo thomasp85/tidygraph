@@ -11,6 +11,7 @@ as_tibble.tbl_graph <- function(x, active = NULL, ...) {
     cli::cli_abort('Unknown active element: {.val {active}}. Only nodes and edges supported')
   )
 }
+#' @export
 as_tibble.grouped_tbl_graph <- function(x, active = NULL, ...) {
   tbl <- NextMethod()
   if (is.null(active)) {
@@ -19,6 +20,10 @@ as_tibble.grouped_tbl_graph <- function(x, active = NULL, ...) {
   group_attr <- attr(x, paste0(active, '_group_attr'))
   if (!is.null(group_attr)) attributes(tbl) <- group_attr
   tbl
+}
+#' @export
+as_tibble.morphed_tbl_graph <- function(x, ...) {
+  as_tibble(crystallize(x))
 }
 #' @export
 tibble::as_tibble
