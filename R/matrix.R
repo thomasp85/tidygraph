@@ -12,13 +12,13 @@ as_tbl_graph.matrix <- function(x, directed = TRUE, ...) {
 }
 
 guess_matrix_type <- function(x) {
-  if (ncol(x) == 2) {
-    'edgelist'
-  } else if (nrow(x) == ncol(x) &&
-             mode(x) %in% c('numeric', 'integer') &&
-             ((is.null(rownames(x)) && is.null(colnames(x))) ||
-              colnames(x) == rownames(x))) {
+  if (nrow(x) == ncol(x) &&
+      mode(x) %in% c('numeric', 'integer') &&
+      ((is.null(rownames(x)) && is.null(colnames(x))) ||
+       colnames(x) == rownames(x))) {
     'adjacency'
+  } else if (ncol(x) == 2) {
+    'edgelist'
   } else if (mode(x) %in% c('numeric', 'integer')) {
     'incidence'
   } else {
