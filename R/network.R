@@ -57,6 +57,8 @@ network_to_igraph <- function(graph) {
     node_attr$name <- node_attr$vertex.names
   }
   node_attr$vertex.names <- NULL
+  missing_nodes <- network::network.size(graph) - gorder(new_graph)
+  new_graph <- add_vertices(new_graph, missing_nodes)
   vertex_attr(new_graph) <- node_attr
   edge_attr(new_graph) <- edge_attr
 
