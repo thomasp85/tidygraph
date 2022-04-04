@@ -81,6 +81,7 @@ is.tbl_graph <- function(x) {
 #' @export
 print.tbl_graph <- function(x, ...) {
   arg_list <- list(...)
+  arg_list[['useS4']] <- NULL
   graph_desc <- describe_graph(x)
   not_active <- if (active(x) == 'nodes') 'edges' else 'nodes'
   top <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x), n = 6)))
