@@ -18,6 +18,7 @@
 #' initial groups. Will be evaluated in the context of the node data.
 #' @param type The type of component to find. Either `'weak'` or `'strong'`
 #' @param directed Should direction of edges be used for the calculations
+#' @param n_groups Integer scalar, the desired number of communities. If too low or two high, then an error message is given.
 #' @param trials Number of times partition of the network should be attempted
 #' @param steps The number of steps in the random walks
 #' @param options Settings passed on to `igraph::arpack()`
@@ -46,25 +47,37 @@ group_components <- function(type = 'weak') {
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group densely connected nodes using [igraph::cluster_edge_betweenness()]
-#' @importFrom igraph membership cluster_edge_betweenness
+#' @importFrom igraph membership cluster_edge_betweenness cut_at
 #' @export
-group_edge_betweenness <- function(weights = NULL, directed = TRUE) {
+group_edge_betweenness <- function(weights = NULL, directed = TRUE, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   # NULL in weights is for once respected despite a weight attribute
-  group <- as.integer(membership(cluster_edge_betweenness(graph = .G(), weights = weights, directed = directed)))
+  group <- cluster_edge_betweenness(graph = .G(), weights = weights, directed = directed)
+  if (is.null(n_groups)) {
+    group <- membership(group)
+  } else {
+    group <- cut_at(group, no = n_groups)
+  }
+  group <- as.integer(group)
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by optimising modularity using [igraph::cluster_fast_greedy()]
-#' @importFrom igraph membership cluster_fast_greedy
+#' @importFrom igraph membership cluster_fast_greedy cut_at
 #' @export
-group_fast_greedy <- function(weights = NULL) {
+group_fast_greedy <- function(weights = NULL, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   # NULL in weights is for once respected despite a weight attribute
-  group <- as.integer(membership(cluster_fast_greedy(graph = .G(), weights = weights)))
+  group <- cluster_fast_greedy(graph = .G(), weights = weights)
+  if (is.null(n_groups)) {
+    group <- membership(group)
+  } else {
+    group <- cut_at(group, no = n_groups)
+  }
+  group <- as.integer(group)
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by minimizing description length using [igraph::cluster_infomap()]
@@ -101,9 +114,9 @@ group_label_prop <- function(weights = NULL, label = NULL, fixed = NULL) {
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes based on the leading eigenvector of the modularity matrix using [igraph::cluster_leading_eigen()]
-#' @importFrom igraph membership cluster_leading_eigen
+#' @importFrom igraph membership cluster_leading_eigen cut_at
 #' @export
-group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, options = igraph::arpack_defaults) {
+group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, options = igraph::arpack_defaults, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
@@ -112,7 +125,13 @@ group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, option
   }
   label <- enquo(label)
   label <- eval_tidy(label, .N())
-  group <- as.integer(membership(cluster_leading_eigen(graph = .G(), steps = steps, weights = weights, start = label, options = options)))
+  group <- cluster_leading_eigen(graph = .G(), steps = steps, weights = weights, start = label, options = options)
+  if (is.null(n_groups)) {
+    group <- membership(group)
+  } else {
+    group <- cut_at(group, no = n_groups)
+  }
+  group <- as.integer(group)
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by multilevel optimisation of modularity using [igraph::cluster_louvain()]
@@ -155,16 +174,22 @@ group_spinglass <- function(weights = NULL, ...) {
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes via short random walks using [igraph::cluster_walktrap()]
-#' @importFrom igraph membership cluster_walktrap
+#' @importFrom igraph membership cluster_walktrap cut_at
 #' @export
-group_walktrap <- function(weights = NULL, steps = 4) {
+group_walktrap <- function(weights = NULL, steps = 4, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   if (is.null(weights)) {
     weights <- NA
   }
-  group <- as.integer(membership(cluster_walktrap(graph = .G(), weights = weights, steps = steps)))
+  group <- cluster_walktrap(graph = .G(), weights = weights, steps = steps)
+  if (is.null(n_groups)) {
+    group <- membership(group)
+  } else {
+    group <- cut_at(group, no = n_groups)
+  }
+  group <- as.integer(group)
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group edges by their membership of the maximal binconnected components using [igraph::biconnected_components()]
