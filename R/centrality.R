@@ -315,7 +315,7 @@ centrality_expected <- function() {
   expect_netrankr()
   expect_nodes()
   graph <- .G()
-  P <- netrankr::neighborhood_inclusion()
+  P <- netrankr::neighborhood_inclusion(graph)
   ranks <- netrankr::exact_rank_prob(P)
   ranks$expected.rank
 }
