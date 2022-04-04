@@ -527,6 +527,7 @@ as_vector <- function(.x, .type = NULL){
     unlist(.x)
   }
   else {
-    stop("Cannot coerce values to ", deparse(substitute(.type)), call. = FALSE)
+    type <- deparse(substitute(.type))
+    cli::cli_abort("Cannot coerce values to {.cls {type}}")
   }
 }

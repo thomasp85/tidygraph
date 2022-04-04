@@ -9,23 +9,15 @@ as_ind <- function(i, length) {
   seq_len(length)[i]
 }
 
-expect_influencer <- function() {
-  if (!requireNamespace('influenceR', quietly = TRUE)) {
-    stop('The `influenceR` package is required for this functionality')
-  }
+expect_influencer <- function(...) {
+  rlang::check_installed('influenceR', ...)
 }
-expect_netrankr <- function() {
-  if (!requireNamespace('netrankr', quietly = TRUE)) {
-    stop('The `netrankr` package is required for this functionality')
-  }
+expect_netrankr <- function(...) {
+  rlang::check_installed('netrankr', ...)
 }
-expect_seriation <- function() {
-  if (!requireNamespace('seriation', quietly = TRUE)) {
-    stop('The `seriation` package is required for this functionality')
-  }
+expect_seriation <- function(...) {
+  rlang::check_installed('seriation', ...)
 }
-expect_netswan <- function() {
-  if (!requireNamespace('NetSwan', quietly = TRUE)) {
-    stop('The `NetSwan` package is required for this functionality')
-  }
+expect_netswan <- function(...) {
+  rlang::check_installed('NetSwan', ...)
 }

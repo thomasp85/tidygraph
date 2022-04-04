@@ -3,7 +3,7 @@ ContextBuilder <- R6Class(
   'ContextBuilder',
   public = list(
     set = function(graph) {
-      stopifnot(inherits(graph, 'tbl_graph'))
+      if (!is.tbl_graph(graph)) cli::cli_abort('{.arg graph} must be a {.cls tbl_graph} object')
       private$context <- c(private$context, list(graph))
       invisible(self)
     },
@@ -42,7 +42,7 @@ ContextBuilder <- R6Class(
     FREE = 0,
     check = function() {
       if (!self$alive()) {
-        stop('This function should not be called directly', call. = FALSE)
+        cli::cli_abort('This function should not be called directly')
       }
     }
   )
@@ -51,12 +51,12 @@ ContextBuilder <- R6Class(
 .graph_context <- ContextBuilder$new()
 expect_nodes <- function() {
   if (!.graph_context$free() && .graph_context$active() != 'nodes') {
-    stop('This call requires nodes to be active', call. = FALSE)
+    cli::cli_abort('This call requires nodes to be active', call. = FALSE)
   }
 }
 expect_edges <- function() {
   if (!.graph_context$free() && .graph_context$active() != 'edges') {
-    stop('This call requires edges to be active', call. = FALSE)
+    cli::cli_abort('This call requires edges to be active', call. = FALSE)
   }
 }
 
@@ -114,9 +114,9 @@ NULL
 #' @export
 #' @keywords internal
 .register_graph_context <- function(graph, free = FALSE, env = parent.frame()) {
-  stopifnot(is.tbl_graph(graph))
+  if (!is.tbl_graph(graph)) cli::cli_abort('{.arg graph} must be a {.cls tbl_graph} object')
   if (identical(env, .GlobalEnv)) {
-    stop('A context cannot be registered to the global environment', call. = FALSE)
+    cli::cli_abort('A context cannot be registered to the global environment')
   }
   if (free) {
     class(graph) <- c('free_context_tbl_graph', class(graph))
@@ -127,7 +127,7 @@ NULL
 }
 .free_graph_context <- function(env = parent.frame()) {
   if (identical(env, .GlobalEnv)) {
-    stop('A context cannot be freed in the global environment', call. = FALSE)
+    cli::cli_abort('A context cannot be freed in the global environment')
   }
   .graph_context$force_free()
   do.call(on.exit, alist(expr = .graph_context$force_unfree(), add = TRUE), envir = env)

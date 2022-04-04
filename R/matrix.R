@@ -6,7 +6,7 @@ as_tbl_graph.matrix <- function(x, directed = TRUE, ...) {
     edgelist = as_graph_edgelist(x, directed),
     adjacency = as_graph_adj_matrix(x, directed),
     incidence = as_graph_incidence(x, directed),
-    unknown = stop('Unknown matrix format', call. = FALSE)
+    unknown = cli::cli_abort('Unknown matrix format')
   )
   as_tbl_graph(graph)
 }

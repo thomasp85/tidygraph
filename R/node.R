@@ -200,7 +200,7 @@ node_diversity <- function(weights) {
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   if (is.null(weights)) {
-    stop('weights must evaluate to a valid vector', call. = FALSE)
+    cli::cli_abort('{.arg weights} must be a valid vector')
   }
   diversity(graph, weights = weights, vids = V(graph))
 }

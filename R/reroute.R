@@ -38,7 +38,7 @@ reroute.tbl_graph <- function(.data, from = NULL, to = NULL, subset = NULL) {
   from <- enquo(from)
   to <- enquo(to)
   if (is.grouped_tbl_graph(.data)) {
-    message('Ungrouping prior to rerouting edges')
+    cli::cli_inform('Ungrouping prior to rerouting edges')
     .data <- ungroup(.data)
   }
   edges <- as_tibble(.data, active = 'edges')

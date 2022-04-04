@@ -14,11 +14,11 @@ dplyr::left_join
 right_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
   d_tmp <- as_tibble(x)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
-    stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
+    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
   }
   if (active(x) == 'edges' && (!all(c('from', 'to') %in% names(y)) ||
                                !(is.numeric(y$from) && is.numeric(y$to)))) {
-    stop('y must contain the numeric columns "from" and "to"', call. = FALSE)
+    cli::cli_abort('{.arg y} must contain the {.cls numeric} columns {.col from} and {.col to}')
   }
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
@@ -44,7 +44,7 @@ dplyr::right_join
 inner_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
   d_tmp <- as_tibble(x)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
-    stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
+    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
   }
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
@@ -62,11 +62,11 @@ dplyr::inner_join
 full_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
   d_tmp <- as_tibble(x)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
-    stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
+    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
   }
   if (active(x) == 'edges' && (!all(c('from', 'to') %in% names(y)) ||
                                !(is.numeric(y$from) && is.numeric(y$to)))) {
-    stop('y must contain the numeric columns "from" and "to"', call. = FALSE)
+    cli::cli_abort('{.arg y} must contain the {.cls numeric} columns {.col from} and {.col to}')
   }
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
@@ -88,7 +88,7 @@ dplyr::full_join
 semi_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, ...) {
   d_tmp <- as_tibble(x)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
-    stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
+    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
   }
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
@@ -103,7 +103,7 @@ dplyr::semi_join
 anti_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, ...) {
   d_tmp <- as_tibble(x)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
-    stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
+    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
   }
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
@@ -141,13 +141,13 @@ dplyr::anti_join
 #'
 #' gr1 %>% graph_join(gr2)
 graph_join <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
-  stopifnot(is.tbl_graph(x))
+  if (!is.tbl_graph(x)) cli::cli_abort('{.arg x} must be a {.cls tbl_graph} object')
   y <- as_tbl_graph(y)
 
   d_tmp <- as_tibble(x, active = 'nodes')
   d_tmp2 <- as_tibble(y, active = 'nodes')
   if ('.tbl_graph_index' %in% c(names(d_tmp), names(d_tmp2))) {
-    stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
+    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
   }
   orig_ind <- seq_len(nrow(d_tmp2))
   d_tmp2$.tbl_graph_index <- orig_ind

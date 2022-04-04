@@ -92,7 +92,7 @@ convert <- function(.data, .f, ..., .select = 1, .clean = FALSE) {
 #' @importFrom rlang as_quosure sym quo_text enquo
 morph.tbl_graph <- function(.data, .f, ...) {
   if (inherits(.data, 'grouped_tbl_graph')) {
-    message('Ungrouping prior to morphing')
+    cli::cli_inform('Ungrouping prior to morphing')
     .data <- ungroup(.data)
   }
   .register_graph_context(.data)
@@ -114,7 +114,7 @@ morph.tbl_graph <- function(.data, .f, ...) {
 }
 #' @export
 morph.morphed_tbl_graph <- function(.data, .f, ...) {
-  message('Unmorphing tbl_graph first...')
+  cli::cli_inform('Unmorphing {.arg .data} first...')
   .data <- unmorph(.data)
   morph(.data, .f, ...)
 }
@@ -158,13 +158,13 @@ crystallise.morphed_tbl_graph <- function(.data) {
 }
 #' @export
 convert.tbl_graph <- function(.data, .f, ..., .select = 1, .clean = FALSE) {
-  stopifnot(length(.select) == 1)
+  if (length(.select) != 1) cli::cli_abort("{.arg .select} must be a single scalar")
   graphs <- crystallise(morph(.data, .f, ...))
   if (is.character(.select)) {
     .select <- which(.select == graphs$name)[1]
-    if (is.na(.select)) stop('.select does not match any named graph', call. = FALSE)
+    if (is.na(.select)) cli::cli_abort('{.arg .select} does not match any named graph')
   }
-  if (.select > nrow(graphs)) stop('convert did not create ', .select, ' graphs', call. = FALSE)
+  if (.select > nrow(graphs)) cli::cli_abort(c('{.fn convert} did not create {.select} number of graphs', 'i' = 'Set a lower {.arg .select}'))
   graph <- graphs$graph[[.select]]
   if (.clean) {
     nodes <- as_tibble(graph, active = 'nodes')
@@ -182,12 +182,12 @@ convert.tbl_graph <- function(.data, .f, ..., .select = 1, .clean = FALSE) {
 #' @importFrom igraph vertex_attr_names edge_attr_names
 check_morph <- function(morph) {
   if (!all(vapply(morph, inherits, logical(1), 'tbl_graph'))) {
-    stop('morph must consist of tbl_graphs')
+    cli::cli_abort('{.arg morph} must consist of {.cls tbl_graphs}')
   }
   lapply(morph, function(m) {
     attr_names <- c(vertex_attr_names(m), edge_attr_names(m))
     if (!any(c('.tidygraph_node_index', '.tidygraph_edge_index') %in% attr_names)) {
-      stop('Morph must contain reference to at either nodes or edges', call. = FALSE)
+      cli::cli_abort('{.arg morph} must contain reference to either nodes or edges')
     }
   })
   NULL

@@ -5,7 +5,7 @@ as_tbl_graph.list <- function(x, directed = TRUE, node_key = 'name', ...) {
     guess_list_type(x),
     adjacency = as_graph_adj_list(x, directed = directed),
     node_edge = as_graph_node_edge(x, directed = directed, node_key = node_key),
-    unknown = stop("Unknown list format", call. = FALSE)
+    unknown = cli::cli_abort("Unknown list format")
   )
   as_tbl_graph(graph)
 }

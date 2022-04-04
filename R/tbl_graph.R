@@ -64,9 +64,10 @@ as_tbl_graph <- function(x, ...) {
 #' @export
 #' @importFrom igraph as.igraph
 as_tbl_graph.default <- function(x, ...) {
-  tryCatch({
-    as_tbl_graph(as.igraph(x))
-  }, error = function(e) stop('No support for ', class(x)[1], ' objects', call. = FALSE))
+  rlang::try_fetch(
+    as_tbl_graph(as.igraph(x)),
+    error = function(cnd) cli::cli_abort('No support for {.cls {class(x)}} objects', parent = cnd)
+  )
 }
 #' @rdname tbl_graph
 #' @export
@@ -146,7 +147,7 @@ set_graph_data.tbl_graph <- function(x, value, active = NULL) {
     active,
     nodes = set_node_attributes(x, value),
     edges = set_edge_attributes(x, value),
-    stop('Unknown active element: ', active(x), '. Only nodes and edges supported', call. = FALSE)
+    cli::cli_abort('Unknown active element: {.val {active}}. Only nodes and edges supported')
   )
 }
 set_graph_data.grouped_tbl_graph <- function(x, value, active = NULL) {

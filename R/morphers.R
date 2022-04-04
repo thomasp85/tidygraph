@@ -45,7 +45,7 @@ to_linegraph <- function(graph) {
 to_subgraph <- function(graph, ..., subset_by = NULL) {
   if (is.null(subset_by)) {
     subset_by <- active(graph)
-    message('Subsetting by ', subset_by)
+    cli::cli_inform('Subsetting by {subset_by}')
   }
   ind <- as_tibble(graph, active = subset_by)
   ind <- mutate(ind, .tidygraph_index = seq_len(n()))
@@ -68,7 +68,7 @@ to_subgraph <- function(graph, ..., subset_by = NULL) {
 to_subcomponent <- function(graph, node) {
   node <- eval_tidy(enquo(node), as_tibble(graph, 'nodes'))
   node <- as_ind(node, gorder(graph))
-  if (length(node) != 1) stop('Please provide a single node for defining the subcomponent', call. = FALSE)
+  if (length(node) != 1) cli::cli_abort('{.arg node} must identify a single node in the graph')
   component_membership <- components(graph)$membership == components(graph)$membership[node]
   to_subgraph(graph, component_membership, subset_by = 'nodes')
 }
@@ -84,7 +84,7 @@ to_subcomponent <- function(graph, node) {
 to_split <- function(graph, ..., split_by = NULL) {
   if (is.null(split_by)) {
     split_by <- active(graph)
-    message('Subsetting by ', split_by)
+    cli::cli_inform('Splitting by {split_by}')
   }
   ind <- as_tibble(graph, active = split_by)
   ind <- group_by(ind, ...)

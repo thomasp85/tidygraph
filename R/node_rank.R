@@ -254,8 +254,8 @@ node_rank_dendser <- function(... , dist = 'shortest', mode = 'out', weights = N
 to_dist <- function(graph, dist, mode, weights, algorithm) {
   if (is.function(dist)) {
     mat <- dist(graph)
-    stopifnot(inherits(mat, 'dist'))
-    stopifnot(attr(mat, 'Size') == gorder(graph))
+    if (!inherits(mat, 'dist')) cli::cli_abort('{.arg dist} must return a {cls dist} object')
+    if (attr(mat, 'Size') != gorder(graph)) cli::cli_abort('{.arg dist} must return a {.cls dist} object of the same size as the order of {.arg graph}')
   } else if (is.character(dist)) {
     if (dist == 'shortest') {
       mat <- distances(graph, mode = mode, weights = weights, algorithm = algorithm)

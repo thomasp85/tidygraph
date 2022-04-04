@@ -52,7 +52,7 @@ activate.grouped_tbl_graph <- function(.data, what) {
   if (gsub('"', '', quo_text(what)) == active(.data)) {
     return(.data)
   }
-  message('Ungrouping graph...')
+  cli::cli_inform('Ungrouping {.arg .data}...')
   .data <- ungroup(.data)
   activate(.data, !!what)
 }
@@ -76,7 +76,7 @@ active <- function(x) {
     nodes = 'nodes',
     links = ,
     edges = 'edges',
-    stop('Only possible to activate nodes and edges', call. = FALSE)
+    cli::cli_abort('Only possible to activate nodes and edges')
   )
   attr(x, 'active') <- value
   x

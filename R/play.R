@@ -52,7 +52,7 @@ play_bipartite <- function(n1, n2, p, m, directed = TRUE, mode = 'out') {
   type <- if (missing(p)) {
     'gnm'
   } else {
-    if (!missing(m)) warning('Ignoring "m" as "p" is provided', call. = FALSE)
+    if (!missing(m)) cli::cli_warn('Ignoring {.arg m} as {.arg p} is provided')
     'gnp'
   }
   as_tbl_graph(sample_bipartite(n1, n2, type, p, m, directed, mode))
@@ -151,7 +151,7 @@ play_erdos_renyi <- function(n, p, m, directed = TRUE, loops = FALSE) {
   if (missing(p)) {
     as_tbl_graph(sample_gnm(n, m, directed, loops))
   } else {
-    if (!missing(m)) warning('Ignoring "m" as "p" is provided', call. = FALSE)
+    if (!missing(m)) cli::cli_warn('Ignoring {.arg m} as {.arg p} is provided')
     as_tbl_graph(sample_gnp(n, p, directed, loops))
   }
 }

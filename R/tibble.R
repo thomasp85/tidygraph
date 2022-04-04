@@ -8,7 +8,7 @@ as_tibble.tbl_graph <- function(x, active = NULL, ...) {
     active,
     nodes = node_tibble(x),
     edges = edge_tibble(x),
-    stop('Unknown active element: ', active, '. Only nodes and edges supported', call. = FALSE)
+    cli::cli_abort('Unknown active element: {.val {active}}. Only nodes and edges supported')
   )
 }
 as_tibble.grouped_tbl_graph <- function(x, active = NULL, ...) {

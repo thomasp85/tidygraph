@@ -5,7 +5,7 @@ filter.tbl_graph <- function(.data, ...) {
   .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
-    stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
+    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
   }
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind

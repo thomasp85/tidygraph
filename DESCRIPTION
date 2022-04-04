@@ -29,7 +29,8 @@ Imports:
     tools,
     stats,
     tidyr,
-    pillar
+    pillar,
+    cli
 URL: https://tidygraph.data-imaginist.com, https://github.com/thomasp85/tidygraph
 BugReports: https://github.com/thomasp85/tidygraph/issues
 LinkingTo: cpp11

@@ -84,7 +84,7 @@ create_complete <- function(n) {
 #' @importFrom igraph make_graph
 #' @export
 create_notable <- function(name) {
-  stopifnot(is.character(name))
+  if (!is.character(name)) cli::cli_abort('{.arg name} must be a scalar {.cls character} vector')
   as_tbl_graph(make_graph(name))
 }
 #' @describeIn create_graphs Create a Kautz graph with the specified alphabet and label size

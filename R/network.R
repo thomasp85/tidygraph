@@ -21,16 +21,14 @@ as_tbl_graph.network <- function(x, ...) {
 #' @noRd
 #'
 network_to_igraph <- function(graph) {
-  if (!requireNamespace("network", quietly = TRUE)) {
-    stop('The "network" package is needed for this functionality to work', call. = FALSE)
-  }
+  rlang::check_installed('network', 'in order to coerce network object to tbl_graph')
   graph_attr_names <- network::list.network.attributes(graph)
   graph_attr <- lapply(graph_attr_names, function(n) {
     network::get.network.attribute(graph, n)
   })
   names(graph_attr) <- graph_attr_names
   if (graph_attr$hyper) {
-    stop('Hypergraphs are currently unsupported', call. = FALSE)
+    cli::cli_abort('Hypergraphs are currently unsupported', call. = FALSE)
   }
 
   node_attr_names <- network::list.vertex.attributes(graph)
