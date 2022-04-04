@@ -1,7 +1,9 @@
 # tidygraph (development version)
 
-* Activating a grouped tbl_graph whith what is already active will no longer 
+* Activating a grouped tbl_graph which is already active will no longer 
   cause grouping to be dropped (#121)
+* Move compiled code to cpp11
+* Improve messaging with rlang and cli
 
 # tidygraph 1.2.0
 

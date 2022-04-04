@@ -16,8 +16,7 @@ Description: A graph, while not "tidy" in itself, can be thought of as two tidy
     a lot of common graph algorithms.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 Imports: 
     tibble,
@@ -27,14 +26,13 @@ Imports:
     utils,
     rlang,
     R6,
-    Rcpp,
     tools,
     stats,
     tidyr,
     pillar
 URL: https://tidygraph.data-imaginist.com, https://github.com/thomasp85/tidygraph
 BugReports: https://github.com/thomasp85/tidygraph/issues
-LinkingTo: Rcpp
+LinkingTo: cpp11
 Suggests: network,
     data.tree,
     ape,
@@ -46,3 +44,4 @@ Suggests: network,
     netrankr,
     influenceR,
     NetSwan
+SystemRequirements: C++11

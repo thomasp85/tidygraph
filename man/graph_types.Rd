@@ -43,7 +43,7 @@ graph_is_subgraph_isomorphic_to(graph, method = "auto", ...)
 \item{method}{The algorithm to use for comparison}
 
 \item{...}{Arguments passed on to the comparison methods. See
-\code{\link[igraph:is_isomorphic_to]{igraph::is_isomorphic_to()}} and \code{\link[igraph:is_subgraph_isomorphic_to]{igraph::is_subgraph_isomorphic_to()}}}
+\code{\link[igraph:isomorphic]{igraph::is_isomorphic_to()}} and \code{\link[igraph:subgraph_isomorphic]{igraph::is_subgraph_isomorphic_to()}}}
 }
 \value{
 A logical scalar
@@ -73,9 +73,9 @@ properties and will all return a logical scalar.
 
 \item \code{graph_is_complete}: Is the graph fully connected
 
-\item \code{graph_is_isomorphic_to}: Is the graph isomorphic to another graph. See \code{\link[igraph:is_isomorphic_to]{igraph::is_isomorphic_to()}}
+\item \code{graph_is_isomorphic_to}: Is the graph isomorphic to another graph. See \code{\link[igraph:isomorphic]{igraph::is_isomorphic_to()}}
 
-\item \code{graph_is_subgraph_isomorphic_to}: Is the graph an isomorphic subgraph to another graph. see \code{\link[igraph:is_subgraph_isomorphic_to]{igraph::is_subgraph_isomorphic_to()}}
+\item \code{graph_is_subgraph_isomorphic_to}: Is the graph an isomorphic subgraph to another graph. see \code{\link[igraph:subgraph_isomorphic]{igraph::is_subgraph_isomorphic_to()}}
 }}
 
 \examples{

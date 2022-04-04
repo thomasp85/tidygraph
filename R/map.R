@@ -475,7 +475,7 @@ get_offspring <- function(parent, order) {
   offspring <- rep(list(integer(0)), length(parent))
   direct_offspring <- split(seq_along(parent), parent)
   offspring[as.integer(names(direct_offspring))] <- direct_offspring
-  offspring <- collect_offspring(offspring, rev(order))
+  offspring <- collect_offspring(offspring, as.integer(rev(order)))
   lapply(offspring, function(x) x[order(match(x, order))])
 }
 
