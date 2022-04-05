@@ -1,4 +1,4 @@
-# tidygraph (development version)
+# tidygraph 1.2.1
 
 * Move compiled code to cpp11
 * Improve messaging with rlang and cli
