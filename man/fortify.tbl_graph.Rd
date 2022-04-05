@@ -4,7 +4,7 @@
 \alias{fortify.tbl_graph}
 \title{Fortify a tbl_graph for ggplot2 plotting}
 \usage{
-fortify.tbl_graph(model, data, ...)
+\method{fortify}{tbl_graph}(model, data, ...)
 }
 \description{
 In general \code{tbl_graph} objects are intended to be plotted by network
