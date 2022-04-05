@@ -6,9 +6,10 @@
 #' `tbl_graph` object as either the global or layer data and the currently
 #' active data is passed on as a regular data frame.
 #'
-#' @export
 #' @keywords internal
 #'
 fortify.tbl_graph <- function(model, data, ...) {
   as_tibble(model)
 }
+
+rlang::on_load(register_s3_method('ggplot2', 'fortify', 'tbl_graph'))
