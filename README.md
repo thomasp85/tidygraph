@@ -7,8 +7,8 @@
 
 [![R build
 status](https://github.com/thomasp85/tidygraph/workflows/R-CMD-check/badge.svg)](https://github.com/thomasp85/tidygraph/actions)
-[![CRAN\_Release\_Badge](http://www.r-pkg.org/badges/version-ago/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
-[![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
+[![CRAN_Release_Badge](http://www.r-pkg.org/badges/version-ago/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
+[![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/thomasp85/tidygraph/master.svg)](https://codecov.io/github/thomasp85/tidygraph?branch=master)
 <!-- badges: end -->
@@ -32,27 +32,27 @@ play_erdos_renyi(10, 0.5) %>%
   activate(edges) %>% 
   mutate(centrality = centrality_edge_betweenness()) %>% 
   arrange(centrality)
-#> # A tbl_graph: 10 nodes and 46 edges
+#> # A tbl_graph: 10 nodes and 44 edges
 #> #
 #> # A directed simple graph with 1 component
 #> #
-#> # Edge Data: 46 x 3 (active)
+#> # Edge Data: 44 × 3 (active)
 #>    from    to centrality
-#> * <int> <int>      <dbl>
-#> 1     1     8       1.33
-#> 2     5     8       1.42
-#> 3     5     3       1.75
-#> 4     3     7       1.75
-#> 5     5     7       1.92
-#> 6     5     1       2.00
-#> # … with 40 more rows
+#>   <int> <int>      <dbl>
+#> 1     7     8       1.58
+#> 2     9     7       1.7 
+#> 3     9     1       1.78
+#> 4     7     6       1.83
+#> 5     7     5       2   
+#> 6     8     5       2   
+#> # … with 38 more rows
 #> #
-#> # Node Data: 10 x 1
+#> # Node Data: 10 × 1
 #>   degree
 #>    <dbl>
-#> 1      5
-#> 2      6
-#> 3      4
+#> 1      2
+#> 2      3
+#> 3      5
 #> # … with 7 more rows
 ```
 
@@ -137,7 +137,7 @@ thanks so much to them.
 
 ## Code of Conduct
 
-Please note that the ‘tidygraph’ project is released with a [Contributor
+Please note that the tidygraph project is released with a [Contributor
 Code of
 Conduct](https://tidygraph.data-imaginist.com/CODE_OF_CONDUCT.html). By
 contributing to this project, you agree to abide by its terms.

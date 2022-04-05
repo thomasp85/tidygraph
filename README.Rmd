@@ -107,6 +107,6 @@ devtools::install_github('thomasp85/tidygraph')
 much to them.
 
 ## Code of Conduct
-Please note that the 'tidygraph' project is released with a
-[Contributor Code of Conduct](https://tidygraph.data-imaginist.com/CODE_OF_CONDUCT.html).
+Please note that the tidygraph project is released with a 
+[Contributor Code of Conduct](https://tidygraph.data-imaginist.com/CODE_OF_CONDUCT.html). 
 By contributing to this project, you agree to abide by its terms.
