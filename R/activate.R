@@ -49,9 +49,9 @@ activate.tbl_graph <- function(.data, what) {
 #' @importFrom rlang enquo
 activate.grouped_tbl_graph <- function(.data, what) {
   what <- enquo(what)
-#  if (gsub('"', '', quo_text(what)) == active(.data)) {
-#    return(.data)
-#  }
+  if (gsub('"', '', quo_text(what)) == active(.data)) {
+    return(.data)
+  }
   cli::cli_inform('Ungrouping {.arg .data}...')
   .data <- ungroup(.data)
   activate(.data, !!what)
