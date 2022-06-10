@@ -199,7 +199,7 @@ to_shortest_path <- function(graph, from, to, mode = 'out', weights = NULL) {
 to_bfs_tree <- function(graph, root, mode = 'out', unreachable = FALSE) {
   root <- eval_tidy(enquo(root), as_tibble(graph, 'nodes'))
   root <- as_ind(root, gorder(graph))
-  search <- bfs(graph, root, neimode = mode, unreachable = unreachable, father = TRUE)
+  search <- bfs(graph, root, mode = mode, unreachable = unreachable, father = TRUE)
   bfs_graph <- search_to_graph(graph, search)
   list(
     bfs = bfs_graph
@@ -212,7 +212,7 @@ to_bfs_tree <- function(graph, root, mode = 'out', unreachable = FALSE) {
 to_dfs_tree <- function(graph, root, mode = 'out', unreachable = FALSE) {
   root <- eval_tidy(enquo(root), as_tibble(graph, 'nodes'))
   root <- as_ind(root, gorder(graph))
-  search <- dfs(graph, root, neimode = mode, unreachable = unreachable, father = TRUE)
+  search <- dfs(graph, root, mode = mode, unreachable = unreachable, father = TRUE)
   dfs_graph <- search_to_graph(graph, search)
   list(
     dfs = dfs_graph
