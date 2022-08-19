@@ -68,6 +68,13 @@ reference:
       - map_dfs
       - map_dfs_back
       - map_local
+  - title: Searches
+    desc: >
+      Searching is central to many graph algorithms and is often performed in
+      either a breath-first, or depth-first manner. Tidygraph provides a slew of
+      functions for extracting out information from such searches.
+    contents:
+      - search_graph
   - title: Centrality
     desc: >
       Centrality is a key measure in network analysis, and while it is mainly
