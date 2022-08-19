@@ -22,10 +22,12 @@ will not take changes happening during the mutate call into account.
 \details{
 The order of speed increase are rather small and in the ~1 millisecond per
 mutateed column order, so for regular use this should not be a choice. The
-operations not supported by \code{mutate_as_tbl} are e.g.\preformatted{gr \%>\%
+operations not supported by \code{mutate_as_tbl} are e.g.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{gr \%>\%
   activate(nodes) \%>\%
   mutate(weights = runif(10), degree = centrality_degree(weights))
-}
+}\if{html}{\out{</div>}}
 
 as \code{weights} will only be made available in the graph at the end of the
 mutate call.

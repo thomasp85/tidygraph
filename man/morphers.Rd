@@ -109,64 +109,64 @@ called directly. See below for detail of each morpher.
 }
 \section{Functions}{
 \itemize{
-\item \code{to_linegraph}: Convert a graph to its line graph. When unmorphing node
+\item \code{to_linegraph()}: Convert a graph to its line graph. When unmorphing node
 data will be merged back into the original edge data. Edge data will be
 ignored.
 
-\item \code{to_subgraph}: Convert a graph to a single subgraph. \code{...} is evaluated
+\item \code{to_subgraph()}: Convert a graph to a single subgraph. \code{...} is evaluated
 in the same manner as \code{filter}. When unmorphing all data in the subgraph
 will get merged back.
 
-\item \code{to_subcomponent}: Convert a graph to a single component containing the specified node
+\item \code{to_subcomponent()}: Convert a graph to a single component containing the specified node
 
-\item \code{to_split}: Convert a graph into a list of separate subgraphs. \code{...}
+\item \code{to_split()}: Convert a graph into a list of separate subgraphs. \code{...}
 is evaluated in the same manner as \code{group_by}. When unmorphing all data in
 the subgraphs will get merged back, but in the case of \code{split_by = 'edges'}
 only the first instance of node data will be used (as the same node can be
 present in multiple subgraphs).
 
-\item \code{to_components}: Split a graph into its separate components. When
+\item \code{to_components()}: Split a graph into its separate components. When
 unmorphing all data in the subgraphs will get merged back.
 
-\item \code{to_complement}: Convert a graph into its complement. When unmorphing
+\item \code{to_complement()}: Convert a graph into its complement. When unmorphing
 only node data will get merged back.
 
-\item \code{to_local_neighborhood}: Convert a graph into the local neighborhood around a
+\item \code{to_local_neighborhood()}: Convert a graph into the local neighborhood around a
 single node. When unmorphing all data will be merged back.
 
-\item \code{to_dominator_tree}: Convert a graph into its dominator tree based on a
+\item \code{to_dominator_tree()}: Convert a graph into its dominator tree based on a
 specific root. When unmorphing only node data will get merged back.
 
-\item \code{to_minimum_spanning_tree}: Convert a graph into its minimum spanning tree/forest.
+\item \code{to_minimum_spanning_tree()}: Convert a graph into its minimum spanning tree/forest.
 When unmorphing all data will get merged back.
 
-\item \code{to_shortest_path}: Limit a graph to the shortest path between two nodes.
+\item \code{to_shortest_path()}: Limit a graph to the shortest path between two nodes.
 When unmorphing all data is merged back.
 
-\item \code{to_bfs_tree}: Convert a graph into a breath-first search tree based on
+\item \code{to_bfs_tree()}: Convert a graph into a breath-first search tree based on
 a specific root. When unmorphing only node data is merged back.
 
-\item \code{to_dfs_tree}: Convert a graph into a depth-first search tree based on
+\item \code{to_dfs_tree()}: Convert a graph into a depth-first search tree based on
 a specific root. When unmorphing only node data is merged back.
 
-\item \code{to_simple}: Collapse parallel edges and remove loops in a graph.
+\item \code{to_simple()}: Collapse parallel edges and remove loops in a graph.
 When unmorphing all data will get merged back
 
-\item \code{to_contracted}: Combine multiple nodes into one. \code{...}
+\item \code{to_contracted()}: Combine multiple nodes into one. \code{...}
 is evaluated in the same manner as \code{group_by}. When unmorphing all
 data will get merged back.
 
-\item \code{to_unfolded_tree}: Unfold a graph to a tree or forest starting from
+\item \code{to_unfolded_tree()}: Unfold a graph to a tree or forest starting from
 multiple roots (or one), potentially duplicating nodes and edges.
 
-\item \code{to_directed}: Make a graph directed in the direction given by from and
+\item \code{to_directed()}: Make a graph directed in the direction given by from and
 to
 
-\item \code{to_undirected}: Make a graph undirected
+\item \code{to_undirected()}: Make a graph undirected
 
-\item \code{to_hierarchical_clusters}: Convert a graph into a hierarchical clustering based on a grouping
+\item \code{to_hierarchical_clusters()}: Convert a graph into a hierarchical clustering based on a grouping
+
 }}
-
 \examples{
 # Compute only on a subgraph of every even node
 create_notable('meredith') \%>\%

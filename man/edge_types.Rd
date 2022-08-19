@@ -41,21 +41,21 @@ in the graph corresponds to the specific type.
 }
 \section{Functions}{
 \itemize{
-\item \code{edge_is_multiple}: Query whether each edge has any parallel siblings
+\item \code{edge_is_multiple()}: Query whether each edge has any parallel siblings
 
-\item \code{edge_is_loop}: Query whether each edge is a loop
+\item \code{edge_is_loop()}: Query whether each edge is a loop
 
-\item \code{edge_is_mutual}: Query whether each edge has a sibling going in the reverse direction
+\item \code{edge_is_mutual()}: Query whether each edge has a sibling going in the reverse direction
 
-\item \code{edge_is_from}: Query whether an edge goes from a set of nodes
+\item \code{edge_is_from()}: Query whether an edge goes from a set of nodes
 
-\item \code{edge_is_to}: Query whether an edge goes to a set of nodes
+\item \code{edge_is_to()}: Query whether an edge goes to a set of nodes
 
-\item \code{edge_is_between}: Query whether an edge goes between two sets of nodes
+\item \code{edge_is_between()}: Query whether an edge goes between two sets of nodes
 
-\item \code{edge_is_incident}: Query whether an edge goes from or to a set of nodes
+\item \code{edge_is_incident()}: Query whether an edge goes from or to a set of nodes
+
 }}
-
 \examples{
 create_star(10, directed = TRUE, mutual = TRUE) \%>\%
   activate(edges) \%>\%

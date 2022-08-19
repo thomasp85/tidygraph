@@ -54,25 +54,25 @@ of the nodes in the graph.
 }
 \section{Functions}{
 \itemize{
-\item \code{bfs_rank}: Get the succession in which the nodes are visited in a breath first search
+\item \code{bfs_rank()}: Get the succession in which the nodes are visited in a breath first search
 
-\item \code{bfs_parent}: Get the nodes from which each node is visited in a breath first search
+\item \code{bfs_parent()}: Get the nodes from which each node is visited in a breath first search
 
-\item \code{bfs_before}: Get the node that was visited before each node in a breath first search
+\item \code{bfs_before()}: Get the node that was visited before each node in a breath first search
 
-\item \code{bfs_after}: Get the node that was visited after each node in a breath first search
+\item \code{bfs_after()}: Get the node that was visited after each node in a breath first search
 
-\item \code{bfs_dist}: Get the number of nodes between the root and each node in a breath first search
+\item \code{bfs_dist()}: Get the number of nodes between the root and each node in a breath first search
 
-\item \code{dfs_rank}: Get the succession in which the nodes are visited in a depth first search
+\item \code{dfs_rank()}: Get the succession in which the nodes are visited in a depth first search
 
-\item \code{dfs_rank_out}: Get the succession in which each nodes subtree is completed in a depth first search
+\item \code{dfs_rank_out()}: Get the succession in which each nodes subtree is completed in a depth first search
 
-\item \code{dfs_parent}: Get the nodes from which each node is visited in a depth first search
+\item \code{dfs_parent()}: Get the nodes from which each node is visited in a depth first search
 
-\item \code{dfs_dist}: Get the number of nodes between the root and each node in a depth first search
+\item \code{dfs_dist()}: Get the number of nodes between the root and each node in a depth first search
+
 }}
-
 \examples{
 # Get the depth of each node in a tree
 create_tree(10, 2) \%>\%

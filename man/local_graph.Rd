@@ -51,20 +51,20 @@ the node position.
 }
 \section{Functions}{
 \itemize{
-\item \code{local_size}: The size of the neighborhood in a given distance from
+\item \code{local_size()}: The size of the neighborhood in a given distance from
 the node. (Note that the node itself is included unless \code{mindist > 0}). Wraps \code{\link[igraph:ego]{igraph::ego_size()}}.
 
-\item \code{local_members}: The members of the neighborhood of each node in a
+\item \code{local_members()}: The members of the neighborhood of each node in a
 given distance. Wraps \code{\link[igraph:ego]{igraph::ego()}}.
 
-\item \code{local_triangles}: The number of triangles each node participate in. Wraps \code{\link[igraph:count_triangles]{igraph::count_triangles()}}.
+\item \code{local_triangles()}: The number of triangles each node participate in. Wraps \code{\link[igraph:count_triangles]{igraph::count_triangles()}}.
 
-\item \code{local_ave_degree}: Calculates the average degree based on the neighborhood of each node. Wraps \code{\link[igraph:knn]{igraph::knn()}}.
+\item \code{local_ave_degree()}: Calculates the average degree based on the neighborhood of each node. Wraps \code{\link[igraph:knn]{igraph::knn()}}.
 
-\item \code{local_transitivity}: Calculate the transitivity of each node, that is, the
+\item \code{local_transitivity()}: Calculate the transitivity of each node, that is, the
 propensity for the nodes neighbors to be connected. Wraps \code{\link[igraph:transitivity]{igraph::transitivity()}}
-}}
 
+}}
 \examples{
 # Get all neighbors of each graph
 create_notable('chvatal') \%>\%

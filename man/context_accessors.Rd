@@ -25,13 +25,13 @@ itself to use in computations.
 }
 \section{Functions}{
 \itemize{
-\item \code{.G}: Get the tbl_graph you're currently working on
+\item \code{.G()}: Get the tbl_graph you're currently working on
 
-\item \code{.N}: Get the nodes data from the graph you're currently working on
+\item \code{.N()}: Get the nodes data from the graph you're currently working on
 
-\item \code{.E}: Get the edges data from the graph you're currently working on
+\item \code{.E()}: Get the edges data from the graph you're currently working on
+
 }}
-
 \examples{
 
 # Get data from the nodes while computing for the edges

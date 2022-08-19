@@ -211,35 +211,35 @@ well.
 }
 \section{Functions}{
 \itemize{
-\item \code{node_rank_hclust}: Use hierarchical clustering to rank nodes (see \code{\link[stats:hclust]{stats::hclust()}} for allowed methods)
+\item \code{node_rank_hclust()}: Use hierarchical clustering to rank nodes (see \code{\link[stats:hclust]{stats::hclust()}} for allowed methods)
 
-\item \code{node_rank_anneal}: Use simulated annealing based on the "ARSA" method in \code{seriation}
+\item \code{node_rank_anneal()}: Use simulated annealing based on the "ARSA" method in \code{seriation}
 
-\item \code{node_rank_branch_bound}: Use branch and bounds strategy to minimize the gradient measure (only feasable for small graphs). Will use "BBURCG" or "BBWRCG" in \code{seriation} dependent on the \code{weighted_gradient} argument
+\item \code{node_rank_branch_bound()}: Use branch and bounds strategy to minimize the gradient measure (only feasable for small graphs). Will use "BBURCG" or "BBWRCG" in \code{seriation} dependent on the \code{weighted_gradient} argument
 
-\item \code{node_rank_traveller}: Minimize hamiltonian path length using a travelling salesperson solver. See the the \code{solve_TSP} function in \code{TSP} for an overview of possible arguments
+\item \code{node_rank_traveller()}: Minimize hamiltonian path length using a travelling salesperson solver. See the the \code{solve_TSP} function in \code{TSP} for an overview of possible arguments
 
-\item \code{node_rank_two}: Use Rank-two ellipse seriation to rank the nodes. Uses "R2E" method in \code{seriation}
+\item \code{node_rank_two()}: Use Rank-two ellipse seriation to rank the nodes. Uses "R2E" method in \code{seriation}
 
-\item \code{node_rank_mds}: Rank by multidimensional scaling onto one dimension. \code{method = 'cmdscale'} will use the classic scaling from \code{stats}, \code{method = 'isoMDS'} will use \code{isoMDS} from \code{MASS}, and \code{method = 'sammon'} will use \code{sammon} from \code{MASS}
+\item \code{node_rank_mds()}: Rank by multidimensional scaling onto one dimension. \code{method = 'cmdscale'} will use the classic scaling from \code{stats}, \code{method = 'isoMDS'} will use \code{isoMDS} from \code{MASS}, and \code{method = 'sammon'} will use \code{sammon} from \code{MASS}
 
-\item \code{node_rank_leafsort}: Minimize hamiltonian path length by reordering leafs in a hierarchical clustering. Method refers to the clustering algorithm (either 'average', 'single', 'complete', or 'ward')
+\item \code{node_rank_leafsort()}: Minimize hamiltonian path length by reordering leafs in a hierarchical clustering. Method refers to the clustering algorithm (either 'average', 'single', 'complete', or 'ward')
 
-\item \code{node_rank_visual}: Use Prim's algorithm to find a minimum spanning tree giving the rank. Uses the "VAT" method in \code{seriation}
+\item \code{node_rank_visual()}: Use Prim's algorithm to find a minimum spanning tree giving the rank. Uses the "VAT" method in \code{seriation}
 
-\item \code{node_rank_spectral}: Minimize the 2-sum problem using a relaxation approach. Uses the "Spectral" or "Spectral_norm" methods in \code{seriation} depending on the value of the \code{norm} argument
+\item \code{node_rank_spectral()}: Minimize the 2-sum problem using a relaxation approach. Uses the "Spectral" or "Spectral_norm" methods in \code{seriation} depending on the value of the \code{norm} argument
 
-\item \code{node_rank_spin_out}: Sorts points into neighborhoods by pushing large distances away from the diagonal. Uses the "SPIN_STS" method in \code{seriation}
+\item \code{node_rank_spin_out()}: Sorts points into neighborhoods by pushing large distances away from the diagonal. Uses the "SPIN_STS" method in \code{seriation}
 
-\item \code{node_rank_spin_in}: Sorts points into neighborhoods by concentrating low distances around the diagonal. Uses the "SPIN_NH" method in \code{seriation}
+\item \code{node_rank_spin_in()}: Sorts points into neighborhoods by concentrating low distances around the diagonal. Uses the "SPIN_NH" method in \code{seriation}
 
-\item \code{node_rank_quadratic}: Use quadratic assignment problem formulations to minimize criterions using simulated annealing. Uses the "QAP_LS", "QAP_2SUM", "QAP_BAR", or "QAP_Inertia" methods from \code{seriation} dependant on the \code{criterion} argument
+\item \code{node_rank_quadratic()}: Use quadratic assignment problem formulations to minimize criterions using simulated annealing. Uses the "QAP_LS", "QAP_2SUM", "QAP_BAR", or "QAP_Inertia" methods from \code{seriation} dependant on the \code{criterion} argument
 
-\item \code{node_rank_genetic}: Optimizes different criteria based on a genetic algorithm. Uses the "GA" method from \code{seriation}. See \code{register_GA} for an overview of relevant arguments
+\item \code{node_rank_genetic()}: Optimizes different criteria based on a genetic algorithm. Uses the "GA" method from \code{seriation}. See \code{register_GA} for an overview of relevant arguments
 
-\item \code{node_rank_dendser}: Optimizes different criteria based on heuristic dendrogram seriation. Uses the "DendSer" method from \code{seriation}. See \code{register_DendSer} for an overview of relevant arguments
+\item \code{node_rank_dendser()}: Optimizes different criteria based on heuristic dendrogram seriation. Uses the "DendSer" method from \code{seriation}. See \code{register_DendSer} for an overview of relevant arguments
+
 }}
-
 \examples{
 graph <- create_notable('zachary') \%>\%
   mutate(rank = node_rank_hclust())

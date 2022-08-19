@@ -60,20 +60,20 @@ the linked igraph documentation.
 }
 \section{Functions}{
 \itemize{
-\item \code{play_blocks}: Create graphs by sampling from stochastic block
+\item \code{play_blocks()}: Create graphs by sampling from stochastic block
 model. See \code{\link[igraph:sample_sbm]{igraph::sample_sbm()}}
 
-\item \code{play_blocks_hierarchy}: Create graphs by sampling from the hierarchical
+\item \code{play_blocks_hierarchy()}: Create graphs by sampling from the hierarchical
 stochastic block model. See \code{\link[igraph:sample_hierarchical_sbm]{igraph::sample_hierarchical_sbm()}}
 
-\item \code{play_islands}: Create graphs with fixed size and edge
+\item \code{play_islands()}: Create graphs with fixed size and edge
 probability of subgraphs as well as fixed edge count between subgraphs. See
 \code{\link[igraph:sample_islands]{igraph::sample_islands()}}
 
-\item \code{play_smallworld}: Create graphs based on the Watts-Strogatz small-
+\item \code{play_smallworld()}: Create graphs based on the Watts-Strogatz small-
 world model. See \code{\link[igraph:sample_smallworld]{igraph::sample_smallworld()}}
-}}
 
+}}
 \examples{
 plot(play_islands(4, 10, 0.7, 3))
 

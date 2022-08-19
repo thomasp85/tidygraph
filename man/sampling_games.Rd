@@ -70,26 +70,26 @@ detail at the linked igraph documentation.
 }
 \section{Functions}{
 \itemize{
-\item \code{play_degree}: Create graphs based on the given node degrees. See
+\item \code{play_degree()}: Create graphs based on the given node degrees. See
 \code{\link[igraph:sample_degseq]{igraph::sample_degseq()}}
 
-\item \code{play_dotprod}: Create graphs with link probability given by the
+\item \code{play_dotprod()}: Create graphs with link probability given by the
 dot product of the latent position of termintating nodes. See
 \code{\link[igraph:sample_dot_product]{igraph::sample_dot_product()}}
 
-\item \code{play_fitness}: Create graphs where edge probabilities are
+\item \code{play_fitness()}: Create graphs where edge probabilities are
 proportional to terminal node fitness scores. See \code{\link[igraph:sample_fitness]{igraph::sample_fitness()}}
 
-\item \code{play_fitness_power}: Create graphs with an expected power-law degree
+\item \code{play_fitness_power()}: Create graphs with an expected power-law degree
 distribution. See \code{\link[igraph:sample_fitness_pl]{igraph::sample_fitness_pl()}}
 
-\item \code{play_erdos_renyi}: Create graphs with a fixed edge probability or
+\item \code{play_erdos_renyi()}: Create graphs with a fixed edge probability or
 count. See \code{\link[igraph:sample_gnp]{igraph::sample_gnp()}} and \code{\link[igraph:sample_gnm]{igraph::sample_gnm()}}
 
-\item \code{play_geometry}: Create graphs by positioning nodes on a plane or
+\item \code{play_geometry()}: Create graphs by positioning nodes on a plane or
 torus and connecting nearby ones. See \code{\link[igraph:sample_grg]{igraph::sample_grg()}}
-}}
 
+}}
 \examples{
 plot(play_erdos_renyi(20, 0.3))
 }

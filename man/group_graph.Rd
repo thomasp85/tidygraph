@@ -86,29 +86,29 @@ grouping of edges supported is biconnected components.
 }
 \section{Functions}{
 \itemize{
-\item \code{group_components}: Group by connected compenents using \code{\link[igraph:components]{igraph::components()}}
+\item \code{group_components()}: Group by connected compenents using \code{\link[igraph:components]{igraph::components()}}
 
-\item \code{group_edge_betweenness}: Group densely connected nodes using \code{\link[igraph:cluster_edge_betweenness]{igraph::cluster_edge_betweenness()}}
+\item \code{group_edge_betweenness()}: Group densely connected nodes using \code{\link[igraph:cluster_edge_betweenness]{igraph::cluster_edge_betweenness()}}
 
-\item \code{group_fast_greedy}: Group nodes by optimising modularity using \code{\link[igraph:cluster_fast_greedy]{igraph::cluster_fast_greedy()}}
+\item \code{group_fast_greedy()}: Group nodes by optimising modularity using \code{\link[igraph:cluster_fast_greedy]{igraph::cluster_fast_greedy()}}
 
-\item \code{group_infomap}: Group nodes by minimizing description length using \code{\link[igraph:cluster_infomap]{igraph::cluster_infomap()}}
+\item \code{group_infomap()}: Group nodes by minimizing description length using \code{\link[igraph:cluster_infomap]{igraph::cluster_infomap()}}
 
-\item \code{group_label_prop}: Group nodes by propagating labels using \code{\link[igraph:cluster_label_prop]{igraph::cluster_label_prop()}}
+\item \code{group_label_prop()}: Group nodes by propagating labels using \code{\link[igraph:cluster_label_prop]{igraph::cluster_label_prop()}}
 
-\item \code{group_leading_eigen}: Group nodes based on the leading eigenvector of the modularity matrix using \code{\link[igraph:cluster_leading_eigen]{igraph::cluster_leading_eigen()}}
+\item \code{group_leading_eigen()}: Group nodes based on the leading eigenvector of the modularity matrix using \code{\link[igraph:cluster_leading_eigen]{igraph::cluster_leading_eigen()}}
 
-\item \code{group_louvain}: Group nodes by multilevel optimisation of modularity using \code{\link[igraph:cluster_louvain]{igraph::cluster_louvain()}}
+\item \code{group_louvain()}: Group nodes by multilevel optimisation of modularity using \code{\link[igraph:cluster_louvain]{igraph::cluster_louvain()}}
 
-\item \code{group_optimal}: Group nodes by optimising the moldularity score using \code{\link[igraph:cluster_optimal]{igraph::cluster_optimal()}}
+\item \code{group_optimal()}: Group nodes by optimising the moldularity score using \code{\link[igraph:cluster_optimal]{igraph::cluster_optimal()}}
 
-\item \code{group_spinglass}: Group nodes using simulated annealing with \code{\link[igraph:cluster_spinglass]{igraph::cluster_spinglass()}}
+\item \code{group_spinglass()}: Group nodes using simulated annealing with \code{\link[igraph:cluster_spinglass]{igraph::cluster_spinglass()}}
 
-\item \code{group_walktrap}: Group nodes via short random walks using \code{\link[igraph:cluster_walktrap]{igraph::cluster_walktrap()}}
+\item \code{group_walktrap()}: Group nodes via short random walks using \code{\link[igraph:cluster_walktrap]{igraph::cluster_walktrap()}}
 
-\item \code{group_biconnected_component}: Group edges by their membership of the maximal binconnected components using \code{\link[igraph:biconnected_components]{igraph::biconnected_components()}}
+\item \code{group_biconnected_component()}: Group edges by their membership of the maximal binconnected components using \code{\link[igraph:biconnected_components]{igraph::biconnected_components()}}
+
 }}
-
 \examples{
 create_notable('tutte') \%>\%
   activate(nodes) \%>\%

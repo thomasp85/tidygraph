@@ -197,69 +197,69 @@ manual mode for specifying more-or-less any centrality score.
 }
 \section{Functions}{
 \itemize{
-\item \code{centrality_alpha}: Wrapper for \code{\link[igraph:alpha_centrality]{igraph::alpha_centrality()}}
+\item \code{centrality_alpha()}: Wrapper for \code{\link[igraph:alpha_centrality]{igraph::alpha_centrality()}}
 
-\item \code{centrality_authority}: Wrapper for \code{\link[igraph:authority_score]{igraph::authority_score()}}
+\item \code{centrality_authority()}: Wrapper for \code{\link[igraph:authority_score]{igraph::authority_score()}}
 
-\item \code{centrality_betweenness}: Wrapper for \code{\link[igraph:betweenness]{igraph::betweenness()}} and \code{\link[igraph:betweenness]{igraph::estimate_betweenness()}}
+\item \code{centrality_betweenness()}: Wrapper for \code{\link[igraph:betweenness]{igraph::betweenness()}} and \code{\link[igraph:betweenness]{igraph::estimate_betweenness()}}
 
-\item \code{centrality_power}: Wrapper for \code{\link[igraph:power_centrality]{igraph::power_centrality()}}
+\item \code{centrality_power()}: Wrapper for \code{\link[igraph:power_centrality]{igraph::power_centrality()}}
 
-\item \code{centrality_closeness}: Wrapper for \code{\link[igraph:closeness]{igraph::closeness()}} and \code{\link[igraph:closeness]{igraph::estimate_closeness()}}
+\item \code{centrality_closeness()}: Wrapper for \code{\link[igraph:closeness]{igraph::closeness()}} and \code{\link[igraph:closeness]{igraph::estimate_closeness()}}
 
-\item \code{centrality_eigen}: Wrapper for \code{\link[igraph:eigen_centrality]{igraph::eigen_centrality()}}
+\item \code{centrality_eigen()}: Wrapper for \code{\link[igraph:eigen_centrality]{igraph::eigen_centrality()}}
 
-\item \code{centrality_hub}: Wrapper for \code{\link[igraph:hub_score]{igraph::hub_score()}}
+\item \code{centrality_hub()}: Wrapper for \code{\link[igraph:hub_score]{igraph::hub_score()}}
 
-\item \code{centrality_pagerank}: Wrapper for \code{\link[igraph:page_rank]{igraph::page_rank()}}
+\item \code{centrality_pagerank()}: Wrapper for \code{\link[igraph:page_rank]{igraph::page_rank()}}
 
-\item \code{centrality_subgraph}: Wrapper for \code{\link[igraph:subgraph_centrality]{igraph::subgraph_centrality()}}
+\item \code{centrality_subgraph()}: Wrapper for \code{\link[igraph:subgraph_centrality]{igraph::subgraph_centrality()}}
 
-\item \code{centrality_degree}: Wrapper for \code{\link[igraph:degree]{igraph::degree()}} and \code{\link[igraph:strength]{igraph::strength()}}
+\item \code{centrality_degree()}: Wrapper for \code{\link[igraph:degree]{igraph::degree()}} and \code{\link[igraph:strength]{igraph::strength()}}
 
-\item \code{centrality_edge_betweenness}: Wrapper for \code{\link[igraph:betweenness]{igraph::edge_betweenness()}}
+\item \code{centrality_edge_betweenness()}: Wrapper for \code{\link[igraph:betweenness]{igraph::edge_betweenness()}}
 
-\item \code{centrality_manual}: Manually specify your centrality score using the \code{netrankr} framework (\code{netrankr})
+\item \code{centrality_manual()}: Manually specify your centrality score using the \code{netrankr} framework (\code{netrankr})
 
-\item \code{centrality_closeness_harmonic}: centrality based on inverse shortest path (\code{netrankr})
+\item \code{centrality_closeness_harmonic()}: centrality based on inverse shortest path (\code{netrankr})
 
-\item \code{centrality_closeness_residual}: centrality based on 2-to-the-power-of negative shortest path (\code{netrankr})
+\item \code{centrality_closeness_residual()}: centrality based on 2-to-the-power-of negative shortest path (\code{netrankr})
 
-\item \code{centrality_closeness_generalised}: centrality based on alpha-to-the-power-of negative shortest path (\code{netrankr})
+\item \code{centrality_closeness_generalised()}: centrality based on alpha-to-the-power-of negative shortest path (\code{netrankr})
 
-\item \code{centrality_integration}: centrality based on \eqn{1 - (x - 1)/max(x)} transformation of shortest path (\code{netrankr})
+\item \code{centrality_integration()}: centrality based on \eqn{1 - (x - 1)/max(x)} transformation of shortest path (\code{netrankr})
 
-\item \code{centrality_communicability}: centrality an exponential tranformation of walk counts (\code{netrankr})
+\item \code{centrality_communicability()}: centrality an exponential tranformation of walk counts (\code{netrankr})
 
-\item \code{centrality_communicability_odd}: centrality an exponential tranformation of odd walk counts (\code{netrankr})
+\item \code{centrality_communicability_odd()}: centrality an exponential tranformation of odd walk counts (\code{netrankr})
 
-\item \code{centrality_communicability_even}: centrality an exponential tranformation of even walk counts (\code{netrankr})
+\item \code{centrality_communicability_even()}: centrality an exponential tranformation of even walk counts (\code{netrankr})
 
-\item \code{centrality_subgraph_odd}: subgraph centrality based on odd walk counts (\code{netrankr})
+\item \code{centrality_subgraph_odd()}: subgraph centrality based on odd walk counts (\code{netrankr})
 
-\item \code{centrality_subgraph_even}: subgraph centrality based on even walk counts (\code{netrankr})
+\item \code{centrality_subgraph_even()}: subgraph centrality based on even walk counts (\code{netrankr})
 
-\item \code{centrality_katz}: centrality based on walks penalizing distant nodes (\code{netrankr})
+\item \code{centrality_katz()}: centrality based on walks penalizing distant nodes (\code{netrankr})
 
-\item \code{centrality_betweenness_network}: Betweenness centrality based on network flow (\code{netrankr})
+\item \code{centrality_betweenness_network()}: Betweenness centrality based on network flow (\code{netrankr})
 
-\item \code{centrality_betweenness_current}: Betweenness centrality based on current flow (\code{netrankr})
+\item \code{centrality_betweenness_current()}: Betweenness centrality based on current flow (\code{netrankr})
 
-\item \code{centrality_betweenness_communicability}: Betweenness centrality based on communicability (\code{netrankr})
+\item \code{centrality_betweenness_communicability()}: Betweenness centrality based on communicability (\code{netrankr})
 
-\item \code{centrality_betweenness_rsp_simple}: Betweenness centrality based on simple randomised shortest path dependencies (\code{netrankr})
+\item \code{centrality_betweenness_rsp_simple()}: Betweenness centrality based on simple randomised shortest path dependencies (\code{netrankr})
 
-\item \code{centrality_betweenness_rsp_net}: Betweenness centrality based on net randomised shortest path dependencies (\code{netrankr})
+\item \code{centrality_betweenness_rsp_net()}: Betweenness centrality based on net randomised shortest path dependencies (\code{netrankr})
 
-\item \code{centrality_information}: centrality based on inverse sum of resistance distance between nodes (\code{netrankr})
+\item \code{centrality_information()}: centrality based on inverse sum of resistance distance between nodes (\code{netrankr})
 
-\item \code{centrality_decay}: based on a power transformation of the shortest path (\code{netrankr})
+\item \code{centrality_decay()}: based on a power transformation of the shortest path (\code{netrankr})
 
-\item \code{centrality_random_walk}: centrality based on the inverse sum of expected random walk length between nodes (\code{netrankr})
+\item \code{centrality_random_walk()}: centrality based on the inverse sum of expected random walk length between nodes (\code{netrankr})
 
-\item \code{centrality_expected}: Expected centrality ranking based on exact rank probability (\code{netrankr})
+\item \code{centrality_expected()}: Expected centrality ranking based on exact rank probability (\code{netrankr})
+
 }}
-
 \examples{
 create_notable('bull') \%>\%
   activate(nodes) \%>\%

@@ -104,38 +104,38 @@ Constructors are provided for most data structures that resembles networks.
 If a class provides an \code{\link[igraph:as.igraph]{igraph::as.igraph()}} method it is automatically
 supported.
 }
-\section{Methods (by generic)}{
+\section{Functions}{
 \itemize{
-\item \code{as_tbl_graph}: Method for edge table and set membership table
+\item \code{as_tbl_graph(data.frame)}: Method for edge table and set membership table
 
-\item \code{as_tbl_graph}: Method to deal with Node objects from the data.tree package
+\item \code{as_tbl_graph(Node)}: Method to deal with Node objects from the data.tree package
 
-\item \code{as_tbl_graph}: Method for dendrogram objects
+\item \code{as_tbl_graph(dendrogram)}: Method for dendrogram objects
 
-\item \code{as_tbl_graph}: Method for handling graphNEL objects from the graph package (on Bioconductor)
+\item \code{as_tbl_graph(graphNEL)}: Method for handling graphNEL objects from the graph package (on Bioconductor)
 
-\item \code{as_tbl_graph}: Method for handling graphAM objects from the graph package (on Bioconductor)
+\item \code{as_tbl_graph(graphAM)}: Method for handling graphAM objects from the graph package (on Bioconductor)
 
-\item \code{as_tbl_graph}: Method for handling graphBAM objects from the graph package (on Bioconductor)
+\item \code{as_tbl_graph(graphBAM)}: Method for handling graphBAM objects from the graph package (on Bioconductor)
 
-\item \code{as_tbl_graph}: Method for hclust objects
+\item \code{as_tbl_graph(hclust)}: Method for hclust objects
 
-\item \code{as_tbl_graph}: Method for igraph object. Simply subclasses the object into a \code{tbl_graph}
+\item \code{as_tbl_graph(igraph)}: Method for igraph object. Simply subclasses the object into a \code{tbl_graph}
 
-\item \code{as_tbl_graph}: Method for adjacency lists and lists of node and edge tables
+\item \code{as_tbl_graph(list)}: Method for adjacency lists and lists of node and edge tables
 
-\item \code{as_tbl_graph}: Method for edgelist, adjacency and incidence matrices
+\item \code{as_tbl_graph(matrix)}: Method for edgelist, adjacency and incidence matrices
 
-\item \code{as_tbl_graph}: Method to handle network objects from the \code{network}
+\item \code{as_tbl_graph(network)}: Method to handle network objects from the \code{network}
 package. Requires this packages to work.
 
-\item \code{as_tbl_graph}: Method for handling phylo objects from the ape package
+\item \code{as_tbl_graph(phylo)}: Method for handling phylo objects from the ape package
 
-\item \code{as_tbl_graph}: Method for handling evonet objects from the ape package
+\item \code{as_tbl_graph(evonet)}: Method for handling evonet objects from the ape package
 
-\item \code{as_tbl_graph}: Default method. tries to call \code{\link[igraph:as.igraph]{igraph::as.igraph()}} on the input.
+\item \code{as_tbl_graph(default)}: Default method. tries to call \code{\link[igraph:as.igraph]{igraph::as.igraph()}} on the input.
+
 }}
-
 \examples{
 rstat_nodes <- data.frame(name = c("Hadley", "David", "Romain", "Julia"))
 rstat_edges <- data.frame(from = c(1, 1, 1, 2, 3, 3, 4, 4, 4),

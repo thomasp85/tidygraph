@@ -55,29 +55,29 @@ properties and will all return a logical scalar.
 }
 \section{Functions}{
 \itemize{
-\item \code{graph_is_simple}: Is the graph simple (no parallel edges)
+\item \code{graph_is_simple()}: Is the graph simple (no parallel edges)
 
-\item \code{graph_is_directed}: Is the graph directed
+\item \code{graph_is_directed()}: Is the graph directed
 
-\item \code{graph_is_bipartite}: Is the graph bipartite
+\item \code{graph_is_bipartite()}: Is the graph bipartite
 
-\item \code{graph_is_connected}: Is the graph connected
+\item \code{graph_is_connected()}: Is the graph connected
 
-\item \code{graph_is_tree}: Is the graph a tree
+\item \code{graph_is_tree()}: Is the graph a tree
 
-\item \code{graph_is_forest}: Is the graph an ensemble of multiple trees
+\item \code{graph_is_forest()}: Is the graph an ensemble of multiple trees
 
-\item \code{graph_is_dag}: Is the graph a directed acyclic graph
+\item \code{graph_is_dag()}: Is the graph a directed acyclic graph
 
-\item \code{graph_is_chordal}: Is the graph chordal
+\item \code{graph_is_chordal()}: Is the graph chordal
 
-\item \code{graph_is_complete}: Is the graph fully connected
+\item \code{graph_is_complete()}: Is the graph fully connected
 
-\item \code{graph_is_isomorphic_to}: Is the graph isomorphic to another graph. See \code{\link[igraph:isomorphic]{igraph::is_isomorphic_to()}}
+\item \code{graph_is_isomorphic_to()}: Is the graph isomorphic to another graph. See \code{\link[igraph:isomorphic]{igraph::is_isomorphic_to()}}
 
-\item \code{graph_is_subgraph_isomorphic_to}: Is the graph an isomorphic subgraph to another graph. see \code{\link[igraph:subgraph_isomorphic]{igraph::is_subgraph_isomorphic_to()}}
+\item \code{graph_is_subgraph_isomorphic_to()}: Is the graph an isomorphic subgraph to another graph. see \code{\link[igraph:subgraph_isomorphic]{igraph::is_subgraph_isomorphic_to()}}
+
 }}
-
 \examples{
 gr <- create_tree(50, 4)
 

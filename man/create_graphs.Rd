@@ -81,33 +81,33 @@ but returns \code{tbl_graph} rather than \code{igraph} objects.
 }
 \section{Functions}{
 \itemize{
-\item \code{create_ring}: Create a simple ring graph
+\item \code{create_ring()}: Create a simple ring graph
 
-\item \code{create_path}: Create a simple path
+\item \code{create_path()}: Create a simple path
 
-\item \code{create_chordal_ring}: Create a chordal ring
+\item \code{create_chordal_ring()}: Create a chordal ring
 
-\item \code{create_de_bruijn}: Create a de Bruijn graph with the specified alphabet and label size
+\item \code{create_de_bruijn()}: Create a de Bruijn graph with the specified alphabet and label size
 
-\item \code{create_empty}: Create a graph with no edges
+\item \code{create_empty()}: Create a graph with no edges
 
-\item \code{create_bipartite}: Create a full bipartite graph
+\item \code{create_bipartite()}: Create a full bipartite graph
 
-\item \code{create_citation}: Create a full citation graph
+\item \code{create_citation()}: Create a full citation graph
 
-\item \code{create_complete}: Create a complete graph (a graph where all nodes are connected)
+\item \code{create_complete()}: Create a complete graph (a graph where all nodes are connected)
 
-\item \code{create_notable}: Create a graph based on its name. See \code{\link[igraph:make_graph]{igraph::make_graph()}}
+\item \code{create_notable()}: Create a graph based on its name. See \code{\link[igraph:make_graph]{igraph::make_graph()}}
 
-\item \code{create_kautz}: Create a Kautz graph with the specified alphabet and label size
+\item \code{create_kautz()}: Create a Kautz graph with the specified alphabet and label size
 
-\item \code{create_lattice}: Create a multidimensional grid of nodes
+\item \code{create_lattice()}: Create a multidimensional grid of nodes
 
-\item \code{create_star}: Create a star graph (A single node in the center connected to all other nodes)
+\item \code{create_star()}: Create a star graph (A single node in the center connected to all other nodes)
 
-\item \code{create_tree}: Create a tree graph
+\item \code{create_tree()}: Create a tree graph
+
 }}
-
 \examples{
 # Create a complete graph with 10 nodes
 create_complete(10)

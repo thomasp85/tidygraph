@@ -100,23 +100,23 @@ described in detail at the linked igraph documentation.
 }
 \section{Functions}{
 \itemize{
-\item \code{play_citation_age}: Create citation graphs based on a specific age
+\item \code{play_citation_age()}: Create citation graphs based on a specific age
 link probability. See \code{\link[igraph:sample_last_cit]{igraph::sample_last_cit()}}
 
-\item \code{play_forestfire}: Create graphs by simulating the spead of fire in
+\item \code{play_forestfire()}: Create graphs by simulating the spead of fire in
 a forest. See \code{\link[igraph:sample_forestfire]{igraph::sample_forestfire()}}
 
-\item \code{play_growing}: Create graphs by adding a fixed number of edges
+\item \code{play_growing()}: Create graphs by adding a fixed number of edges
 at each iteration. See \code{\link[igraph:sample_growing]{igraph::sample_growing()}}
 
-\item \code{play_barabasi_albert}: Create graphs based on the Barabasi-Alberts
+\item \code{play_barabasi_albert()}: Create graphs based on the Barabasi-Alberts
 preferential attachment model. See \code{\link[igraph:sample_pa]{igraph::sample_pa()}}
 
-\item \code{play_barabasi_albert_aging}: Create graphs based on the Barabasi-Alberts
+\item \code{play_barabasi_albert_aging()}: Create graphs based on the Barabasi-Alberts
 preferential attachment model, incoorporating node age preferrence. See
 \code{\link[igraph:sample_pa_age]{igraph::sample_pa_age()}}.
-}}
 
+}}
 \examples{
 plot(play_forestfire(50, 0.5))
 

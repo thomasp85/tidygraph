@@ -47,25 +47,25 @@ collected under the \verb{node_*} umbrella of functions.
 }
 \section{Functions}{
 \itemize{
-\item \code{node_eccentricity}: measure the maximum shortest path to all other nodes in the graph
+\item \code{node_eccentricity()}: measure the maximum shortest path to all other nodes in the graph
 
-\item \code{node_constraint}: measures Burts constraint of the node. See \code{\link[igraph:constraint]{igraph::constraint()}}
+\item \code{node_constraint()}: measures Burts constraint of the node. See \code{\link[igraph:constraint]{igraph::constraint()}}
 
-\item \code{node_coreness}: measures the coreness of each node. See \code{\link[igraph:coreness]{igraph::coreness()}}
+\item \code{node_coreness()}: measures the coreness of each node. See \code{\link[igraph:coreness]{igraph::coreness()}}
 
-\item \code{node_diversity}: measures the diversity of the node. See \code{\link[igraph:diversity]{igraph::diversity()}}
+\item \code{node_diversity()}: measures the diversity of the node. See \code{\link[igraph:diversity]{igraph::diversity()}}
 
-\item \code{node_bridging_score}: measures Valente's Bridging measures for detecting structural bridges (\code{influenceR})
+\item \code{node_bridging_score()}: measures Valente's Bridging measures for detecting structural bridges (\code{influenceR})
 
-\item \code{node_effective_network_size}: measures Burt's Effective Network Size indicating access to structural holes in the network (\code{influenceR})
+\item \code{node_effective_network_size()}: measures Burt's Effective Network Size indicating access to structural holes in the network (\code{influenceR})
 
-\item \code{node_connectivity_impact}: measures the impact on connectivity when removing the node (\code{NetSwan})
+\item \code{node_connectivity_impact()}: measures the impact on connectivity when removing the node (\code{NetSwan})
 
-\item \code{node_closeness_impact}: measures the impact on closeness when removing the node (\code{NetSwan})
+\item \code{node_closeness_impact()}: measures the impact on closeness when removing the node (\code{NetSwan})
 
-\item \code{node_fareness_impact}: measures the impact on fareness (distance between all node pairs) when removing the node (\code{NetSwan})
+\item \code{node_fareness_impact()}: measures the impact on fareness (distance between all node pairs) when removing the node (\code{NetSwan})
+
 }}
-
 \examples{
 # Calculate Burt's Constraint for each node
 create_notable('meredith') \%>\%

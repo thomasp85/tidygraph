@@ -66,29 +66,29 @@ exclusive and that nodes can thus be of multiple types.
 }
 \section{Functions}{
 \itemize{
-\item \code{node_is_cut}: is the node a cut node (articaultion node)
+\item \code{node_is_cut()}: is the node a cut node (articaultion node)
 
-\item \code{node_is_root}: is the node a root in a tree
+\item \code{node_is_root()}: is the node a root in a tree
 
-\item \code{node_is_leaf}: is the node a leaf in a tree
+\item \code{node_is_leaf()}: is the node a leaf in a tree
 
-\item \code{node_is_sink}: does the node only have incomming edges
+\item \code{node_is_sink()}: does the node only have incomming edges
 
-\item \code{node_is_source}: does the node only have outgoing edges
+\item \code{node_is_source()}: does the node only have outgoing edges
 
-\item \code{node_is_isolated}: is the node unconnected
+\item \code{node_is_isolated()}: is the node unconnected
 
-\item \code{node_is_universal}: is the node connected to all other nodes in the graph
+\item \code{node_is_universal()}: is the node connected to all other nodes in the graph
 
-\item \code{node_is_simplical}: are all the neighbors of the node connected
+\item \code{node_is_simplical()}: are all the neighbors of the node connected
 
-\item \code{node_is_center}: does the node have the minimal eccentricity in the graph
+\item \code{node_is_center()}: does the node have the minimal eccentricity in the graph
 
-\item \code{node_is_adjacent}: is a node adjacent to any of the nodes given in \code{to}
+\item \code{node_is_adjacent()}: is a node adjacent to any of the nodes given in \code{to}
 
-\item \code{node_is_keyplayer}: Is a node part of the keyplayers in the graph (\code{influenceR})
+\item \code{node_is_keyplayer()}: Is a node part of the keyplayers in the graph (\code{influenceR})
+
 }}
-
 \examples{
 # Find the root and leafs in a tree
 create_tree(40, 2) \%>\%
