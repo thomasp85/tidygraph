@@ -5,12 +5,11 @@
 
 <!-- badges: start -->
 
-[![R build
-status](https://github.com/thomasp85/tidygraph/workflows/R-CMD-check/badge.svg)](https://github.com/thomasp85/tidygraph/actions)
+[![R-CMD-check](https://github.com/thomasp85/tidygraph/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomasp85/tidygraph/actions/workflows/R-CMD-check.yaml)
 [![CRAN_Release_Badge](http://www.r-pkg.org/badges/version-ago/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
 [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/tidygraph)](https://CRAN.R-project.org/package=tidygraph)
 [![Coverage
-Status](https://img.shields.io/codecov/c/github/thomasp85/tidygraph/master.svg)](https://codecov.io/github/thomasp85/tidygraph?branch=master)
+Status](https://codecov.io/gh/thomasp85/tidygraph/branch/main/graph/badge.svg)](https://app.codecov.io/gh/thomasp85/tidygraph?branch=main)
 <!-- badges: end -->
 
 This package provides a tidy API for graph/network manipulation. While
@@ -32,27 +31,27 @@ play_erdos_renyi(10, 0.5) %>%
   activate(edges) %>% 
   mutate(centrality = centrality_edge_betweenness()) %>% 
   arrange(centrality)
-#> # A tbl_graph: 10 nodes and 44 edges
+#> # A tbl_graph: 10 nodes and 39 edges
 #> #
 #> # A directed simple graph with 1 component
 #> #
-#> # Edge Data: 44 × 3 (active)
+#> # Edge Data: 39 × 3 (active)
 #>    from    to centrality
 #>   <int> <int>      <dbl>
-#> 1     7     8       1.58
-#> 2     9     7       1.7 
-#> 3     9     1       1.78
-#> 4     7     6       1.83
-#> 5     7     5       2   
-#> 6     8     5       2   
-#> # … with 38 more rows
+#> 1     4    10       1.25
+#> 2     2    10       1.92
+#> 3     6    10       2.08
+#> 4     5     2       2.17
+#> 5     5    10       2.25
+#> 6     4     6       2.25
+#> # … with 33 more rows
 #> #
 #> # Node Data: 10 × 1
 #>   degree
 #>    <dbl>
-#> 1      2
-#> 2      3
-#> 3      5
+#> 1      4
+#> 2      4
+#> 3      2
 #> # … with 7 more rows
 ```
 
