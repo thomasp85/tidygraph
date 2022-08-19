@@ -424,7 +424,7 @@ map_local_dbl <- function(order = 1, mode = 'all', mindist = 0, .f, ...) {
 #' @importFrom igraph bfs
 #' @importFrom tibble tibble
 bfs_df <- function(graph, root, mode, unreachable) {
-  search <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  search <- bfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
                 order = TRUE, rank = TRUE, father = TRUE, pred = TRUE,
                 succ = TRUE, dist = TRUE)
   nodes <- seq_along(search$order)
@@ -441,7 +441,7 @@ bfs_df <- function(graph, root, mode, unreachable) {
 #' @importFrom igraph dfs
 #' @importFrom tibble tibble
 dfs_df <- function(graph, root, mode, unreachable) {
-  search <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  search <- dfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
                 order = TRUE, order.out = TRUE, father = TRUE, dist = TRUE)
   nodes <- seq_along(search$order)
   tibble(

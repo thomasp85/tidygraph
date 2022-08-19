@@ -44,7 +44,7 @@ bfs_rank <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
   graph <- .G()
   root <- as_ind(root, gorder(graph))
-  ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  ind <- bfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
              order = TRUE, rank = TRUE)$rank
   as.integer(ind)
 }
@@ -55,7 +55,7 @@ bfs_parent <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
   graph <- .G()
   root <- as_ind(root, gorder(graph))
-  ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  ind <- bfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
       order = TRUE, father = TRUE)$father
   as.integer(ind)
 }
@@ -66,7 +66,7 @@ bfs_before <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
   graph <- .G()
   root <- as_ind(root, gorder(graph))
-  ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  ind <- bfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
              order = TRUE, pred = TRUE)$pred
   as.integer(ind)
 }
@@ -77,7 +77,7 @@ bfs_after <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
   graph <- .G()
   root <- as_ind(root, gorder(graph))
-  ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  ind <- bfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
              order = TRUE, succ = TRUE)$succ
   as.integer(ind)
 }
@@ -88,7 +88,7 @@ bfs_dist <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
   graph <- .G()
   root <- as_ind(root, gorder(graph))
-  ind <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  ind <- bfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
              order = TRUE, dist = TRUE)$dist
   as.integer(ind)
 }
@@ -102,7 +102,7 @@ dfs_rank <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
   graph <- .G()
   root <- as_ind(root, gorder(graph))
-  ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  ind <- dfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
              order = TRUE)$order
   match(seq_along(ind), as.integer(ind))
 }
@@ -113,7 +113,7 @@ dfs_rank_out <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
   graph <- .G()
   root <- as_ind(root, gorder(graph))
-  ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  ind <- dfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
              order = TRUE, order.out = TRUE)$order.out
   match(seq_along(ind), as.integer(ind))
 }
@@ -124,7 +124,7 @@ dfs_parent <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
   graph <- .G()
   root <- as_ind(root, gorder(graph))
-  ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  ind <- dfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
              order = TRUE, father = TRUE)$father
   as.integer(ind)
 }
@@ -135,7 +135,7 @@ dfs_dist <- function(root, mode = 'out', unreachable = FALSE) {
   expect_nodes()
   graph <- .G()
   root <- as_ind(root, gorder(graph))
-  ind <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  ind <- dfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
              order = TRUE, dist = TRUE)$dist
   as.integer(ind)
 }
