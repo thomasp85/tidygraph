@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -42,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidygraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1.9000</span>
       </span>
     </div>
 
@@ -58,7 +60,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -66,13 +68,14 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Release notes</li>
     <li>
-      <a href="https://www.data-imaginist.com/2018/tidygraph-1-1-a-tidy-hope/">Version 1.1.0</a>
+      <a href="https://www.data-imaginist.com/2018/tidygraph-1-1-a-tidy-hope/" class="external-link">Version 1.1.0</a>
     </li>
     <li>
-      <a href="https://www.data-imaginist.com/2017/introducing-tidygraph/">Version 1.0.0</a>
+      <a href="https://www.data-imaginist.com/2017/introducing-tidygraph/" class="external-link">Version 1.0.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="news/index.html">Change log</a>
     </li>
   </ul>
@@ -80,10 +83,10 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://ggraph.data-imaginist.com">ggraph</a>
+  <a href="https://ggraph.data-imaginist.com" class="external-link">ggraph</a>
 </li>
 <li>
-  <a href="https://github.com/thomasp85/tidygraph">
+  <a href="https://github.com/thomasp85/tidygraph" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -100,155 +103,165 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="tidygraph-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#tidygraph-" class="anchor"></a>tidygraph <img src="reference/figures/logo.png" align="right" width="140px">
+<div class="section level1">
+<div class="page-header"><h1 id="tidygraph-">tidygraph <img src="reference/figures/logo.png" align="right" width="140px"><a class="anchor" aria-label="anchor" href="#tidygraph-"></a>
 </h1></div>
 <!-- badges: start -->
-
 <p>This package provides a tidy API for graph/network manipulation. While network data itself is not tidy, it can be envisioned as two tidy tables, one for node data and one for edge data. <code>tidygraph</code> provides a way to switch between the two tables and provides <code>dplyr</code> verbs for manipulating them. Furthermore it provides access to a lot of graph algorithms with return values that facilitate their use in a tidy workflow.</p>
-<div id="an-example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#an-example" class="anchor"></a>An example</h2>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidygraph</span>)
-
-<span class="fu"><a href="reference/sampling_games.html">play_erdos_renyi</a></span>(<span class="fl">10</span>, <span class="fl">0.5</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/activate.html">activate</a></span>(<span class="no">nodes</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">degree</span> <span class="kw">=</span> <span class="fu"><a href="reference/centrality.html">centrality_degree</a></span>()) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/activate.html">activate</a></span>(<span class="no">edges</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">centrality</span> <span class="kw">=</span> <span class="fu"><a href="reference/centrality.html">centrality_edge_betweenness</a></span>()) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="no">centrality</span>)
-<span class="co">#&gt; # A tbl_graph: 10 nodes and 46 edges</span>
-<span class="co">#&gt; #</span>
-<span class="co">#&gt; # A directed simple graph with 1 component</span>
-<span class="co">#&gt; #</span>
-<span class="co">#&gt; # Edge Data: 46 x 3 (active)</span>
-<span class="co">#&gt;    from    to centrality</span>
-<span class="co">#&gt; * &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1     8       1.33</span>
-<span class="co">#&gt; 2     5     8       1.42</span>
-<span class="co">#&gt; 3     5     3       1.75</span>
-<span class="co">#&gt; 4     3     7       1.75</span>
-<span class="co">#&gt; 5     5     7       1.92</span>
-<span class="co">#&gt; 6     5     1       2.00</span>
-<span class="co">#&gt; # … with 40 more rows</span>
-<span class="co">#&gt; #</span>
-<span class="co">#&gt; # Node Data: 10 x 1</span>
-<span class="co">#&gt;   degree</span>
-<span class="co">#&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1      5</span>
-<span class="co">#&gt; 2      6</span>
-<span class="co">#&gt; 3      4</span>
-<span class="co">#&gt; # … with 7 more rows</span></pre></div>
+<div class="section level2">
+<h2 id="an-example">An example<a class="anchor" aria-label="anchor" href="#an-example"></a>
+</h2>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/sampling_games.html">play_erdos_renyi</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>degree <span class="op">=</span> <span class="fu"><a href="reference/centrality.html">centrality_degree</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>centrality <span class="op">=</span> <span class="fu"><a href="reference/centrality.html">centrality_edge_betweenness</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">centrality</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tbl_graph: 10 nodes and 39 edges</span></span>
+<span><span class="co">#&gt; #</span></span>
+<span><span class="co">#&gt; # A directed simple graph with 1 component</span></span>
+<span><span class="co">#&gt; #</span></span>
+<span><span class="co">#&gt; # Edge Data: 39 × 3 (active)</span></span>
+<span><span class="co">#&gt;    from    to centrality</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1     4    10       1.25</span></span>
+<span><span class="co">#&gt; 2     2    10       1.92</span></span>
+<span><span class="co">#&gt; 3     6    10       2.08</span></span>
+<span><span class="co">#&gt; 4     5     2       2.17</span></span>
+<span><span class="co">#&gt; 5     5    10       2.25</span></span>
+<span><span class="co">#&gt; 6     4     6       2.25</span></span>
+<span><span class="co">#&gt; # … with 33 more rows</span></span>
+<span><span class="co">#&gt; #</span></span>
+<span><span class="co">#&gt; # Node Data: 10 × 1</span></span>
+<span><span class="co">#&gt;   degree</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1      4</span></span>
+<span><span class="co">#&gt; 2      4</span></span>
+<span><span class="co">#&gt; 3      2</span></span>
+<span><span class="co">#&gt; # … with 7 more rows</span></span></code></pre></div>
 </div>
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p><code>tidygraph</code> is a huge package that exports 280 different functions and methods. It more or less wraps the full functionality of <code>igraph</code> in a tidy API giving you access to almost all of the <code>dplyr</code> verbs plus a few more, developed for use with relational data.</p>
-<div id="more-verbs" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more-verbs" class="anchor"></a>More verbs</h3>
+<div class="section level3">
+<h3 id="more-verbs">More verbs<a class="anchor" aria-label="anchor" href="#more-verbs"></a>
+</h3>
 <p><code>tidygraph</code> adds some extra verbs for specific use in network analysis and manipulation. The <code><a href="reference/activate.html">activate()</a></code> function defines whether one is manipulating node or edge data at the moment as shown in the example above. <code><a href="reference/bind_graphs.html">bind_edges()</a></code>, <code><a href="reference/bind_graphs.html">bind_nodes()</a></code>, and <code><a href="reference/bind_graphs.html">bind_graphs()</a></code> let you expand the graph structure you’re working with, while <code><a href="reference/graph_join.html">graph_join()</a></code> lets you merge two graphs on some node identifier. <code><a href="reference/reroute.html">reroute()</a></code>, on the other hand, lets you change the terminal nodes of the edges in the graph.</p>
 </div>
-<div id="more-algorithms" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more-algorithms" class="anchor"></a>More algorithms</h3>
+<div class="section level3">
+<h3 id="more-algorithms">More algorithms<a class="anchor" aria-label="anchor" href="#more-algorithms"></a>
+</h3>
 <p><code>tidygraph</code> wraps almost all of the graph algorithms from <code>igraph</code> and provides a consistent interface and output that always matches the sequence of nodes and edges. All <code>tidygraph</code> algorithm wrappers are intended for use inside verbs where they know the context they are being called in. In the example above it is not necessary to supply the graph nor the node/edge IDs to <code><a href="reference/centrality.html">centrality_degree()</a></code> and <code><a href="reference/centrality.html">centrality_edge_betweenness()</a></code> as they are aware of them already. This leads to much clearer code and less typing.</p>
 </div>
-<div id="more-maps" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more-maps" class="anchor"></a>More maps</h3>
+<div class="section level3">
+<h3 id="more-maps">More maps<a class="anchor" aria-label="anchor" href="#more-maps"></a>
+</h3>
 <p><code>tidygraph</code> goes beyond <code>dplyr</code> and also implements graph centric version of the <code>purrr</code> map functions. You can now call a function on the nodes in the order of a breadth or depth first search while getting access to the result of the previous calls.</p>
 </div>
-<div id="more-morphs" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more-morphs" class="anchor"></a>More morphs</h3>
+<div class="section level3">
+<h3 id="more-morphs">More morphs<a class="anchor" aria-label="anchor" href="#more-morphs"></a>
+</h3>
 <p><code>tidygraph</code> lets you temporarily change the representation of your graph, do some manipulation of the node and edge data, and then change back to the original graph with the changes being merged in automatically. This is powered by the new <code><a href="reference/morph.html">morph()</a></code>/<code><a href="reference/morph.html">unmorph()</a></code> verbs that let you e.g. contract nodes, work on the linegraph representation, split communities to separate graphs etc. If you wish to continue with the morphed version, the <code><a href="reference/morph.html">crystallise()</a></code> verb lets you <em>freeze</em> the temporary representation into a proper <code>tbl_graph</code>.</p>
 </div>
-<div id="more-data-structure-support" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more-data-structure-support" class="anchor"></a>More data structure support</h3>
+<div class="section level3">
+<h3 id="more-data-structure-support">More data structure support<a class="anchor" aria-label="anchor" href="#more-data-structure-support"></a>
+</h3>
 <p>While <code>tidygraph</code> is powered by igraph underneath it wants everyone to join the fun. The <code><a href="reference/tbl_graph.html">as_tbl_graph()</a></code> function can easily convert relational data from all your favourite objects, such as <code>network</code>, <code>phylo</code>, <code>dendrogram</code>, <code>data.tree</code>, <code>graph</code>, etc. More conversion will be added in the order I become aware of them.</p>
 </div>
 </div>
-<div id="visualisation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#visualisation" class="anchor"></a>Visualisation</h2>
+<div class="section level2">
+<h2 id="visualisation">Visualisation<a class="anchor" aria-label="anchor" href="#visualisation"></a>
+</h2>
 <p><code>tidygraph</code> itself does not provide any means of visualisation, but it works flawlessly with <code>ggraph</code>. This division makes it easy to develop the visualisation and manipulation code at different speeds depending on where the needs arise.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p><code>tidygraph</code> is available on CRAN and can be installed simply, using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages('tidygraph')</a></code>. For the development version available on GitHub, use the <code>devtools</code> package for installation:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages('devtools')</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">'thomasp85/tidygraph'</span>)</pre></div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p><code>tidygraph</code> is available on CRAN and can be installed simply, using <code>install.packages('tidygraph')</code>. For the development version available on GitHub, use the <code>devtools</code> package for installation:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages('devtools')</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'thomasp85/tidygraph'</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="thanks" class="section level2">
-<h2 class="hasAnchor">
-<a href="#thanks" class="anchor"></a>Thanks</h2>
+<div class="section level2">
+<h2 id="thanks">Thanks<a class="anchor" aria-label="anchor" href="#thanks"></a>
+</h2>
 <p><code>tidygraph</code> stands on the shoulders of particularly the <code>igraph</code> and <code>dplyr</code>/<code>tidyverse</code> teams. It would not have happened without them, so thanks so much to them.</p>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
-<p>Please note that the ‘tidygraph’ project is released with a <a href="https://tidygraph.data-imaginist.com/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
+<p>Please note that the tidygraph project is released with a <a href="https://tidygraph.data-imaginist.com/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=tidygraph">https://​cloud.r-project.org/​package=tidygraph</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/thomasp85/tidygraph/">https://​github.com/​thomasp85/​tidygraph/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/thomasp85/tidygraph/issues">https://​github.com/​thomasp85/​tidygraph/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=tidygraph" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/thomasp85/tidygraph/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/thomasp85/tidygraph/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>
-<a href="https://data-imaginist.com">Thomas Lin Pedersen</a> <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-5147-4711" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html#citation">Citing tidygraph</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/thomasp85/tidygraph/actions"><img src="https://github.com/thomasp85/tidygraph/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://CRAN.R-project.org/package=tidygraph"><img src="http://www.r-pkg.org/badges/version-ago/tidygraph" alt="CRAN_Release_Badge"></a></li>
-<li><a href="https://CRAN.R-project.org/package=tidygraph"><img src="http://cranlogs.r-pkg.org/badges/tidygraph" alt="CRAN_Download_Badge"></a></li>
-<li><a href="https://codecov.io/github/thomasp85/tidygraph?branch=master"><img src="https://img.shields.io/codecov/c/github/thomasp85/tidygraph/master.svg" alt="Coverage Status"></a></li>
+<li>
+<a href="https://data-imaginist.com" class="external-link">Thomas Lin Pedersen</a> <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-5147-4711" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/thomasp85/tidygraph/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/thomasp85/tidygraph/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://CRAN.R-project.org/package=tidygraph" class="external-link"><img src="http://www.r-pkg.org/badges/version-ago/tidygraph" alt="CRAN_Release_Badge"></a></li>
+<li><a href="https://CRAN.R-project.org/package=tidygraph" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/tidygraph" alt="CRAN_Download_Badge"></a></li>
+<li><a href="https://app.codecov.io/gh/thomasp85/tidygraph?branch=main" class="external-link"><img src="https://codecov.io/gh/thomasp85/tidygraph/branch/main/graph/badge.svg" alt="Coverage Status"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://data-imaginist.com">Thomas Lin Pedersen</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://data-imaginist.com" class="external-link">Thomas Lin Pedersen</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -256,6 +269,8 @@
 
   
 
+
+  
 
   </body>
 </html>

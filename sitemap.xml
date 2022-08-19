@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tidygraph.data-imaginist.com/404.html</loc>
+  </url>
+  <url>
+    <loc>https://tidygraph.data-imaginist.com/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://tidygraph.data-imaginist.com/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://tidygraph.data-imaginist.com/authors.html</loc>
+  </url>
+  <url>
     <loc>https://tidygraph.data-imaginist.com/index.html</loc>
+  </url>
+  <url>
+    <loc>https://tidygraph.data-imaginist.com/news/index.html</loc>
   </url>
   <url>
     <loc>https://tidygraph.data-imaginist.com/reference/activate.html</loc>
@@ -44,6 +59,9 @@
   </url>
   <url>
     <loc>https://tidygraph.data-imaginist.com/reference/group_graph.html</loc>
+  </url>
+  <url>
+    <loc>https://tidygraph.data-imaginist.com/reference/index.html</loc>
   </url>
   <url>
     <loc>https://tidygraph.data-imaginist.com/reference/local_graph.html</loc>
