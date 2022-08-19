@@ -2,6 +2,7 @@
 
 * Activating a grouped tbl_graph with what is already active will no longer 
   cause grouping to be dropped (#121)
+* General upkeep
 
 # tidygraph 1.2.1
 
