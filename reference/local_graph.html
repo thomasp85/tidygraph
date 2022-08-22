@@ -113,13 +113,10 @@ argument is ignored for undirected graphs.</p></dd>
 
 
 <dt>weights</dt>
-<dd><p>Weight vector. If the graph has a <code>weight</code> edge
-attribute, then this is used by default. If this argument is given, then
-vertex strength (see <code><a href="https://rdrr.io/pkg/igraph/man/strength.html" class="external-link">strength</a></code>) is used instead of vertex
-degree. But note that <code>knnk</code> is still given in the function of the
-normal vertex degree.
-Weights are are used to calculate a weighted degree (also called
-<code><a href="https://rdrr.io/pkg/igraph/man/strength.html" class="external-link">strength</a></code>) instead of the degree.</p></dd>
+<dd><p>An edge weight vector. For <code>local_ave_degree</code>: If this argument
+is given, the average vertex strength is calculated instead of vertex degree.
+For <code>local_transitivity</code>: if given weighted transitivity using the approach by
+<em>A. Barrat</em> will be calculated.</p></dd>
 
 </dl></div>
     <div id="value">
