@@ -1,4 +1,8 @@
-Minor release addressing the breaking changes in igraph and fixing a few minor
-bugs
+Minor release due to HTML5 upgrade on CRAN
 
+## revdepcheck results
 
+We checked 44 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
