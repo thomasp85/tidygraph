@@ -1,3 +1,5 @@
+# tidygraph (development version)
+
 # tidygraph 1.2.2
 
 * Activating a grouped tbl_graph with what is already active will no longer 
