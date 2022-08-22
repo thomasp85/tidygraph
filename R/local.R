@@ -50,7 +50,10 @@ local_triangles <- function() {
   count_triangles(graph = .G())
 }
 #' @describeIn local_graph Calculates the average degree based on the neighborhood of each node. Wraps [igraph::knn()].
-#' @inheritParams igraph::knn
+#' @param weights An edge weight vector. For `local_ave_degree`: If this argument
+#' is given, the average vertex strength is calculated instead of vertex degree.
+#' For `local_transitivity`: if given weighted transitivity using the approach by
+#' *A. Barrat* will be calculated.
 #' @importFrom igraph knn
 #' @export
 local_ave_degree <- function(weights = NULL) {

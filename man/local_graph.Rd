@@ -32,13 +32,10 @@ argument is ignored for undirected graphs.}
 
 \item{mindist}{The minimum distance to include the vertex in the result.}
 
-\item{weights}{Weight vector. If the graph has a \code{weight} edge
-attribute, then this is used by default. If this argument is given, then
-vertex strength (see \code{\link[igraph]{strength}}) is used instead of vertex
-degree. But note that \code{knnk} is still given in the function of the
-normal vertex degree.
-Weights are are used to calculate a weighted degree (also called
-\code{\link[igraph]{strength}}) instead of the degree.}
+\item{weights}{An edge weight vector. For \code{local_ave_degree}: If this argument
+is given, the average vertex strength is calculated instead of vertex degree.
+For \code{local_transitivity}: if given weighted transitivity using the approach by
+\emph{A. Barrat} will be calculated.}
 }
 \value{
 A numeric vector or a list (for \code{local_members}) with elements
