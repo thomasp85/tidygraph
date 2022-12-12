@@ -8,7 +8,7 @@ get_number_of_groups <- function(graph, group_clustering_function) {
   graph %>%
     mutate(groups = group_clustering_function) %>%
     dplyr::as_tibble(what = 'vertices') %>%
-    distinct() %>% dplyr::count() %>% dplyr::first()
+    distinct() %>% dplyr::count() %>% dplyr::pull(1)
 }
 
 test_that("grouping returns integer vector", {
