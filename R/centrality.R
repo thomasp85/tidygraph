@@ -23,7 +23,6 @@
 #' @param tol Tolerance for near-singularities during matrix inversion
 #' @param options Settings passed on to `igraph::arpack()`
 #' @param cutoff maximum path length to use during calculations
-#' @param nobigint Should big integers be avoided during calculations
 #' @param alpha Relative importance of endogenous vs exogenous factors (`centrality_alpha`), the exponent to the power transformation of the distance metric (`centrality_closeness_generalised`), the base of power transformation (`centrality_decay`), or the attenuation factor (`centrality_katz`)
 #' @param exo The exogenous factors of the nodes. Either a scalar or a number
 #' number for each node. Evaluated in the context of the node data.
@@ -79,7 +78,7 @@ centrality_authority <- function(weights = NULL, scale = TRUE, options = igraph:
 #' @importFrom igraph V betweenness estimate_betweenness
 #' @importFrom rlang quos
 #' @export
-centrality_betweenness <- function(weights = NULL, directed = TRUE, cutoff = NULL, nobigint = TRUE, normalized = FALSE) {
+centrality_betweenness <- function(weights = NULL, directed = TRUE, cutoff = -1, normalized = FALSE) {
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
@@ -88,9 +87,9 @@ centrality_betweenness <- function(weights = NULL, directed = TRUE, cutoff = NUL
     weights <- NA
   }
   if (is.null(cutoff)) {
-    betweenness(graph = graph, v = V(graph), directed = directed, weights = weights, nobigint = nobigint, normalized = normalized)
+    betweenness(graph = graph, v = V(graph), directed = directed, weights = weights, normalized = normalized)
   } else {
-    estimate_betweenness(graph = graph, vids = V(graph), directed = directed, cutoff = cutoff, weights = weights, nobigint = nobigint)
+    estimate_betweenness(graph = graph, vids = V(graph), directed = directed, cutoff = cutoff, weights = weights)
   }
 }
 #' @describeIn centrality Wrapper for [igraph::power_centrality()]
