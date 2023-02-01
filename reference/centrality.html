@@ -114,8 +114,7 @@ manual mode for specifying more-or-less any centrality score.</p>
 <span><span class="fu">centrality_betweenness</span><span class="op">(</span></span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  cutoff <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  nobigint <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  cutoff <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
 <span>  normalized <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -234,10 +233,6 @@ number for each node. Evaluated in the context of the node data.</p></dd>
 
 <dt>cutoff</dt>
 <dd><p>maximum path length to use during calculations</p></dd>
-
-
-<dt>nobigint</dt>
-<dd><p>Should big integers be avoided during calculations</p></dd>
 
 
 <dt>normalized</dt>

@@ -121,27 +121,27 @@
 <span>  <span class="fu"><a href="reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>centrality <span class="op">=</span> <span class="fu"><a href="reference/centrality.html">centrality_edge_betweenness</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">centrality</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tbl_graph: 10 nodes and 39 edges</span></span>
+<span><span class="co">#&gt; # A tbl_graph: 10 nodes and 47 edges</span></span>
 <span><span class="co">#&gt; #</span></span>
 <span><span class="co">#&gt; # A directed simple graph with 1 component</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # Edge Data: 39 × 3 (active)</span></span>
+<span><span class="co">#&gt; # Edge Data: 47 × 3 (active)</span></span>
 <span><span class="co">#&gt;    from    to centrality</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1     4    10       1.25</span></span>
-<span><span class="co">#&gt; 2     2    10       1.92</span></span>
-<span><span class="co">#&gt; 3     6    10       2.08</span></span>
-<span><span class="co">#&gt; 4     5     2       2.17</span></span>
-<span><span class="co">#&gt; 5     5    10       2.25</span></span>
-<span><span class="co">#&gt; 6     4     6       2.25</span></span>
-<span><span class="co">#&gt; # … with 33 more rows</span></span>
+<span><span class="co">#&gt; 1     1     4       1   </span></span>
+<span><span class="co">#&gt; 2     1     7       1.2 </span></span>
+<span><span class="co">#&gt; 3     1     2       1.45</span></span>
+<span><span class="co">#&gt; 4     1     5       1.45</span></span>
+<span><span class="co">#&gt; 5     1     9       1.45</span></span>
+<span><span class="co">#&gt; 6     5     4       1.5 </span></span>
+<span><span class="co">#&gt; # … with 41 more rows</span></span>
 <span><span class="co">#&gt; #</span></span>
 <span><span class="co">#&gt; # Node Data: 10 × 1</span></span>
 <span><span class="co">#&gt;   degree</span></span>
 <span><span class="co">#&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1      4</span></span>
-<span><span class="co">#&gt; 2      4</span></span>
-<span><span class="co">#&gt; 3      2</span></span>
+<span><span class="co">#&gt; 1      7</span></span>
+<span><span class="co">#&gt; 2      5</span></span>
+<span><span class="co">#&gt; 3      5</span></span>
 <span><span class="co">#&gt; # … with 7 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">
