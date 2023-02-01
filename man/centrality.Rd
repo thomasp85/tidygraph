@@ -52,8 +52,7 @@ centrality_authority(
 centrality_betweenness(
   weights = NULL,
   directed = TRUE,
-  cutoff = NULL,
-  nobigint = TRUE,
+  cutoff = -1,
   normalized = FALSE
 )
 
@@ -153,8 +152,6 @@ number for each node. Evaluated in the context of the node data.}
 \item{directed}{Should direction of edges be used for the calculations}
 
 \item{cutoff}{maximum path length to use during calculations}
-
-\item{nobigint}{Should big integers be avoided during calculations}
 
 \item{normalized}{Should the output be normalized}
 
