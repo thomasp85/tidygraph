@@ -45,4 +45,3 @@ Suggests: network,
     netrankr,
     influenceR,
     NetSwan
-SystemRequirements: C++11
