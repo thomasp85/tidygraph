@@ -31,27 +31,27 @@ play_erdos_renyi(10, 0.5) %>%
   activate(edges) %>% 
   mutate(centrality = centrality_edge_betweenness()) %>% 
   arrange(centrality)
-#> # A tbl_graph: 10 nodes and 39 edges
+#> # A tbl_graph: 10 nodes and 47 edges
 #> #
 #> # A directed simple graph with 1 component
 #> #
-#> # Edge Data: 39 × 3 (active)
+#> # Edge Data: 47 × 3 (active)
 #>    from    to centrality
 #>   <int> <int>      <dbl>
-#> 1     4    10       1.25
-#> 2     2    10       1.92
-#> 3     6    10       2.08
-#> 4     5     2       2.17
-#> 5     5    10       2.25
-#> 6     4     6       2.25
-#> # … with 33 more rows
+#> 1     1     4       1   
+#> 2     1     7       1.2 
+#> 3     1     2       1.45
+#> 4     1     5       1.45
+#> 5     1     9       1.45
+#> 6     5     4       1.5 
+#> # … with 41 more rows
 #> #
 #> # Node Data: 10 × 1
 #>   degree
 #>    <dbl>
-#> 1      4
-#> 2      4
-#> 3      2
+#> 1      7
+#> 2      5
+#> 3      5
 #> # … with 7 more rows
 ```
 

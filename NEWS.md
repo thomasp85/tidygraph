@@ -1,5 +1,7 @@
 # tidygraph (development version)
 
+* Small updates to work with new versions of igraph and dplyr
+
 # tidygraph 1.2.2
 
 * Activating a grouped tbl_graph with what is already active will no longer 
