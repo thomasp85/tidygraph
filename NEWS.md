@@ -1,3 +1,5 @@
+# tidygraph (development version)
+
 # tidygraph 1.2.3
 
 * Small updates to work with new versions of igraph and dplyr
