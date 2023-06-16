@@ -111,7 +111,7 @@ centrality_closeness <- function(weights = NULL, mode = 'out', normalized = FALS
     weights <- NA
   }
   cutoff <- cutoff %||% -1
-  closeness(graph = graph, v = V(graph), mode = mode, cutoff = cutoff, weights = weights, normalized = normalized)
+  closeness(graph = graph, vids = V(graph), mode = mode, cutoff = cutoff, weights = weights, normalized = normalized)
 }
 #' @describeIn centrality Wrapper for [igraph::eigen_centrality()]
 #' @importFrom igraph eigen_centrality
