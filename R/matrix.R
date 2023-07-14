@@ -15,7 +15,7 @@ guess_matrix_type <- function(x) {
   if (nrow(x) == ncol(x) &&
       mode(x) %in% c('numeric', 'integer') &&
       ((is.null(rownames(x)) && is.null(colnames(x))) ||
-       colnames(x) == rownames(x))) {
+       all(colnames(x) == rownames(x)))) {
     'adjacency'
   } else if (ncol(x) == 2) {
     'edgelist'
