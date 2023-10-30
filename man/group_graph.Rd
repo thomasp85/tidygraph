@@ -33,7 +33,7 @@ group_leading_eigen(
   n_groups = NULL
 )
 
-group_louvain(weights = NULL)
+group_louvain(weights = NULL, resolution = 1)
 
 group_optimal(weights = NULL)
 
@@ -67,6 +67,8 @@ initial groups. Will be evaluated in the context of the node data.}
 \item{steps}{The number of steps in the random walks}
 
 \item{options}{Settings passed on to \code{igraph::arpack()}}
+
+\item{resolution}{Resolution of the modularity function used internally in the algorithm}
 
 \item{...}{arguments passed on to \code{\link[igraph:cluster_spinglass]{igraph::cluster_spinglass()}}}
 }

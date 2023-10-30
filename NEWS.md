@@ -1,5 +1,7 @@
 # tidygraph (development version)
 
+* Add `resolution` argument to `group_louvrain()` to mirror the igraph function
+
 # tidygraph 1.2.3
 
 * Small updates to work with new versions of igraph and dplyr

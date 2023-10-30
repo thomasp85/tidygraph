@@ -22,6 +22,7 @@
 #' @param trials Number of times partition of the network should be attempted
 #' @param steps The number of steps in the random walks
 #' @param options Settings passed on to `igraph::arpack()`
+#' @param resolution Resolution of the modularity function used internally in the algorithm
 #' @param ... arguments passed on to [igraph::cluster_spinglass()]
 #'
 #' @return a numeric vector with the membership for each node in the graph. The
@@ -137,14 +138,14 @@ group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, option
 #' @describeIn group_graph Group nodes by multilevel optimisation of modularity using [igraph::cluster_louvain()]
 #' @importFrom igraph membership cluster_louvain
 #' @export
-group_louvain <- function(weights = NULL) {
+group_louvain <- function(weights = NULL, resolution = 1) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   if (is.null(weights)) {
     weights <- NA
   }
-  group <- as.integer(membership(cluster_louvain(graph = .G(), weights = weights)))
+  group <- as.integer(membership(cluster_louvain(graph = .G(), weights = weights, resolution = resolution)))
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by optimising the moldularity score using [igraph::cluster_optimal()]
