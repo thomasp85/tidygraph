@@ -121,9 +121,9 @@ graph.</p>
     <h2>Functions</h2>
     
 <ul><li><p><code>node_eccentricity()</code>: measure the maximum shortest path to all other nodes in the graph</p></li>
-<li><p><code>node_constraint()</code>: measures Burts constraint of the node. See <code><a href="https://rdrr.io/pkg/igraph/man/constraint.html" class="external-link">igraph::constraint()</a></code></p></li>
-<li><p><code>node_coreness()</code>: measures the coreness of each node. See <code><a href="https://rdrr.io/pkg/igraph/man/coreness.html" class="external-link">igraph::coreness()</a></code></p></li>
-<li><p><code>node_diversity()</code>: measures the diversity of the node. See <code><a href="https://rdrr.io/pkg/igraph/man/diversity.html" class="external-link">igraph::diversity()</a></code></p></li>
+<li><p><code>node_constraint()</code>: measures Burts constraint of the node. See <code><a href="https://r.igraph.org/reference/constraint.html" class="external-link">igraph::constraint()</a></code></p></li>
+<li><p><code>node_coreness()</code>: measures the coreness of each node. See <code><a href="https://r.igraph.org/reference/coreness.html" class="external-link">igraph::coreness()</a></code></p></li>
+<li><p><code>node_diversity()</code>: measures the diversity of the node. See <code><a href="https://r.igraph.org/reference/diversity.html" class="external-link">igraph::diversity()</a></code></p></li>
 <li><p><code>node_bridging_score()</code>: measures Valente's Bridging measures for detecting structural bridges (<code>influenceR</code>)</p></li>
 <li><p><code>node_effective_network_size()</code>: measures Burt's Effective Network Size indicating access to structural holes in the network (<code>influenceR</code>)</p></li>
 <li><p><code>node_connectivity_impact()</code>: measures the impact on connectivity when removing the node (<code>NetSwan</code>)</p></li>
@@ -140,7 +140,7 @@ graph.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># An undirected simple graph with 1 component</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data: 70 × 1 (active)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 70 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   b_constraint</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>         0.25</span>
@@ -149,15 +149,15 @@ graph.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>         0.25</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>         0.25</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>         0.25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 64 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 64 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data: 140 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 140 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    from    to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1     5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1     6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 137 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 137 more rows</span></span>
 </code></pre></div>
     </div>
   </div>

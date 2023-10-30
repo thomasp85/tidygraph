@@ -103,7 +103,7 @@ grouping of edges supported is biconnected components.</p>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  steps <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
 <span>  label <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/igraph/man/arpack.html" class="external-link">arpack_defaults</a></span>,</span>
+<span>  options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/arpack.html" class="external-link">arpack_defaults</a></span>,</span>
 <span>  n_groups <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -161,11 +161,11 @@ initial groups. Will be evaluated in the context of the node data.</p></dd>
 
 
 <dt>options</dt>
-<dd><p>Settings passed on to <code><a href="https://rdrr.io/pkg/igraph/man/arpack.html" class="external-link">igraph::arpack()</a></code></p></dd>
+<dd><p>Settings passed on to <code><a href="https://r.igraph.org/reference/arpack.html" class="external-link">igraph::arpack()</a></code></p></dd>
 
 
 <dt>...</dt>
-<dd><p>arguments passed on to <code><a href="https://rdrr.io/pkg/igraph/man/cluster_spinglass.html" class="external-link">igraph::cluster_spinglass()</a></code></p></dd>
+<dd><p>arguments passed on to <code><a href="https://r.igraph.org/reference/cluster_spinglass.html" class="external-link">igraph::cluster_spinglass()</a></code></p></dd>
 
 </dl></div>
     <div id="value">
@@ -179,17 +179,17 @@ to the smallest group</p>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>group_components()</code>: Group by connected compenents using <code><a href="https://rdrr.io/pkg/igraph/man/components.html" class="external-link">igraph::components()</a></code></p></li>
-<li><p><code>group_edge_betweenness()</code>: Group densely connected nodes using <code><a href="https://rdrr.io/pkg/igraph/man/cluster_edge_betweenness.html" class="external-link">igraph::cluster_edge_betweenness()</a></code></p></li>
-<li><p><code>group_fast_greedy()</code>: Group nodes by optimising modularity using <code><a href="https://rdrr.io/pkg/igraph/man/cluster_fast_greedy.html" class="external-link">igraph::cluster_fast_greedy()</a></code></p></li>
-<li><p><code>group_infomap()</code>: Group nodes by minimizing description length using <code><a href="https://rdrr.io/pkg/igraph/man/cluster_infomap.html" class="external-link">igraph::cluster_infomap()</a></code></p></li>
-<li><p><code>group_label_prop()</code>: Group nodes by propagating labels using <code><a href="https://rdrr.io/pkg/igraph/man/cluster_label_prop.html" class="external-link">igraph::cluster_label_prop()</a></code></p></li>
-<li><p><code>group_leading_eigen()</code>: Group nodes based on the leading eigenvector of the modularity matrix using <code><a href="https://rdrr.io/pkg/igraph/man/cluster_leading_eigen.html" class="external-link">igraph::cluster_leading_eigen()</a></code></p></li>
-<li><p><code>group_louvain()</code>: Group nodes by multilevel optimisation of modularity using <code><a href="https://rdrr.io/pkg/igraph/man/cluster_louvain.html" class="external-link">igraph::cluster_louvain()</a></code></p></li>
-<li><p><code>group_optimal()</code>: Group nodes by optimising the moldularity score using <code><a href="https://rdrr.io/pkg/igraph/man/cluster_optimal.html" class="external-link">igraph::cluster_optimal()</a></code></p></li>
-<li><p><code>group_spinglass()</code>: Group nodes using simulated annealing with <code><a href="https://rdrr.io/pkg/igraph/man/cluster_spinglass.html" class="external-link">igraph::cluster_spinglass()</a></code></p></li>
-<li><p><code>group_walktrap()</code>: Group nodes via short random walks using <code><a href="https://rdrr.io/pkg/igraph/man/cluster_walktrap.html" class="external-link">igraph::cluster_walktrap()</a></code></p></li>
-<li><p><code>group_biconnected_component()</code>: Group edges by their membership of the maximal binconnected components using <code><a href="https://rdrr.io/pkg/igraph/man/biconnected_components.html" class="external-link">igraph::biconnected_components()</a></code></p></li>
+<ul><li><p><code>group_components()</code>: Group by connected compenents using <code><a href="https://r.igraph.org/reference/components.html" class="external-link">igraph::components()</a></code></p></li>
+<li><p><code>group_edge_betweenness()</code>: Group densely connected nodes using <code><a href="https://r.igraph.org/reference/cluster_edge_betweenness.html" class="external-link">igraph::cluster_edge_betweenness()</a></code></p></li>
+<li><p><code>group_fast_greedy()</code>: Group nodes by optimising modularity using <code><a href="https://r.igraph.org/reference/cluster_fast_greedy.html" class="external-link">igraph::cluster_fast_greedy()</a></code></p></li>
+<li><p><code>group_infomap()</code>: Group nodes by minimizing description length using <code><a href="https://r.igraph.org/reference/cluster_infomap.html" class="external-link">igraph::cluster_infomap()</a></code></p></li>
+<li><p><code>group_label_prop()</code>: Group nodes by propagating labels using <code><a href="https://r.igraph.org/reference/cluster_label_prop.html" class="external-link">igraph::cluster_label_prop()</a></code></p></li>
+<li><p><code>group_leading_eigen()</code>: Group nodes based on the leading eigenvector of the modularity matrix using <code><a href="https://r.igraph.org/reference/cluster_leading_eigen.html" class="external-link">igraph::cluster_leading_eigen()</a></code></p></li>
+<li><p><code>group_louvain()</code>: Group nodes by multilevel optimisation of modularity using <code><a href="https://r.igraph.org/reference/cluster_louvain.html" class="external-link">igraph::cluster_louvain()</a></code></p></li>
+<li><p><code>group_optimal()</code>: Group nodes by optimising the moldularity score using <code><a href="https://r.igraph.org/reference/cluster_optimal.html" class="external-link">igraph::cluster_optimal()</a></code></p></li>
+<li><p><code>group_spinglass()</code>: Group nodes using simulated annealing with <code><a href="https://r.igraph.org/reference/cluster_spinglass.html" class="external-link">igraph::cluster_spinglass()</a></code></p></li>
+<li><p><code>group_walktrap()</code>: Group nodes via short random walks using <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="external-link">igraph::cluster_walktrap()</a></code></p></li>
+<li><p><code>group_biconnected_component()</code>: Group edges by their membership of the maximal binconnected components using <code><a href="https://r.igraph.org/reference/biconnected_components.html" class="external-link">igraph::biconnected_components()</a></code></p></li>
 </ul></div>
 
     <div id="ref-examples">
@@ -201,24 +201,24 @@ to the smallest group</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># An undirected simple graph with 1 component</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data: 46 × 1 (active)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 46 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 40 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 40 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data: 69 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 69 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    from    to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1    11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1    12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1    13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 66 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 66 more rows</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -165,17 +165,17 @@ graph</p>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>node_adhesion_to()</code>: Calculate the adhesion to the specified node. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/edge_connectivity.html" class="external-link">igraph::edge_connectivity()</a></code></p></li>
-<li><p><code>node_adhesion_from()</code>: Calculate the adhesion from the specified node. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/edge_connectivity.html" class="external-link">igraph::edge_connectivity()</a></code></p></li>
-<li><p><code>node_cohesion_to()</code>: Calculate the cohesion to the specified node. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/vertex_connectivity.html" class="external-link">igraph::vertex_connectivity()</a></code></p></li>
-<li><p><code>node_cohesion_from()</code>: Calculate the cohesion from the specified node. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/vertex_connectivity.html" class="external-link">igraph::vertex_connectivity()</a></code></p></li>
-<li><p><code>node_distance_to()</code>: Calculate various distance metrics between node pairs. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/distances.html" class="external-link">igraph::distances()</a></code></p></li>
-<li><p><code>node_distance_from()</code>: Calculate various distance metrics between node pairs. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/distances.html" class="external-link">igraph::distances()</a></code></p></li>
-<li><p><code>node_cocitation_with()</code>: Calculate node pair cocitation count. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/cocitation.html" class="external-link">igraph::cocitation()</a></code></p></li>
-<li><p><code>node_bibcoupling_with()</code>: Calculate node pair bibliographic coupling. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/cocitation.html" class="external-link">igraph::bibcoupling()</a></code></p></li>
-<li><p><code>node_similarity_with()</code>: Calculate various node pair similarity measures. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/similarity.html" class="external-link">igraph::similarity()</a></code></p></li>
-<li><p><code>node_max_flow_to()</code>: Calculate the maximum flow to a node. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/max_flow.html" class="external-link">igraph::max_flow()</a></code></p></li>
-<li><p><code>node_max_flow_from()</code>: Calculate the maximum flow from a node. Wraps <code><a href="https://rdrr.io/pkg/igraph/man/max_flow.html" class="external-link">igraph::max_flow()</a></code></p></li>
+<ul><li><p><code>node_adhesion_to()</code>: Calculate the adhesion to the specified node. Wraps <code><a href="https://r.igraph.org/reference/edge_connectivity.html" class="external-link">igraph::edge_connectivity()</a></code></p></li>
+<li><p><code>node_adhesion_from()</code>: Calculate the adhesion from the specified node. Wraps <code><a href="https://r.igraph.org/reference/edge_connectivity.html" class="external-link">igraph::edge_connectivity()</a></code></p></li>
+<li><p><code>node_cohesion_to()</code>: Calculate the cohesion to the specified node. Wraps <code><a href="https://r.igraph.org/reference/vertex_connectivity.html" class="external-link">igraph::vertex_connectivity()</a></code></p></li>
+<li><p><code>node_cohesion_from()</code>: Calculate the cohesion from the specified node. Wraps <code><a href="https://r.igraph.org/reference/vertex_connectivity.html" class="external-link">igraph::vertex_connectivity()</a></code></p></li>
+<li><p><code>node_distance_to()</code>: Calculate various distance metrics between node pairs. Wraps <code><a href="https://r.igraph.org/reference/distances.html" class="external-link">igraph::distances()</a></code></p></li>
+<li><p><code>node_distance_from()</code>: Calculate various distance metrics between node pairs. Wraps <code><a href="https://r.igraph.org/reference/distances.html" class="external-link">igraph::distances()</a></code></p></li>
+<li><p><code>node_cocitation_with()</code>: Calculate node pair cocitation count. Wraps <code><a href="https://r.igraph.org/reference/cocitation.html" class="external-link">igraph::cocitation()</a></code></p></li>
+<li><p><code>node_bibcoupling_with()</code>: Calculate node pair bibliographic coupling. Wraps <code><a href="https://r.igraph.org/reference/cocitation.html" class="external-link">igraph::bibcoupling()</a></code></p></li>
+<li><p><code>node_similarity_with()</code>: Calculate various node pair similarity measures. Wraps <code><a href="https://r.igraph.org/reference/similarity.html" class="external-link">igraph::similarity()</a></code></p></li>
+<li><p><code>node_max_flow_to()</code>: Calculate the maximum flow to a node. Wraps <code><a href="https://r.igraph.org/reference/max_flow.html" class="external-link">igraph::max_flow()</a></code></p></li>
+<li><p><code>node_max_flow_from()</code>: Calculate the maximum flow from a node. Wraps <code><a href="https://r.igraph.org/reference/max_flow.html" class="external-link">igraph::max_flow()</a></code></p></li>
 </ul></div>
 
     <div id="ref-examples">
@@ -187,7 +187,7 @@ graph</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># An undirected simple graph with 1 component</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data: 70 × 1 (active)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 70 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   dist_to_center</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>              1</span>
@@ -196,15 +196,15 @@ graph</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>              5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>              6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>              6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 64 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 64 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data: 140 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 140 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    from    to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1     5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1     6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 137 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 137 more rows</span></span>
 </code></pre></div>
     </div>
   </div>

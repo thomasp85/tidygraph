@@ -108,7 +108,7 @@ manual mode for specifying more-or-less any centrality score.</p>
 <span><span class="fu">centrality_authority</span><span class="op">(</span></span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/igraph/man/arpack.html" class="external-link">arpack_defaults</a></span></span>
+<span>  options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/arpack.html" class="external-link">arpack_defaults</a></span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">centrality_betweenness</span><span class="op">(</span></span>
@@ -131,10 +131,10 @@ manual mode for specifying more-or-less any centrality score.</p>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/igraph/man/arpack.html" class="external-link">arpack_defaults</a></span></span>
+<span>  options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/arpack.html" class="external-link">arpack_defaults</a></span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">centrality_hub</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/igraph/man/arpack.html" class="external-link">arpack_defaults</a></span><span class="op">)</span></span>
+<span><span class="fu">centrality_hub</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/arpack.html" class="external-link">arpack_defaults</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">centrality_pagerank</span><span class="op">(</span></span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -224,7 +224,7 @@ number for each node. Evaluated in the context of the node data.</p></dd>
 
 
 <dt>options</dt>
-<dd><p>Settings passed on to <code><a href="https://rdrr.io/pkg/igraph/man/arpack.html" class="external-link">igraph::arpack()</a></code></p></dd>
+<dd><p>Settings passed on to <code><a href="https://r.igraph.org/reference/arpack.html" class="external-link">igraph::arpack()</a></code></p></dd>
 
 
 <dt>directed</dt>
@@ -289,17 +289,17 @@ random walk. Evaluated in the context of the node data.</p></dd>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>centrality_alpha()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/alpha_centrality.html" class="external-link">igraph::alpha_centrality()</a></code></p></li>
-<li><p><code>centrality_authority()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/authority_score.html" class="external-link">igraph::authority_score()</a></code></p></li>
-<li><p><code>centrality_betweenness()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/betweenness.html" class="external-link">igraph::betweenness()</a></code> and <code><a href="https://rdrr.io/pkg/igraph/man/betweenness.html" class="external-link">igraph::estimate_betweenness()</a></code></p></li>
-<li><p><code>centrality_power()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/power_centrality.html" class="external-link">igraph::power_centrality()</a></code></p></li>
-<li><p><code>centrality_closeness()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/closeness.html" class="external-link">igraph::closeness()</a></code> and <code><a href="https://rdrr.io/pkg/igraph/man/closeness.html" class="external-link">igraph::estimate_closeness()</a></code></p></li>
-<li><p><code>centrality_eigen()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/eigen_centrality.html" class="external-link">igraph::eigen_centrality()</a></code></p></li>
-<li><p><code>centrality_hub()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/hub_score.html" class="external-link">igraph::hub_score()</a></code></p></li>
-<li><p><code>centrality_pagerank()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/page_rank.html" class="external-link">igraph::page_rank()</a></code></p></li>
-<li><p><code>centrality_subgraph()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/subgraph_centrality.html" class="external-link">igraph::subgraph_centrality()</a></code></p></li>
-<li><p><code>centrality_degree()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/degree.html" class="external-link">igraph::degree()</a></code> and <code><a href="https://rdrr.io/pkg/igraph/man/strength.html" class="external-link">igraph::strength()</a></code></p></li>
-<li><p><code>centrality_edge_betweenness()</code>: Wrapper for <code><a href="https://rdrr.io/pkg/igraph/man/betweenness.html" class="external-link">igraph::edge_betweenness()</a></code></p></li>
+<ul><li><p><code>centrality_alpha()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/alpha_centrality.html" class="external-link">igraph::alpha_centrality()</a></code></p></li>
+<li><p><code>centrality_authority()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/hub_score.html" class="external-link">igraph::authority_score()</a></code></p></li>
+<li><p><code>centrality_betweenness()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/betweenness.html" class="external-link">igraph::betweenness()</a></code> and <code><a href="https://r.igraph.org/reference/betweenness.html" class="external-link">igraph::estimate_betweenness()</a></code></p></li>
+<li><p><code>centrality_power()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/power_centrality.html" class="external-link">igraph::power_centrality()</a></code></p></li>
+<li><p><code>centrality_closeness()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/closeness.html" class="external-link">igraph::closeness()</a></code> and <code><a href="https://r.igraph.org/reference/closeness.html" class="external-link">igraph::estimate_closeness()</a></code></p></li>
+<li><p><code>centrality_eigen()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/eigen_centrality.html" class="external-link">igraph::eigen_centrality()</a></code></p></li>
+<li><p><code>centrality_hub()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/hub_score.html" class="external-link">igraph::hub_score()</a></code></p></li>
+<li><p><code>centrality_pagerank()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/page_rank.html" class="external-link">igraph::page_rank()</a></code></p></li>
+<li><p><code>centrality_subgraph()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/subgraph_centrality.html" class="external-link">igraph::subgraph_centrality()</a></code></p></li>
+<li><p><code>centrality_degree()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/degree.html" class="external-link">igraph::degree()</a></code> and <code><a href="https://r.igraph.org/reference/strength.html" class="external-link">igraph::strength()</a></code></p></li>
+<li><p><code>centrality_edge_betweenness()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/betweenness.html" class="external-link">igraph::edge_betweenness()</a></code></p></li>
 <li><p><code>centrality_manual()</code>: Manually specify your centrality score using the <code>netrankr</code> framework (<code>netrankr</code>)</p></li>
 <li><p><code>centrality_closeness_harmonic()</code>: centrality based on inverse shortest path (<code>netrankr</code>)</p></li>
 <li><p><code>centrality_closeness_residual()</code>: centrality based on 2-to-the-power-of negative shortest path (<code>netrankr</code>)</p></li>
@@ -331,7 +331,7 @@ random walk. Evaluated in the context of the node data.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># An undirected simple graph with 1 component</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data: 5 × 1 (active)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   importance</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>         -<span style="color: #BB0000;">1</span></span>
@@ -340,13 +340,13 @@ random walk. Evaluated in the context of the node data.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>          0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>          0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data: 5 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    from    to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1     2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1     3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     2     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 2 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Most centrality measures are for nodes but not all</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="create_graphs.html">create_notable</a></span><span class="op">(</span><span class="st">'bull'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -356,7 +356,7 @@ random walk. Evaluated in the context of the node data.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># An undirected simple graph with 1 component</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data: 5 × 3 (active)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    from    to importance</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1     2          2</span>
@@ -365,8 +365,7 @@ random walk. Evaluated in the context of the node data.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     2     4          4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     3     5          4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data: 5 × 0</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 2 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 0</span></span>
 </code></pre></div>
     </div>
   </div>

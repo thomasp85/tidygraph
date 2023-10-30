@@ -199,7 +199,7 @@ graph. The terminal nodes of each edge must either be encoded in a <code>to</cod
     <div id="details">
     <h2>Details</h2>
     <p>Constructors are provided for most data structures that resembles networks.
-If a class provides an <code><a href="https://rdrr.io/pkg/igraph/man/as.igraph.html" class="external-link">igraph::as.igraph()</a></code> method it is automatically
+If a class provides an <code><a href="https://r.igraph.org/reference/as.igraph.html" class="external-link">igraph::as.igraph()</a></code> method it is automatically
 supported.</p>
     </div>
     <div id="functions">
@@ -219,7 +219,7 @@ supported.</p>
 package. Requires this packages to work.</p></li>
 <li><p><code>as_tbl_graph(phylo)</code>: Method for handling phylo objects from the ape package</p></li>
 <li><p><code>as_tbl_graph(evonet)</code>: Method for handling evonet objects from the ape package</p></li>
-<li><p><code>as_tbl_graph(default)</code>: Default method. tries to call <code><a href="https://rdrr.io/pkg/igraph/man/as.igraph.html" class="external-link">igraph::as.igraph()</a></code> on the input.</p></li>
+<li><p><code>as_tbl_graph(default)</code>: Default method. tries to call <code><a href="https://r.igraph.org/reference/as.igraph.html" class="external-link">igraph::as.igraph()</a></code> on the input.</p></li>
 </ul></div>
 
     <div id="ref-examples">
@@ -232,7 +232,7 @@ package. Requires this packages to work.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A directed simple graph with 1 component</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data: 4 × 1 (active)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Hadley</span>
@@ -240,13 +240,13 @@ package. Requires this packages to work.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Romain</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Julia </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data: 9 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    from    to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1     2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1     3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 6 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more rows</span></span>
 </code></pre></div>
     </div>
   </div>
