@@ -196,13 +196,13 @@ manual mode for specifying more-or-less any centrality score.
 \itemize{
 \item \code{centrality_alpha()}: Wrapper for \code{\link[igraph:alpha_centrality]{igraph::alpha_centrality()}}
 
-\item \code{centrality_authority()}: Wrapper for \code{\link[igraph:authority_score]{igraph::authority_score()}}
+\item \code{centrality_authority()}: Wrapper for \code{\link[igraph:hub_score]{igraph::authority_score()}}
 
-\item \code{centrality_betweenness()}: Wrapper for \code{\link[igraph:betweenness]{igraph::betweenness()}} and \code{\link[igraph:betweenness]{igraph::estimate_betweenness()}}
+\item \code{centrality_betweenness()}: Wrapper for \code{\link[igraph:betweenness]{igraph::betweenness()}}
 
 \item \code{centrality_power()}: Wrapper for \code{\link[igraph:power_centrality]{igraph::power_centrality()}}
 
-\item \code{centrality_closeness()}: Wrapper for \code{\link[igraph:closeness]{igraph::closeness()}} and \code{\link[igraph:closeness]{igraph::estimate_closeness()}}
+\item \code{centrality_closeness()}: Wrapper for \code{\link[igraph:closeness]{igraph::closeness()}}
 
 \item \code{centrality_eigen()}: Wrapper for \code{\link[igraph:eigen_centrality]{igraph::eigen_centrality()}}
 

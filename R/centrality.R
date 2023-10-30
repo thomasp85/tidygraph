@@ -74,8 +74,8 @@ centrality_authority <- function(weights = NULL, scale = TRUE, options = igraph:
   }
   authority_score(graph = .G(), scale = scale, weights = weights, options = options)$vector
 }
-#' @describeIn centrality Wrapper for [igraph::betweenness()] and [igraph::estimate_betweenness()]
-#' @importFrom igraph V betweenness estimate_betweenness
+#' @describeIn centrality Wrapper for [igraph::betweenness()]
+#' @importFrom igraph V betweenness
 #' @importFrom rlang quos
 #' @export
 centrality_betweenness <- function(weights = NULL, directed = TRUE, cutoff = -1, normalized = FALSE) {
@@ -86,11 +86,9 @@ centrality_betweenness <- function(weights = NULL, directed = TRUE, cutoff = -1,
   if (is.null(weights)) {
     weights <- NA
   }
-  if (is.null(cutoff)) {
-    betweenness(graph = graph, v = V(graph), directed = directed, weights = weights, normalized = normalized)
-  } else {
-    estimate_betweenness(graph = graph, vids = V(graph), directed = directed, cutoff = cutoff, weights = weights)
-  }
+  cutoff <- cutoff %||% -1
+  betweenness(graph = graph, v = V(graph), directed = directed, cutoff = cutoff, weights = weights, normalized = normalized)
+
 }
 #' @describeIn centrality Wrapper for [igraph::power_centrality()]
 #' @importFrom igraph V power_centrality
@@ -100,8 +98,8 @@ centrality_power <- function(exponent = 1, rescale = FALSE, tol = 1e-7, loops = 
   graph <- .G()
   power_centrality(graph = graph, nodes = V(graph), exponent = exponent, loops = loops, rescale = rescale, tol = tol)
 }
-#' @describeIn centrality Wrapper for [igraph::closeness()] and [igraph::estimate_closeness()]
-#' @importFrom igraph V closeness estimate_closeness
+#' @describeIn centrality Wrapper for [igraph::closeness()]
+#' @importFrom igraph V closeness
 #' @importFrom rlang quos
 #' @export
 centrality_closeness <- function(weights = NULL, mode = 'out', normalized = FALSE, cutoff = NULL) {
@@ -112,11 +110,8 @@ centrality_closeness <- function(weights = NULL, mode = 'out', normalized = FALS
   if (is.null(weights)) {
     weights <- NA
   }
-  if (is.null(cutoff)) {
-    closeness(graph = graph, vids = V(graph), mode = mode, weights = weights, normalized = normalized)
-  } else {
-    estimate_closeness(graph = graph, vids = V(graph), mode = mode, cutoff = cutoff, weights = weights, normalized = normalized)
-  }
+  cutoff <- cutoff %||% -1
+  closeness(graph = graph, vids = V(graph), mode = mode, cutoff = cutoff, weights = weights, normalized = normalized)
 }
 #' @describeIn centrality Wrapper for [igraph::eigen_centrality()]
 #' @importFrom igraph eigen_centrality
@@ -183,7 +178,7 @@ centrality_degree <- function(weights = NULL, mode = 'out', loops = TRUE, normal
   }
 }
 #' @describeIn centrality Wrapper for [igraph::edge_betweenness()]
-#' @importFrom igraph edge_betweenness estimate_edge_betweenness E
+#' @importFrom igraph edge_betweenness E
 #' @importFrom rlang quos
 #' @export
 centrality_edge_betweenness <- function(weights = NULL, directed = TRUE, cutoff = NULL) {
@@ -194,11 +189,9 @@ centrality_edge_betweenness <- function(weights = NULL, directed = TRUE, cutoff 
   if (is.null(weights)) {
     weights <- NA
   }
-  if (is.null(cutoff)) {
-    edge_betweenness(graph = graph, e = E(graph), directed = directed, weights = weights)
-  } else {
-    estimate_edge_betweenness(graph = graph, e = E(graph), directed = directed, cutoff = cutoff, weights = weights)
-  }
+
+  cutoff <- cutoff %||% -1
+  edge_betweenness(graph = graph, e = E(graph), directed = directed, cutoff = cutoff, weights = weights)
 }
 #' @describeIn centrality Manually specify your centrality score using the `netrankr` framework (`netrankr`)
 #' @param relation The indirect relation measure type to be used in `netrankr::indirect_relations`
