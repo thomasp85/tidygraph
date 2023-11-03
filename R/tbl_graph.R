@@ -94,7 +94,7 @@ tbl_sum.named_tbl <- function(x) {
 #' @export
 tbl_format_footer.named_tbl <- function(x, setup, ...) {
   footer <- NextMethod()
-  footer[min(1, length(footer))]
+  footer[!grepl("to see more rows", footer)]
 }
 
 #' @importFrom tools toTitleCase
