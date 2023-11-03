@@ -37,7 +37,7 @@ A \code{morphed_tbl_graph}
 \description{
 The \code{morph}/\code{unmorph} verbs are used to create temporary representations of
 the graph, such as e.g. its search tree or a subgraph. A morphed graph will
-accept any of the standard \code{dplyr} verbs, and changed to the data is
+accept any of the standard \code{dplyr} verbs, and changes to the data is
 automatically propagated to the original graph when unmorphing. Tidygraph
 comes with a range of \link{morphers}, but is it also possible to supply your own.
 See Details for the requirement for custom morphers. The \code{crystallise} verb
@@ -73,7 +73,7 @@ these must contain either a \code{.tidygraph_node_index} column or a
 \code{.tidygraph_edge_index} column (or both). Note that it is possible for the
 morph to have the edges mapped back to the original nodes and vice versa
 (e.g. as with \link{to_linegraph}). In that case the edge data in the morphed
-graph(s) will contain a \code{.tidygraph_node_index} column and or the node data a
+graph(s) will contain a \code{.tidygraph_node_index} column and/or the node data a
 \code{.tidygraph_edge_index} column. If the morphing results in the collapse of
 multiple columns or edges the index columns should be converted to list
 columns mapping the new node/edge back to all the nodes/edges it represents.
