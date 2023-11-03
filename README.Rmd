@@ -97,8 +97,8 @@ needs arise.
 use the `devtools` package for installation:
 
 ```{r, eval=FALSE}
-# install.packages('devtools')
-devtools::install_github('thomasp85/tidygraph')
+# install.packages('pak')
+pak::pak('thomasp85/tidygraph')
 ```
 
 ## Thanks
