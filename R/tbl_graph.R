@@ -100,7 +100,7 @@ tbl_format_footer.named_tbl <- function(x, setup, ...) {
 #' @importFrom tools toTitleCase
 #' @importFrom rlang as_quosure sym
 #' @export
-print.tbl_graph <- function(x, ...) {
+print.tbl_graph <- function(x, ..., n_non_active = 3) {
   graph_desc <- describe_graph(x)
   not_active <- if (active(x) == 'nodes') 'edges' else 'nodes'
   top <- toTitleCase(paste0(substr(active(x), 1, 4), ' data'))
@@ -111,7 +111,7 @@ print.tbl_graph <- function(x, ...) {
   cat_subtle('#\n')
   print(new_name_tibble(x, NULL, top, " (active)"), ...)
   cat_subtle('#\n')
-  print(new_name_tibble(x, not_active, bottom, ""), n = 3)
+  print(new_name_tibble(x, not_active, bottom, ""), n = n_non_active)
   invisible(x)
 }
 
