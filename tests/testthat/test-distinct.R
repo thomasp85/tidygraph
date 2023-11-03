@@ -1,5 +1,3 @@
-context("distinct")
-
 test_that("distinct works", {
   gr <- create_notable('bull') %>%
     mutate(id = c(1,1,1,2,2)) %>%

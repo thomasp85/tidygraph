@@ -1,5 +1,3 @@
-context("morph")
-
 test_that("to_linegraph works", {
   gr <- create_notable('bull') %>%
     morph(to_linegraph) %>%

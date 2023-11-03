@@ -1,19 +1,17 @@
-context("node_types")
-
 get_type <- function(gr, fn) {
   gr %>% mutate(type = fn) %>% pull(type)
 }
 test_that("node types return logical", {
   gr <- create_tree(10, 2)
-  expect_is(get_type(gr, node_is_center()), 'logical')
-  expect_is(get_type(gr, node_is_cut()), 'logical')
-  expect_is(get_type(gr, node_is_isolated()), 'logical')
-  expect_is(get_type(gr, node_is_leaf()), 'logical')
-  expect_is(get_type(gr, node_is_root()), 'logical')
-  expect_is(get_type(gr, node_is_simplical()), 'logical')
-  expect_is(get_type(gr, node_is_sink()), 'logical')
-  expect_is(get_type(gr, node_is_source()), 'logical')
-  expect_is(get_type(gr, node_is_universal()), 'logical')
+  expect_type(get_type(gr, node_is_center()), 'logical')
+  expect_type(get_type(gr, node_is_cut()), 'logical')
+  expect_type(get_type(gr, node_is_isolated()), 'logical')
+  expect_type(get_type(gr, node_is_leaf()), 'logical')
+  expect_type(get_type(gr, node_is_root()), 'logical')
+  expect_type(get_type(gr, node_is_simplical()), 'logical')
+  expect_type(get_type(gr, node_is_sink()), 'logical')
+  expect_type(get_type(gr, node_is_source()), 'logical')
+  expect_type(get_type(gr, node_is_universal()), 'logical')
 })
 test_that("node types return vector of correct length", {
   gr <- create_tree(10, 2)

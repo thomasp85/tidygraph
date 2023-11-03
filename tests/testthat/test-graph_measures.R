@@ -1,5 +1,3 @@
-context("graph_measures")
-
 test_that("graph measures returns scalars", {
   gr <- create_notable('housex') %>%
     mutate(type = c(1, 1, 1, 2, 2))

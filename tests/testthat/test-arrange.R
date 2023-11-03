@@ -1,5 +1,3 @@
-context("arrange")
-
 test_that("arrange works with nodes", {
   ord <- c(2, 4, 1, 3, 5)
   gr1 <- create_notable('bull')

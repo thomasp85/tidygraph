@@ -1,5 +1,3 @@
-context("mutate")
-
 test_that("mutate works with nodes", {
   mut <- create_notable('bull') %>%
     mutate(letters = letters[1:5]) %>%

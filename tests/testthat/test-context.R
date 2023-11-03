@@ -1,5 +1,3 @@
-context("context")
-
 test_that("graphs get added and stacked in the context", {
   context <- ContextBuilder$new()
   expect_false(context$alive())

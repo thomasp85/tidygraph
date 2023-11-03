@@ -1,5 +1,3 @@
-context("node_measures")
-
 get_val <- function(gr, fn) {
   gr %>% mutate(val = fn) %>% pull(val)
 }
@@ -13,12 +11,12 @@ test_that("Node measures return corrent type", {
     mutate(w = seq_len(n())) %>%
     activate(nodes)
   gr_u <- convert(gr, to_undirected)
-  expect_is(get_val(gr, node_constraint()), 'numeric')
-  expect_is(get_val(gr, node_coreness()), 'numeric')
-  expect_is(get_val(gr_u, node_diversity(w)), 'numeric')
-  expect_is(get_val(tree, node_dominator(node_is_root())), 'numeric')
-  expect_is(get_val(gr, node_eccentricity()), 'numeric')
-  expect_is(get_val(tree, node_topo_order()), 'integer')
+  expect_type(get_val(gr, node_constraint()), 'double')
+  expect_type(get_val(gr, node_coreness()), 'double')
+  expect_type(get_val(gr_u, node_diversity(w)), 'double')
+  expect_type(get_val(tree, node_dominator(node_is_root())), 'double')
+  expect_type(get_val(gr, node_eccentricity()), 'double')
+  expect_type(get_val(tree, node_topo_order()), 'integer')
 })
 test_that("Node measures return correct length", {
   tree <- create_tree(10, 2) %>%

@@ -1,5 +1,3 @@
-context("group")
-
 get_group <- function(gr, fn) {
   gr %>% mutate(group = fn) %>% pull(group)
 }
@@ -13,20 +11,20 @@ get_number_of_groups <- function(graph, group_clustering_function) {
 
 test_that("grouping returns integer vector", {
   gr <- create_notable('zachary')
-  expect_is(get_group(gr, group_components()), 'integer')
-  expect_is(get_group(gr, group_edge_betweenness()), 'integer')
-  expect_is(get_group(gr, group_fast_greedy()), 'integer')
-  expect_is(get_group(gr, group_infomap()), 'integer')
-  expect_is(get_group(gr, group_label_prop()), 'integer')
-  expect_is(get_group(gr, group_louvain()), 'integer')
-  #expect_is(get_group(gr, group_optimal()), 'integer')
-  expect_is(get_group(gr, group_spinglass()), 'integer')
-  expect_is(get_group(gr, group_walktrap()), 'integer')
+  expect_type(get_group(gr, group_components()), 'integer')
+  expect_type(get_group(gr, group_edge_betweenness()), 'integer')
+  expect_type(get_group(gr, group_fast_greedy()), 'integer')
+  expect_type(get_group(gr, group_infomap()), 'integer')
+  expect_type(get_group(gr, group_label_prop()), 'integer')
+  expect_type(get_group(gr, group_louvain()), 'integer')
+  #expect_type(get_group(gr, group_optimal()), 'integer')
+  expect_type(get_group(gr, group_spinglass()), 'integer')
+  expect_type(get_group(gr, group_walktrap()), 'integer')
   gr1 <- activate(gr, edges)
-  expect_is(get_group(gr1, group_biconnected_component()), 'integer')
+  expect_type(get_group(gr1, group_biconnected_component()), 'integer')
 
   skip_on_os('windows')
-  expect_is(get_group(gr, group_leading_eigen()), 'integer')
+  expect_type(get_group(gr, group_leading_eigen()), 'integer')
 })
 test_that("grouping returns integer of correct length", {
   gr <- create_notable('zachary')

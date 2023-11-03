@@ -1,5 +1,3 @@
-context("graph_attributes")
-
 test_that("attributes are applied correctly", {
   gr1 <- create_notable('bull')
   gr2 <- create_notable('diamond')

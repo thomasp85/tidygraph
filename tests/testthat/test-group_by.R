@@ -1,5 +1,3 @@
-context("group_by")
-
 test_that("nodes and edges are grouped", {
   gr <- create_notable('bull') %>%
     mutate(group = c(1,1,1,2,2)) %>%

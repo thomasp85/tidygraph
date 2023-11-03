@@ -1,20 +1,18 @@
-context("search")
-
 get_val <- function(gr, fn) {
   gr %>% mutate(val = fn) %>% pull(val)
 }
 test_that("search returns correct type", {
   gr <- create_tree(10, 2)
-  expect_is(get_val(gr, bfs_after()), 'integer')
-  expect_is(get_val(gr, bfs_before()), 'integer')
-  expect_is(get_val(gr, bfs_dist()), 'integer')
-  expect_is(get_val(gr, bfs_parent()), 'integer')
-  expect_is(get_val(gr, bfs_rank()), 'integer')
+  expect_type(get_val(gr, bfs_after()), 'integer')
+  expect_type(get_val(gr, bfs_before()), 'integer')
+  expect_type(get_val(gr, bfs_dist()), 'integer')
+  expect_type(get_val(gr, bfs_parent()), 'integer')
+  expect_type(get_val(gr, bfs_rank()), 'integer')
 
-  expect_is(get_val(gr, dfs_dist()), 'integer')
-  expect_is(get_val(gr, dfs_parent()), 'integer')
-  expect_is(get_val(gr, dfs_rank()), 'integer')
-  expect_is(get_val(gr, dfs_rank_out()), 'integer')
+  expect_type(get_val(gr, dfs_dist()), 'integer')
+  expect_type(get_val(gr, dfs_parent()), 'integer')
+  expect_type(get_val(gr, dfs_rank()), 'integer')
+  expect_type(get_val(gr, dfs_rank_out()), 'integer')
 })
 test_that("search returns correct length", {
   gr <- create_tree(10, 2)

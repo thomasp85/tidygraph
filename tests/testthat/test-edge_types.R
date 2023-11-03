@@ -1,5 +1,3 @@
-context("edge_types")
-
 get_type <- function(gr, fn) {
   gr %>% mutate(type = fn) %>% pull(type)
 }
@@ -10,9 +8,9 @@ test_that("edge types return logical", {
       to = c(1, 1, 3, 4),
       from = c(1, 3, 1, 2)
     ))
-  expect_is(get_type(gr, edge_is_loop()), 'logical')
-  expect_is(get_type(gr, edge_is_multiple()), 'logical')
-  expect_is(get_type(gr, edge_is_mutual()), 'logical')
+  expect_type(get_type(gr, edge_is_loop()), 'logical')
+  expect_type(get_type(gr, edge_is_multiple()), 'logical')
+  expect_type(get_type(gr, edge_is_mutual()), 'logical')
 })
 test_that("edge types return correct length", {
   gr <- create_notable('bull') %>%

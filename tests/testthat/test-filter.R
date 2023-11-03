@@ -1,5 +1,3 @@
-context("filter")
-
 test_that("filter works", {
   id_nodes <- create_notable('bull') %>%
     mutate(id = seq_len(n())) %>%

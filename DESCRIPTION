@@ -1,47 +1,48 @@
-Package: tidygraph
 Type: Package
+Package: tidygraph
 Title: A Tidy API for Graph Manipulation
 Version: 1.2.3.9000
 Authors@R:
-    person(given = "Thomas Lin",
-           family = "Pedersen",
-           role = c("cre", "aut"),
-           email = "thomasp85@gmail.com",
+    person("Thomas Lin", "Pedersen", , "thomasp85@gmail.com", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0002-5147-4711"))
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
-Description: A graph, while not "tidy" in itself, can be thought of as two tidy
-    data frames describing node and edge data respectively. 'tidygraph'
-    provides an approach to manipulate these two virtual data frames using the
-    API defined in the 'dplyr' package, as well as provides tidy interfaces to 
-    a lot of common graph algorithms.
+Description: A graph, while not "tidy" in itself, can be thought of as two
+    tidy data frames describing node and edge data respectively.
+    'tidygraph' provides an approach to manipulate these two virtual data
+    frames using the API defined in the 'dplyr' package, as well as
+    provides tidy interfaces to a lot of common graph algorithms.
 License: MIT + file LICENSE
-Encoding: UTF-8
-RoxygenNote: 7.2.3
-Roxygen: list(markdown = TRUE)
+URL: https://tidygraph.data-imaginist.com,
+    https://github.com/thomasp85/tidygraph
+BugReports: https://github.com/thomasp85/tidygraph/issues
 Imports: 
-    tibble,
+    cli,
     dplyr (>= 0.8.5),
     igraph (>= 1.3.0),
     magrittr,
-    utils,
-    rlang,
-    R6,
-    tools,
-    stats,
-    tidyr,
     pillar,
-    cli
-URL: https://tidygraph.data-imaginist.com, https://github.com/thomasp85/tidygraph
-BugReports: https://github.com/thomasp85/tidygraph/issues
-LinkingTo: cpp11
-Suggests: network,
-    data.tree,
+    R6,
+    rlang,
+    stats,
+    tibble,
+    tidyr,
+    tools,
+    utils
+Suggests: 
     ape,
-    graph,
-    methods,
-    testthat,
     covr,
-    seriation,
-    netrankr,
+    data.tree,
+    graph,
     influenceR,
-    NetSwan
+    methods,
+    netrankr,
+    NetSwan,
+    network,
+    seriation,
+    testthat (>= 3.0.0)
+LinkingTo: 
+    cpp11
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Config/testthat/edition: 3

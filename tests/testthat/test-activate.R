@@ -1,5 +1,3 @@
-context("activate")
-
 test_that("active<- and activate works for tbl_graph", {
   gr1 <- create_notable('bull')
   gr1 <- activate(gr1, edges)
