@@ -1,6 +1,8 @@
 # tidygraph (development version)
 
 * Add `resolution` argument to `group_louvrain()` to mirror the igraph function
+* `as_tbl_graph()` on an edge dataframe now only adds a name node attribute if 
+  the edges are encoded as a character (#147)
 
 # tidygraph 1.2.3
 

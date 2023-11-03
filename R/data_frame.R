@@ -22,7 +22,13 @@ as_graph_edge_df <- function(x, directed) {
   to_ind <- which(names(x) == 'to')
   if (length(to_ind) == 0) to_ind <- 2
   x <- x[, c(from_ind, to_ind, seq_along(x)[-c(from_ind, to_ind)]), drop = FALSE]
-  graph_from_data_frame(x, directed = directed)
+  is_named <- is.character(x[[1]]) || is.character(x[[2]])
+  gr <- graph_from_data_frame(x, directed = directed)
+  if (!is_named) {
+    igraph::delete_vertex_attr(gr, 'name')
+  } else {
+    gr
+  }
 }
 as_graph_set_df <- function(x, simple = TRUE) {
   if (simple) {
