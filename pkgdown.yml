@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2023-11-03T12:00Z
+last_built: 2023-11-03T12:03Z
 urls:
   reference: https://tidygraph.data-imaginist.com/reference
   article: https://tidygraph.data-imaginist.com/articles

@@ -121,28 +121,28 @@
 <span>  <span class="fu"><a href="reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>centrality <span class="op">=</span> <span class="fu"><a href="reference/centrality.html">centrality_edge_betweenness</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">centrality</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tbl_graph: 10 nodes and 47 edges</span></span>
+<span><span class="co">#&gt; # A tbl_graph: 10 nodes and 57 edges</span></span>
 <span><span class="co">#&gt; #</span></span>
 <span><span class="co">#&gt; # A directed simple graph with 1 component</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # Edge Data: 47 × 3 (active)</span></span>
+<span><span class="co">#&gt; # A tibble: 57 × 3</span></span>
 <span><span class="co">#&gt;    from    to centrality</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1     1     4       1   </span></span>
-<span><span class="co">#&gt; 2     1     7       1.2 </span></span>
-<span><span class="co">#&gt; 3     1     2       1.45</span></span>
-<span><span class="co">#&gt; 4     1     5       1.45</span></span>
-<span><span class="co">#&gt; 5     1     9       1.45</span></span>
-<span><span class="co">#&gt; 6     5     4       1.5 </span></span>
-<span><span class="co">#&gt; # … with 41 more rows</span></span>
+<span><span class="co">#&gt; 1     4     3       1.31</span></span>
+<span><span class="co">#&gt; 2     6     3       1.33</span></span>
+<span><span class="co">#&gt; 3     8     5       1.33</span></span>
+<span><span class="co">#&gt; 4     8     2       1.34</span></span>
+<span><span class="co">#&gt; 5     9     2       1.34</span></span>
+<span><span class="co">#&gt; 6     7     3       1.37</span></span>
+<span><span class="co">#&gt; # ℹ 51 more rows</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # Node Data: 10 × 1</span></span>
+<span><span class="co">#&gt; # A tibble: 10 × 1</span></span>
 <span><span class="co">#&gt;   degree</span></span>
 <span><span class="co">#&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1      7</span></span>
-<span><span class="co">#&gt; 2      5</span></span>
-<span><span class="co">#&gt; 3      5</span></span>
-<span><span class="co">#&gt; # … with 7 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt; 1      5</span></span>
+<span><span class="co">#&gt; 2      4</span></span>
+<span><span class="co">#&gt; 3      6</span></span>
+<span><span class="co">#&gt; # ℹ 7 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -184,8 +184,8 @@
 </h2>
 <p><code>tidygraph</code> is available on CRAN and can be installed simply, using <code>install.packages('tidygraph')</code>. For the development version available on GitHub, use the <code>devtools</code> package for installation:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages('devtools')</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'thomasp85/tidygraph'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages('pak')</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'thomasp85/tidygraph'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="thanks">Thanks<a class="anchor" aria-label="anchor" href="#thanks"></a>
