@@ -3,6 +3,8 @@
 * Add `resolution` argument to `group_louvrain()` to mirror the igraph function
 * `as_tbl_graph()` on an edge dataframe now only adds a name node attribute if 
   the edges are encoded as a character (#147)
+* Added `node_is_connected()` to test whether a node is connected to a set of 
+  nodes (#165)
 
 # tidygraph 1.2.3
 

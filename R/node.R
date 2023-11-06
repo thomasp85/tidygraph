@@ -141,6 +141,27 @@ node_is_keyplayer <- function(k, p = 0, tol = 1e-4, maxsec = 120, roundsec = 30)
   ind <- influenceR::keyplayer(graph, k = k, prob = p, tol = tol, maxsec = maxsec, roundsec = roundsec)
   seq_len(gorder(graph)) %in% ind
 }
+#' @describeIn node_types Is a node connected to all (or any) nodes in a set
+#' @param nodes The set of nodes to test connectivity to. Can be a list to use
+#' different sets for different nodes. If a list it will be recycled as
+#' necessary.
+#' @param any Logical. If `TRUE` the node only needs to be connected to a single
+#' node in the set for it to return `TRUE`
+#' @importFrom igraph distances gorder
+#' @export
+node_is_connected <- function(nodes, mode = 'all', any = FALSE) {
+  expect_nodes()
+  graph <- .G()
+  n_nodes <- gorder(graph)
+  if (!is.list(nodes)) nodes <- list(nodes)
+  all_nodes <- unique(unlist(nodes))
+  reached <- is.finite(t(distances(graph, to = all_nodes, mode = mode, weights = NA)))
+  nodes <- rep_len(nodes, n_nodes)
+  vapply(seq_len(n_nodes), function(n) {
+    found <- reached[,n][nodes[[n]]]
+    if (any) any(found) else all(found)
+  }, logical(1))
+}
 #' Querying node measures
 #'
 #' These functions are a collection of node measures that do not really fall

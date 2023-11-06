@@ -12,6 +12,7 @@ test_that("node types return logical", {
   expect_type(get_type(gr, node_is_sink()), 'logical')
   expect_type(get_type(gr, node_is_source()), 'logical')
   expect_type(get_type(gr, node_is_universal()), 'logical')
+  expect_type(get_type(gr, node_is_connected(1:4)), 'logical')
 })
 test_that("node types return vector of correct length", {
   gr <- create_tree(10, 2)
@@ -24,6 +25,7 @@ test_that("node types return vector of correct length", {
   expect_length(get_type(gr, node_is_sink()), igraph::gorder(gr))
   expect_length(get_type(gr, node_is_source()), igraph::gorder(gr))
   expect_length(get_type(gr, node_is_universal()), igraph::gorder(gr))
+  expect_length(get_type(gr, node_is_connected(1:4)), igraph::gorder(gr))
 })
 test_that("node types require active nodes", {
   gr <- create_tree(10, 2) %>% activate(edges)
@@ -36,4 +38,5 @@ test_that("node types require active nodes", {
   expect_error(get_type(gr, node_is_sink()))
   expect_error(get_type(gr, node_is_source()))
   expect_error(get_type(gr, node_is_universal()))
+  expect_error(get_type(gr, node_is_connected(1:4)))
 })
