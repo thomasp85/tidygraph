@@ -97,9 +97,13 @@ detail at the linked igraph documentation.</p>
 <span>  correct <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">play_erdos_renyi</span><span class="op">(</span><span class="va">n</span>, <span class="va">p</span>, <span class="va">m</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">play_gnm</span><span class="op">(</span><span class="va">n</span>, <span class="va">m</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">play_geometry</span><span class="op">(</span><span class="va">n</span>, <span class="va">radius</span>, torus <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">play_gnp</span><span class="op">(</span><span class="va">n</span>, <span class="va">p</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">play_geometry</span><span class="op">(</span><span class="va">n</span>, <span class="va">radius</span>, torus <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">play_erdos_renyi</span><span class="op">(</span><span class="va">n</span>, <span class="va">p</span>, <span class="va">m</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -179,10 +183,15 @@ dot product of the latent position of termintating nodes. See
 proportional to terminal node fitness scores. See <code><a href="https://r.igraph.org/reference/sample_fitness.html" class="external-link">igraph::sample_fitness()</a></code></p></li>
 <li><p><code>play_fitness_power()</code>: Create graphs with an expected power-law degree
 distribution. See <code><a href="https://r.igraph.org/reference/sample_fitness_pl.html" class="external-link">igraph::sample_fitness_pl()</a></code></p></li>
-<li><p><code>play_erdos_renyi()</code>: Create graphs with a fixed edge probability or
-count. See <code><a href="https://r.igraph.org/reference/sample_gnp.html" class="external-link">igraph::sample_gnp()</a></code> and <code><a href="https://r.igraph.org/reference/sample_gnm.html" class="external-link">igraph::sample_gnm()</a></code></p></li>
+<li><p><code>play_gnm()</code>: Create graphs with a fixed edge count. See
+<code><a href="https://r.igraph.org/reference/sample_gnm.html" class="external-link">igraph::sample_gnm()</a></code></p></li>
+<li><p><code>play_gnp()</code>: Create graphs with a fixed edge probability. See
+<code><a href="https://r.igraph.org/reference/sample_gnp.html" class="external-link">igraph::sample_gnp()</a></code></p></li>
 <li><p><code>play_geometry()</code>: Create graphs by positioning nodes on a plane or
 torus and connecting nearby ones. See <code><a href="https://r.igraph.org/reference/sample_grg.html" class="external-link">igraph::sample_grg()</a></code></p></li>
+<li><p><code>play_erdos_renyi()</code>: <a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Create graphs
+with a fixed edge probability or count. See <code><a href="https://r.igraph.org/reference/sample_gnp.html" class="external-link">igraph::sample_gnp()</a></code> and
+<code><a href="https://r.igraph.org/reference/sample_gnm.html" class="external-link">igraph::sample_gnm()</a></code></p></li>
 </ul></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -195,6 +204,8 @@ torus and connecting nearby ones. See <code><a href="https://r.igraph.org/refere
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">play_erdos_renyi</span><span class="op">(</span><span class="fl">20</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`play_erdos_renyi()` was deprecated in tidygraph 1.3.0.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use `play_gnp()` instead.</span>
 <span class="r-plt img"><img src="sampling_games-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
