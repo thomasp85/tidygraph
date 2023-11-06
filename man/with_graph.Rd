@@ -23,7 +23,7 @@ want to use an algorithm outside of the tidygraph framework you can use
 being evaluated.
 }
 \examples{
-gr <- play_erdos_renyi(10, 0.3)
+gr <- play_gnp(10, 0.3)
 
 with_graph(gr, centrality_degree())
 

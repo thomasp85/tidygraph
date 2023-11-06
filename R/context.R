@@ -151,7 +151,7 @@ NULL
 #' @export
 #'
 #' @examples
-#' gr <- play_erdos_renyi(10, 0.3)
+#' gr <- play_gnp(10, 0.3)
 #'
 #' with_graph(gr, centrality_degree())
 #'

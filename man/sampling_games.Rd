@@ -6,8 +6,10 @@
 \alias{play_dotprod}
 \alias{play_fitness}
 \alias{play_fitness_power}
-\alias{play_erdos_renyi}
+\alias{play_gnm}
+\alias{play_gnp}
 \alias{play_geometry}
+\alias{play_erdos_renyi}
 \title{Graph games based on direct sampling}
 \usage{
 play_degree(out_degree, in_degree = NULL, method = "simple")
@@ -26,9 +28,13 @@ play_fitness_power(
   correct = TRUE
 )
 
-play_erdos_renyi(n, p, m, directed = TRUE, loops = FALSE)
+play_gnm(n, m, directed = TRUE, loops = FALSE)
+
+play_gnp(n, p, directed = TRUE, loops = FALSE)
 
 play_geometry(n, radius, torus = FALSE)
+
+play_erdos_renyi(n, p, m, directed = TRUE, loops = FALSE)
 }
 \arguments{
 \item{out_degree, in_degree}{The degrees of each node in the graph}
@@ -83,11 +89,18 @@ proportional to terminal node fitness scores. See \code{\link[igraph:sample_fitn
 \item \code{play_fitness_power()}: Create graphs with an expected power-law degree
 distribution. See \code{\link[igraph:sample_fitness_pl]{igraph::sample_fitness_pl()}}
 
-\item \code{play_erdos_renyi()}: Create graphs with a fixed edge probability or
-count. See \code{\link[igraph:sample_gnp]{igraph::sample_gnp()}} and \code{\link[igraph:sample_gnm]{igraph::sample_gnm()}}
+\item \code{play_gnm()}: Create graphs with a fixed edge count. See
+\code{\link[igraph:sample_gnm]{igraph::sample_gnm()}}
+
+\item \code{play_gnp()}: Create graphs with a fixed edge probability. See
+\code{\link[igraph:sample_gnp]{igraph::sample_gnp()}}
 
 \item \code{play_geometry()}: Create graphs by positioning nodes on a plane or
 torus and connecting nearby ones. See \code{\link[igraph:sample_grg]{igraph::sample_grg()}}
+
+\item \code{play_erdos_renyi()}: \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Create graphs
+with a fixed edge probability or count. See \code{\link[igraph:sample_gnp]{igraph::sample_gnp()}} and
+\code{\link[igraph:sample_gnm]{igraph::sample_gnm()}}
 
 }}
 \examples{

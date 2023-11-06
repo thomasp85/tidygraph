@@ -19,6 +19,7 @@ Imports:
     cli,
     dplyr (>= 0.8.5),
     igraph (>= 1.3.0),
+    lifecycle,
     magrittr,
     pillar,
     R6,

@@ -143,17 +143,19 @@ play_fitness <- function(m, out_fit, in_fit = NULL, loops = FALSE, multiple = FA
 play_fitness_power <- function(n, m, out_exp, in_exp = -1, loops = FALSE, multiple = FALSE, correct = TRUE) {
   as_tbl_graph(sample_fitness_pl(n, m, out_exp, in_exp, loops, multiple, correct))
 }
-#' @describeIn sampling_games Create graphs with a fixed edge probability or
-#' count. See [igraph::sample_gnp()] and [igraph::sample_gnm()]
-#' @importFrom igraph sample_gnm sample_gnp
+#' @describeIn sampling_games Create graphs with a fixed edge count. See
+#' [igraph::sample_gnm()]
+#' @importFrom igraph sample_gnm
 #' @export
-play_erdos_renyi <- function(n, p, m, directed = TRUE, loops = FALSE) {
-  if (missing(p)) {
-    as_tbl_graph(sample_gnm(n, m, directed, loops))
-  } else {
-    if (!missing(m)) cli::cli_warn('Ignoring {.arg m} as {.arg p} is provided')
-    as_tbl_graph(sample_gnp(n, p, directed, loops))
-  }
+play_gnm <- function(n, m, directed = TRUE, loops = FALSE) {
+  as_tbl_graph(sample_gnm(n, m, directed, loops))
+}
+#' @describeIn sampling_games Create graphs with a fixed edge probability. See
+#' [igraph::sample_gnp()]
+#' @importFrom igraph sample_gnp
+#' @export
+play_gnp <- function(n, p, directed = TRUE, loops = FALSE) {
+  as_tbl_graph(sample_gnp(n, p, directed, loops))
 }
 #' @describeIn sampling_games Create graphs by positioning nodes on a plane or
 #' torus and connecting nearby ones. See [igraph::sample_grg()]
@@ -161,6 +163,20 @@ play_erdos_renyi <- function(n, p, m, directed = TRUE, loops = FALSE) {
 #' @export
 play_geometry <- function(n, radius, torus = FALSE) {
   as_tbl_graph(sample_grg(n, radius, torus, TRUE))
+}
+#' @describeIn sampling_games `r lifecycle::badge('deprecated')` Create graphs
+#' with a fixed edge probability or count. See [igraph::sample_gnp()] and
+#' [igraph::sample_gnm()]
+#' @importFrom igraph sample_gnm sample_gnp
+#' @export
+play_erdos_renyi <- function(n, p, m, directed = TRUE, loops = FALSE) {
+  if (missing(p)) {
+    lifecycle::deprecate_soft("1.3.0", "play_erdos_renyi()", "play_gnm()")
+    as_tbl_graph(sample_gnm(n, m, directed, loops))
+  } else {
+    lifecycle::deprecate_soft("1.3.0", "play_erdos_renyi()", "play_gnp()")
+    as_tbl_graph(sample_gnp(n, p, directed, loops))
+  }
 }
 
 #' Graph games based on evolution

@@ -5,6 +5,8 @@
   the edges are encoded as a character (#147)
 * Added `node_is_connected()` to test whether a node is connected to a set of 
   nodes (#165)
+* Deprecated `play_erdos_renyi()` in favour of `play_gnm()` and `play_gnp()` 
+  (#152)
 
 # tidygraph 1.2.3
 
