@@ -103,7 +103,9 @@ exclusive and that nodes can thus be of multiple types.</p>
 <span></span>
 <span><span class="fu">node_is_adjacent</span><span class="op">(</span><span class="va">to</span>, mode <span class="op">=</span> <span class="st">"all"</span>, include_to <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">node_is_keyplayer</span><span class="op">(</span><span class="va">k</span>, p <span class="op">=</span> <span class="fl">0</span>, tol <span class="op">=</span> <span class="fl">1e-04</span>, maxsec <span class="op">=</span> <span class="fl">120</span>, roundsec <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">node_is_keyplayer</span><span class="op">(</span><span class="va">k</span>, p <span class="op">=</span> <span class="fl">0</span>, tol <span class="op">=</span> <span class="fl">1e-04</span>, maxsec <span class="op">=</span> <span class="fl">120</span>, roundsec <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">node_is_connected</span><span class="op">(</span><span class="va">nodes</span>, mode <span class="op">=</span> <span class="st">"all"</span>, any <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -139,6 +141,17 @@ exclusive and that nodes can thus be of multiple types.</p>
 <dt>roundsec</dt>
 <dd><p>Number of seconds in between synchronizing workers' answer</p></dd>
 
+
+<dt>nodes</dt>
+<dd><p>The set of nodes to test connectivity to. Can be a list to use
+different sets for different nodes. If a list it will be recycled as
+necessary.</p></dd>
+
+
+<dt>any</dt>
+<dd><p>Logical. If <code>TRUE</code> the node only needs to be connected to a single
+node in the set for it to return <code>TRUE</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -161,6 +174,7 @@ graph.</p>
 <li><p><code>node_is_center()</code>: does the node have the minimal eccentricity in the graph</p></li>
 <li><p><code>node_is_adjacent()</code>: is a node adjacent to any of the nodes given in <code>to</code></p></li>
 <li><p><code>node_is_keyplayer()</code>: Is a node part of the keyplayers in the graph (<code>influenceR</code>)</p></li>
+<li><p><code>node_is_connected()</code>: Is a node connected to all (or any) nodes in a set</p></li>
 </ul></div>
 
     <div id="ref-examples">
