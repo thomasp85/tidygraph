@@ -42,7 +42,7 @@ edge_is_mutual <- function() {
   which_mutual(graph)
 }
 #' @describeIn edge_types Query whether an edge goes from a set of nodes
-#' @param from,to,i A vector giving node indices
+#' @param from,to,nodes A vector giving node indices
 #' @export
 edge_is_from <- function(from) {
   expect_edges()
@@ -74,10 +74,11 @@ edge_is_between <- function(from, to, ignore_dir = !graph_is_directed()) {
 }
 #' @describeIn edge_types Query whether an edge goes from or to a set of nodes
 #' @export
-edge_is_incident <- function(i) {
+edge_is_incident <- function(nodes) {
   expect_edges()
   .free_graph_context()
   edges <- .E()
-  i <- as_ind(i, graph_order())
-  edges$from %in% i | edges$to %in% i
+  nodes <- as_ind(nodes, graph_order())
+  edges$from %in% nodes | edges$to %in% nodes
+}
 }

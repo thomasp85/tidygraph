@@ -9,6 +9,7 @@
 \alias{edge_is_to}
 \alias{edge_is_between}
 \alias{edge_is_incident}
+\alias{edge_is_bridge}
 \title{Querying edge types}
 \usage{
 edge_is_multiple()
@@ -23,10 +24,12 @@ edge_is_to(to)
 
 edge_is_between(from, to, ignore_dir = !graph_is_directed())
 
-edge_is_incident(i)
+edge_is_incident(nodes)
+
+edge_is_bridge()
 }
 \arguments{
-\item{from, to, i}{A vector giving node indices}
+\item{from, to, nodes}{A vector giving node indices}
 
 \item{ignore_dir}{Is both directions of the edge allowed}
 }
@@ -54,6 +57,9 @@ in the graph corresponds to the specific type.
 \item \code{edge_is_between()}: Query whether an edge goes between two sets of nodes
 
 \item \code{edge_is_incident()}: Query whether an edge goes from or to a set of nodes
+
+\item \code{edge_is_bridge()}: Query whether an edge is a bridge (ie. it's removal
+will increase the number of components in a graph)
 
 }}
 \examples{
