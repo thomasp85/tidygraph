@@ -81,4 +81,13 @@ edge_is_incident <- function(nodes) {
   nodes <- as_ind(nodes, graph_order())
   edges$from %in% nodes | edges$to %in% nodes
 }
+#' @describeIn edge_types Query whether an edge is a bridge (ie. it's removal
+#' will increase the number of components in a graph)
+#' @importFrom igraph bridges gsize
+#' @export
+edge_is_bridge <- function() {
+  expect_edges()
+  graph <- .G()
+  seq_len(gsize(graph)) %in% bridges(graph)
 }
+
