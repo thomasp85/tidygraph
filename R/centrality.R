@@ -10,7 +10,8 @@
 #' vector with measures ready to be added to the node data. Further `tidygraph`
 #' provides access to the `netrankr` engine for centrality calculations and
 #' define a number of centrality measures based on that, as well as provide a
-#' manual mode for specifying more-or-less any centrality score.
+#' manual mode for specifying more-or-less any centrality score. These measures
+#' all only work on undirected graphs.
 #'
 #' @param weights The weight of the edges to use for the calculation. Will be
 #' evaluated in the context of the edge data.
@@ -202,6 +203,9 @@ centrality_manual <- function(relation = 'dist_sp', aggregation = 'sum', ...) {
   expect_netrankr()
   expect_nodes()
   graph <- .G()
+  if (is.directed(graph)) {
+    cli::cli_abort("Centrality measures based on the {.pkg netrankr} package only works on undirected networks")
+  }
   rel <- netrankr::indirect_relations(graph, type = relation, ...)
   netrankr::aggregate_positions(rel, type = aggregation)
 }

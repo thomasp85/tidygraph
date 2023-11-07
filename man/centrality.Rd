@@ -190,7 +190,8 @@ naming scheme and automatically calls the function on the graph, returning a
 vector with measures ready to be added to the node data. Further \code{tidygraph}
 provides access to the \code{netrankr} engine for centrality calculations and
 define a number of centrality measures based on that, as well as provide a
-manual mode for specifying more-or-less any centrality score.
+manual mode for specifying more-or-less any centrality score. These measures
+all only work on undirected graphs.
 }
 \section{Functions}{
 \itemize{
