@@ -8,6 +8,7 @@
 * Deprecated `play_erdos_renyi()` in favour of `play_gnm()` and `play_gnp()` 
   (#152)
 * Added the whole family of `slice_*()` functions from dplyr (#128)
+* Added methods for `tidyr::replace_na()` and `tidyr::drop_na()` (#114)
 
 # tidygraph 1.2.3
 

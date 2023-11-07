@@ -2,7 +2,7 @@
 % Please edit documentation in R/arrange.R, R/distinct.R, R/filter.R,
 %   R/group_by.R, R/igraph.R, R/joins.R, R/mutate.R, R/pull.R, R/rename.R,
 %   R/sample_frac.R, R/sample_n.R, R/select.R, R/slice.R, R/tbl_graph.R,
-%   R/tibble.R
+%   R/tibble.R, R/tidyr-utils.R
 \docType{import}
 \name{reexports}
 \alias{reexports}
@@ -52,6 +52,8 @@
 \alias{tbl_vars}
 \alias{as_tibble}
 \alias{\%>\%}
+\alias{replace_na}
+\alias{drop_na}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -66,5 +68,7 @@ below to see their documentation.
   \item{magrittr}{\code{\link[magrittr:pipe]{\%>\%}}}
 
   \item{tibble}{\code{\link[tibble]{as_tibble}}}
+
+  \item{tidyr}{\code{\link[tidyr]{drop_na}}, \code{\link[tidyr]{replace_na}}}
 }}
 
