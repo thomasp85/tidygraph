@@ -21,7 +21,7 @@ map_local_dbl(order = 1, mode = "all", mindist = 0, .f, ...)
 \arguments{
 \item{order}{Integer giving the order of the neighborhood.}
 
-\item{mode}{Character constatnt, it specifies how to use the direction of
+\item{mode}{Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For \sQuote{out} only the
 outgoing edges are followed, so all vertices reachable from the source
 vertex in at most \code{order} steps are counted. For \sQuote{"in"} all
@@ -38,7 +38,7 @@ argument is ignored for undirected graphs.}
 \value{
 \code{map_local()} returns a list of the same length as the number of
 nodes in the graph, in the order matching the node order in the graph.
-\code{map_local_*()} tries to coerce its result into a vector of the classes
+\verb{map_local_*()} tries to coerce its result into a vector of the classes
 \code{logical} (\code{map_local_lgl}), \code{character} (\code{map_local_chr}), \code{integer}
 (\code{map_local_int}), or \code{double} (\code{map_local_dbl}). These functions will throw
 an error if they are unsuccesful, so they are type safe.
@@ -57,4 +57,16 @@ addition to those supplied through \code{...}:
 \item \code{graph}: The full \code{tbl_graph} object
 \item \code{node}: The index of the node currently mapped over
 }
+
+The \code{neighborhood} graph will contain an extra node attribute called
+\code{.central_node}, which will be \code{TRUE} for the node that the neighborhood is
+expanded from and \code{FALSE} for everything else.
+}
+\examples{
+# Smooth out values over a neighborhood
+create_notable('meredith') \%>\%
+  mutate(value = rpois(graph_order(), 5)) \%>\%
+  mutate(value_smooth = map_local_dbl(order = 2, .f = function(neighborhood, ...) {
+    mean(as_tibble(neighborhood, active = 'nodes')$value)
+  }))
 }

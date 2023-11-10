@@ -12,6 +12,11 @@
 #' @name graph_measures
 #' @rdname graph_measures
 #'
+#' @examples
+#' # Use e.g. to modify computations on nodes and edges
+#' create_notable('meredith') %>%
+#'   activate(nodes) %>%
+#'   mutate(rel_neighbors = centrality_degree()/graph_order())
 NULL
 
 #' @describeIn graph_measures Gives the minimum edge connectivity. Wraps [igraph::edge_connectivity()]
@@ -29,7 +34,11 @@ graph_adhesion <- function() {
 #' @export
 graph_assortativity <- function(attr, in_attr = NULL, directed = TRUE) {
   graph <- .G()
+  attr <- enquo(attr)
+  attr <- eval_tidy(attr, .N())
   if (is.numeric(attr)) {
+    in_attr <- enquo(in_attr)
+    in_attr <- eval_tidy(in_attr, .N())
     assortativity(graph, attr, in_attr, directed)
   } else {
     assortativity_nominal(graph, as.factor(attr), directed)
@@ -41,7 +50,7 @@ graph_assortativity <- function(attr, in_attr = NULL, directed = TRUE) {
 #' @export
 graph_automorphisms <- function(sh = 'fm') {
   graph <- .G()
-  as.numeric(automorphisms(graph, sh)$group_size)
+  as.numeric(automorphisms(graph, sh = sh)$group_size)
 }
 #' @describeIn graph_measures Get the size of the largest clique. Wraps [igraph::clique_num()]
 #' @importFrom igraph clique_num
@@ -57,6 +66,8 @@ graph_clique_num <- function() {
 #' @export
 graph_clique_count <- function(min = NULL, max = NULL, subset = NULL) {
   graph <- .G()
+  subset <- enquo(subset)
+  subset <- eval_tidy(subset, .N())
   if (is.logical(subset)) subset <- which(subset)
   count_max_cliques(graph, min, max, subset)
 }
@@ -80,8 +91,13 @@ graph_motif_count <- function(size = 3, cut.prob = rep(0, size)) {
 #' @inheritParams igraph::diameter
 #' @importFrom igraph diameter
 #' @export
-graph_diameter <- function(directed = TRUE, unconnected = TRUE, weights = NULL) {
+graph_diameter <- function(weights = NULL, directed = TRUE, unconnected = TRUE) {
   graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   diameter(graph, directed, unconnected, weights)
 }
 #' @describeIn graph_measures Measrues the length of the shortest circle in the graph. Wraps [igraph::girth()]
@@ -149,7 +165,9 @@ graph_reciprocity <- function(ignore_loops = TRUE, ratio = FALSE) {
 #' @export
 graph_min_cut <- function(capacity = NULL) {
   graph <- .G()
-  min_cut(graph, capacity = capacity)$value
+  capacity <- enquo(capacity)
+  capacity <- eval_tidy(capacity, .E())
+  min_cut(graph, capacity = capacity)
 }
 #' @describeIn graph_measures Calculates the mean distance between all node pairs in the graph. Wraps [igraph::mean_distance()]
 #' @importFrom igraph mean_distance
@@ -157,4 +175,16 @@ graph_min_cut <- function(capacity = NULL) {
 graph_mean_dist <- function(directed = TRUE, unconnected = TRUE) {
   graph <- .G()
   mean_distance(graph, directed = directed, unconnected = unconnected)
+}
+#' @describeIn graph_measures Calculates the modularity of the graph contingent on a provided node grouping
+#' @param group The node grouping to calculate the modularity on
+#' @importFrom igraph modularity
+#' @export
+graph_modularity <- function(group, weights = NULL) {
+  graph <- .G()
+  group <- enquo(group)
+  weights <- enquo(weights)
+  group <- eval_tidy(group, .N())
+  weights <- eval_tidy(weights, .E())
+  modularity(graph, group, weights)
 }

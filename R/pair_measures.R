@@ -14,6 +14,11 @@
 #'
 #' @name pair_measures
 #' @rdname pair_measures
+#'
+#' @examples
+#' # Calculate the distance to the center node
+#' create_notable('meredith') %>%
+#'   mutate(dist_to_center = node_distance_to(node_is_center()))
 NULL
 
 #' @describeIn pair_measures Calculate the adhesion to the specified node. Wraps [igraph::edge_connectivity()]
@@ -29,6 +34,7 @@ node_adhesion_to <- function(nodes) {
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   adhesion <- Map(function(s, t) {
+    if (s == t) return(NA)
     edge_connectivity(graph, source = s, target = t, checks = TRUE)
   }, s = source, t = target)
   unlist(adhesion)
@@ -44,6 +50,7 @@ node_adhesion_from <- function(nodes) {
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
   adhesion <- Map(function(s, t) {
+    if (s == t) return(NA)
     edge_connectivity(graph, source = s, target = t, checks = TRUE)
   }, s = source, t = target)
   unlist(adhesion)
@@ -58,7 +65,10 @@ node_cohesion_to <- function(nodes) {
   nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
+  neigh <- lapply(ego(graph, 1, source, 'out', mindist = 1), as.integer)
   adhesion <- Map(function(s, t) {
+    if (s == t) return(NA)
+    if (t %in% neigh[[s]]) return(NA)
     vertex_connectivity(graph, source = s, target = t, checks = TRUE)
   }, s = source, t = target)
   unlist(adhesion)
@@ -66,14 +76,17 @@ node_cohesion_to <- function(nodes) {
 
 #' @describeIn pair_measures Calculate the cohesion from the specified node. Wraps [igraph::vertex_connectivity()]
 #' @export
-#' @importFrom igraph vertex_connectivity gorder
+#' @importFrom igraph vertex_connectivity gorder ego
 node_cohesion_from <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
+  neigh <- lapply(ego(graph, 1, source, 'out', mindist = 1), as.integer)
   adhesion <- Map(function(s, t) {
+    if (s == t) return(NA)
+    if (t %in% neigh[[s]]) return(NA)
     vertex_connectivity(graph, source = s, target = t, checks = TRUE)
   }, s = source, t = target)
   unlist(adhesion)
@@ -90,9 +103,14 @@ node_cohesion_from <- function(nodes) {
 #' @param algorithm The distance algorithms to use. By default it will try to
 #' select the fastest suitable algorithm. Possible values are `"automatic"`,
 #' `"unweighted"`, `"dijkstra"`, `"bellman-ford"`, and `"johnson"`
-node_distance_to <- function(nodes, mode, weights = NA, algorithm = 'automatic') {
+node_distance_to <- function(nodes, mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
@@ -104,9 +122,14 @@ node_distance_to <- function(nodes, mode, weights = NA, algorithm = 'automatic')
 #' @describeIn pair_measures Calculate various distance metrics between node pairs. Wraps [igraph::distances()]
 #' @export
 #' @importFrom igraph distances gorder
-node_distance_from <- function(nodes, mode, weights = NA, algorithm = 'automatic') {
+node_distance_from <- function(nodes, mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
   nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
@@ -118,7 +141,7 @@ node_distance_from <- function(nodes, mode, weights = NA, algorithm = 'automatic
 #' @describeIn pair_measures Calculate node pair cocitation count. Wraps [igraph::cocitation()]
 #' @export
 #' @importFrom igraph cocitation gorder
-node_cocitation <- function(nodes) {
+node_cocitation_with <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
@@ -131,7 +154,7 @@ node_cocitation <- function(nodes) {
 #' @describeIn pair_measures Calculate node pair bibliographic coupling. Wraps [igraph::bibcoupling()]
 #' @export
 #' @importFrom igraph bibcoupling gorder
-node_bibcoupling <- function(nodes) {
+node_bibcoupling_with <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
@@ -148,7 +171,7 @@ node_bibcoupling <- function(nodes) {
 #' @param loops Should loop edges be considered
 #' @param method The similarity measure to calculate. Possible values are:
 #' `"jaccard"`, `"dice"`, and `"invlogweighted"`
-node_similarity <- function(nodes, mode = 'out', loops = FALSE, method = 'jaccard') {
+node_similarity_with <- function(nodes, mode = 'out', loops = FALSE, method = 'jaccard') {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
@@ -166,10 +189,13 @@ node_similarity <- function(nodes, mode = 'out', loops = FALSE, method = 'jaccar
 node_max_flow_to <- function(nodes, capacity = NULL) {
   expect_nodes()
   graph <- .G()
+  capacity <- enquo(capacity)
+  capacity <- eval_tidy(capacity, .E())
   nodes <- as_ind(nodes, gorder(graph))
   source <- seq_len(gorder(graph))
   target <- rep(nodes, length.out = length(source))
   flow <- Map(function(s, t) {
+    if (s == t) return(NA)
     max_flow(graph, source = s, target = t, capacity = capacity)$value
   }, s = source, t = target)
   unlist(flow)
@@ -181,10 +207,13 @@ node_max_flow_to <- function(nodes, capacity = NULL) {
 node_max_flow_from <- function(nodes, capacity = NULL) {
   expect_nodes()
   graph <- .G()
+  capacity <- enquo(capacity)
+  capacity <- eval_tidy(capacity, .E())
   nodes <- as_ind(nodes, gorder(graph))
   target <- seq_len(gorder(graph))
   source <- rep(nodes, length.out = length(target))
   flow <- Map(function(s, t) {
+    if (s == t) return(NA)
     max_flow(graph, source = s, target = t, capacity = capacity)$value
   }, s = source, t = target)
   unlist(flow)

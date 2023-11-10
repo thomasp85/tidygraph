@@ -47,10 +47,18 @@
 #' These functions will throw an error if they are unsuccesful, so they are type
 #' safe.
 #'
-#' @family node_map
+#' @family node map functions
 #'
 #' @export
 #' @importFrom igraph gorder
+#'
+#' @examples
+#' # Accumulate values along a search
+#' create_tree(40, children = 3, directed = TRUE) %>%
+#'   mutate(value = round(runif(40)*100)) %>%
+#'   mutate(value_acc = map_bfs_dbl(node_is_root(), .f = function(node, path, ...) {
+#'     sum(.N()$value[c(node, path$node)])
+#'   }))
 map_bfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
@@ -122,10 +130,21 @@ map_bfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' (`map_bfs_back_dbl`). These functions will throw an error if they are
 #' unsuccesful, so they are type safe.
 #'
-#' @family node_map
+#' @family node map functions
 #'
 #' @export
 #' @importFrom igraph gorder
+#'
+#' @examples
+#' # Collect values from children
+#' create_tree(40, children = 3, directed = TRUE) %>%
+#'   mutate(value = round(runif(40)*100)) %>%
+#'   mutate(child_acc = map_bfs_back_dbl(node_is_root(), .f = function(node, path, ...) {
+#'     if (nrow(path) == 0) .N()$value[node]
+#'     else {
+#'       sum(unlist(path$result[path$parent == node]))
+#'     }
+#'   }))
 map_bfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
@@ -133,7 +152,7 @@ map_bfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   dot_params <- list(...)
   search_df <- bfs_df(graph, root, mode, unreachable)
   offspring <- get_offspring(as.integer(search_df$parent), order(search_df$rank))
-  call_nodes(graph, .f, search_df, offspring, dot_params)
+  call_nodes(graph, .f, search_df, offspring, dot_params, reverse = TRUE)
 }
 #' @rdname map_bfs_back
 #' @export
@@ -196,10 +215,18 @@ map_bfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' These functions will throw an error if they are unsuccesful, so they are type
 #' safe.
 #'
-#' @family node_map
+#' @family node map functions
 #'
 #' @export
 #' @importFrom igraph gorder
+#'
+#' @examples
+#' # Add a random integer to the last value along a search
+#' create_tree(40, children = 3, directed = TRUE) %>%
+#'   mutate(child_acc = map_dfs_int(node_is_root(), .f = function(node, path, ...) {
+#'     last_val <- if (nrow(path) == 0) 0L else tail(unlist(path$result), 1)
+#'     last_val + sample(1:10, 1)
+#'   }))
 map_dfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
@@ -270,10 +297,21 @@ map_dfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' (`map_dfs_back_dbl`). These functions will throw an error if they are
 #' unsuccesful, so they are type safe.
 #'
-#' @family node_map
+#' @family node map functions
 #'
 #' @export
 #' @importFrom igraph gorder
+#'
+#' @examples
+#' # Collect values from the 2 closest layers of children in a dfs search
+#' create_tree(40, children = 3, directed = TRUE) %>%
+#'   mutate(value = round(runif(40)*100)) %>%
+#'   mutate(child_acc = map_dfs_back(node_is_root(), .f = function(node, path, dist, ...) {
+#'     if (nrow(path) == 0) .N()$value[node]
+#'     else {
+#'       unlist(path$result[path$dist - dist <= 2])
+#'     }
+#'   }))
 map_dfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
@@ -281,7 +319,7 @@ map_dfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   dot_params <- list(...)
   search_df <- dfs_df(graph, root, mode, unreachable)
   offspring <- get_offspring(as.integer(search_df$parent), order(search_df$rank))
-  call_nodes(graph, .f, search_df, offspring, dot_params)
+  call_nodes(graph, .f, search_df, offspring, dot_params, reverse = TRUE)
 }
 #' @rdname map_dfs_back
 #' @export
@@ -322,6 +360,10 @@ map_dfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' * `graph`: The full `tbl_graph` object
 #' * `node`: The index of the node currently mapped over
 #'
+#' The `neighborhood` graph will contain an extra node attribute called
+#' `.central_node`, which will be `TRUE` for the node that the neighborhood is
+#' expanded from and `FALSE` for everything else.
+#'
 #' @inheritParams igraph::ego
 #' @inheritParams map_bfs
 #'
@@ -332,13 +374,23 @@ map_dfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' (`map_local_int`), or `double` (`map_local_dbl`). These functions will throw
 #' an error if they are unsuccesful, so they are type safe.
 #'
-#' @importFrom igraph gorder make_ego_graph
+#' @importFrom igraph gorder make_ego_graph V<-
 #' @export
+#'
+#' @examples
+#' # Smooth out values over a neighborhood
+#' create_notable('meredith') %>%
+#'   mutate(value = rpois(graph_order(), 5)) %>%
+#'   mutate(value_smooth = map_local_dbl(order = 2, .f = function(neighborhood, ...) {
+#'     mean(as_tibble(neighborhood, active = 'nodes')$value)
+#'   }))
 map_local <- function(order = 1, mode = 'all', mindist = 0, .f, ...) {
   expect_nodes()
   graph <- .G()
+  V(graph)$.central_node <- FALSE
   res <- lapply(seq_len(gorder(graph)), function(i) {
-    ego_graph <- make_ego_graph(graph, order = order, nodes = i, mode = mode, mindist = mindist)
+    V(graph)$.central_node[i] <- TRUE
+    ego_graph <- make_ego_graph(graph, order = order, nodes = i, mode = mode, mindist = mindist)[[1]]
     .f(neighborhood = as_tbl_graph(ego_graph), graph = graph, node = i, ...)
   })
 }
@@ -372,7 +424,7 @@ map_local_dbl <- function(order = 1, mode = 'all', mindist = 0, .f, ...) {
 #' @importFrom igraph bfs
 #' @importFrom tibble tibble
 bfs_df <- function(graph, root, mode, unreachable) {
-  search <- bfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  search <- bfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
                 order = TRUE, rank = TRUE, father = TRUE, pred = TRUE,
                 succ = TRUE, dist = TRUE)
   nodes <- seq_along(search$order)
@@ -389,7 +441,7 @@ bfs_df <- function(graph, root, mode, unreachable) {
 #' @importFrom igraph dfs
 #' @importFrom tibble tibble
 dfs_df <- function(graph, root, mode, unreachable) {
-  search <- dfs(graph = graph, root = root, neimode = mode, unreachable = unreachable,
+  search <- dfs(graph = graph, root = root, mode = mode, unreachable = unreachable,
                 order = TRUE, order.out = TRUE, father = TRUE, dist = TRUE)
   nodes <- seq_along(search$order)
   tibble(
@@ -401,9 +453,11 @@ dfs_df <- function(graph, root, mode, unreachable) {
     result = rep(list(NULL), length(nodes))
   )
 }
-call_nodes <- function(graph, .f, search, connections, dot_params) {
+call_nodes <- function(graph, .f, search, connections, dot_params, reverse = FALSE) {
   not_results <- which(names(search) != 'result')
-  for (i in order(search$rank)) {
+  call_order <- order(search$rank)
+  if (reverse) call_order <- rev(call_order)
+  for (i in call_order) {
     if (is.na(i)) break
 
     conn <- connections[[i]]
@@ -419,8 +473,9 @@ call_nodes <- function(graph, .f, search, connections, dot_params) {
 }
 get_offspring <- function(parent, order) {
   offspring <- rep(list(integer(0)), length(parent))
-  offspring[unique(na.omit(parent))] <- split(seq_along(parent), parent)
-  offspring <- collect_offspring(offspring, rev(order))
+  direct_offspring <- split(seq_along(parent), parent)
+  offspring[as.integer(names(direct_offspring))] <- direct_offspring
+  offspring <- collect_offspring(offspring, as.integer(rev(order)))
   lapply(offspring, function(x) x[order(match(x, order))])
 }
 
@@ -472,6 +527,7 @@ as_vector <- function(.x, .type = NULL){
     unlist(.x)
   }
   else {
-    stop("Cannot coerce values to ", deparse(substitute(.type)), call. = FALSE)
+    type <- deparse(substitute(.type))
+    cli::cli_abort("Cannot coerce values to {.cls {type}}")
   }
 }

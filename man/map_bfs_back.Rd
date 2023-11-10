@@ -35,7 +35,7 @@ is completed without visiting all nodes.}
 \value{
 \code{map_bfs_back()} returns a list of the same length as the number of
 nodes in the graph, in the order matching the node order in the graph (that
-is, not in the order they are called). \code{map_bfs_back_*()} tries to coerce
+is, not in the order they are called). \verb{map_bfs_back_*()} tries to coerce
 its result into a vector of the classes \code{logical} (\code{map_bfs_back_lgl}),
 \code{character} (\code{map_bfs_back_chr}), \code{integer} (\code{map_bfs_back_int}), or \code{double}
 (\code{map_bfs_back_dbl}). These functions will throw an error if they are
@@ -69,7 +69,21 @@ of each node in a list.
 Instead of spelling out all of these in the function it is possible to simply
 name the ones needed and use \code{...} to catch the rest.
 }
-\seealso{
-Other node_map: \code{\link{map_bfs}},
-  \code{\link{map_dfs_back}}, \code{\link{map_dfs}}
+\examples{
+# Collect values from children
+create_tree(40, children = 3, directed = TRUE) \%>\%
+  mutate(value = round(runif(40)*100)) \%>\%
+  mutate(child_acc = map_bfs_back_dbl(node_is_root(), .f = function(node, path, ...) {
+    if (nrow(path) == 0) .N()$value[node]
+    else {
+      sum(unlist(path$result[path$parent == node]))
+    }
+  }))
 }
+\seealso{
+Other node map functions: 
+\code{\link{map_bfs}()},
+\code{\link{map_dfs_back}()},
+\code{\link{map_dfs}()}
+}
+\concept{node map functions}

@@ -21,16 +21,14 @@ as_tbl_graph.network <- function(x, ...) {
 #' @noRd
 #'
 network_to_igraph <- function(graph) {
-  if (!requireNamespace("network", quietly = TRUE)) {
-    stop('The "network" package is needed for this functionality to work', call. = FALSE)
-  }
+  rlang::check_installed('network', 'in order to coerce network object to tbl_graph')
   graph_attr_names <- network::list.network.attributes(graph)
   graph_attr <- lapply(graph_attr_names, function(n) {
     network::get.network.attribute(graph, n)
   })
   names(graph_attr) <- graph_attr_names
   if (graph_attr$hyper) {
-    stop('Hypergraphs are currently unsupported', call. = FALSE)
+    cli::cli_abort('Hypergraphs are currently unsupported', call. = FALSE)
   }
 
   node_attr_names <- network::list.vertex.attributes(graph)
@@ -45,7 +43,7 @@ network_to_igraph <- function(graph) {
   })
   names(edge_attr) <- edge_attr_names
 
-  edges <- network::as.edgelist(graph)
+  edges <- as.matrix(graph, matrix.type = 'edgelist')
   class(edges) <- 'matrix'
   attributes(edges) <- attributes(edges)[c('dim', 'class')]
 
@@ -59,6 +57,8 @@ network_to_igraph <- function(graph) {
     node_attr$name <- node_attr$vertex.names
   }
   node_attr$vertex.names <- NULL
+  missing_nodes <- network::network.size(graph) - gorder(new_graph)
+  new_graph <- add_vertices(new_graph, missing_nodes)
   vertex_attr(new_graph) <- node_attr
   edge_attr(new_graph) <- edge_attr
 

@@ -8,3 +8,16 @@
 as_ind <- function(i, length) {
   seq_len(length)[i]
 }
+
+expect_influencer <- function(...) {
+  rlang::check_installed('influenceR', ...)
+}
+expect_netrankr <- function(...) {
+  rlang::check_installed('netrankr', ...)
+}
+expect_seriation <- function(...) {
+  rlang::check_installed('seriation', ...)
+}
+expect_netswan <- function(...) {
+  rlang::check_installed('NetSwan', ...)
+}

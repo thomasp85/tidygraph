@@ -2,37 +2,67 @@
 % Please edit documentation in R/node.R
 \name{node_types}
 \alias{node_types}
-\alias{node_cut}
-\alias{node_root}
-\alias{node_leaf}
-\alias{node_sink}
-\alias{node_source}
-\alias{node_isolated}
-\alias{node_universal}
-\alias{node_simplical}
-\alias{node_center}
+\alias{node_is_cut}
+\alias{node_is_root}
+\alias{node_is_leaf}
+\alias{node_is_sink}
+\alias{node_is_source}
+\alias{node_is_isolated}
+\alias{node_is_universal}
+\alias{node_is_simplical}
+\alias{node_is_center}
+\alias{node_is_adjacent}
+\alias{node_is_keyplayer}
+\alias{node_is_connected}
 \title{Querying node types}
 \usage{
-node_cut()
+node_is_cut()
 
-node_root()
+node_is_root()
 
-node_leaf()
+node_is_leaf()
 
-node_sink()
+node_is_sink()
 
-node_source()
+node_is_source()
 
-node_isolated()
+node_is_isolated()
 
-node_universal(mode = "out")
+node_is_universal(mode = "out")
 
-node_simplical(mode = "out")
+node_is_simplical(mode = "out")
 
-node_center(mode = "out")
+node_is_center(mode = "out")
+
+node_is_adjacent(to, mode = "all", include_to = TRUE)
+
+node_is_keyplayer(k, p = 0, tol = 1e-04, maxsec = 120, roundsec = 30)
+
+node_is_connected(nodes, mode = "all", any = FALSE)
 }
 \arguments{
 \item{mode}{The way edges should be followed in the case of directed graphs.}
+
+\item{to}{The nodes to test for adjacency to}
+
+\item{include_to}{Should the nodes in \code{to} be marked as adjacent as well}
+
+\item{k}{The number of keyplayers to identify}
+
+\item{p}{The probability to accept a lesser state}
+
+\item{tol}{Optimisation tolerance, below which the optimisation will stop}
+
+\item{maxsec}{The total computation budget for the optimization, in seconds}
+
+\item{roundsec}{Number of seconds in between synchronizing workers' answer}
+
+\item{nodes}{The set of nodes to test connectivity to. Can be a list to use
+different sets for different nodes. If a list it will be recycled as
+necessary.}
+
+\item{any}{Logical. If \code{TRUE} the node only needs to be connected to a single
+node in the set for it to return \code{TRUE}}
 }
 \value{
 A logical vector of the same length as the number of nodes in the
@@ -46,22 +76,33 @@ exclusive and that nodes can thus be of multiple types.
 }
 \section{Functions}{
 \itemize{
-\item \code{node_cut}: is the node a cut node (articaultion node)
+\item \code{node_is_cut()}: is the node a cut node (articaultion node)
 
-\item \code{node_root}: is the node a root in a tree
+\item \code{node_is_root()}: is the node a root in a tree
 
-\item \code{node_leaf}: is the node a leaf in a tree
+\item \code{node_is_leaf()}: is the node a leaf in a tree
 
-\item \code{node_sink}: does the node only have incomming edges
+\item \code{node_is_sink()}: does the node only have incomming edges
 
-\item \code{node_source}: does the node only have outgoing edges
+\item \code{node_is_source()}: does the node only have outgoing edges
 
-\item \code{node_isolated}: is the node unconnected
+\item \code{node_is_isolated()}: is the node unconnected
 
-\item \code{node_universal}: is the node connected to all other nodes in the graph
+\item \code{node_is_universal()}: is the node connected to all other nodes in the graph
 
-\item \code{node_simplical}: are all the neighbors of the node connected
+\item \code{node_is_simplical()}: are all the neighbors of the node connected
 
-\item \code{node_center}: does the node have the minimal eccentricity in the graph
+\item \code{node_is_center()}: does the node have the minimal eccentricity in the graph
+
+\item \code{node_is_adjacent()}: is a node adjacent to any of the nodes given in \code{to}
+
+\item \code{node_is_keyplayer()}: Is a node part of the keyplayers in the graph (\code{influenceR})
+
+\item \code{node_is_connected()}: Is a node connected to all (or any) nodes in a set
+
 }}
-
+\examples{
+# Find the root and leafs in a tree
+create_tree(40, 2) \%>\%
+  mutate(root = node_is_root(), leaf = node_is_leaf())
+}

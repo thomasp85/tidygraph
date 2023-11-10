@@ -20,6 +20,7 @@
 \alias{graph_reciprocity}
 \alias{graph_min_cut}
 \alias{graph_mean_dist}
+\alias{graph_modularity}
 \title{Graph measurements}
 \usage{
 graph_adhesion()
@@ -36,7 +37,7 @@ graph_component_count(type = "weak")
 
 graph_motif_count(size = 3, cut.prob = rep(0, size))
 
-graph_diameter(directed = TRUE, unconnected = TRUE, weights = NULL)
+graph_diameter(weights = NULL, directed = TRUE, unconnected = TRUE)
 
 graph_girth()
 
@@ -57,6 +58,8 @@ graph_reciprocity(ignore_loops = TRUE, ratio = FALSE)
 graph_min_cut(capacity = NULL)
 
 graph_mean_dist(directed = TRUE, unconnected = TRUE)
+
+graph_modularity(group, weights = NULL)
 }
 \arguments{
 \item{attr}{The node attribute to measure on}
@@ -79,21 +82,21 @@ smallest maximally non-trivially connected non-singleton cell.}
 
 \item{type}{The type of component to count, either 'weak' or 'strong'. Ignored for undirected graphs.}
 
-\item{size}{The size of the motif, currently 3 and 4 are supported only.}
+\item{size}{The size of the motif.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument). By default no cuts are made.}
+
+\item{weights}{Optional positive weight vector for calculating weighted
+distances. If the graph has a \code{weight} edge attribute, then this is
+used by default.}
 
 \item{unconnected}{Logical, what to do if the graph is unconnected. If
 FALSE, the function will return a number that is one larger the largest
 possible diameter, which is always the number of vertices. If TRUE, the
 diameters of the connected components will be calculated and the largest one
 will be returned.}
-
-\item{weights}{Optional positive weight vector for calculating weighted
-distances. If the graph has a \code{weight} edge attribute, then this is
-used by default.}
 
 \item{mode}{How should eccentricity be calculated. If \code{"out"} only outbound edges are followed. If \code{"in"} only inbound are followed. If \code{"all"} all edges are followed. Ignored for undirected graphs.}
 
@@ -102,6 +105,8 @@ used by default.}
 \item{ratio}{Should the old "ratio" approach from igraph < v0.6 be used}
 
 \item{capacity}{The capacity of the edges}
+
+\item{group}{The node grouping to calculate the modularity on}
 }
 \value{
 A scalar, the type depending on the function
@@ -116,40 +121,48 @@ them.
 }
 \section{Functions}{
 \itemize{
-\item \code{graph_adhesion}: Gives the minimum edge connectivity. Wraps \code{\link[igraph:edge_connectivity]{igraph::edge_connectivity()}}
+\item \code{graph_adhesion()}: Gives the minimum edge connectivity. Wraps \code{\link[igraph:edge_connectivity]{igraph::edge_connectivity()}}
 
-\item \code{graph_assortativity}: Measures the propensity of similar nodes to be connected. Wraps \code{\link[igraph:assortativity]{igraph::assortativity()}}
+\item \code{graph_assortativity()}: Measures the propensity of similar nodes to be connected. Wraps \code{\link[igraph:assortativity]{igraph::assortativity()}}
 
-\item \code{graph_automorphisms}: Calculate the number of automorphisms of the graph. Wraps \code{\link[igraph:automorphisms]{igraph::automorphisms()}}
+\item \code{graph_automorphisms()}: Calculate the number of automorphisms of the graph. Wraps \code{\link[igraph:automorphisms]{igraph::automorphisms()}}
 
-\item \code{graph_clique_num}: Get the size of the largest clique. Wraps \code{\link[igraph:clique_num]{igraph::clique_num()}}
+\item \code{graph_clique_num()}: Get the size of the largest clique. Wraps \code{\link[igraph:cliques]{igraph::clique_num()}}
 
-\item \code{graph_clique_count}: Get the number of maximal cliques in the graph. Wraps \code{\link[igraph:count_max_cliques]{igraph::count_max_cliques()}}
+\item \code{graph_clique_count()}: Get the number of maximal cliques in the graph. Wraps \code{\link[igraph:cliques]{igraph::count_max_cliques()}}
 
-\item \code{graph_component_count}: Count the number of unconnected componenets in the graph. Wraps \code{\link[igraph:count_components]{igraph::count_components()}}
+\item \code{graph_component_count()}: Count the number of unconnected componenets in the graph. Wraps \code{\link[igraph:components]{igraph::count_components()}}
 
-\item \code{graph_motif_count}: Count the number of motifs in a graph. Wraps \code{\link[igraph:count_motifs]{igraph::count_motifs()}}
+\item \code{graph_motif_count()}: Count the number of motifs in a graph. Wraps \code{\link[igraph:count_motifs]{igraph::count_motifs()}}
 
-\item \code{graph_diameter}: Measures the length of the longest geodesic. Wraps \code{\link[igraph:diameter]{igraph::diameter()}}
+\item \code{graph_diameter()}: Measures the length of the longest geodesic. Wraps \code{\link[igraph:diameter]{igraph::diameter()}}
 
-\item \code{graph_girth}: Measrues the length of the shortest circle in the graph. Wraps \code{\link[igraph:girth]{igraph::girth()}}
+\item \code{graph_girth()}: Measrues the length of the shortest circle in the graph. Wraps \code{\link[igraph:girth]{igraph::girth()}}
 
-\item \code{graph_radius}: Measures the smallest eccentricity in the graph. Wraps \code{\link[igraph:radius]{igraph::radius()}}
+\item \code{graph_radius()}: Measures the smallest eccentricity in the graph. Wraps \code{\link[igraph:radius]{igraph::radius()}}
 
-\item \code{graph_mutual_count}: Counts the number of mutually connected nodes. Wraps \code{\link[igraph:dyad_census]{igraph::dyad_census()}}
+\item \code{graph_mutual_count()}: Counts the number of mutually connected nodes. Wraps \code{\link[igraph:dyad_census]{igraph::dyad_census()}}
 
-\item \code{graph_asym_count}: Counts the number of asymmetrically connected nodes. Wraps \code{\link[igraph:dyad_census]{igraph::dyad_census()}}
+\item \code{graph_asym_count()}: Counts the number of asymmetrically connected nodes. Wraps \code{\link[igraph:dyad_census]{igraph::dyad_census()}}
 
-\item \code{graph_unconn_count}: Counts the number of unconnected node pairs. Wraps \code{\link[igraph:dyad_census]{igraph::dyad_census()}}
+\item \code{graph_unconn_count()}: Counts the number of unconnected node pairs. Wraps \code{\link[igraph:dyad_census]{igraph::dyad_census()}}
 
-\item \code{graph_size}: Counts the number of edges in the graph. Wraps \code{\link[igraph:gsize]{igraph::gsize()}}
+\item \code{graph_size()}: Counts the number of edges in the graph. Wraps \code{\link[igraph:gsize]{igraph::gsize()}}
 
-\item \code{graph_order}: Counts the number of nodes in the graph. Wraps \code{\link[igraph:gorder]{igraph::gorder()}}
+\item \code{graph_order()}: Counts the number of nodes in the graph. Wraps \code{\link[igraph:gorder]{igraph::gorder()}}
 
-\item \code{graph_reciprocity}: Measures the proportion of mutual connections in the graph. Wraps \code{\link[igraph:reciprocity]{igraph::reciprocity()}}
+\item \code{graph_reciprocity()}: Measures the proportion of mutual connections in the graph. Wraps \code{\link[igraph:reciprocity]{igraph::reciprocity()}}
 
-\item \code{graph_min_cut}: Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps \code{\link[igraph:min_cut]{igraph::min_cut()}}
+\item \code{graph_min_cut()}: Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps \code{\link[igraph:min_cut]{igraph::min_cut()}}
 
-\item \code{graph_mean_dist}: Calculates the mean distance between all node pairs in the graph. Wraps \code{\link[igraph:mean_distance]{igraph::mean_distance()}}
+\item \code{graph_mean_dist()}: Calculates the mean distance between all node pairs in the graph. Wraps \code{\link[igraph:distances]{igraph::mean_distance()}}
+
+\item \code{graph_modularity()}: Calculates the modularity of the graph contingent on a provided node grouping
+
 }}
-
+\examples{
+# Use e.g. to modify computations on nodes and edges
+create_notable('meredith') \%>\%
+  activate(nodes) \%>\%
+  mutate(rel_neighbors = centrality_degree()/graph_order())
+}

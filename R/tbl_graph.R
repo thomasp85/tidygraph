@@ -6,7 +6,7 @@
 #' `grouped_tbl_graph` is the equivalent of a `grouped_df` where either the
 #' nodes or the edges has been grouped. The `grouped_tbl_graph` is not
 #' constructed directly but by using the [group_by()] verb. After creation of a
-#' `tble_graph` the nodes are activated by default. The context can be changed
+#' `tbl_graph` the nodes are activated by default. The context can be changed
 #' using the [activate()] verb and affects all subsequent operations. Changing
 #' context automatically drops any grouping. The current active context can
 #' always be extracted with [as_tibble()], which drops the graph structure and
@@ -20,15 +20,23 @@
 #' supported.
 #'
 #' @param nodes A `data.frame` containing information about the nodes in the
-#' graph.
+#' graph. If `edges$to` and/or `edges$from` are characters then they will be
+#' matched to the column named according to `node_key` in nodes, if it exists.
+#' If not, they will be matched to the first column.
 #'
 #' @param edges A `data.frame` containing information about the edges in the
 #' graph. The terminal nodes of each edge must either be encoded in a `to` and
-#' `from` column, or in the two first columns, as integers.
+#' `from` column, or in the two first columns, as integers. These integers refer to
+#' `nodes` index.
 #'
 #' @param x An object convertible to a `tbl_graph`
 #'
 #' @param directed Should the constructed graph be directed (defaults to `TRUE`)
+#'
+#' @param node_key The name of the column in `nodes` that character represented
+#' `to` and `from` columns should be matched against. If `NA` the first column
+#' is always chosen. This setting has no effect if `to` and `from` are given as
+#' integers.
 #'
 #' @param mode In case `directed = TRUE` should the edge direction be away from
 #' node or towards. Possible values are `"out"` (default) or `"in"`.
@@ -37,10 +45,15 @@
 #'
 #' @return A `tbl_graph` object
 #'
+#' @examples
+#' rstat_nodes <- data.frame(name = c("Hadley", "David", "Romain", "Julia"))
+#' rstat_edges <- data.frame(from = c(1, 1, 1, 2, 3, 3, 4, 4, 4),
+#'                             to = c(2, 3, 4, 1, 1, 2, 1, 2, 3))
+#' tbl_graph(nodes = rstat_nodes, edges = rstat_edges)
 #' @export
 #'
-tbl_graph <- function(nodes = NULL, edges = NULL, directed = TRUE) {
-  as_tbl_graph(list(nodes = nodes, edges = edges), directed = directed)
+tbl_graph <- function(nodes = NULL, edges = NULL, directed = TRUE, node_key = 'name') {
+  as_tbl_graph(list(nodes = nodes, edges = edges), directed = directed, node_key = node_key)
 }
 #' @rdname tbl_graph
 #' @export
@@ -51,37 +64,84 @@ as_tbl_graph <- function(x, ...) {
 #' @export
 #' @importFrom igraph as.igraph
 as_tbl_graph.default <- function(x, ...) {
-  tryCatch({
-    as_tbl_graph(as.igraph(x))
-  }, error = function(e) stop('No support for ', class(x)[1], ' objects', call. = FALSE))
+  rlang::try_fetch(
+    as_tbl_graph(as.igraph(x)),
+    error = function(cnd) cli::cli_abort('No support for {.cls {class(x)}} objects', parent = cnd)
+  )
 }
 #' @rdname tbl_graph
 #' @export
 is.tbl_graph <- function(x) {
   inherits(x, 'tbl_graph')
 }
-#' @importFrom tibble trunc_mat
+
+new_name_tibble <- function(x, active = NULL, name = "A tibble", suffix = "") {
+  x <- as_tibble(x, active)
+  attr(x, "name") <- name
+  attr(x, "suffix") <- suffix
+  class(x) <- c("named_tbl", class(x))
+  x
+}
+#' @importFrom pillar tbl_sum
+#' @export
+tbl_sum.named_tbl <- function(x) {
+  summary <- NextMethod()
+  names(summary)[1] <- attr(x, "name")
+  summary[1] <- paste0(summary[1], attr(x, "suffix"))
+  summary
+}
+#' @importFrom pillar tbl_format_footer
+#' @export
+tbl_format_footer.named_tbl <- function(x, setup, ...) {
+  footer <- NextMethod()
+  footer[!grepl("to see more rows", footer)]
+}
+
 #' @importFrom tools toTitleCase
 #' @importFrom rlang as_quosure sym
 #' @export
-print.tbl_graph <- function(x, ...) {
-  arg_list <- list(...)
+print.tbl_graph <- function(x, ..., n_non_active = 3) {
   graph_desc <- describe_graph(x)
   not_active <- if (active(x) == 'nodes') 'edges' else 'nodes'
-  top <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x), n = 6)))
-  top$summary[1] <- paste0(top$summary[1], ' (active)')
-  names(top$summary)[1] <- toTitleCase(paste0(substr(active(x), 1, 4), ' data'))
-  bottom <- do.call(trunc_mat, modifyList(arg_list, list(x = as_tibble(x, active = not_active), n = 3)))
-  names(bottom$summary)[1] <- toTitleCase(paste0(substr(not_active, 1, 4), ' data'))
-  cat('# A tbl_graph: ', gorder(x), ' nodes and ', gsize(x), ' edges\n', sep = '')
-  cat('#\n')
-  cat('# ', graph_desc, '\n', sep = '')
-  cat('#\n')
-  print(top)
-  cat('#\n')
-  print(bottom)
+  top <- toTitleCase(paste0(substr(active(x), 1, 4), ' data'))
+  bottom <- toTitleCase(paste0(substr(not_active, 1, 4), ' data'))
+  cat_subtle('# A tbl_graph: ', gorder(x), ' nodes and ', gsize(x), ' edges\n', sep = '')
+  cat_subtle('#\n')
+  cat_subtle('# ', graph_desc, '\n', sep = '')
+  cat_subtle('#\n')
+  print(new_name_tibble(x, NULL, top, " (active)"), ...)
+  cat_subtle('#\n')
+  print(new_name_tibble(x, not_active, bottom, ""), n = n_non_active)
   invisible(x)
 }
+
+#' @importFrom pillar glimpse
+#' @export
+glimpse.tbl_graph <- function(x, width = NULL, ...) {
+  cli::cli_rule(left = "Nodes")
+  glimpse(as_tibble(x, active = "nodes"))
+  cli::cat_line()
+  cli::cli_rule(left = "Edges")
+  glimpse(as_tibble(x, active = "edges"))
+}
+
+#' @importFrom pillar glimpse
+#' @export
+glimpse.morphed_tbl_graph <- function(x, width = NULL, ...) {
+  graph <- attr(x, '.orig_graph')
+
+  cat_subtle("Currently morphed to a ", gsub('_', ' ', sub('to_', '', attr(x, '.morpher'))), " representation\n")
+  cli::cat_line()
+  cli::cli_rule(left = "Nodes")
+  glimpse(as_tibble(graph, active = "nodes"))
+  cli::cat_line()
+  cli::cli_rule(left = "Edges")
+  glimpse(as_tibble(graph, active = "edges"))
+}
+
+#' @importFrom pillar style_subtle
+cat_subtle <- function(...) cat(pillar::style_subtle(paste0(...)))
+
 #' @export
 print.morphed_tbl_graph <- function(x, ...) {
   graph <- attr(x, '.orig_graph')
@@ -90,8 +150,9 @@ print.morphed_tbl_graph <- function(x, ...) {
   cat('# Original graph is ', tolower(describe_graph(graph)), '\n', sep = '')
   cat('# consisting of ', gorder(graph), ' nodes and ', gsize(graph), ' edges\n', sep = '')
 }
-#' @importFrom igraph is_simple is_directed is_bipartite is_connected is_dag
+#' @importFrom igraph is_simple is_directed is_bipartite is_connected is_dag gorder
 describe_graph <- function(x) {
+  if (gorder(x) == 0) return('An empty graph')
   prop <- list(simple = is_simple(x), directed = is_directed(x),
                   bipartite = is_bipartite(x), connected = is_connected(x),
                   tree = is_tree(x), forest = is_forest(x), DAG = is_dag(x))
@@ -107,32 +168,14 @@ describe_graph <- function(x) {
   }
   paste(desc, collapse = ' ')
 }
-#' @importFrom igraph is_connected is_simple gorder gsize
+#' @importFrom igraph is_connected is_simple gorder gsize is_directed
 is_tree <- function(x) {
   is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) == 1)
 }
-#' @importFrom igraph is_connected is_simple gorder gsize count_components
+#' @importFrom igraph is_connected is_simple gorder gsize count_components is_directed
 is_forest <- function(x) {
-  !is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) - count_components(x) == 1)
+  !is_connected(x) && is_simple(x) && (gorder(x) - gsize(x) - count_components(x) == 0)
 }
-#' @importFrom igraph is_bipartite
-#' @export
-igraph::is_bipartite
-#' @importFrom igraph is_chordal
-#' @export
-igraph::is_chordal
-#' @importFrom igraph is_connected
-#' @export
-igraph::is_connected
-#' @importFrom igraph is_dag
-#' @export
-igraph::is_dag
-#' @importFrom igraph is_directed
-#' @export
-igraph::is_directed
-#' @importFrom igraph is_simple
-#' @export
-igraph::is_simple
 #' @export
 as_tbl_graph.tbl_graph <- function(x, ...) {
   x
@@ -146,7 +189,7 @@ set_graph_data.tbl_graph <- function(x, value, active = NULL) {
     active,
     nodes = set_node_attributes(x, value),
     edges = set_edge_attributes(x, value),
-    stop('Unknown active element: ', active(x), '. Only nodes and edges supported', call. = FALSE)
+    cli::cli_abort('Unknown active element: {.val {active}}. Only nodes and edges supported')
   )
 }
 set_graph_data.grouped_tbl_graph <- function(x, value, active = NULL) {
@@ -175,13 +218,10 @@ set_edge_attributes <- function(x, value) {
 #' @importFrom dplyr tbl_vars
 #' @export
 tbl_vars.tbl_graph <- function(x) {
-  names(as_tibble(x))
+  tbl_vars(as_tibble(x))
 }
-#' @importFrom dplyr groups
 #' @export
-groups.tbl_graph <- function(x) {
-  NULL
-}
+dplyr::tbl_vars
 
 merge_into <- function(new, old, index) {
   order <- new[integer(0), , drop = FALSE]

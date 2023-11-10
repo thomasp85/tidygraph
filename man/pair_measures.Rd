@@ -8,9 +8,9 @@
 \alias{node_cohesion_from}
 \alias{node_distance_to}
 \alias{node_distance_from}
-\alias{node_cocitation}
-\alias{node_bibcoupling}
-\alias{node_similarity}
+\alias{node_cocitation_with}
+\alias{node_bibcoupling_with}
+\alias{node_similarity_with}
 \alias{node_max_flow_to}
 \alias{node_max_flow_from}
 \title{Calculate node pair properties}
@@ -23,15 +23,20 @@ node_cohesion_to(nodes)
 
 node_cohesion_from(nodes)
 
-node_distance_to(nodes, mode, weights = NA, algorithm = "automatic")
+node_distance_to(nodes, mode = "out", weights = NULL, algorithm = "automatic")
 
-node_distance_from(nodes, mode, weights = NA, algorithm = "automatic")
+node_distance_from(
+  nodes,
+  mode = "out",
+  weights = NULL,
+  algorithm = "automatic"
+)
 
-node_cocitation(nodes)
+node_cocitation_with(nodes)
 
-node_bibcoupling(nodes)
+node_bibcoupling_with(nodes)
 
-node_similarity(nodes, mode = "out", loops = FALSE, method = "jaccard")
+node_similarity_with(nodes, mode = "out", loops = FALSE, method = "jaccard")
 
 node_max_flow_to(nodes, capacity = NULL)
 
@@ -65,35 +70,40 @@ graph
 \description{
 This set of functions can be used for calculations that involve node pairs.
 If the calculateable measure is not symmetric the function will come in two
-flavours, differentiated with \code{_to}/\code{_from} suffix. The \code{*_to()} functions
+flavours, differentiated with \verb{_to}/\verb{_from} suffix. The \verb{*_to()} functions
 will take the provided node indexes as the target node (recycling if
-necessary). For the \code{*_from()} functions the provided nodes are taken as
+necessary). For the \verb{*_from()} functions the provided nodes are taken as
 the source. As for the other wrappers provided, they are intended
 for use inside the \code{tidygraph} framework and it is thus not necessary to
 supply the graph being computed on as the context is known.
 }
 \section{Functions}{
 \itemize{
-\item \code{node_adhesion_to}: Calculate the adhesion to the specified node. Wraps \code{\link[igraph:edge_connectivity]{igraph::edge_connectivity()}}
+\item \code{node_adhesion_to()}: Calculate the adhesion to the specified node. Wraps \code{\link[igraph:edge_connectivity]{igraph::edge_connectivity()}}
 
-\item \code{node_adhesion_from}: Calculate the adhesion from the specified node. Wraps \code{\link[igraph:edge_connectivity]{igraph::edge_connectivity()}}
+\item \code{node_adhesion_from()}: Calculate the adhesion from the specified node. Wraps \code{\link[igraph:edge_connectivity]{igraph::edge_connectivity()}}
 
-\item \code{node_cohesion_to}: Calculate the cohesion to the specified node. Wraps \code{\link[igraph:vertex_connectivity]{igraph::vertex_connectivity()}}
+\item \code{node_cohesion_to()}: Calculate the cohesion to the specified node. Wraps \code{\link[igraph:vertex_connectivity]{igraph::vertex_connectivity()}}
 
-\item \code{node_cohesion_from}: Calculate the cohesion from the specified node. Wraps \code{\link[igraph:vertex_connectivity]{igraph::vertex_connectivity()}}
+\item \code{node_cohesion_from()}: Calculate the cohesion from the specified node. Wraps \code{\link[igraph:vertex_connectivity]{igraph::vertex_connectivity()}}
 
-\item \code{node_distance_to}: Calculate various distance metrics between node pairs. Wraps \code{\link[igraph:distances]{igraph::distances()}}
+\item \code{node_distance_to()}: Calculate various distance metrics between node pairs. Wraps \code{\link[igraph:distances]{igraph::distances()}}
 
-\item \code{node_distance_from}: Calculate various distance metrics between node pairs. Wraps \code{\link[igraph:distances]{igraph::distances()}}
+\item \code{node_distance_from()}: Calculate various distance metrics between node pairs. Wraps \code{\link[igraph:distances]{igraph::distances()}}
 
-\item \code{node_cocitation}: Calculate node pair cocitation count. Wraps \code{\link[igraph:cocitation]{igraph::cocitation()}}
+\item \code{node_cocitation_with()}: Calculate node pair cocitation count. Wraps \code{\link[igraph:cocitation]{igraph::cocitation()}}
 
-\item \code{node_bibcoupling}: Calculate node pair bibliographic coupling. Wraps \code{\link[igraph:bibcoupling]{igraph::bibcoupling()}}
+\item \code{node_bibcoupling_with()}: Calculate node pair bibliographic coupling. Wraps \code{\link[igraph:cocitation]{igraph::bibcoupling()}}
 
-\item \code{node_similarity}: Calculate various node pair similarity measures. Wraps \code{\link[igraph:similarity]{igraph::similarity()}}
+\item \code{node_similarity_with()}: Calculate various node pair similarity measures. Wraps \code{\link[igraph:similarity]{igraph::similarity()}}
 
-\item \code{node_max_flow_to}: Calculate the maximum flow to a node. Wraps \code{\link[igraph:max_flow]{igraph::max_flow()}}
+\item \code{node_max_flow_to()}: Calculate the maximum flow to a node. Wraps \code{\link[igraph:max_flow]{igraph::max_flow()}}
 
-\item \code{node_max_flow_from}: Calculate the maximum flow from a node. Wraps \code{\link[igraph:max_flow]{igraph::max_flow()}}
+\item \code{node_max_flow_from()}: Calculate the maximum flow from a node. Wraps \code{\link[igraph:max_flow]{igraph::max_flow()}}
+
 }}
-
+\examples{
+# Calculate the distance to the center node
+create_notable('meredith') \%>\%
+  mutate(dist_to_center = node_distance_to(node_is_center()))
+}

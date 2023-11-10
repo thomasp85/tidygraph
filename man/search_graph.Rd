@@ -54,33 +54,33 @@ of the nodes in the graph.
 }
 \section{Functions}{
 \itemize{
-\item \code{bfs_rank}: Get the succession in which the nodes are visited in a breath first search
+\item \code{bfs_rank()}: Get the succession in which the nodes are visited in a breath first search
 
-\item \code{bfs_parent}: Get the nodes from which each node is visited in a breath first search
+\item \code{bfs_parent()}: Get the nodes from which each node is visited in a breath first search
 
-\item \code{bfs_before}: Get the node that was visited before each node in a breath first search
+\item \code{bfs_before()}: Get the node that was visited before each node in a breath first search
 
-\item \code{bfs_after}: Get the node that was visited after each node in a breath first search
+\item \code{bfs_after()}: Get the node that was visited after each node in a breath first search
 
-\item \code{bfs_dist}: Get the number of nodes between the root and each node in a breath first search
+\item \code{bfs_dist()}: Get the number of nodes between the root and each node in a breath first search
 
-\item \code{dfs_rank}: Get the succession in which the nodes are visited in a depth first search
+\item \code{dfs_rank()}: Get the succession in which the nodes are visited in a depth first search
 
-\item \code{dfs_rank_out}: Get the succession in which each nodes subtree is completed in a depth first search
+\item \code{dfs_rank_out()}: Get the succession in which each nodes subtree is completed in a depth first search
 
-\item \code{dfs_parent}: Get the nodes from which each node is visited in a depth first search
+\item \code{dfs_parent()}: Get the nodes from which each node is visited in a depth first search
 
-\item \code{dfs_dist}: Get the number of nodes between the root and each node in a depth first search
+\item \code{dfs_dist()}: Get the number of nodes between the root and each node in a depth first search
+
 }}
-
 \examples{
 # Get the depth of each node in a tree
-as_tbl_graph(igraph::make_tree(10)) \%>\%
+create_tree(10, 2) \%>\%
   activate(nodes) \%>\%
   mutate(depth = bfs_dist(root = 1))
 
 # Reorder nodes based on a depth first search from node 3
-as_tbl_graph(igraph::make_graph('franklin')) \%>\%
+create_notable('franklin') \%>\%
   activate(nodes) \%>\%
   mutate(order = dfs_rank(root = 3)) \%>\%
   arrange(order)

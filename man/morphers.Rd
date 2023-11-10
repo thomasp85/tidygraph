@@ -4,6 +4,7 @@
 \alias{morphers}
 \alias{to_linegraph}
 \alias{to_subgraph}
+\alias{to_subcomponent}
 \alias{to_split}
 \alias{to_components}
 \alias{to_complement}
@@ -15,11 +16,17 @@
 \alias{to_dfs_tree}
 \alias{to_simple}
 \alias{to_contracted}
+\alias{to_unfolded_tree}
+\alias{to_directed}
+\alias{to_undirected}
+\alias{to_hierarchical_clusters}
 \title{Functions to generate alternate representations of graphs}
 \usage{
 to_linegraph(graph)
 
 to_subgraph(graph, ..., subset_by = NULL)
+
+to_subcomponent(graph, node)
 
 to_split(graph, ..., split_by = NULL)
 
@@ -39,22 +46,33 @@ to_bfs_tree(graph, root, mode = "out", unreachable = FALSE)
 
 to_dfs_tree(graph, root, mode = "out", unreachable = FALSE)
 
-to_simple(graph)
+to_simple(graph, remove_multiples = TRUE, remove_loops = TRUE)
 
 to_contracted(graph, ..., simplify = TRUE)
+
+to_unfolded_tree(graph, root, mode = "out")
+
+to_directed(graph)
+
+to_undirected(graph)
+
+to_hierarchical_clusters(graph, method = "walktrap", weights = NULL, ...)
 }
 \arguments{
 \item{graph}{A \code{tbl_graph}}
 
-\item{...}{Arguments to pass on to \code{\link[=filter]{filter()}} or \code{\link[=group_by]{group_by()}}}
+\item{...}{Arguments to pass on to \code{\link[=filter]{filter()}}, \code{\link[=group_by]{group_by()}}, or the cluster
+algorithm (see \code{\link[igraph:cluster_walktrap]{igraph::cluster_walktrap()}}, \code{\link[igraph:cluster_leading_eigen]{igraph::cluster_leading_eigen()}},
+and \code{\link[igraph:cluster_edge_betweenness]{igraph::cluster_edge_betweenness()}})}
 
 \item{subset_by, split_by}{Whether to create subgraphs based on nodes or edges}
+
+\item{node}{The center of the neighborhood for \code{to_local_neighborhood()} and
+the node to that should be included in the component for \code{to_subcomponent()}}
 
 \item{type}{The type of component to split into. Either \code{'weak'} or \code{'strong'}}
 
 \item{loops}{Should loops be included. Defaults to \code{FALSE}}
-
-\item{node}{The center of the neighborhood}
 
 \item{order}{The radius of the neighborhood}
 
@@ -71,8 +89,15 @@ parameter is ignored for undirected graphs.}
 \item{unreachable}{Should the search jump to a node in a new component when
 stuck.}
 
+\item{remove_multiples}{Should edges that run between the same nodes be
+reduced to one}
+
+\item{remove_loops}{Should edges that start and end at the same node be removed}
+
 \item{simplify}{Should edges in the contracted graph be simplified? Defaults
 to \code{TRUE}}
+
+\item{method}{The clustering method to use. Either \code{'walktrap'}, \code{'leading_eigen'}, or \code{'edge_betweenness'}}
 }
 \value{
 A list of \code{tbl_graph}s
@@ -84,49 +109,68 @@ called directly. See below for detail of each morpher.
 }
 \section{Functions}{
 \itemize{
-\item \code{to_linegraph}: Convert a graph to its line graph. When unmorphing node
+\item \code{to_linegraph()}: Convert a graph to its line graph. When unmorphing node
 data will be merged back into the original edge data. Edge data will be
 ignored.
 
-\item \code{to_subgraph}: Convert a graph to a single subgraph. \code{...} is evaluated
+\item \code{to_subgraph()}: Convert a graph to a single subgraph. \code{...} is evaluated
 in the same manner as \code{filter}. When unmorphing all data in the subgraph
 will get merged back.
 
-\item \code{to_split}: Convert a graph into a list of separate subgraphs. \code{...}
+\item \code{to_subcomponent()}: Convert a graph to a single component containing the specified node
+
+\item \code{to_split()}: Convert a graph into a list of separate subgraphs. \code{...}
 is evaluated in the same manner as \code{group_by}. When unmorphing all data in
 the subgraphs will get merged back, but in the case of \code{split_by = 'edges'}
 only the first instance of node data will be used (as the same node can be
 present in multiple subgraphs).
 
-\item \code{to_components}: Split a graph into its separate components. When
+\item \code{to_components()}: Split a graph into its separate components. When
 unmorphing all data in the subgraphs will get merged back.
 
-\item \code{to_complement}: Convert a graph into its complement. When unmorphing
+\item \code{to_complement()}: Convert a graph into its complement. When unmorphing
 only node data will get merged back.
 
-\item \code{to_local_neighborhood}: Convert a graph into the local neighborhood around a
+\item \code{to_local_neighborhood()}: Convert a graph into the local neighborhood around a
 single node. When unmorphing all data will be merged back.
 
-\item \code{to_dominator_tree}: Convert a graph into its dominator tree based on a
+\item \code{to_dominator_tree()}: Convert a graph into its dominator tree based on a
 specific root. When unmorphing only node data will get merged back.
 
-\item \code{to_minimum_spanning_tree}: Convert a graph into its minimum spanning tree/forest.
+\item \code{to_minimum_spanning_tree()}: Convert a graph into its minimum spanning tree/forest.
 When unmorphing all data will get merged back.
 
-\item \code{to_shortest_path}: Limit a graph to the shortest path between two nodes.
+\item \code{to_shortest_path()}: Limit a graph to the shortest path between two nodes.
 When unmorphing all data is merged back.
 
-\item \code{to_bfs_tree}: Convert a graph into a breath-first search tree based on
+\item \code{to_bfs_tree()}: Convert a graph into a breath-first search tree based on
 a specific root. When unmorphing only node data is merged back.
 
-\item \code{to_dfs_tree}: Convert a graph into a depth-first search tree based on
+\item \code{to_dfs_tree()}: Convert a graph into a depth-first search tree based on
 a specific root. When unmorphing only node data is merged back.
 
-\item \code{to_simple}: Collapse parallel edges and remove loops in a graph.
+\item \code{to_simple()}: Collapse parallel edges and remove loops in a graph.
 When unmorphing all data will get merged back
 
-\item \code{to_contracted}: Combine multiple nodes into one. \code{...}
+\item \code{to_contracted()}: Combine multiple nodes into one. \code{...}
 is evaluated in the same manner as \code{group_by}. When unmorphing all
 data will get merged back.
-}}
 
+\item \code{to_unfolded_tree()}: Unfold a graph to a tree or forest starting from
+multiple roots (or one), potentially duplicating nodes and edges.
+
+\item \code{to_directed()}: Make a graph directed in the direction given by from and
+to
+
+\item \code{to_undirected()}: Make a graph undirected
+
+\item \code{to_hierarchical_clusters()}: Convert a graph into a hierarchical clustering based on a grouping
+
+}}
+\examples{
+# Compute only on a subgraph of every even node
+create_notable('meredith') \%>\%
+  morph(to_subgraph, seq_len(graph_order()) \%\% 2 == 0) \%>\%
+  mutate(neighbour_count = centrality_degree()) \%>\%
+  unmorph()
+}

@@ -1,9 +1,8 @@
 #' Measures based on the neighborhood of each node
 #'
 #' These functions wraps a set of functions that all measures quantities of the
-#' local neighborhood of each node.
-#'
-#' @param ... Parameters passed on to the `igraph` function in question
+#' local neighborhood of each node. They all return a vector or list matching
+#' the node position.
 #'
 #' @return A numeric vector or a list (for `local_members`) with elements
 #' corresponding to the nodes in the graph.
@@ -13,12 +12,12 @@
 #'
 #' @examples
 #' # Get all neighbors of each graph
-#' as_tbl_graph(igraph::make_graph('chvatal')) %>%
+#' create_notable('chvatal') %>%
 #'   activate(nodes) %>%
 #'   mutate(neighborhood = local_members(mindist = 1))
 #'
 #' # These are equivalent
-#' as_tbl_graph(igraph::make_graph('chvatal')) %>%
+#' create_notable('chvatal') %>%
 #'   activate(nodes) %>%
 #'   mutate(n_neighbors = local_size(mindist = 1),
 #'          degree = centrality_degree()) %>%
@@ -50,27 +49,36 @@ local_triangles <- function() {
   expect_nodes()
   count_triangles(graph = .G())
 }
-#' @describeIn local_graph Calculates the average degree of based on the neighborhood of each node. Wraps [igraph::knn()].
-#' @inheritParams igraph::knn
+#' @describeIn local_graph Calculates the average degree based on the neighborhood of each node. Wraps [igraph::knn()].
+#' @param weights An edge weight vector. For `local_ave_degree`: If this argument
+#' is given, the average vertex strength is calculated instead of vertex degree.
+#' For `local_transitivity`: if given weighted transitivity using the approach by
+#' *A. Barrat* will be calculated.
 #' @importFrom igraph knn
 #' @export
 local_ave_degree <- function(weights = NULL) {
   expect_nodes()
-  knn(graph = .G(), weights = weights)
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
+  knn(graph = .G(), weights = weights)$knn
 }
 #' @describeIn local_graph Calculate the transitivity of each node, that is, the
 #' propensity for the nodes neighbors to be connected. Wraps [igraph::transitivity()]
 #' @importFrom igraph transitivity V
 #' @importFrom rlang quos
 #' @export
-local_transitivity <- function(...) {
+local_transitivity <- function(weights = NULL) {
   expect_nodes()
-  dots <- quos(...)
-  type <- if (is.null(dots$weights)) {
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  type <- if (is.null(weights)) {
     'weighted'
   } else {
     'local'
   }
   graph <- .G()
-  transitivity(graph = graph, type = type, vids = V(graph), ...)
+  transitivity(graph = graph, type = type, vids = V(graph), weights = weights, isolates = 'zero')
 }

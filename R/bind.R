@@ -12,37 +12,49 @@
 #' always result in a disconnected graph. See [graph_join()] for merging graphs
 #' on common nodes.
 #'
-#' @param .data A `tbl_graph`
+#' @param .data A `tbl_graph`, or a list of `tbl_graph` objects (for
+#' `bind_graphs()`).
 #'
 #' @param ... In case of `bind_nodes()` and `bind_edges()` data.frames to add.
 #' In the case of `bind_graphs()` objects that are convertible to `tbl_graph`
 #' using `as_tbl_graph()`.
 #'
+#' @param node_key The name of the column in `nodes` that character represented
+#' `to` and `from` columns should be matched against. If `NA` the first column
+#' is always chosen. This setting has no effect if `to` and `from` are given as
+#' integers.
+#'
 #' @return A `tbl_graph` containing the new data
 #'
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble as_tibble
+#' @importFrom igraph is_directed
+#' @importFrom rlang is_bare_list list2
 #' @export
 #'
 #' @examples
-#' graph <- igraph::make_graph('bull')
-#' new_graph <- igraph::make_graph('housex')
+#' graph <- create_notable('bull')
+#' new_graph <- create_notable('housex')
 #'
 #' # Add nodes
-#' as_tbl_graph(graph) %>%
-#'   bind_nodes(data.frame(new = 1:4))
+#' graph %>% bind_nodes(data.frame(new = 1:4))
 #'
 #' # Add edges
-#' as_tbl_graph(graph) %>%
-#'   bind_edges(data.frame(from = 1, to = 4:5))
+#' graph %>% bind_edges(data.frame(from = 1, to = 4:5))
 #'
 #' # Add graphs
-#' as_tbl_graph(graph) %>%
-#'   bind_graphs(new_graph)
+#' graph %>% bind_graphs(new_graph)
 #'
 bind_graphs <- function(.data, ...) {
-  stopifnot(is.tbl_graph(.data))
-  dots <- lapply(list(...), as_tbl_graph)
+  if (is_bare_list(.data)) {
+    .data <- lapply(c(.data, list2(...)), as_tbl_graph)
+    dots <- .data[-1]
+    .data <- .data[[1]]
+  } else {
+    .data <- as_tbl_graph(.data)
+    dots <- lapply(list2(...), as_tbl_graph)
+  }
+  if (length(dots) == 0) return(.data)
   n_nodes <- sapply(dots, gorder)
   n_edges <- sapply(dots, gsize)
   offset <- rep(c(gorder(.data), gorder(.data) + cumsum(n_nodes)[-length(n_nodes)]), n_edges)
@@ -51,7 +63,7 @@ bind_graphs <- function(.data, ...) {
   edges$from <- edges$from + offset
   edges$to <- edges$to + offset
   edges <- bind_rows(as_tibble(.data, active = 'edges'), edges)
-  as_tbl_graph(list(nodes = nodes, edges = edges)) %gr_attr% .data
+  as_tbl_graph(list(nodes = nodes, edges = edges), directed = is_directed(.data)) %gr_attr% .data
 }
 #' @rdname bind_graphs
 #' @importFrom igraph add_vertices
@@ -59,7 +71,7 @@ bind_graphs <- function(.data, ...) {
 #' @importFrom tibble as_tibble
 #' @export
 bind_nodes <- function(.data, ...) {
-  stopifnot(is.tbl_graph(.data))
+  if (!is.tbl_graph(.data)) cli::cli_abort('{.arg .data} must be a {.cls tbl_graph} object')
   d_tmp <- as_tibble(.data, acitve = 'nodes')
   new_nodes <- bind_rows(d_tmp, ...)
   .data <- add_vertices(.data, nrow(new_nodes) - nrow(d_tmp)) %gr_attr% .data
@@ -70,16 +82,32 @@ bind_nodes <- function(.data, ...) {
 #' @importFrom dplyr bind_rows
 #' @importFrom igraph gorder add_edges
 #' @export
-bind_edges <- function(.data, ...) {
-  stopifnot(is.tbl_graph(.data))
+bind_edges <- function(.data, ..., node_key = 'name') {
+  if (!is.tbl_graph(.data)) cli::cli_abort('{.arg .data} must be a {.cls tbl_graph} object')
   d_tmp <- as_tibble(.data, active = 'edges')
+  nodes <- as_tibble(.data, active = 'nodes')
+  if (is.na(node_key)) {
+    name_ind <- 1L
+  } else {
+    name_ind <- which(names(nodes) == node_key)
+    if (length(name_ind) == 0) name_ind <- 1
+  }
   new_edges <- bind_rows(...)
+  if (!all(c('to', 'from') %in% names(new_edges))) {
+    cli::cli_abort('Edges can only be added if they contain a {.col to} and {.col from} column')
+  }
+  if (is.character(new_edges$from)) {
+    new_edges$from <- match(new_edges$from, nodes[[name_ind]])
+  }
+  if (is.character(new_edges$to)) {
+    new_edges$to <- match(new_edges$to, nodes[[name_ind]])
+  }
   all_edges <- bind_rows(d_tmp, new_edges)
   if (any(is.na(all_edges$from)) || any(is.na(all_edges$to))) {
-    stop('Edges can only be added if they contain a "to" and "from" node', call. = FALSE)
+    cli::cli_abort('Edges can only be added if they contain a valid {.col to} and {.col from} column')
   }
   if (max(c(new_edges$to, new_edges$from)) > gorder(.data)) {
-    stop('Edges can only be added if they refer to existing nodes', call. = FALSE)
+    cli::cli_abort('Edges can only be added if they refer to existing nodes')
   }
   .data <- add_edges(.data, rbind(new_edges$from, new_edges$to)) %gr_attr% .data
   set_graph_data(.data, all_edges, active = 'edges')

@@ -2,13 +2,16 @@
 #'
 #' The `morph`/`unmorph` verbs are used to create temporary representations of
 #' the graph, such as e.g. its search tree or a subgraph. A morphed graph will
-#' accept any of the standard `dplyr` verbs, and changed to the data is
+#' accept any of the standard `dplyr` verbs, and changes to the data is
 #' automatically propagated to the original graph when unmorphing. Tidygraph
 #' comes with a range of [morphers], but is it also possible to supply your own.
 #' See Details for the requirement for custom morphers. The `crystallise` verb
 #' is used to extract the temporary graph representation into a tibble
 #' containing one separate graph per row and a `name` and `graph` column holding
-#' the name of each graph and the graph itself respectively.
+#' the name of each graph and the graph itself respectively. `convert()` is a
+#' shorthand for performing both `morph` and `crystallise` along with extracting
+#' a single `tbl_graph` (defaults to the first). For morphs were you know they
+#' only create a single graph, and you want to keep it, this is an easy way.
 #'
 #' @details
 #' It is only possible to change and add to node and edge data from a
@@ -35,7 +38,7 @@
 #' `.tidygraph_edge_index` column (or both). Note that it is possible for the
 #' morph to have the edges mapped back to the original nodes and vice versa
 #' (e.g. as with [to_linegraph]). In that case the edge data in the morphed
-#' graph(s) will contain a `.tidygraph_node_index` column and or the node data a
+#' graph(s) will contain a `.tidygraph_node_index` column and/or the node data a
 #' `.tidygraph_edge_index` column. If the morphing results in the collapse of
 #' multiple columns or edges the index columns should be converted to list
 #' columns mapping the new node/edge back to all the nodes/edges it represents.
@@ -48,9 +51,22 @@
 #'
 #' @param ... Arguments passed on to the morpher
 #'
+#' @param .select The graph to return during `convert()`. Either an index or the
+#' name as created during `crystallise()`.
+#'
+#' @param .clean Should references to the node and edge indexes in the original
+#' graph be removed when using `convert`
+#'
 #' @return A `morphed_tbl_graph`
 #'
 #' @export
+#'
+#' @examples
+#' create_notable('meredith') %>%
+#'   mutate(group = group_infomap()) %>%
+#'   morph(to_contracted, group) %>%
+#'   mutate(group_centrality = centrality_pagerank()) %>%
+#'   unmorph()
 morph <- function(.data, .f, ...) {
   UseMethod('morph')
 }
@@ -67,15 +83,21 @@ crystallise <- function(.data) {
 #' @rdname morph
 #' @export
 crystallize <- crystallise
+#' @rdname morph
+#' @export
+convert <- function(.data, .f, ..., .select = 1, .clean = FALSE) {
+  UseMethod('convert')
+}
 #' @export
 #' @importFrom rlang as_quosure sym quo_text enquo
 morph.tbl_graph <- function(.data, .f, ...) {
   if (inherits(.data, 'grouped_tbl_graph')) {
-    message('Ungrouping prior to morphing')
+    cli::cli_inform('Ungrouping prior to morphing')
     .data <- ungroup(.data)
   }
+  .register_graph_context(.data)
   morph_name <- quo_text(enquo(.f))
-  current_active <- as_quosure(sym(active(.data)))
+  current_active <- as_quosure(sym(active(.data)), environment())
   .data <- mutate(activate(.data, 'nodes'), .tidygraph_node_index = seq_len(n()))
   .data <- mutate(activate(.data, 'edges'), .tidygraph_edge_index = seq_len(n()))
   .data <- activate(.data, !! current_active)
@@ -92,13 +114,13 @@ morph.tbl_graph <- function(.data, .f, ...) {
 }
 #' @export
 morph.morphed_tbl_graph <- function(.data, .f, ...) {
-  message('Unmorphing tbl_graph first...')
+  cli::cli_inform('Unmorphing {.arg .data} first...')
   .data <- unmorph(.data)
   morph(.data, .f, ...)
 }
 #' @export
 unmorph.morphed_tbl_graph <- function(.data) {
-  current_active <- as_quosure(sym(active(.data[[1]])))
+  current_active <- as_quosure(sym(active(.data[[1]])), environment())
   nodes <- bind_rows(lapply(.data, as_tibble, active = 'nodes'))
   edges <- bind_rows(lapply(.data, as_tibble, active = 'edges'))
   graph <- attr(.data, '.orig_graph')
@@ -128,10 +150,31 @@ crystallise.morphed_tbl_graph <- function(.data) {
   attr(.data, '.orig_graph') <- NULL
   attr(.data, '.morpher') <- NULL
   name <- names(.data) %||% as.character(seq_along(.data))
+  graph <- unname(.data)
   tibble(
-    name = names(.data),
-    graph = unname(.data)
+    name = name,
+    graph = graph
   )
+}
+#' @export
+convert.tbl_graph <- function(.data, .f, ..., .select = 1, .clean = FALSE) {
+  if (length(.select) != 1) cli::cli_abort("{.arg .select} must be a single scalar")
+  graphs <- crystallise(morph(.data, .f, ...))
+  if (is.character(.select)) {
+    .select <- which(.select == graphs$name)[1]
+    if (is.na(.select)) cli::cli_abort('{.arg .select} does not match any named graph')
+  }
+  if (.select > nrow(graphs)) cli::cli_abort(c('{.fn convert} did not create {.select} number of graphs', 'i' = 'Set a lower {.arg .select}'))
+  graph <- graphs$graph[[.select]]
+  if (.clean) {
+    nodes <- as_tibble(graph, active = 'nodes')
+    edges <- as_tibble(graph, active = 'edges')
+    nodes$.tidygraph_node_index <- NULL
+    edges$.tidygraph_edge_index <- NULL
+    graph <- set_node_attributes(graph, nodes)
+    graph <- set_edge_attributes(graph, edges)
+  }
+  graph
 }
 # HELPERS -----------------------------------------------------------------
 
@@ -139,12 +182,12 @@ crystallise.morphed_tbl_graph <- function(.data) {
 #' @importFrom igraph vertex_attr_names edge_attr_names
 check_morph <- function(morph) {
   if (!all(vapply(morph, inherits, logical(1), 'tbl_graph'))) {
-    stop('morph must consist of tbl_graphs')
+    cli::cli_abort('{.arg morph} must consist of {.cls tbl_graphs}')
   }
   lapply(morph, function(m) {
     attr_names <- c(vertex_attr_names(m), edge_attr_names(m))
     if (!any(c('.tidygraph_node_index', '.tidygraph_edge_index') %in% attr_names)) {
-      stop('Morph must contain reference to at either nodes or edges', call. = FALSE)
+      cli::cli_abort('{.arg morph} must contain reference to either nodes or edges')
     }
   })
   NULL
@@ -154,9 +197,9 @@ merge_meta <- function(new, into, col) {
   if (is.list(new[[col]])) {
     index <- new[[col]]
     new[[col]] <- NULL
-    data <- new$.data
-    new$.data <- NULL
-    new <- new[lengths(index), ]
+    data <- new$.orig_data
+    new$.orig_data <- NULL
+    new <- new[rep(seq_along(index), lengths(index)), ]
     new[[col]] <- unlist(index)
     if (!is.null(data)) {
       data <- bind_rows(data)

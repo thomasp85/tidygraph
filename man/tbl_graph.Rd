@@ -38,7 +38,7 @@
 
 \method{as_tbl_graph}{igraph}(x, ...)
 
-\method{as_tbl_graph}{list}(x, directed = TRUE, ...)
+\method{as_tbl_graph}{list}(x, directed = TRUE, node_key = "name", ...)
 
 \method{as_tbl_graph}{matrix}(x, directed = TRUE, ...)
 
@@ -48,7 +48,7 @@
 
 \method{as_tbl_graph}{evonet}(x, directed = TRUE, ...)
 
-tbl_graph(nodes = NULL, edges = NULL, directed = TRUE)
+tbl_graph(nodes = NULL, edges = NULL, directed = TRUE, node_key = "name")
 
 as_tbl_graph(x, ...)
 
@@ -66,12 +66,20 @@ is.tbl_graph(x)
 \item{mode}{In case \code{directed = TRUE} should the edge direction be away from
 node or towards. Possible values are \code{"out"} (default) or \code{"in"}.}
 
+\item{node_key}{The name of the column in \code{nodes} that character represented
+\code{to} and \code{from} columns should be matched against. If \code{NA} the first column
+is always chosen. This setting has no effect if \code{to} and \code{from} are given as
+integers.}
+
 \item{nodes}{A \code{data.frame} containing information about the nodes in the
-graph.}
+graph. If \code{edges$to} and/or \code{edges$from} are characters then they will be
+matched to the column named according to \code{node_key} in nodes, if it exists.
+If not, they will be matched to the first column.}
 
 \item{edges}{A \code{data.frame} containing information about the edges in the
 graph. The terminal nodes of each edge must either be encoded in a \code{to} and
-\code{from} column, or in the two first columns, as integers.}
+\code{from} column, or in the two first columns, as integers. These integers refer to
+\code{nodes} index.}
 }
 \value{
 A \code{tbl_graph} object
@@ -83,7 +91,7 @@ a subclass of \code{igraph} every igraph method will work as expected. A
 \code{grouped_tbl_graph} is the equivalent of a \code{grouped_df} where either the
 nodes or the edges has been grouped. The \code{grouped_tbl_graph} is not
 constructed directly but by using the \code{\link[=group_by]{group_by()}} verb. After creation of a
-\code{tble_graph} the nodes are activated by default. The context can be changed
+\code{tbl_graph} the nodes are activated by default. The context can be changed
 using the \code{\link[=activate]{activate()}} verb and affects all subsequent operations. Changing
 context automatically drops any grouping. The current active context can
 always be extracted with \code{\link[=as_tibble]{as_tibble()}}, which drops the graph structure and
@@ -96,35 +104,41 @@ Constructors are provided for most data structures that resembles networks.
 If a class provides an \code{\link[igraph:as.igraph]{igraph::as.igraph()}} method it is automatically
 supported.
 }
-\section{Methods (by generic)}{
+\section{Functions}{
 \itemize{
-\item \code{as_tbl_graph}: Method for edge table
+\item \code{as_tbl_graph(data.frame)}: Method for edge table and set membership table
 
-\item \code{as_tbl_graph}: Method to deal with Node objects from the data.tree package
+\item \code{as_tbl_graph(Node)}: Method to deal with Node objects from the data.tree package
 
-\item \code{as_tbl_graph}: Method for dendrogram objects
+\item \code{as_tbl_graph(dendrogram)}: Method for dendrogram objects
 
-\item \code{as_tbl_graph}: Method for handling graphNEL objects from the graph package (on Bioconductor)
+\item \code{as_tbl_graph(graphNEL)}: Method for handling graphNEL objects from the graph package (on Bioconductor)
 
-\item \code{as_tbl_graph}: Method for handling graphAM objects from the graph package (on Bioconductor)
+\item \code{as_tbl_graph(graphAM)}: Method for handling graphAM objects from the graph package (on Bioconductor)
 
-\item \code{as_tbl_graph}: Method for handling graphBAM objects from the graph package (on Bioconductor)
+\item \code{as_tbl_graph(graphBAM)}: Method for handling graphBAM objects from the graph package (on Bioconductor)
 
-\item \code{as_tbl_graph}: Method for hclust objects
+\item \code{as_tbl_graph(hclust)}: Method for hclust objects
 
-\item \code{as_tbl_graph}: Method for igraph object. Simply subclasses the object into a \code{tbl_graph}
+\item \code{as_tbl_graph(igraph)}: Method for igraph object. Simply subclasses the object into a \code{tbl_graph}
 
-\item \code{as_tbl_graph}: Method for adjacency lists and lists of node and edge tables
+\item \code{as_tbl_graph(list)}: Method for adjacency lists and lists of node and edge tables
 
-\item \code{as_tbl_graph}: Method for edgelist, adjacency and incidence matrices
+\item \code{as_tbl_graph(matrix)}: Method for edgelist, adjacency and incidence matrices
 
-\item \code{as_tbl_graph}: Method to handle network objects from the \code{network}
+\item \code{as_tbl_graph(network)}: Method to handle network objects from the \code{network}
 package. Requires this packages to work.
 
-\item \code{as_tbl_graph}: Method for handling phylo objects from the ape package
+\item \code{as_tbl_graph(phylo)}: Method for handling phylo objects from the ape package
 
-\item \code{as_tbl_graph}: Method for handling evonet objects from the ape package
+\item \code{as_tbl_graph(evonet)}: Method for handling evonet objects from the ape package
 
-\item \code{as_tbl_graph}: Default method. tries to call \code{\link[igraph:as.igraph]{igraph::as.igraph()}} on the input.
+\item \code{as_tbl_graph(default)}: Default method. tries to call \code{\link[igraph:as.igraph]{igraph::as.igraph()}} on the input.
+
 }}
-
+\examples{
+rstat_nodes <- data.frame(name = c("Hadley", "David", "Romain", "Julia"))
+rstat_edges <- data.frame(from = c(1, 1, 1, 2, 3, 3, 4, 4, 4),
+                            to = c(2, 3, 4, 1, 1, 2, 1, 2, 3))
+tbl_graph(nodes = rstat_nodes, edges = rstat_edges)
+}

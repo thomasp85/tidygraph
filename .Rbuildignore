@@ -4,3 +4,14 @@
 ^README-.*\.png$
 ^appveyor\.yml$
 ^\.travis\.yml$
+^codecov\.yml$
+^CODE_OF_CONDUCT\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^cran-comments\.md$
+^revdep$
+^CRAN-RELEASE$
+^CRAN-SUBMISSION$
+^LICENSE\.md$

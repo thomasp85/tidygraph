@@ -1,39 +1,46 @@
-#include <Rcpp.h>
-using namespace Rcpp;
+#include <vector>
+#include <cpp11/list.hpp>
+#include <cpp11/list_of.hpp>
+#include <cpp11/integers.hpp>
+#include <cpp11/logicals.hpp>
 
-//[[Rcpp::export]]
-List get_paths(IntegerVector parent) {
-  std::deque< std::deque<int> > paths;
-  int i, next;
-  LogicalVector last = is_na(parent);
-  for (i = 0; i < parent.size(); ++i) {
-    std::deque<int> path;
+[[cpp11::register]]
+cpp11::list get_paths(cpp11::integers parent) {
+  cpp11::writable::list paths;
+  int next = 0;
+  for (int i = 0; i < parent.size(); ++i) {
+    std::vector<int> path;
     next = i;
-    while(!last[next]) {
+    while(!cpp11::is_na(parent[next])) {
       next = parent[next] - 1;
       path.push_back(next + 1);
     }
     std::reverse(path.begin(), path.end());
-    paths.push_back(path);
+    paths.push_back(cpp11::integers(path));
   }
-  return wrap(paths);
+  return paths;
 }
 
-//[[Rcpp::export]]
-List collect_offspring(ListOf<IntegerVector> offspring, IntegerVector order) {
-  std::deque< std::deque<int> > offsprings;
-  int i, j, node, n_children, child;
-  for (i = 0; i < order.size(); ++i) {
-    std::deque<int> off(offspring[i].begin(), offspring[i].end());
+[[cpp11::register]]
+cpp11::list collect_offspring(cpp11::list_of<cpp11::integers> offspring, cpp11::integers order) {
+  cpp11::writable::list offsprings;
+
+  for (R_len_t i = 0; i < order.size(); ++i) {
+    cpp11::writable::integers off(offspring[i].begin(), offspring[i].end());
     offsprings.push_back(off);
   }
-  for (i = 0; i < order.size(); ++i) {
-    node = order[i] - 1;
-    n_children = offsprings[node].size();
-    for (j = 0; j < n_children; ++j) {
-      child = offsprings[node][j] - 1;
-      offsprings[node].insert(offsprings[node].end(), offsprings[child].begin(), offsprings[child].end());
+
+  for (R_len_t i = 0; i < order.size(); ++i) {
+    int node = order[i] - 1;
+
+    cpp11::writable::integers off = cpp11::as_cpp<cpp11::writable::integers>(offsprings[node]);
+    for (R_len_t j = 0; j < off.size(); ++j) {
+      int child = off[j] - 1;
+      cpp11::integers child_off = cpp11::as_cpp<cpp11::integers>(offsprings[child]);
+      for (R_len_t k = 0; k < child_off.size(); ++k) {
+        off.push_back(child_off[k]);
+      }
     }
   }
-  return wrap(offsprings);
+  return offsprings;
 }

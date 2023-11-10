@@ -1,11 +1,10 @@
 #' @export
 #' @importFrom dplyr arrange
 arrange.tbl_graph <- function(.data, ...) {
-  .graph_context$set(.data)
-  on.exit(.graph_context$clear())
+  .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
-    stop('The attribute name ".tbl_graph_index" is reserved', call. = FALSE)
+    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
   }
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
@@ -26,13 +25,11 @@ arrange.morphed_tbl_graph <- function(.data, ...) {
 #' @export
 dplyr::arrange
 
-#' @importFrom igraph graph_from_data_frame is.directed as_data_frame vertex_attr<-
+#' @importFrom igraph is.directed as_data_frame
 permute_edges <- function(graph, order) {
   graph_mod <- as_data_frame(graph, what = 'both')
   graph_mod$edges <- graph_mod$edges[order, ]
-  graph_new <- graph_from_data_frame(graph_mod$edges, is.directed(graph))
-  vertex_attr(graph_new) <- as.list(graph_mod$vertices)
-  graph_new
+  as_tbl_graph(graph_mod, directed = is.directed(graph))
 }
 #' @importFrom igraph permute
 permute_nodes <- function(graph, order) {

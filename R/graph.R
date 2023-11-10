@@ -4,9 +4,7 @@
 #' @importFrom igraph as_edgelist edge_attr<- vertex_attr<- V
 #' @export
 as_tbl_graph.graphNEL <- function(x, ...) {
-  if (!requireNamespace("graph", quietly = TRUE)) {
-    stop('The "graph" package is needed for this functionality to work', call. = FALSE)
-  }
+  rlang::check_installed('graph', 'in order to coerce graphNEL object to tbl_graph')
   directed <- graph::edgemode(x) == 'directed'
   adj_list <- lapply(graph::edgeL(x), `[[`, i = 'edges')
   graph <- as_tbl_graph(adj_list)
@@ -20,11 +18,7 @@ as_tbl_graph.graphNEL <- function(x, ...) {
 
   graph_nd <- graph::nodeData(x)
   graph_nd <- lapply(names(graph_nd), function(n) {
-    if (length(graph_nd[[n]]) == 0) {
-      tibble(name = n)
-    } else {
-      as_tibble(list(name = n, graph_nd[[n]]))
-    }
+    tibble(name = n, !!!graph_nd[[n]])
   })
   node_data <- bind_rows(graph_nd)
   node_data <- node_data[match(node_data$name, V(graph)$name), ]
@@ -36,16 +30,12 @@ as_tbl_graph.graphNEL <- function(x, ...) {
 #' @describeIn tbl_graph Method for handling graphAM objects from the graph package (on Bioconductor)
 #' @export
 as_tbl_graph.graphAM <- function(x, ...) {
-  if (!requireNamespace("methods", quietly = TRUE)) {
-    stop('The "methods" package is needed for this functionality to work', call. = FALSE)
-  }
+  rlang::check_installed('methods', 'in order to coerce graphAM object to tbl_graph')
   as_tbl_graph(methods::as(x, 'graphNEL'), ...)
 }
 #' @describeIn tbl_graph Method for handling graphBAM objects from the graph package (on Bioconductor)
 #' @export
 as_tbl_graph.graphBAM <- function(x, ...) {
-  if (!requireNamespace("methods", quietly = TRUE)) {
-    stop('The "methods" package is needed for this functionality to work', call. = FALSE)
-  }
+  rlang::check_installed('methods', 'in order to coerce graphBAM object to tbl_graph')
   as_tbl_graph(methods::as(x, 'graphNEL'), ...)
 }

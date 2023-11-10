@@ -2,16 +2,36 @@
 % Please edit documentation in R/edge.R
 \name{edge_types}
 \alias{edge_types}
-\alias{edge_multiple}
-\alias{edge_loop}
-\alias{edge_mutual}
+\alias{edge_is_multiple}
+\alias{edge_is_loop}
+\alias{edge_is_mutual}
+\alias{edge_is_from}
+\alias{edge_is_to}
+\alias{edge_is_between}
+\alias{edge_is_incident}
+\alias{edge_is_bridge}
 \title{Querying edge types}
 \usage{
-edge_multiple()
+edge_is_multiple()
 
-edge_loop()
+edge_is_loop()
 
-edge_mutual()
+edge_is_mutual()
+
+edge_is_from(from)
+
+edge_is_to(to)
+
+edge_is_between(from, to, ignore_dir = !graph_is_directed())
+
+edge_is_incident(nodes)
+
+edge_is_bridge()
+}
+\arguments{
+\item{from, to, nodes}{A vector giving node indices}
+
+\item{ignore_dir}{Is both directions of the edge allowed}
 }
 \value{
 A logical vector of the same length as the number of edges in the
@@ -24,10 +44,27 @@ in the graph corresponds to the specific type.
 }
 \section{Functions}{
 \itemize{
-\item \code{edge_multiple}: Query whether each edge has any parallel siblings
+\item \code{edge_is_multiple()}: Query whether each edge has any parallel siblings
 
-\item \code{edge_loop}: Query whether each edge is a loop
+\item \code{edge_is_loop()}: Query whether each edge is a loop
 
-\item \code{edge_mutual}: Query whether each edge has a sibling going in the reverse direction
+\item \code{edge_is_mutual()}: Query whether each edge has a sibling going in the reverse direction
+
+\item \code{edge_is_from()}: Query whether an edge goes from a set of nodes
+
+\item \code{edge_is_to()}: Query whether an edge goes to a set of nodes
+
+\item \code{edge_is_between()}: Query whether an edge goes between two sets of nodes
+
+\item \code{edge_is_incident()}: Query whether an edge goes from or to a set of nodes
+
+\item \code{edge_is_bridge()}: Query whether an edge is a bridge (ie. it's removal
+will increase the number of components in a graph)
+
 }}
-
+\examples{
+create_star(10, directed = TRUE, mutual = TRUE) \%>\%
+  activate(edges) \%>\%
+  sample_frac(0.7) \%>\%
+  mutate(single_edge = !edge_is_mutual())
+}
