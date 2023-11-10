@@ -115,6 +115,30 @@ print.tbl_graph <- function(x, ..., n_non_active = 3) {
   invisible(x)
 }
 
+#' @importFrom pillar glimpse
+#' @export
+glimpse.tbl_graph <- function(x, width = NULL, ...) {
+  cli::cli_rule(left = "Nodes")
+  glimpse(as_tibble(x, active = "nodes"))
+  cli::cat_line()
+  cli::cli_rule(left = "Edges")
+  glimpse(as_tibble(x, active = "edges"))
+}
+
+#' @importFrom pillar glimpse
+#' @export
+glimpse.morphed_tbl_graph <- function(x, width = NULL, ...) {
+  graph <- attr(x, '.orig_graph')
+
+  cat_subtle("Currently morphed to a ", gsub('_', ' ', sub('to_', '', attr(x, '.morpher'))), " representation\n")
+  cli::cat_line()
+  cli::cli_rule(left = "Nodes")
+  glimpse(as_tibble(graph, active = "nodes"))
+  cli::cat_line()
+  cli::cli_rule(left = "Edges")
+  glimpse(as_tibble(graph, active = "edges"))
+}
+
 #' @importFrom pillar style_subtle
 cat_subtle <- function(...) cat(pillar::style_subtle(paste0(...)))
 

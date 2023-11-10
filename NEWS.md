@@ -10,6 +10,8 @@
 * Added the whole family of `slice_*()` functions from dplyr (#128)
 * Added methods for `tidyr::replace_na()` and `tidyr::drop_na()` (#114)
 * Added `edge_is_bridge()` for querying whether an edge is a bridge edge (#113)
+* Added a `glimpse()` method for `tbl_graph` and `morphed_tbl_graph` objects 
+  (#30)
 
 # tidygraph 1.2.3
 
