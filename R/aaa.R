@@ -9,6 +9,10 @@ as_ind <- function(i, length) {
   seq_len(length)[i]
 }
 
+compress_rank <- function(x) {
+  match(x, sort(x))
+}
+
 expect_influencer <- function(...) {
   rlang::check_installed('influenceR', ...)
 }

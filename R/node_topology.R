@@ -29,7 +29,7 @@ node_dominator <- function(root, mode = 'out') {
   domtree <- as_edgelist(dominator_tree(graph, root, mode)$domtree)
   dom <- rep(NA, gorder(graph))
   dom[domtree[, 2]] <- domtree[, 1]
-  dom
+  dom[focus_ind(graph)]
 }
 #' @describeIn node_topology Get the topological order of nodes in a DAG. Wraps [igraph::topo_sort()].
 #' @importFrom igraph gorder topo_sort
@@ -37,5 +37,5 @@ node_dominator <- function(root, mode = 'out') {
 node_topo_order <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
-  match(seq_len(gorder(graph)), topo_sort(graph, mode = mode))
+  compress_rank(match(focus_ind(graph), topo_sort(graph, mode = mode)))
 }

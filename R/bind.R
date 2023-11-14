@@ -46,6 +46,7 @@
 #' graph %>% bind_graphs(new_graph)
 #'
 bind_graphs <- function(.data, ...) {
+  .data <- unfocus(.data)
   if (is_bare_list(.data)) {
     .data <- lapply(c(.data, list2(...)), as_tbl_graph)
     dots <- .data[-1]
@@ -71,6 +72,7 @@ bind_graphs <- function(.data, ...) {
 #' @importFrom tibble as_tibble
 #' @export
 bind_nodes <- function(.data, ...) {
+  .data <- unfocus(.data)
   if (!is.tbl_graph(.data)) cli::cli_abort('{.arg .data} must be a {.cls tbl_graph} object')
   d_tmp <- as_tibble(.data, acitve = 'nodes')
   new_nodes <- bind_rows(d_tmp, ...)
@@ -83,6 +85,7 @@ bind_nodes <- function(.data, ...) {
 #' @importFrom igraph gorder add_edges
 #' @export
 bind_edges <- function(.data, ..., node_key = 'name') {
+  .data <- unfocus(.data)
   if (!is.tbl_graph(.data)) cli::cli_abort('{.arg .data} must be a {.cls tbl_graph} object')
   d_tmp <- as_tibble(.data, active = 'edges')
   nodes <- as_tibble(.data, active = 'nodes')

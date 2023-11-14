@@ -1,6 +1,10 @@
 #' @importFrom dplyr group_by
 #' @export
 group_by.tbl_graph <- function(.data, ..., add = FALSE) {
+  if (is.focused_tbl_graph(.data)) {
+    cli::cli_inform('Unfocusing prior to grouping')
+    .data <- unfocus(.data)
+  }
   .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
   d_tmp <- group_by(d_tmp, ..., .add = add)
@@ -24,8 +28,8 @@ ungroup.tbl_graph <- function(x, ...) {
 #' @export
 ungroup.grouped_tbl_graph <- function(x, ...) {
   attr(x, paste0(active(x), '_group_attr')) <- NULL
-  class(x) <- class(x)[class(x) != 'grouped_tbl_graph']
-  x
+  class(x) <- setdiff(class(x), 'grouped_tbl_graph')
+  unfocus(x)
 }
 #' @export
 #' @importFrom dplyr ungroup

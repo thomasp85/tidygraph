@@ -11,7 +11,8 @@
 #' @param from,to The new indexes of the terminal nodes. If `NULL` nothing will
 #' be changed
 #' @param subset An expression evaluating to an indexing vector in the context
-#' of the edge data.
+#' of the edge data. If `NULL` it will use focused edges if available or all
+#' edges
 #'
 #' @return An object of the same class as .data
 #' @export
@@ -44,7 +45,7 @@ reroute.tbl_graph <- function(.data, from = NULL, to = NULL, subset = NULL) {
   edges <- as_tibble(.data, active = 'edges')
   subset <- enquo(subset)
   subset <- eval_tidy(subset, edges)
-  if (is.null(subset)) subset <- seq_len(nrow(edges))
+  if (is.null(subset)) subset <- focus_ind(.data)
   edges_sub <- edges[subset, , drop = FALSE]
   from <- eval_tidy(from, edges_sub)
   if (!is.null(from)) edges$from[subset] <- rep(from, length.out = nrow(edges_sub))

@@ -25,7 +25,7 @@ NULL
 node_is_cut <- function() {
   expect_nodes()
   graph <- .G()
-  seq_len(gorder(graph)) %in% articulation_points(graph)
+  focus_ind(graph) %in% articulation_points(graph)
 }
 #' @describeIn node_types is the node a root in a tree
 #' @importFrom igraph degree is.directed
@@ -33,11 +33,12 @@ node_is_cut <- function() {
 node_is_root <- function() {
   expect_nodes()
   graph <- .G()
+  node_inds <- focus_ind(graph)
   if ((!is_tree(graph) && !is_forest(graph)) || !is.directed(graph)) {
-    return(rep(FALSE, gorder(graph)))
+    return(rep(FALSE, length(node_inds)))
   }
-  deg_in <- degree(graph, mode = 'in') == 0
-  deg_out <- degree(graph, mode = 'out') == 0
+  deg_in <- degree(graph, v = node_inds, mode = 'in') == 0
+  deg_out <- degree(graph, v = node_inds, mode = 'out') == 0
   if (sum(deg_in) > sum(deg_out)) deg_out else deg_in
 }
 #' @describeIn node_types is the node a leaf in a tree
@@ -46,12 +47,13 @@ node_is_root <- function() {
 node_is_leaf <- function() {
   expect_nodes()
   graph <- .G()
+  node_inds <- focus_ind(graph)
   if ((!is_tree(graph) && !is_forest(graph))) {
-    return(rep(FALSE, gorder(graph)))
+    return(rep(FALSE, length(node_inds)))
   }
   if (is.directed(graph)) {
-    deg_in <- degree(graph, mode = 'in') == 0
-    deg_out <- degree(graph, mode = 'out') == 0
+    deg_in <- degree(graph, v = node_inds, mode = 'in') == 0
+    deg_out <- degree(graph, v = node_inds, mode = 'out') == 0
     if (sum(deg_out) > sum(deg_in)) deg_out else deg_in
   } else {
     degree(graph, mode = 'all') == 1
@@ -63,8 +65,9 @@ node_is_leaf <- function() {
 node_is_sink <- function() {
   expect_nodes()
   graph <- .G()
-  deg_in <- degree(graph, mode = 'in')
-  deg_out <- degree(graph, mode = 'out')
+  node_inds <- focus_ind(graph)
+  deg_in <- degree(graph, v = node_inds, mode = 'in')
+  deg_out <- degree(graph, v = node_inds, mode = 'out')
   deg_out == 0 & deg_in != 0
 }
 #' @describeIn node_types does the node only have outgoing edges
@@ -73,8 +76,9 @@ node_is_sink <- function() {
 node_is_source <- function() {
   expect_nodes()
   graph <- .G()
-  deg_in <- degree(graph, mode = 'in')
-  deg_out <- degree(graph, mode = 'out')
+  node_inds <- focus_ind(graph)
+  deg_in <- degree(graph, v = node_inds, mode = 'in')
+  deg_out <- degree(graph, v = node_inds, mode = 'out')
   deg_out != 0 & deg_in == 0
 }
 #' @describeIn node_types is the node unconnected
@@ -83,7 +87,7 @@ node_is_source <- function() {
 node_is_isolated <- function() {
   expect_nodes()
   graph <- .G()
-  degree(graph) == 0
+  degree(graph, v = focus_ind(graph)) == 0
 }
 #' @describeIn node_types is the node connected to all other nodes in the graph
 #' @importFrom igraph ego_size gorder
@@ -91,7 +95,7 @@ node_is_isolated <- function() {
 node_is_universal <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
-  ego_size(graph, order = 1, mode = mode) == gorder(graph)
+  ego_size(graph, order = 1, nodes = focus_ind(graph), mode = mode) == gorder(graph)
 }
 #' @describeIn node_types are all the neighbors of the node connected
 #' @importFrom igraph local_scan ecount ego_size
@@ -99,8 +103,9 @@ node_is_universal <- function(mode = 'out') {
 node_is_simplical <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
-  n_edges <- local_scan(graph, k = 1, mode = mode, FUN = ecount)
-  n_nodes <- ego_size(graph, order = 1, mode = mode)
+  node_inds <- focus_ind(graph)
+  n_edges <- local_scan(graph, k = 1, mode = mode, FUN = ecount)[node_inds]
+  n_nodes <- ego_size(graph, order = 1, nodes = node_inds, mode = mode)
   n_edges == n_nodes * (n_nodes - 1) * 0.5
 }
 #' @describeIn node_types does the node have the minimal eccentricity in the graph
@@ -110,7 +115,7 @@ node_is_center <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
   ecc <- eccentricity(graph, mode = mode)
-  ecc == min(ecc)
+  ecc[focus_ind(graph)] == min(ecc)
 }
 #' @describeIn node_types is a node adjacent to any of the nodes given in `to`
 #' @param to The nodes to test for adjacency to
@@ -120,11 +125,10 @@ node_is_center <- function(mode = 'out') {
 node_is_adjacent <- function(to, mode = 'all', include_to = TRUE) {
   expect_nodes()
   graph <- .G()
-  n_nodes <- gorder(graph)
-  to <- as_ind(to, n_nodes)
+  to <- as_ind(to, gorder(graph))
   include <- unlist(adjacent_vertices(graph, to, mode))
   if (include_to) include <- union(to, include)
-  seq_len(n_nodes) %in% include
+  focus_ind(graph) %in% include
 }
 #' @describeIn node_types Is a node part of the keyplayers in the graph (`influenceR`)
 #' @param k The number of keyplayers to identify
@@ -139,7 +143,7 @@ node_is_keyplayer <- function(k, p = 0, tol = 1e-4, maxsec = 120, roundsec = 30)
   expect_nodes()
   graph <- .G()
   ind <- influenceR::keyplayer(graph, k = k, prob = p, tol = tol, maxsec = maxsec, roundsec = roundsec)
-  seq_len(gorder(graph)) %in% ind
+  focus_ind(graph) %in% ind
 }
 #' @describeIn node_types Is a node connected to all (or any) nodes in a set
 #' @param nodes The set of nodes to test connectivity to. Can be a list to use
@@ -152,13 +156,15 @@ node_is_keyplayer <- function(k, p = 0, tol = 1e-4, maxsec = 120, roundsec = 30)
 node_is_connected <- function(nodes, mode = 'all', any = FALSE) {
   expect_nodes()
   graph <- .G()
-  n_nodes <- gorder(graph)
+  node_inds <- focus_ind(graph)
   if (!is.list(nodes)) nodes <- list(nodes)
   all_nodes <- unique(unlist(nodes))
-  reached <- is.finite(t(distances(graph, to = all_nodes, mode = mode, weights = NA)))
-  nodes <- rep_len(nodes, n_nodes)
-  vapply(seq_len(n_nodes), function(n) {
-    found <- reached[,n][nodes[[n]]]
+  reached <- is.finite(t(distances(graph, v = node_inds, to = all_nodes, mode = mode, weights = NA)))
+  nodes <- rep_len(nodes, length(node_inds))
+  vapply(seq_along(node_inds), function(i) {
+    n <- node_inds[i]
+    connections <- match(nodes[[i]], all_nodes)
+    found <- reached[,n][connections]
     if (any) any(found) else all(found)
   }, logical(1))
 }
@@ -189,7 +195,7 @@ NULL
 node_eccentricity <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
-  eccentricity(graph, V(graph), mode = mode)
+  eccentricity(graph, focus_ind(graph), mode = mode)
 }
 #' @describeIn node_measures measures Burts constraint of the node. See [igraph::constraint()]
 #' @importFrom igraph constraint
@@ -202,7 +208,7 @@ node_constraint <- function(weights = NULL) {
   if (is.null(weights)) {
     weights <- rep_len(1L, gsize(graph))
   }
-  constraint(graph, V(graph), weights = weights)
+  constraint(graph, focus_ind(graph), weights = weights)
 }
 #' @describeIn node_measures measures the coreness of each node. See [igraph::coreness()]
 #' @importFrom igraph coreness
@@ -210,7 +216,7 @@ node_constraint <- function(weights = NULL) {
 node_coreness <- function(mode = 'out') {
   expect_nodes()
   graph <- .G()
-  coreness(graph, mode = mode)
+  coreness(graph, mode = mode)[focus_ind(graph)]
 }
 #' @describeIn node_measures measures the diversity of the node. See [igraph::diversity()]
 #' @importFrom igraph diversity
@@ -223,40 +229,45 @@ node_diversity <- function(weights) {
   if (is.null(weights)) {
     cli::cli_abort('{.arg weights} must be a valid vector')
   }
-  diversity(graph, weights = weights, vids = V(graph))
+  diversity(graph, weights = weights, vids = focus_ind(graph))
 }
 #' @describeIn node_measures measures Valente's Bridging measures for detecting structural bridges (`influenceR`)
 #' @export
 node_bridging_score <- function() {
   expect_influencer()
   expect_nodes()
-  influenceR::bridging(.G())
+  graph <- .G()
+  influenceR::bridging(graph)[focus_ind(graph)]
 }
 #' @describeIn node_measures measures Burt's Effective Network Size indicating access to structural holes in the network (`influenceR`)
 #' @export
 node_effective_network_size <- function() {
   expect_influencer()
   expect_nodes()
-  influenceR::ens(.G())
+  graph <- .G()
+  influenceR::ens(graph)[focus_ind(graph)]
 }
 #' @describeIn node_measures measures the impact on connectivity when removing the node (`NetSwan`)
 #' @export
 node_connectivity_impact <- function() {
   expect_netswan()
   expect_nodes()
-  NetSwan::swan_connectivity(.G())
+  graph <- .G()
+  NetSwan::swan_connectivity(graph)[focus_ind(graph)]
 }
 #' @describeIn node_measures measures the impact on closeness when removing the node (`NetSwan`)
 #' @export
 node_closeness_impact <- function() {
   expect_netswan()
   expect_nodes()
-  NetSwan::swan_closeness(.G())
+  graph <- .G()
+  NetSwan::swan_closeness(graph)[focus_ind(graph)]
 }
 #' @describeIn node_measures measures the impact on fareness (distance between all node pairs) when removing the node (`NetSwan`)
 #' @export
 node_fareness_impact <- function() {
   expect_netswan()
   expect_nodes()
-  NetSwan::swan_efficiency(.G())
+  graph <- .G()
+  NetSwan::swan_efficiency(graph)[focus_ind(graph)]
 }

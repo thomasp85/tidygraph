@@ -31,7 +31,7 @@ node_adhesion_to <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
-  source <- seq_len(gorder(graph))
+  source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   adhesion <- Map(function(s, t) {
     if (s == t) return(NA)
@@ -47,7 +47,7 @@ node_adhesion_from <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
-  target <- seq_len(gorder(graph))
+  target <- focus_ind(graph)
   source <- rep(nodes, length.out = length(target))
   adhesion <- Map(function(s, t) {
     if (s == t) return(NA)
@@ -63,14 +63,14 @@ node_cohesion_to <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
-  source <- seq_len(gorder(graph))
+  source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   neigh <- lapply(ego(graph, 1, source, 'out', mindist = 1), as.integer)
-  adhesion <- Map(function(s, t) {
+  adhesion <- Map(function(s, t, n) {
     if (s == t) return(NA)
-    if (t %in% neigh[[s]]) return(NA)
+    if (t %in% n) return(NA)
     vertex_connectivity(graph, source = s, target = t, checks = TRUE)
-  }, s = source, t = target)
+  }, s = source, t = target, n = neigh)
   unlist(adhesion)
 }
 
@@ -81,14 +81,14 @@ node_cohesion_from <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
-  target <- seq_len(gorder(graph))
+  target <- focus_ind(graph)
   source <- rep(nodes, length.out = length(target))
   neigh <- lapply(ego(graph, 1, source, 'out', mindist = 1), as.integer)
-  adhesion <- Map(function(s, t) {
+  adhesion <- Map(function(s, t, n) {
     if (s == t) return(NA)
-    if (t %in% neigh[[s]]) return(NA)
+    if (t %in% n) return(NA)
     vertex_connectivity(graph, source = s, target = t, checks = TRUE)
-  }, s = source, t = target)
+  }, s = source, t = target, n = neigh)
   unlist(adhesion)
 }
 
@@ -112,11 +112,11 @@ node_distance_to <- function(nodes, mode = 'out', weights = NULL, algorithm = 'a
     weights <- NA
   }
   nodes <- as_ind(nodes, gorder(graph))
-  source <- seq_len(gorder(graph))
+  source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   target_unique <- unique(target)
   dist <- distances(graph, v = source, to = target_unique, mode = mode, weights = weights, algorithm = algorithm)
-  unlist(Map(function(s, t) {dist[s, t]}, s = source, t = match(target, target_unique)))
+  dist[cbind(source, match(target, target_unique))]
 }
 
 #' @describeIn pair_measures Calculate various distance metrics between node pairs. Wraps [igraph::distances()]
@@ -131,11 +131,11 @@ node_distance_from <- function(nodes, mode = 'out', weights = NULL, algorithm = 
     weights <- NA
   }
   nodes <- as_ind(nodes, gorder(graph))
-  target <- seq_len(gorder(graph))
+  target <- focus_ind(graph)
   source <- rep(nodes, length.out = length(target))
   source_unique <- unique(source)
   dist <- distances(graph, v = source_unique, to = target, mode = mode, weights = weights, algorithm = algorithm)
-  unlist(Map(function(s, t) {dist[s, t]}, s = match(source, source_unique), t = target))
+  dist[cbind(match(source, source_unique), target)]
 }
 
 #' @describeIn pair_measures Calculate node pair cocitation count. Wraps [igraph::cocitation()]
@@ -145,10 +145,10 @@ node_cocitation_with <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
-  source <- seq_len(gorder(graph))
+  source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   cocite <- cocitation(graph)
-  unlist(Map(function(s, t) {cocite[s, t]}, s = source, t = target))
+  cocite[cbind(source, target)]
 }
 
 #' @describeIn pair_measures Calculate node pair bibliographic coupling. Wraps [igraph::bibcoupling()]
@@ -158,10 +158,10 @@ node_bibcoupling_with <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
-  source <- seq_len(gorder(graph))
+  source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   bibc <- bibcoupling(graph)
-  unlist(Map(function(s, t) {bibc[s, t]}, s = source, t = target))
+  bibc[cbind(source, target)]
 }
 
 #' @describeIn pair_measures Calculate various node pair similarity measures. Wraps [igraph::similarity()]
@@ -175,10 +175,10 @@ node_similarity_with <- function(nodes, mode = 'out', loops = FALSE, method = 'j
   expect_nodes()
   graph <- .G()
   nodes <- as_ind(nodes, gorder(graph))
-  source <- seq_len(gorder(graph))
+  source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   sim <- similarity(graph, mode = mode, loops = loops, method = method)
-  unlist(Map(function(s, t) {sim[s, t]}, s = source, t = target))
+  sim[cbind(source, target)]
 }
 
 #' @describeIn pair_measures Calculate the maximum flow to a node. Wraps [igraph::max_flow()]
@@ -192,7 +192,7 @@ node_max_flow_to <- function(nodes, capacity = NULL) {
   capacity <- enquo(capacity)
   capacity <- eval_tidy(capacity, .E())
   nodes <- as_ind(nodes, gorder(graph))
-  source <- seq_len(gorder(graph))
+  source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   flow <- Map(function(s, t) {
     if (s == t) return(NA)
@@ -210,7 +210,7 @@ node_max_flow_from <- function(nodes, capacity = NULL) {
   capacity <- enquo(capacity)
   capacity <- eval_tidy(capacity, .E())
   nodes <- as_ind(nodes, gorder(graph))
-  target <- seq_len(gorder(graph))
+  target <- focus_ind(graph)
   source <- rep(nodes, length.out = length(target))
   flow <- Map(function(s, t) {
     if (s == t) return(NA)

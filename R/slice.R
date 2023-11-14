@@ -1,6 +1,7 @@
 #' @export
 #' @importFrom dplyr slice
 slice.tbl_graph <- function(.data, ..., .by = NULL, .preserve = FALSE) {
+  .data <- unfocus(.data)
   graph_slicer(.data, slice, ..., .by = {{.by}}, .preserve = .preserve)
 }
 #' @export
@@ -15,6 +16,7 @@ dplyr::slice
 #' @export
 #' @importFrom dplyr slice_head
 slice_head.tbl_graph <- function(.data, ..., n, prop, by = NULL) {
+  .data <- unfocus(.data)
   graph_slicer(.data, slice_head, ..., n = n, prop = prop, by = {{by}})
 }
 #' @export
@@ -29,6 +31,7 @@ dplyr::slice_head
 #' @export
 #' @importFrom dplyr slice_tail
 slice_tail.tbl_graph <- function(.data, ..., n, prop, by = NULL) {
+  .data <- unfocus(.data)
   graph_slicer(.data, slice_tail, ..., n = n, prop = prop, by = {{by}})
 }
 #' @export
@@ -43,6 +46,7 @@ dplyr::slice_tail
 #' @export
 #' @importFrom dplyr slice_min
 slice_min.tbl_graph <- function(.data, order_by, ..., n, prop, by = NULL, with_ties = TRUE, na_rm = FALSE) {
+  .data <- unfocus(.data)
   graph_slicer(.data, slice_min, order_by = {{order_by}}, ..., n = n, prop = prop, by = {{by}}, with_ties = with_ties, na_rm = na_rm)
 }
 #' @export
@@ -57,6 +61,7 @@ dplyr::slice_min
 #' @export
 #' @importFrom dplyr slice_max
 slice_max.tbl_graph <- function(.data, order_by, ..., n, prop, by = NULL, with_ties = TRUE, na_rm = FALSE) {
+  .data <- unfocus(.data)
   graph_slicer(.data, slice_max, order_by = {{order_by}}, ..., n = n, prop = prop, by = {{by}}, with_ties = with_ties, na_rm = na_rm)
 }
 #' @export
@@ -71,6 +76,7 @@ dplyr::slice_max
 #' @export
 #' @importFrom dplyr slice_sample
 slice_sample.tbl_graph <- function(.data, ..., n, prop, by = NULL, weight_by = NULL, replace = FALSE) {
+  .data <- unfocus(.data)
   graph_slicer(.data, slice_sample, ..., n = n, prop = prop, by = {{by}}, weight_by = weight_by, replace = replace)
 }
 #' @export

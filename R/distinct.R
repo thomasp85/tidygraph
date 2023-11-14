@@ -3,6 +3,7 @@
 #' @importFrom utils head
 #' @export
 distinct.tbl_graph <- function(.data, ..., .keep_all = FALSE) {
+  .data <- unfocus(.data)
   .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
   if ('.tbl_graph_index' %in% names(d_tmp)) {

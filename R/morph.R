@@ -91,6 +91,10 @@ convert <- function(.data, .f, ..., .select = 1, .clean = FALSE) {
 #' @export
 #' @importFrom rlang as_quosure sym quo_text enquo
 morph.tbl_graph <- function(.data, .f, ...) {
+  if (is.focused_tbl_graph(.data)) {
+    cli::cli_inform('Unfocusing prior to morphing')
+    .data <- unfocus(.data)
+  }
   if (inherits(.data, 'grouped_tbl_graph')) {
     cli::cli_inform('Ungrouping prior to morphing')
     .data <- ungroup(.data)
