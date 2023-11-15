@@ -51,7 +51,9 @@ evaluated in the context of the edge data.}
 
 \item{directed}{Should direction of edges be used for the calculations}
 
-\item{n_groups}{Integer scalar, the desired number of communities. If too low or two high, then an error message is given.}
+\item{n_groups}{Integer scalar, the desired number of communities. If too low
+or two high, then an error message is given. The measure is applied to the
+full graph so the number of groups returned may be lower for focused graphs}
 
 \item{node_weights}{The weight of the nodes to use for the calculation. Will
 be evaluated in the context of the node data.}

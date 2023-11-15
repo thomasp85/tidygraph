@@ -3,7 +3,6 @@
 \name{focus}
 \alias{focus}
 \alias{focus.tbl_graph}
-\alias{focus.grouped_tbl_graph}
 \alias{focus.morphed_tbl_graph}
 \alias{unfocus}
 \alias{unfocus.tbl_graph}
@@ -14,8 +13,6 @@
 focus(.data, ...)
 
 \method{focus}{tbl_graph}(.data, ...)
-
-\method{focus}{grouped_tbl_graph}(.data, ...)
 
 \method{focus}{morphed_tbl_graph}(.data, ...)
 
@@ -47,11 +44,16 @@ graph intact. The purpose of this is to avoid having to calculate time
 costly measures etc on all nodes or edges of a graph if only a few is needed.
 E.g. you might only be interested in the shortest distance from one node to
 another so rather than calculating this for all nodes you apply a focus on
-one node and perform the calculation.
+one node and perform the calculation. It should be made clear that not all
+algorithms will see a performance boost by being applied to a few nodes/edges
+since their calculation is applied globally and the result for all
+nodes/edges are provided in unison.
 }
 \note{
 focusing is the lowest prioritised operation on a graph. Applying a
 \code{\link[=morph]{morph()}} or a \code{\link[=group_by]{group_by()}} operation will unfocus the graph prior to
 performing the operation. The same is true for the inverse operations
-(\code{\link[=unmorph]{unmorph()}} and \code{\link[=ungroup]{ungroup()}})
+(\code{\link[=unmorph]{unmorph()}} and \code{\link[=ungroup]{ungroup()}}). Further, unfocusing will happen any time some
+graph altering operation is performed, such as the \code{arrange()} and \code{slice()}
+operations
 }
