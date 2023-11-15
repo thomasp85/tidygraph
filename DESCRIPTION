@@ -33,6 +33,7 @@ Suggests:
     ape,
     covr,
     data.tree,
+    dagitty,
     graph,
     influenceR,
     methods,
