@@ -8,3 +8,5 @@ test_that("distinct works", {
   gr2 <- gr %>% activate(edges) %>% distinct(id)
   expect_equal(igraph::gsize(gr2), 3)
 })
+
+test_empty_context()

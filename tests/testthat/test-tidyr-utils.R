@@ -14,3 +14,5 @@ test_that("tidyr utils work on edges", {
   expect_equal(drop_na(gr) %>% pull(val), 1:3)
   expect_equal(replace_na(gr, list(val = 0)) %>% pull(val), c(1:3, 0, 0, 0))
 })
+
+test_empty_context()

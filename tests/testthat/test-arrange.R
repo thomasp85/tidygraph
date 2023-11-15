@@ -18,3 +18,5 @@ test_that('reserved words are protected', {
   gr1 <- mutate(gr1, .tbl_graph_index = letters[1:5], order = ord)
   expect_error(arrange(gr1, order))
 })
+
+test_empty_context()

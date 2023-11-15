@@ -27,3 +27,5 @@ test_that("graph measures returns scalars", {
   expect_length(graph_unconn_count(), 1)
   .graph_context$clear()
 })
+
+test_empty_context()

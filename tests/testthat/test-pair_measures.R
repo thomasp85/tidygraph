@@ -27,6 +27,20 @@ test_that("pair measures return correct length", {
   expect_length(get_val(gr, node_max_flow_to(1)), igraph::gorder(gr))
   expect_length(get_val(gr, node_similarity_with(1)), igraph::gorder(gr))
 })
+test_that("pair measures return correct length for focus", {
+  gr <- create_ring(5, directed = TRUE) |>
+    focus(dplyr::row_number() < 3)
+  expect_length(get_val(gr, node_adhesion_from(1)), 2)
+  expect_length(get_val(gr, node_adhesion_to(1)), 2)
+  expect_length(get_val(gr, node_cocitation_with(1)), 2)
+  expect_length(get_val(gr, node_cohesion_from(1)), 2)
+  expect_length(get_val(gr, node_cohesion_to(1)), 2)
+  expect_length(get_val(gr, node_distance_from(1)), 2)
+  expect_length(get_val(gr, node_distance_to(1)), 2)
+  expect_length(get_val(gr, node_max_flow_from(1)), 2)
+  expect_length(get_val(gr, node_max_flow_to(1)), 2)
+  expect_length(get_val(gr, node_similarity_with(1)), 2)
+})
 test_that("pair measures requires active nodes", {
   gr <- create_ring(5, directed = TRUE) %>% activate(edges)
   expect_error(get_val(gr, node_adhesion_from(1)))
@@ -40,3 +54,5 @@ test_that("pair measures requires active nodes", {
   expect_error(get_val(gr, node_max_flow_to(1)))
   expect_error(get_val(gr, node_similarity_with(1)))
 })
+
+test_empty_context()

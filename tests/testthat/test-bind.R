@@ -29,3 +29,5 @@ test_that('bind_edges works', {
   tbl2$to <- tbl2$to + 10
   expect_error(bind_edges(gr2, tbl2))
 })
+
+test_empty_context()

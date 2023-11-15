@@ -35,6 +35,23 @@ test_that("centrality returns correct length", {
   expect_length(get_cent(gr1, centrality_eigen()), 4)
   expect_length(get_cent(gr1, centrality_hub()), 4)
 })
+test_that("centrality returns correct length for focus", {
+  gr1 <- create_notable('diamond') |> focus(dplyr::row_number() < 3)
+  expect_length(get_cent(gr1, centrality_alpha()), 2)
+  expect_length(get_cent(gr1, centrality_betweenness()), 2)
+  expect_length(get_cent(gr1, centrality_closeness()), 2)
+  expect_length(get_cent(gr1, centrality_degree()), 2)
+  expect_length(get_cent(gr1, centrality_pagerank()), 2)
+  expect_length(get_cent(gr1, centrality_power()), 2)
+  expect_length(get_cent(gr1, centrality_subgraph()), 2)
+  gr2 <- activate(gr1, 'edges') |> focus(dplyr::row_number() < 3)
+  expect_length(get_cent(gr2, centrality_edge_betweenness()), 2)
+
+  skip_on_os('windows')
+  expect_length(get_cent(gr1, centrality_authority()), 2)
+  expect_length(get_cent(gr1, centrality_eigen()), 2)
+  expect_length(get_cent(gr1, centrality_hub()), 2)
+})
 test_that("centrality requires the right activation", {
   gr1 <- create_notable('diamond')
   expect_error(get_cent(gr1, centrality_edge_betweenness()))
@@ -52,3 +69,5 @@ test_that("centrality requires the right activation", {
   expect_error(get_cent(gr2, centrality_eigen()))
   expect_error(get_cent(gr2, centrality_hub()))
 })
+
+test_empty_context()

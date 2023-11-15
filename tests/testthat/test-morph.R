@@ -111,3 +111,5 @@ test_that('to_contracted works', {
   expect_equal(pull(gr1, node), c(2,2,2,1,1))
   expect_equal(nrow(gr2), 1)
 })
+
+test_empty_context()

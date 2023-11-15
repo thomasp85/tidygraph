@@ -25,3 +25,5 @@ test_that('activate activates all morphed graphs', {
   gr1 <- activate(gr1, 'edges')
   expect_true(all(sapply(gr1, active) == 'edges'))
 })
+
+test_empty_context()
