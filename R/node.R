@@ -120,12 +120,12 @@ node_is_center <- function(mode = 'out') {
 #' @describeIn node_types is a node adjacent to any of the nodes given in `to`
 #' @param to The nodes to test for adjacency to
 #' @param include_to Should the nodes in `to` be marked as adjacent as well
-#' @importFrom igraph gorder adjacent_vertices
+#' @importFrom igraph adjacent_vertices
 #' @export
 node_is_adjacent <- function(to, mode = 'all', include_to = TRUE) {
   expect_nodes()
   graph <- .G()
-  to <- as_ind(to, gorder(graph))
+  to <- as_node_ind(to, graph)
   include <- unlist(adjacent_vertices(graph, to, mode))
   if (include_to) include <- union(to, include)
   focus_ind(graph) %in% include

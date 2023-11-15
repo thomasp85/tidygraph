@@ -9,6 +9,14 @@ as_ind <- function(i, length) {
   seq_len(length)[i]
 }
 
+#' @importFrom igraph gorder
+as_node_ind <- function(i, graph) {
+  if (!missing(i)) {
+    i <- with_graph(unfocus(graph), {{i}})
+  }
+  as_ind(i, gorder(graph))
+}
+
 compress_rank <- function(x) {
   match(x, sort(x))
 }

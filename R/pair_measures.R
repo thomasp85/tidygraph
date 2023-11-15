@@ -23,14 +23,14 @@ NULL
 
 #' @describeIn pair_measures Calculate the adhesion to the specified node. Wraps [igraph::edge_connectivity()]
 #' @export
-#' @importFrom igraph edge_connectivity gorder
+#' @importFrom igraph edge_connectivity
 #'
 #' @param nodes The other part of the node pair (the first part is the node
 #' defined by the row). Recycled if necessary.
 node_adhesion_to <- function(nodes) {
   expect_nodes()
   graph <- .G()
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   adhesion <- Map(function(s, t) {
@@ -42,11 +42,11 @@ node_adhesion_to <- function(nodes) {
 
 #' @describeIn pair_measures Calculate the adhesion from the specified node. Wraps [igraph::edge_connectivity()]
 #' @export
-#' @importFrom igraph edge_connectivity gorder
+#' @importFrom igraph edge_connectivity
 node_adhesion_from <- function(nodes) {
   expect_nodes()
   graph <- .G()
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   target <- focus_ind(graph)
   source <- rep(nodes, length.out = length(target))
   adhesion <- Map(function(s, t) {
@@ -58,11 +58,11 @@ node_adhesion_from <- function(nodes) {
 
 #' @describeIn pair_measures Calculate the cohesion to the specified node. Wraps [igraph::vertex_connectivity()]
 #' @export
-#' @importFrom igraph vertex_connectivity gorder
+#' @importFrom igraph vertex_connectivity
 node_cohesion_to <- function(nodes) {
   expect_nodes()
   graph <- .G()
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   neigh <- lapply(ego(graph, 1, source, 'out', mindist = 1), as.integer)
@@ -76,11 +76,11 @@ node_cohesion_to <- function(nodes) {
 
 #' @describeIn pair_measures Calculate the cohesion from the specified node. Wraps [igraph::vertex_connectivity()]
 #' @export
-#' @importFrom igraph vertex_connectivity gorder ego
+#' @importFrom igraph vertex_connectivity ego
 node_cohesion_from <- function(nodes) {
   expect_nodes()
   graph <- .G()
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   target <- focus_ind(graph)
   source <- rep(nodes, length.out = length(target))
   neigh <- lapply(ego(graph, 1, source, 'out', mindist = 1), as.integer)
@@ -94,7 +94,7 @@ node_cohesion_from <- function(nodes) {
 
 #' @describeIn pair_measures Calculate various distance metrics between node pairs. Wraps [igraph::distances()]
 #' @export
-#' @importFrom igraph distances gorder
+#' @importFrom igraph distances
 #'
 #' @param mode How should edges be followed? If `'all'` all edges are
 #' considered, if `'in'` only inbound edges are considered, and if `'out'` only
@@ -111,7 +111,7 @@ node_distance_to <- function(nodes, mode = 'out', weights = NULL, algorithm = 'a
   if (is.null(weights)) {
     weights <- NA
   }
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   target_unique <- unique(target)
@@ -121,7 +121,7 @@ node_distance_to <- function(nodes, mode = 'out', weights = NULL, algorithm = 'a
 
 #' @describeIn pair_measures Calculate various distance metrics between node pairs. Wraps [igraph::distances()]
 #' @export
-#' @importFrom igraph distances gorder
+#' @importFrom igraph distances
 node_distance_from <- function(nodes, mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   graph <- .G()
@@ -130,7 +130,7 @@ node_distance_from <- function(nodes, mode = 'out', weights = NULL, algorithm = 
   if (is.null(weights)) {
     weights <- NA
   }
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   target <- focus_ind(graph)
   source <- rep(nodes, length.out = length(target))
   source_unique <- unique(source)
@@ -140,11 +140,11 @@ node_distance_from <- function(nodes, mode = 'out', weights = NULL, algorithm = 
 
 #' @describeIn pair_measures Calculate node pair cocitation count. Wraps [igraph::cocitation()]
 #' @export
-#' @importFrom igraph cocitation gorder
+#' @importFrom igraph cocitation
 node_cocitation_with <- function(nodes) {
   expect_nodes()
   graph <- .G()
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   cocite <- cocitation(graph)
@@ -153,11 +153,11 @@ node_cocitation_with <- function(nodes) {
 
 #' @describeIn pair_measures Calculate node pair bibliographic coupling. Wraps [igraph::bibcoupling()]
 #' @export
-#' @importFrom igraph bibcoupling gorder
+#' @importFrom igraph bibcoupling
 node_bibcoupling_with <- function(nodes) {
   expect_nodes()
   graph <- .G()
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   bibc <- bibcoupling(graph)
@@ -166,7 +166,7 @@ node_bibcoupling_with <- function(nodes) {
 
 #' @describeIn pair_measures Calculate various node pair similarity measures. Wraps [igraph::similarity()]
 #' @export
-#' @importFrom igraph similarity gorder
+#' @importFrom igraph similarity
 #'
 #' @param loops Should loop edges be considered
 #' @param method The similarity measure to calculate. Possible values are:
@@ -174,7 +174,7 @@ node_bibcoupling_with <- function(nodes) {
 node_similarity_with <- function(nodes, mode = 'out', loops = FALSE, method = 'jaccard') {
   expect_nodes()
   graph <- .G()
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   sim <- similarity(graph, mode = mode, loops = loops, method = method)
@@ -183,7 +183,7 @@ node_similarity_with <- function(nodes, mode = 'out', loops = FALSE, method = 'j
 
 #' @describeIn pair_measures Calculate the maximum flow to a node. Wraps [igraph::max_flow()]
 #' @export
-#' @importFrom igraph max_flow gorder
+#' @importFrom igraph max_flow
 #'
 #' @param capacity The edge capacity to use
 node_max_flow_to <- function(nodes, capacity = NULL) {
@@ -191,7 +191,7 @@ node_max_flow_to <- function(nodes, capacity = NULL) {
   graph <- .G()
   capacity <- enquo(capacity)
   capacity <- eval_tidy(capacity, .E())
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   source <- focus_ind(graph)
   target <- rep(nodes, length.out = length(source))
   flow <- Map(function(s, t) {
@@ -203,13 +203,13 @@ node_max_flow_to <- function(nodes, capacity = NULL) {
 
 #' @describeIn pair_measures Calculate the maximum flow from a node. Wraps [igraph::max_flow()]
 #' @export
-#' @importFrom igraph max_flow gorder
+#' @importFrom igraph max_flow
 node_max_flow_from <- function(nodes, capacity = NULL) {
   expect_nodes()
   graph <- .G()
   capacity <- enquo(capacity)
   capacity <- eval_tidy(capacity, .E())
-  nodes <- as_ind(nodes, gorder(graph))
+  nodes <- as_node_ind(nodes, graph)
   target <- focus_ind(graph)
   source <- rep(nodes, length.out = length(target))
   flow <- Map(function(s, t) {

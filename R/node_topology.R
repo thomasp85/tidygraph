@@ -25,7 +25,7 @@ NULL
 node_dominator <- function(root, mode = 'out') {
   expect_nodes()
   graph <- .G()
-  root <- as_ind(root, gorder(graph))
+  root <- as_node_ind(root, graph)
   domtree <- as_edgelist(dominator_tree(graph, root, mode)$domtree)
   dom <- rep(NA, gorder(graph))
   dom[domtree[, 2]] <- domtree[, 1]

@@ -50,7 +50,6 @@
 #' @family node map functions
 #'
 #' @export
-#' @importFrom igraph gorder
 #'
 #' @examples
 #' # Accumulate values along a search
@@ -62,7 +61,7 @@
 map_bfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
-  root <- as_ind(root, gorder(graph))
+  root <- as_node_ind(root, graph)
   dot_params <- list(...)
   search_df <- bfs_df(graph, root, mode, unreachable)
   paths <- get_paths(as.integer(search_df$parent))
@@ -133,7 +132,6 @@ map_bfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' @family node map functions
 #'
 #' @export
-#' @importFrom igraph gorder
 #'
 #' @examples
 #' # Collect values from children
@@ -148,7 +146,7 @@ map_bfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 map_bfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
-  root <- as_ind(root, gorder(graph))
+  root <- as_node_ind(root, graph)
   dot_params <- list(...)
   search_df <- bfs_df(graph, root, mode, unreachable)
   offspring <- get_offspring(as.integer(search_df$parent), order(search_df$rank))
@@ -218,7 +216,6 @@ map_bfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' @family node map functions
 #'
 #' @export
-#' @importFrom igraph gorder
 #'
 #' @examples
 #' # Add a random integer to the last value along a search
@@ -230,7 +227,7 @@ map_bfs_back_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 map_dfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
-  root <- as_ind(root, gorder(graph))
+  root <- as_node_ind(root, graph)
   dot_params <- list(...)
   search_df <- dfs_df(graph, root, mode, unreachable)
   paths <- get_paths(as.integer(search_df$parent))
@@ -300,7 +297,6 @@ map_dfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 #' @family node map functions
 #'
 #' @export
-#' @importFrom igraph gorder
 #'
 #' @examples
 #' # Collect values from the 2 closest layers of children in a dfs search
@@ -315,7 +311,7 @@ map_dfs_dbl <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
 map_dfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   expect_nodes()
   graph <- .G()
-  root <- as_ind(root, gorder(graph))
+  root <- as_node_ind(root, graph)
   dot_params <- list(...)
   search_df <- dfs_df(graph, root, mode, unreachable)
   offspring <- get_offspring(as.integer(search_df$parent), order(search_df$rank))
