@@ -37,9 +37,10 @@ node_is_root <- function() {
   if ((!is_tree(graph) && !is_forest(graph)) || !is.directed(graph)) {
     return(rep(FALSE, length(node_inds)))
   }
-  deg_in <- degree(graph, v = node_inds, mode = 'in') == 0
-  deg_out <- degree(graph, v = node_inds, mode = 'out') == 0
-  if (sum(deg_in) > sum(deg_out)) deg_out else deg_in
+  deg_in <- degree(graph, mode = 'in') == 0
+  deg_out <- degree(graph, mode = 'out') == 0
+  root <- if (sum(deg_in) > sum(deg_out)) deg_out else deg_in
+  root[node_inds]
 }
 #' @describeIn node_types is the node a leaf in a tree
 #' @importFrom igraph degree is.directed
@@ -52,11 +53,12 @@ node_is_leaf <- function() {
     return(rep(FALSE, length(node_inds)))
   }
   if (is.directed(graph)) {
-    deg_in <- degree(graph, v = node_inds, mode = 'in') == 0
-    deg_out <- degree(graph, v = node_inds, mode = 'out') == 0
-    if (sum(deg_out) > sum(deg_in)) deg_out else deg_in
+    deg_in <- degree(graph, mode = 'in') == 0
+    deg_out <- degree(graph, mode = 'out') == 0
+    leaf <- if (sum(deg_out) > sum(deg_in)) deg_out else deg_in
+    leaf[node_inds]
   } else {
-    degree(graph, mode = 'all') == 1
+    degree(graph, v = node_inds, mode = 'all') == 1
   }
 }
 #' @describeIn node_types does the node only have incomming edges
