@@ -197,7 +197,7 @@ set_graph_data.tbl_graph <- function(x, value, active = NULL) {
 }
 set_graph_data.grouped_tbl_graph <- function(x, value, active = NULL) {
   x <- NextMethod()
-  apply_groups(x, attributes(value))
+  apply_groups(x, value)
 }
 #' @importFrom igraph vertex_attr<-
 set_node_attributes <- function(x, value) {

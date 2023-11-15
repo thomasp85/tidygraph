@@ -8,7 +8,7 @@ group_by.tbl_graph <- function(.data, ..., add = FALSE) {
   .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
   d_tmp <- group_by(d_tmp, ..., .add = add)
-  apply_groups(.data, attributes(d_tmp))
+  apply_groups(.data, d_tmp)
 }
 #' @export
 #' @importFrom dplyr group_by
@@ -99,8 +99,9 @@ dplyr::group_keys
 is.grouped_tbl_graph <- function(x) {
   inherits(x, 'grouped_tbl_graph')
 }
-apply_groups <- function(graph, attributes) {
-  attr(graph, paste0(active(graph), '_group_attr')) <- attributes
+apply_groups <- function(graph, group) {
+  graph <- set_graph_data(graph, ungroup(group))
+  attr(graph, paste0(active(graph), '_group_attr')) <- attributes(group)
   if (!is.grouped_tbl_graph(graph)) {
     class(graph) <- c('grouped_tbl_graph', class(graph))
   }
