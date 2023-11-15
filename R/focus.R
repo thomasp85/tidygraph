@@ -50,15 +50,6 @@ focus.tbl_graph <- function(.data, ...) {
 
 #' @rdname focus
 #' @export
-focus.grouped_tbl_graph <- function(.data, ...) {
-  old_attr <- attributes(as_tibble(.data))
-  .data <- NextMethod()
-  new_attr <- regroup(as_tibble(.data), old_attr)
-  apply_groups(.data, new_attr)
-}
-
-#' @rdname focus
-#' @export
 focus.morphed_tbl_graph <- function(.data, ...) {
   .data[] <- lapply(.data, focus, ...)
   .data
@@ -81,12 +72,6 @@ unfocus.tbl_graph <- function(.data, ...) {
 unfocus.focused_tbl_graph <- function(.data, ...) {
   attr(.data, paste0(active(.data), '_focus_index')) <- NULL
   class(.data) <- setdiff(class(.data), 'focused_tbl_graph')
-  if (is.grouped_tbl_graph(.data)) {
-    df <- as_tibble(.data)
-    old_attr <- attributes(df)
-    new_attr <- regroup(df, old_attr)
-    .data <- apply_groups(.data, new_attr)
-  }
   .data
 }
 
