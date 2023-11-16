@@ -76,3 +76,5 @@ test_that("grouping with fixed number of groups", {
     get_number_of_groups(gr, group_walktrap(n_groups = 7)), 7
   )
 })
+
+test_empty_context()

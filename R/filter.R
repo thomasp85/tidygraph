@@ -2,6 +2,7 @@
 #' @importFrom dplyr filter
 #' @importFrom igraph delete_vertices delete_edges
 filter.tbl_graph <- function(.data, ...) {
+  .data <- unfocus(.data)
   .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
   if ('.tbl_graph_index' %in% names(d_tmp)) {

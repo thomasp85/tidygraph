@@ -61,7 +61,7 @@ centrality_alpha <- function(weights = NULL, alpha = 1, exo = 1, tol = 1e-7, loo
   }
   exo <- enquo(exo)
   exo <- eval_tidy(exo, .N())
-  alpha_centrality(graph = graph, nodes = V(graph), alpha = alpha, exo = exo, weights = weights, tol = tol, loops = loops)
+  alpha_centrality(graph = graph, nodes = focus_ind(graph), alpha = alpha, exo = exo, weights = weights, tol = tol, loops = loops)
 }
 #' @describeIn centrality Wrapper for [igraph::authority_score()]
 #' @importFrom igraph authority_score
@@ -73,7 +73,8 @@ centrality_authority <- function(weights = NULL, scale = TRUE, options = igraph:
   if (is.null(weights)) {
     weights <- NA
   }
-  authority_score(graph = .G(), scale = scale, weights = weights, options = options)$vector
+  graph <- .G()
+  authority_score(graph = graph, scale = scale, weights = weights, options = options)$vector[focus_ind(graph)]
 }
 #' @describeIn centrality Wrapper for [igraph::betweenness()]
 #' @importFrom igraph V betweenness
@@ -88,7 +89,7 @@ centrality_betweenness <- function(weights = NULL, directed = TRUE, cutoff = -1,
     weights <- NA
   }
   cutoff <- cutoff %||% -1
-  betweenness(graph = graph, v = V(graph), directed = directed, cutoff = cutoff, weights = weights, normalized = normalized)
+  betweenness(graph = graph, v = focus_ind(graph), directed = directed, cutoff = cutoff, weights = weights, normalized = normalized)
 
 }
 #' @describeIn centrality Wrapper for [igraph::power_centrality()]
@@ -97,7 +98,7 @@ centrality_betweenness <- function(weights = NULL, directed = TRUE, cutoff = -1,
 centrality_power <- function(exponent = 1, rescale = FALSE, tol = 1e-7, loops = FALSE) {
   expect_nodes()
   graph <- .G()
-  power_centrality(graph = graph, nodes = V(graph), exponent = exponent, loops = loops, rescale = rescale, tol = tol)
+  power_centrality(graph = graph, nodes = focus_ind(graph), exponent = exponent, loops = loops, rescale = rescale, tol = tol)
 }
 #' @describeIn centrality Wrapper for [igraph::closeness()]
 #' @importFrom igraph V closeness
@@ -112,7 +113,7 @@ centrality_closeness <- function(weights = NULL, mode = 'out', normalized = FALS
     weights <- NA
   }
   cutoff <- cutoff %||% -1
-  closeness(graph = graph, vids = V(graph), mode = mode, cutoff = cutoff, weights = weights, normalized = normalized)
+  closeness(graph = graph, vids = focus_ind(graph), mode = mode, cutoff = cutoff, weights = weights, normalized = normalized)
 }
 #' @describeIn centrality Wrapper for [igraph::eigen_centrality()]
 #' @importFrom igraph eigen_centrality
@@ -124,7 +125,8 @@ centrality_eigen <- function(weights = NULL, directed = FALSE, scale = TRUE, opt
   if (is.null(weights)) {
     weights <- NA
   }
-  eigen_centrality(graph = .G(), directed = directed, scale = scale, weights = weights, options = options)$vector
+  graph <- .G()
+  eigen_centrality(graph = graph, directed = directed, scale = scale, weights = weights, options = options)$vector[focus_ind(graph)]
 }
 #' @describeIn centrality Wrapper for [igraph::hub_score()]
 #' @importFrom igraph hub_score
@@ -136,7 +138,8 @@ centrality_hub <- function(weights = NULL, scale = TRUE, options = igraph::arpac
   if (is.null(weights)) {
     weights <- NA
   }
-  hub_score(graph = .G(), scale = scale, weights = weights, options = options)$vector
+  graph <- .G()
+  hub_score(graph = graph, scale = scale, weights = weights, options = options)$vector[focus_ind(graph)]
 }
 #' @describeIn centrality Wrapper for [igraph::page_rank()]
 #' @importFrom igraph V page_rank
@@ -151,14 +154,15 @@ centrality_pagerank <- function(weights = NULL, directed = TRUE, damping = 0.85,
   }
   personalized <- enquo(personalized)
   personalized <- eval_tidy(personalized, .N())
-  page_rank(graph = graph, vids = V(graph), directed = directed, damping = damping, personalized = personalized, weights = weights)$vector
+  page_rank(graph = graph, vids = focus_ind(graph), directed = directed, damping = damping, personalized = personalized, weights = weights)$vector
 }
 #' @describeIn centrality Wrapper for [igraph::subgraph_centrality()]
 #' @importFrom igraph subgraph_centrality
 #' @export
 centrality_subgraph <- function(loops = FALSE) {
   expect_nodes()
-  subgraph_centrality(graph = .G(), diag = loops)
+  graph <- .G()
+  subgraph_centrality(graph = graph, diag = loops)[focus_ind(graph)]
 }
 #' @describeIn centrality Wrapper for [igraph::degree()] and [igraph::strength()]
 #' @importFrom igraph V degree strength
@@ -173,9 +177,9 @@ centrality_degree <- function(weights = NULL, mode = 'out', loops = TRUE, normal
     weights <- NA
   }
   if (is.null(weights)) {
-    degree(graph = graph, v = V(graph), mode = mode, loops = loops, normalized = normalized)
+    degree(graph = graph, v = focus_ind(graph), mode = mode, loops = loops, normalized = normalized)
   } else {
-    strength(graph = graph, vids = V(graph), mode = mode, loops = loops, weights = weights)
+    strength(graph = graph, vids = focus_ind(graph), mode = mode, loops = loops, weights = weights)
   }
 }
 #' @describeIn centrality Wrapper for [igraph::edge_betweenness()]
@@ -192,7 +196,7 @@ centrality_edge_betweenness <- function(weights = NULL, directed = TRUE, cutoff 
   }
 
   cutoff <- cutoff %||% -1
-  edge_betweenness(graph = graph, e = E(graph), directed = directed, cutoff = cutoff, weights = weights)
+  edge_betweenness(graph = graph, e = focus_ind(graph), directed = directed, cutoff = cutoff, weights = weights)
 }
 #' @describeIn centrality Manually specify your centrality score using the `netrankr` framework (`netrankr`)
 #' @param relation The indirect relation measure type to be used in `netrankr::indirect_relations`
@@ -207,7 +211,7 @@ centrality_manual <- function(relation = 'dist_sp', aggregation = 'sum', ...) {
     cli::cli_abort("Centrality measures based on the {.pkg netrankr} package only works on undirected networks")
   }
   rel <- netrankr::indirect_relations(graph, type = relation, ...)
-  netrankr::aggregate_positions(rel, type = aggregation)
+  netrankr::aggregate_positions(rel, type = aggregation)[focus_ind(graph)]
 }
 #' @describeIn centrality centrality based on inverse shortest path (`netrankr`)
 #' @export
@@ -313,5 +317,5 @@ centrality_expected <- function() {
   graph <- .G()
   P <- netrankr::neighborhood_inclusion(graph)
   ranks <- netrankr::exact_rank_prob(P)
-  ranks$expected.rank
+  ranks$expected.rank[focus_ind(graph)]
 }

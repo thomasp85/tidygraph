@@ -11,3 +11,5 @@ test_that("nodes and edges are grouped", {
   expect_s3_class(as_tibble(gr), 'grouped_df')
   expect_false(dplyr::is_grouped_df(as_tibble(gr, 'nodes')))
 })
+
+test_empty_context()

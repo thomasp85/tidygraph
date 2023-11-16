@@ -3,6 +3,7 @@
 #' @importFrom igraph delete_vertices delete_edges
 #' @importFrom rlang enquo
 sample_n.tbl_graph <- function(tbl, size = 1, replace = FALSE, weight = NULL, .env = parent.frame(), ...) {
+  tbl <- unfocus(tbl)
   d_tmp <- as_tibble(tbl)
   weight <- enquo(weight)
   if ('.tbl_graph_index' %in% names(d_tmp)) {

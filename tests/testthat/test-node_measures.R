@@ -35,6 +35,26 @@ test_that("Node measures return correct length", {
   expect_length(get_val(gr, node_eccentricity()), igraph::gorder(gr))
   expect_length(get_val(tree, node_topo_order()), igraph::gorder(tree))
 })
+test_that("Node measures return correct length for focus", {
+  tree <- create_tree(10, 2) %>%
+    activate(edges) %>%
+    mutate(w = seq_len(n())) %>%
+    activate(nodes) |>
+    focus(dplyr::row_number() < 3)
+  gr <- create_notable('meredith') %>%
+    activate(edges) %>%
+    mutate(w = seq_len(n())) %>%
+    activate(nodes) |>
+    focus(dplyr::row_number() < 3)
+  gr_u <- convert(gr, to_undirected) |>
+    focus(dplyr::row_number() < 3)
+  expect_length(get_val(gr, node_constraint()), 2)
+  expect_length(get_val(gr, node_coreness()), 2)
+  expect_length(get_val(gr_u, node_diversity(w)), 2)
+  expect_length(get_val(tree, node_dominator(node_is_root())), 2)
+  expect_length(get_val(gr, node_eccentricity()), 2)
+  expect_length(get_val(tree, node_topo_order()), 2)
+})
 test_that("Node measures requires active nodes", {
   tree <- create_tree(10, 2) %>%
     activate(edges) %>%
@@ -50,3 +70,5 @@ test_that("Node measures requires active nodes", {
   expect_error(get_val(gr, node_eccentricity()))
   expect_error(get_val(tree, node_topo_order()))
 })
+
+test_empty_context()

@@ -14,7 +14,8 @@ be ungrouped prior to rerouting}
 be changed}
 
 \item{subset}{An expression evaluating to an indexing vector in the context
-of the edge data.}
+of the edge data. If \code{NULL} it will use focused edges if available or all
+edges}
 }
 \value{
 An object of the same class as .data

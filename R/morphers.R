@@ -63,11 +63,11 @@ to_subgraph <- function(graph, ..., subset_by = NULL) {
 #' @describeIn morphers Convert a graph to a single component containing the specified node
 #' @param node The center of the neighborhood for `to_local_neighborhood()` and
 #' the node to that should be included in the component for `to_subcomponent()`
-#' @importFrom igraph gorder components
+#' @importFrom igraph components
 #' @export
 to_subcomponent <- function(graph, node) {
   node <- eval_tidy(enquo(node), as_tibble(graph, 'nodes'))
-  node <- as_ind(node, gorder(graph))
+  node <- as_node_ind(node, graph)
   if (length(node) != 1) cli::cli_abort('{.arg node} must identify a single node in the graph')
   component_membership <- components(graph)$membership == components(graph)$membership[node]
   to_subgraph(graph, component_membership, subset_by = 'nodes')
@@ -130,11 +130,11 @@ to_complement <- function(graph, loops = FALSE) {
 #' @param mode How should edges be followed? `'out'` only follows outbound
 #' edges, `'in'` only follows inbound edges, and `'all'` follows all edges. This
 #' parameter is ignored for undirected graphs.
-#' @importFrom igraph make_ego_graph gorder
+#' @importFrom igraph make_ego_graph
 #' @export
 to_local_neighborhood <- function(graph, node, order = 1, mode = 'all') {
   node <- eval_tidy(enquo(node), as_tibble(graph, 'nodes'))
-  node <- as_ind(node, gorder(graph))
+  node <- as_node_ind(node, graph)
   ego <- make_ego_graph(graph, order = order, nodes = node, mode = mode)
   list(
     neighborhood = as_tbl_graph(ego[[1]])
@@ -143,11 +143,11 @@ to_local_neighborhood <- function(graph, node, order = 1, mode = 'all') {
 #' @describeIn morphers Convert a graph into its dominator tree based on a
 #' specific root. When unmorphing only node data will get merged back.
 #' @param root The root of the tree
-#' @importFrom igraph dominator_tree gorder
+#' @importFrom igraph dominator_tree
 #' @export
 to_dominator_tree <- function(graph, root, mode = 'out') {
   root <- eval_tidy(enquo(root), as_tibble(graph, 'nodes'))
-  root <- as_ind(root, gorder(graph))
+  root <- as_node_ind(root, graph)
   dom <- dominator_tree(graph, root = root, mode = mode)
   list(
     dominator_tree = as_tbl_graph(dom$domtree)
@@ -170,15 +170,15 @@ to_minimum_spanning_tree <- function(graph, weights = NULL) {
 #' @describeIn morphers Limit a graph to the shortest path between two nodes.
 #' When unmorphing all data is merged back.
 #' @param from,to The start and end node of the path
-#' @importFrom igraph shortest_paths gorder
+#' @importFrom igraph shortest_paths
 #' @importFrom rlang enquo eval_tidy
 #' @export
 to_shortest_path <- function(graph, from, to, mode = 'out', weights = NULL) {
   nodes <- as_tibble(graph, 'nodes')
   from <- eval_tidy(enquo(from), nodes)
-  from <- as_ind(from, gorder(graph))
+  from <- as_node_ind(from, graph)
   to <- eval_tidy(enquo(to), nodes)
-  to <- as_ind(to, gorder(graph))
+  to <- as_node_ind(to, graph)
   weights <- eval_tidy(enquo(weights), as_tibble(graph, active = 'edges'))
   if (is.null(weights)) {
     weights <- NA
@@ -194,11 +194,11 @@ to_shortest_path <- function(graph, from, to, mode = 'out', weights = NULL) {
 #' a specific root. When unmorphing only node data is merged back.
 #' @param unreachable Should the search jump to a node in a new component when
 #' stuck.
-#' @importFrom igraph bfs gorder
+#' @importFrom igraph bfs
 #' @export
 to_bfs_tree <- function(graph, root, mode = 'out', unreachable = FALSE) {
   root <- eval_tidy(enquo(root), as_tibble(graph, 'nodes'))
-  root <- as_ind(root, gorder(graph))
+  root <- as_node_ind(root, graph)
   search <- bfs(graph, root, mode = mode, unreachable = unreachable, father = TRUE)
   bfs_graph <- search_to_graph(graph, search)
   list(
@@ -207,11 +207,11 @@ to_bfs_tree <- function(graph, root, mode = 'out', unreachable = FALSE) {
 }
 #' @describeIn morphers Convert a graph into a depth-first search tree based on
 #' a specific root. When unmorphing only node data is merged back.
-#' @importFrom igraph bfs gorder
+#' @importFrom igraph bfs
 #' @export
 to_dfs_tree <- function(graph, root, mode = 'out', unreachable = FALSE) {
   root <- eval_tidy(enquo(root), as_tibble(graph, 'nodes'))
-  root <- as_ind(root, gorder(graph))
+  root <- as_node_ind(root, graph)
   search <- dfs(graph, root, mode = mode, unreachable = unreachable, father = TRUE)
   dfs_graph <- search_to_graph(graph, search)
   list(
@@ -269,7 +269,7 @@ to_contracted <- function(graph, ..., simplify = TRUE) {
 #' @export
 to_unfolded_tree <- function(graph, root, mode = 'out') {
   root <- eval_tidy(enquo(root), as_tibble(graph, 'nodes'))
-  roots <- as_ind(root, gorder(graph))
+  roots <- as_node_ind(root, graph)
   unfolded <- unfold_tree(graph, mode, roots)
   tree <- as_tbl_graph(unfolded$tree)
   tree <- set_node_attributes(tree, as_tibble(graph, 'nodes')[unfolded$vertex_index, ])

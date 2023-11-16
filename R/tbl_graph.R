@@ -76,7 +76,7 @@ is.tbl_graph <- function(x) {
 }
 
 new_name_tibble <- function(x, active = NULL, name = "A tibble", suffix = "") {
-  x <- as_tibble(x, active)
+  x <- as_tibble(x, active, focused = FALSE)
   attr(x, "name") <- name
   attr(x, "suffix") <- suffix
   class(x) <- c("named_tbl", class(x))
@@ -109,6 +109,9 @@ print.tbl_graph <- function(x, ..., n_non_active = 3) {
   cat_subtle('#\n')
   cat_subtle('# ', graph_desc, '\n', sep = '')
   cat_subtle('#\n')
+  if (is.focused_tbl_graph(x)) {
+    cat_subtle('# Focused on ', length(focus_ind(x)), ' ', active(x), '\n')
+  }
   print(new_name_tibble(x, NULL, top, " (active)"), ...)
   cat_subtle('#\n')
   print(new_name_tibble(x, not_active, bottom, ""), n = n_non_active)
@@ -194,15 +197,21 @@ set_graph_data.tbl_graph <- function(x, value, active = NULL) {
 }
 set_graph_data.grouped_tbl_graph <- function(x, value, active = NULL) {
   x <- NextMethod()
-  apply_groups(x, attributes(value))
+  apply_groups(x, value)
 }
 #' @importFrom igraph vertex_attr<-
 set_node_attributes <- function(x, value) {
+  if (is.focused_tbl_graph(x)) {
+    value <- merge_into(value, as_tibble(x, active = 'nodes', focused = FALSE), focus_ind(x, 'nodes'))
+  }
   vertex_attr(x) <- as.list(value)
   x
 }
 #' @importFrom igraph edge_attr<-
 set_edge_attributes <- function(x, value) {
+  if (is.focused_tbl_graph(x)) {
+    value <- merge_into(value, as_tibble(x, active = 'edges', focused = FALSE), focus_ind(x, 'edges'))
+  }
   value <- value[, !names(value) %in% c('from', 'to')]
   edge_attr(x) <- as.list(value)
   x
@@ -214,3 +223,11 @@ tbl_vars.tbl_graph <- function(x) {
 }
 #' @export
 dplyr::tbl_vars
+
+merge_into <- function(new, old, index) {
+  order <- new[integer(0), , drop = FALSE]
+  old <- bind_rows(order, old)
+  old[, !names(old) %in% names(new)] <- NULL
+  old[index, ] <- new
+  old
+}

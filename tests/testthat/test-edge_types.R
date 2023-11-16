@@ -25,6 +25,21 @@ test_that("edge types return correct length", {
   expect_length(get_type(gr, edge_is_mutual()), igraph::gsize(gr))
   expect_length(get_type(gr, edge_is_bridge()), igraph::gsize(gr))
 })
+
+test_that("edge types return correct length for focus", {
+  gr <- create_notable('bull') %>%
+    activate(edges) %>%
+    bind_edges(tibble::tibble(
+      to = c(1, 1, 3, 4),
+      from = c(1, 3, 1, 2)
+    )) |>
+    focus(dplyr::row_number() < 3)
+  expect_length(get_type(gr, edge_is_loop()), 2)
+  expect_length(get_type(gr, edge_is_multiple()), 2)
+  expect_length(get_type(gr, edge_is_mutual()), 2)
+  expect_length(get_type(gr, edge_is_bridge()), 2)
+})
+
 test_that("edge types require edge active", {
   gr <- create_notable('bull') %>%
     activate(nodes) %>%
@@ -37,3 +52,5 @@ test_that("edge types require edge active", {
   expect_error(get_type(gr, edge_is_mutual()))
   expect_error(get_type(gr, edge_is_bridge()))
 })
+
+test_empty_context()

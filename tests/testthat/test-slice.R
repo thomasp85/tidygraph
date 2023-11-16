@@ -23,3 +23,5 @@ test_that("slicing edges works", {
   expect_equal(slice_min(gr, val, n = 6) %>% pull(id), sort(order(e_val)[1:6]))
   expect_equal(slice_max(gr, val, n = 6) %>% pull(id), sort(order(e_val, decreasing = TRUE)[1:6]))
 })
+
+test_empty_context()

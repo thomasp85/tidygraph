@@ -18,7 +18,9 @@
 #' initial groups. Will be evaluated in the context of the node data.
 #' @param type The type of component to find. Either `'weak'` or `'strong'`
 #' @param directed Should direction of edges be used for the calculations
-#' @param n_groups Integer scalar, the desired number of communities. If too low or two high, then an error message is given.
+#' @param n_groups Integer scalar, the desired number of communities. If too low
+#' or two high, then an error message is given. The measure is applied to the
+#' full graph so the number of groups returned may be lower for focused graphs
 #' @param trials Number of times partition of the network should be attempted
 #' @param steps The number of steps in the random walks
 #' @param options Settings passed on to `igraph::arpack()`
@@ -44,7 +46,7 @@ NULL
 #' @export
 group_components <- function(type = 'weak') {
   expect_nodes()
-  group <- as.integer(components(graph = .G(), mode = type)$membership)
+  group <- as.integer(components(graph = .G(), mode = type)$membership[focus_ind(.G())])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group densely connected nodes using [igraph::cluster_edge_betweenness()]
@@ -61,7 +63,7 @@ group_edge_betweenness <- function(weights = NULL, directed = TRUE, n_groups = N
   } else {
     group <- cut_at(group, no = n_groups)
   }
-  group <- as.integer(group)
+  group <- as.integer(group[focus_ind(.G())])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by optimising modularity using [igraph::cluster_fast_greedy()]
@@ -78,7 +80,7 @@ group_fast_greedy <- function(weights = NULL, n_groups = NULL) {
   } else {
     group <- cut_at(group, no = n_groups)
   }
-  group <- as.integer(group)
+  group <- as.integer(group[focus_ind(.G())])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by minimizing description length using [igraph::cluster_infomap()]
@@ -93,7 +95,7 @@ group_infomap <- function(weights = NULL, node_weights = NULL, trials = 10) {
   }
   node_weights <- enquo(node_weights)
   node_weights <- eval_tidy(node_weights, .N())
-  group <- as.integer(membership(cluster_infomap(graph = .G(), e.weights = weights, v.weights = node_weights, nb.trials = trials)))
+  group <- as.integer(membership(cluster_infomap(graph = .G(), e.weights = weights, v.weights = node_weights, nb.trials = trials))[focus_ind(.G())])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by propagating labels using [igraph::cluster_label_prop()]
@@ -111,7 +113,7 @@ group_label_prop <- function(weights = NULL, label = NULL, fixed = NULL) {
   label <- eval_tidy(label, N)
   fixed <- enquo(fixed)
   fixed <- eval_tidy(fixed, N)
-  group <- as.integer(membership(cluster_label_prop(graph = .G(), weights = weights, initial = label, fixed = fixed)))
+  group <- as.integer(membership(cluster_label_prop(graph = .G(), weights = weights, initial = label, fixed = fixed))[focus_ind(.G())])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes based on the leading eigenvector of the modularity matrix using [igraph::cluster_leading_eigen()]
@@ -132,7 +134,7 @@ group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, option
   } else {
     group <- cut_at(group, no = n_groups)
   }
-  group <- as.integer(group)
+  group <- as.integer(group[focus_ind(.G())])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by multilevel optimisation of modularity using [igraph::cluster_louvain()]
@@ -145,7 +147,7 @@ group_louvain <- function(weights = NULL, resolution = 1) {
   if (is.null(weights)) {
     weights <- NA
   }
-  group <- as.integer(membership(cluster_louvain(graph = .G(), weights = weights, resolution = resolution)))
+  group <- as.integer(membership(cluster_louvain(graph = .G(), weights = weights, resolution = resolution))[focus_ind(.G())])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes by optimising the moldularity score using [igraph::cluster_optimal()]
@@ -158,7 +160,7 @@ group_optimal <- function(weights = NULL) {
   if (is.null(weights)) {
     weights <- NA
   }
-  group <- as.integer(membership(cluster_optimal(graph = .G(), weights = weights)))
+  group <- as.integer(membership(cluster_optimal(graph = .G(), weights = weights))[focus_ind(.G())])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes using simulated annealing with [igraph::cluster_spinglass()]
@@ -171,7 +173,7 @@ group_spinglass <- function(weights = NULL, ...) {
   if (is.null(weights)) {
     weights <- NA
   }
-  group <- as.integer(membership(cluster_spinglass(graph = .G(), weights = weights, vertex = NULL, ...)))
+  group <- as.integer(membership(cluster_spinglass(graph = .G(), weights = weights, vertex = NULL, ...))[focus_ind(.G())])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes via short random walks using [igraph::cluster_walktrap()]
@@ -187,7 +189,7 @@ group_walktrap <- function(weights = NULL, steps = 4, n_groups = NULL) {
   } else {
     group <- cut_at(group, no = n_groups)
   }
-  group <- as.integer(group)
+  group <- as.integer(group[focus_ind(.G())])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group edges by their membership of the maximal binconnected components using [igraph::biconnected_components()]
@@ -198,7 +200,7 @@ group_biconnected_component <- function() {
   graph <- .G()
   comp <- biconnected_components(graph)
   ind <- lapply(comp$component_edges, as.integer)
-  group <- rep(seq_along(ind), lengths(ind))[order(unlist(ind))]
+  group <- rep(seq_along(ind), lengths(ind))[order(unlist(ind))][focus_ind(.G())]
   desc_enumeration(group)
 }
 

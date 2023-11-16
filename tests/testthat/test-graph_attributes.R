@@ -8,3 +8,5 @@ test_that("attributes are applied correctly", {
   expect_equal(attributes(gr1), attributes(gr2))
   expect_equal(graph_attr(gr1), graph_attr(gr2))
 })
+
+test_empty_context()

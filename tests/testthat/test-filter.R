@@ -11,3 +11,5 @@ test_that("filter works", {
     pull(id)
   expect_equal(id_edges, 1:3)
 })
+
+test_empty_context()

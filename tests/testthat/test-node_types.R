@@ -27,6 +27,20 @@ test_that("node types return vector of correct length", {
   expect_length(get_type(gr, node_is_universal()), igraph::gorder(gr))
   expect_length(get_type(gr, node_is_connected(1:4)), igraph::gorder(gr))
 })
+test_that("node types return vector of correct length for focus", {
+  gr <- create_tree(10, 2) |>
+    focus(dplyr::row_number() < 3)
+  expect_length(get_type(gr, node_is_center()), 2)
+  expect_length(get_type(gr, node_is_cut()), 2)
+  expect_length(get_type(gr, node_is_isolated()), 2)
+  expect_length(get_type(gr, node_is_leaf()), 2)
+  expect_length(get_type(gr, node_is_root()), 2)
+  expect_length(get_type(gr, node_is_simplical()), 2)
+  expect_length(get_type(gr, node_is_sink()), 2)
+  expect_length(get_type(gr, node_is_source()), 2)
+  expect_length(get_type(gr, node_is_universal()), 2)
+  expect_length(get_type(gr, node_is_connected(1:4)), 2)
+})
 test_that("node types require active nodes", {
   gr <- create_tree(10, 2) %>% activate(edges)
   expect_error(get_type(gr, node_is_center()))
@@ -40,3 +54,5 @@ test_that("node types require active nodes", {
   expect_error(get_type(gr, node_is_universal()))
   expect_error(get_type(gr, node_is_connected(1:4)))
 })
+
+test_empty_context()

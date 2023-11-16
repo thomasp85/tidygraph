@@ -12,6 +12,7 @@ dplyr::left_join
 #' @importFrom stats na.omit
 #' @export
 right_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
+  x <- unfocus(x)
   d_tmp <- as_tibble(x)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
     cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
@@ -42,6 +43,7 @@ dplyr::right_join
 #' @importFrom dplyr inner_join
 #' @export
 inner_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
+  x <- unfocus(x)
   d_tmp <- as_tibble(x)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
     cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
@@ -60,6 +62,7 @@ dplyr::inner_join
 #' @importFrom igraph add_vertices add_edges
 #' @export
 full_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
+  x <- unfocus(x)
   d_tmp <- as_tibble(x)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
     cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
@@ -86,6 +89,7 @@ dplyr::full_join
 #' @importFrom dplyr semi_join
 #' @export
 semi_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, ...) {
+  x <- unfocus(x)
   d_tmp <- as_tibble(x)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
     cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
@@ -101,6 +105,7 @@ dplyr::semi_join
 #' @importFrom dplyr anti_join
 #' @export
 anti_join.tbl_graph <- function(x, y, by = NULL, copy = FALSE, ...) {
+  x <- unfocus(x)
   d_tmp <- as_tibble(x)
   if ('.tbl_graph_index' %in% names(d_tmp)) {
     cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
@@ -141,6 +146,7 @@ dplyr::anti_join
 #'
 #' gr1 %>% graph_join(gr2)
 graph_join <- function(x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...) {
+  x <- unfocus(x)
   if (!is.tbl_graph(x)) cli::cli_abort('{.arg x} must be a {.cls tbl_graph} object')
   y <- as_tbl_graph(y)
 

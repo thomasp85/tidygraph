@@ -1,6 +1,7 @@
 #' @export
 #' @importFrom dplyr arrange
 arrange.tbl_graph <- function(.data, ...) {
+  .data <- unfocus(.data)
   .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
   if ('.tbl_graph_index' %in% names(d_tmp)) {

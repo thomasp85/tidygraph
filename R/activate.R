@@ -42,6 +42,10 @@ activate <- function(.data, what) {
 #' @export
 #' @importFrom rlang enquo quo_text
 activate.tbl_graph <- function(.data, what) {
+  if (is.focused_tbl_graph(.data)) {
+    message('Unfocusing graph...')
+    .data <- unfocus(.data)
+  }
   active(.data) <- quo_text(enquo(what))
   .data
 }
