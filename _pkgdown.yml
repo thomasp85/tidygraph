@@ -42,6 +42,7 @@ reference:
       - bind_graphs
       - graph_join
       - reroute
+      - focus
       - morph
       - to_simple
   - title: Graph creation
