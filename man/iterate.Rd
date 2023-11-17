@@ -35,6 +35,25 @@ function on a graph until some condition is met. This can be used to create
 simple simulations in a tidygraph friendly API
 }
 \examples{
-# Gradually remove edges from the least connected nodes
+# Gradually remove edges from the least connected nodes while avoiding
+# isolates
+create_notable('zachary') |>
+  iterate_n(20, function(gr) {
+    gr |>
+      activate(nodes) |>
+      mutate(deg = centrality_degree(), rank = order(deg)) |>
+      activate(edges) |>
+      slice(
+        -which(edge_is_incident(.N()$rank == sum(.N()$deg == 1) + 1))[1]
+      )
+  })
+
+# Remove a random edge until the graph is split in two
+create_notable('zachary') |>
+  iterate_while(graph_component_count() == 1, function(gr) {
+    gr |>
+      activate(edges) |>
+      slice(-sample(graph_size(), 1))
+  })
 
 }

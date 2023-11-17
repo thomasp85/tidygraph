@@ -86,10 +86,6 @@ is.focused_tbl_graph <- function(x) inherits(x, 'focused_tbl_graph')
 
 # HELPERS -----------------------------------------------------------------
 
-regroup <- function(data, attr) {
-  vars <- lapply(attr$vars, function(v) as_quosure(sym(v)))
-  group_by(data, !!! vars) %@% vars
-}
 apply_focus <- function(graph, index) {
   attr(graph, paste0(active(graph), '_focus_index')) <- index
   if (!is.focused_tbl_graph(graph)) {

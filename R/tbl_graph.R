@@ -75,6 +75,7 @@ is.tbl_graph <- function(x) {
   inherits(x, 'tbl_graph')
 }
 
+#' @importFrom rlang caller_arg
 check_tbl_graph <- function(x, arg = caller_arg(x), call = caller_env()) {
   if (!is.tbl_graph(x)) {
     cli::cli_abort('{.arg {arg}} must be a {.cls tbl_graph} object', call = call)
