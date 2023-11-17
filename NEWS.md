@@ -12,6 +12,9 @@
 * Added `edge_is_bridge()` for querying whether an edge is a bridge edge (#113)
 * Added a `glimpse()` method for `tbl_graph` and `morphed_tbl_graph` objects 
   (#30)
+* Add `iterate_n()` and `iterate_while()` to perform repeated modifications of
+  a graph for a specific number of times or until a condition no longer is met 
+  (#43)
 
 # tidygraph 1.2.3
 
