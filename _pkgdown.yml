@@ -43,6 +43,7 @@ reference:
       - graph_join
       - reroute
       - focus
+      - iterate
       - morph
       - to_simple
   - title: Graph creation
