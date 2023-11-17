@@ -22,6 +22,7 @@
 * `graph_automorphisms()` gains a `color` argument in line with capabilities in
   igraph
 * `graph_mean_dist()` now supports edge weights through a new `weights` argument
+* Added `to_largest_component()` morpher
 
 # tidygraph 1.2.3
 

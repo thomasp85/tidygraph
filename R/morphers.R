@@ -113,6 +113,14 @@ to_components <- function(graph, type = 'weak') {
   graphs <- lapply(graphs, as_tbl_graph)
   graphs
 }
+#' @describeIn morphers Create a new graph only consisting of it's largest
+#' component. If multiple largest components exists, the one with containing the
+#' node with the lowest index is chosen.
+#' @importFrom igraph largest_component
+#' @export
+to_largest_component <- function(graph, type = 'weak') {
+  as_tbl_graph(largest_component(graph, mode = type))
+}
 #' @describeIn morphers Convert a graph into its complement. When unmorphing
 #' only node data will get merged back.
 #' @param loops Should loops be included. Defaults to `FALSE`

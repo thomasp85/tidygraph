@@ -7,6 +7,7 @@
 \alias{to_subcomponent}
 \alias{to_split}
 \alias{to_components}
+\alias{to_largest_component}
 \alias{to_complement}
 \alias{to_local_neighborhood}
 \alias{to_dominator_tree}
@@ -31,6 +32,8 @@ to_subcomponent(graph, node)
 to_split(graph, ..., split_by = NULL)
 
 to_components(graph, type = "weak")
+
+to_largest_component(graph, type = "weak")
 
 to_complement(graph, loops = FALSE)
 
@@ -127,6 +130,10 @@ present in multiple subgraphs).
 
 \item \code{to_components()}: Split a graph into its separate components. When
 unmorphing all data in the subgraphs will get merged back.
+
+\item \code{to_largest_component()}: Create a new graph only consisting of it's largest
+component. If multiple largest components exists, the one with containing the
+node with the lowest index is chosen.
 
 \item \code{to_complement()}: Convert a graph into its complement. When unmorphing
 only node data will get merged back.

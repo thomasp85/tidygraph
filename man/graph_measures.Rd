@@ -27,7 +27,7 @@ graph_adhesion()
 
 graph_assortativity(attr, in_attr = NULL, directed = TRUE)
 
-graph_automorphisms(sh = "fm")
+graph_automorphisms(sh = "fm", color = NULL)
 
 graph_clique_num()
 
@@ -57,7 +57,7 @@ graph_reciprocity(ignore_loops = TRUE, ratio = FALSE)
 
 graph_min_cut(capacity = NULL)
 
-graph_mean_dist(directed = TRUE, unconnected = TRUE)
+graph_mean_dist(directed = TRUE, unconnected = TRUE, weights = NULL)
 
 graph_modularity(group, weights = NULL)
 }
