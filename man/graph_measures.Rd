@@ -27,7 +27,7 @@ graph_adhesion()
 
 graph_assortativity(attr, in_attr = NULL, directed = TRUE)
 
-graph_automorphisms(sh = "fm", color = NULL)
+graph_automorphisms(sh = "fm", colors = NULL)
 
 graph_clique_num()
 
@@ -75,6 +75,13 @@ cell, \sQuote{\code{fm}}: first maximally non-trivially connected
 non-singleton cell, \sQuote{\code{flm}}: first largest maximally
 non-trivially connected non-singleton cell, \sQuote{\code{fsm}}: first
 smallest maximally non-trivially connected non-singleton cell.}
+
+\item{colors}{The colors of the individual vertices of the graph; only
+vertices having the same color are allowed to match each other in an
+automorphism. When omitted, igraph uses the \code{color} attribute of the
+vertices, or, if there is no such vertex attribute, it simply assumes that
+all vertices have the same color. Pass NULL explicitly if the graph has a
+\code{color} vertex attribute but you do not want to use it.}
 
 \item{min, max}{The upper and lower bounds of the cliques to be considered.}
 

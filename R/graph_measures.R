@@ -48,11 +48,11 @@ graph_assortativity <- function(attr, in_attr = NULL, directed = TRUE) {
 #' @inheritParams igraph::count_automorphisms
 #' @importFrom igraph count_automorphisms
 #' @export
-graph_automorphisms <- function(sh = 'fm', color = NULL) {
+graph_automorphisms <- function(sh = 'fm', colors = NULL) {
   graph <- .G()
-  color <- enquo(color)
-  color <- eval_tidy(color, .N())
-  as.numeric(count_automorphisms(graph, color = color, sh = sh)$group_size)
+  colors <- enquo(colors)
+  colors <- eval_tidy(colors, .N())
+  as.numeric(count_automorphisms(graph, colors = colors, sh = sh)$group_size)
 }
 #' @describeIn graph_measures Get the size of the largest clique. Wraps [igraph::clique_num()]
 #' @importFrom igraph clique_num
