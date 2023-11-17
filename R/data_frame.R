@@ -2,6 +2,7 @@
 #' @export
 #' @importFrom igraph graph_from_data_frame
 as_tbl_graph.data.frame <- function(x, directed = TRUE, ...) {
+  x <- as.data.frame(x)
   graph <- switch(
     guess_df_type(x),
     edge_df = as_graph_edge_df(x, directed),

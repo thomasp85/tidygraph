@@ -17,6 +17,8 @@
   (#43)
 * Add `focus()`/`unfocus()` verbs to limit node and edge algorithms to a subset
   while still keeping the full graph context (#18)
+* Data frame subclasses with sticky columns (such as those from sf and tsibble)
+  now works with the tbl_graph constructors (#184)
 
 # tidygraph 1.2.3
 

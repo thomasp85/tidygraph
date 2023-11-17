@@ -66,6 +66,8 @@ as_graph_node_edge <- function(x, directed, node_key = 'name') {
   edges <- x[[which(names(x) %in% c('edges', 'links'))]]
   if (is.null(edges)) {
     edges <- tibble(from = integer(), to = integer())
+  } else {
+    edges <- as.data.frame(edges)
   }
   from_ind <- which(names(edges) == 'from')
   if (length(from_ind) == 0) from_ind <- 1
@@ -89,6 +91,7 @@ as_graph_node_edge <- function(x, directed, node_key = 'name') {
   gr <- graph_from_edgelist(as.matrix(edges[, 1:2]), directed = directed)
   edge_attr(gr) <- as.list(edges[, -c(1:2), drop = FALSE])
   if (!is.null(nodes)) {
+    nodes <- as.data.frame(nodes)
     if (gorder(gr) != nrow(nodes)) {
       gr <- add_vertices(gr, nrow(nodes) - gorder(gr))
     }
