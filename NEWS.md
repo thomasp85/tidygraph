@@ -19,6 +19,8 @@
   while still keeping the full graph context (#18)
 * Data frame subclasses with sticky columns (such as those from sf and tsibble)
   now works with the tbl_graph constructors (#184)
+* `graph_automorphisms()` gains a `color` argument in line with capabilities in
+  igraph
 
 # tidygraph 1.2.3
 

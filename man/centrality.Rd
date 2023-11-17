@@ -197,7 +197,7 @@ all only work on undirected graphs.
 \itemize{
 \item \code{centrality_alpha()}: Wrapper for \code{\link[igraph:alpha_centrality]{igraph::alpha_centrality()}}
 
-\item \code{centrality_authority()}: Wrapper for \code{\link[igraph:authority_score]{igraph::authority_score()}}
+\item \code{centrality_authority()}: Wrapper for \code{\link[igraph:hub_score]{igraph::authority_score()}}
 
 \item \code{centrality_betweenness()}: Wrapper for \code{\link[igraph:betweenness]{igraph::betweenness()}}
 

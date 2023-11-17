@@ -125,7 +125,7 @@ them.
 
 \item \code{graph_assortativity()}: Measures the propensity of similar nodes to be connected. Wraps \code{\link[igraph:assortativity]{igraph::assortativity()}}
 
-\item \code{graph_automorphisms()}: Calculate the number of automorphisms of the graph. Wraps \code{\link[igraph:automorphisms]{igraph::automorphisms()}}
+\item \code{graph_automorphisms()}: Calculate the number of automorphisms of the graph. Wraps \code{\link[igraph:count_automorphisms]{igraph::count_automorphisms()}}
 
 \item \code{graph_clique_num()}: Get the size of the largest clique. Wraps \code{\link[igraph:cliques]{igraph::clique_num()}}
 
