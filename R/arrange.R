@@ -4,9 +4,7 @@ arrange.tbl_graph <- function(.data, ...) {
   .data <- unfocus(.data)
   .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
-  if ('.tbl_graph_index' %in% names(d_tmp)) {
-    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
-  }
+  check_reserved(d_tmp)
   orig_ind <- seq_len(nrow(d_tmp))
   d_tmp$.tbl_graph_index <- orig_ind
   d_tmp <- arrange(d_tmp, ...)

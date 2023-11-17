@@ -6,9 +6,7 @@ distinct.tbl_graph <- function(.data, ..., .keep_all = FALSE) {
   .data <- unfocus(.data)
   .register_graph_context(.data)
   d_tmp <- as_tibble(.data)
-  if ('.tbl_graph_index' %in% names(d_tmp)) {
-    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved')
-  }
+  check_reserved(d_tmp)
   orig_ind <- seq_len(nrow(d_tmp))
   dot_list <- quos(..., .named = TRUE)
   if (length(dot_list) == 0) {

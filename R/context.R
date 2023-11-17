@@ -3,7 +3,7 @@ ContextBuilder <- R6Class(
   'ContextBuilder',
   public = list(
     set = function(graph) {
-      if (!is.tbl_graph(graph)) cli::cli_abort('{.arg graph} must be a {.cls tbl_graph} object')
+      check_tbl_graph(graph)
       private$context <- c(private$context, list(graph))
       invisible(self)
     },
@@ -114,7 +114,7 @@ NULL
 #' @export
 #' @keywords internal
 .register_graph_context <- function(graph, free = FALSE, env = parent.frame()) {
-  if (!is.tbl_graph(graph)) cli::cli_abort('{.arg graph} must be a {.cls tbl_graph} object')
+  check_tbl_graph(graph)
   if (identical(env, .GlobalEnv)) {
     cli::cli_abort('A context cannot be registered to the global environment')
   }

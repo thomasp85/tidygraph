@@ -75,6 +75,18 @@ is.tbl_graph <- function(x) {
   inherits(x, 'tbl_graph')
 }
 
+check_tbl_graph <- function(x, arg = caller_arg(x), call = caller_env()) {
+  if (!is.tbl_graph(x)) {
+    cli::cli_abort('{.arg {arg}} must be a {.cls tbl_graph} object', call = call)
+  }
+}
+
+check_reserved <- function(x, call = caller_env()) {
+  if (any(names(x) == '.tbl_graph_index')) {
+    cli::cli_abort('The attribute name {.field .tbl_graph_index} is reserved', call = call)
+  }
+}
+
 new_name_tibble <- function(x, active = NULL, name = "A tibble", suffix = "") {
   x <- as_tibble(x, active, focused = FALSE)
   attr(x, "name") <- name

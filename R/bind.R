@@ -73,7 +73,7 @@ bind_graphs <- function(.data, ...) {
 #' @export
 bind_nodes <- function(.data, ...) {
   .data <- unfocus(.data)
-  if (!is.tbl_graph(.data)) cli::cli_abort('{.arg .data} must be a {.cls tbl_graph} object')
+  check_tbl_graph(.data)
   d_tmp <- as_tibble(.data, acitve = 'nodes')
   new_nodes <- bind_rows(d_tmp, ...)
   .data <- add_vertices(.data, nrow(new_nodes) - nrow(d_tmp)) %gr_attr% .data
@@ -86,7 +86,7 @@ bind_nodes <- function(.data, ...) {
 #' @export
 bind_edges <- function(.data, ..., node_key = 'name') {
   .data <- unfocus(.data)
-  if (!is.tbl_graph(.data)) cli::cli_abort('{.arg .data} must be a {.cls tbl_graph} object')
+  check_tbl_graph(.data)
   d_tmp <- as_tibble(.data, active = 'edges')
   nodes <- as_tibble(.data, active = 'nodes')
   if (is.na(node_key)) {
