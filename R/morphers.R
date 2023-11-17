@@ -119,7 +119,9 @@ to_components <- function(graph, type = 'weak') {
 #' @importFrom igraph largest_component
 #' @export
 to_largest_component <- function(graph, type = 'weak') {
-  as_tbl_graph(largest_component(graph, mode = type))
+  list(
+    largest_component = as_tbl_graph(largest_component(graph, mode = type))
+  )
 }
 #' @describeIn morphers Convert a graph into its complement. When unmorphing
 #' only node data will get merged back.
@@ -173,6 +175,15 @@ to_minimum_spanning_tree <- function(graph, weights = NULL) {
   mst <- mst(graph, weights = weights, algorithm = algorithm)
   list(
     mst = as_tbl_graph(mst)
+  )
+}
+#' @describeIn morphers Convert a graph into a random spanning tree/forest. When
+#' unmorphing all data will get merged back
+#' @importFrom igraph subgraph.edges sample_spanning_tree
+#' @export
+to_random_spanning_tree <- function(graph) {
+  list(
+    spanning_tree = as_tbl_graph(subgraph.edges(graph, sample_spanning_tree(graph)))
   )
 }
 #' @describeIn morphers Limit a graph to the shortest path between two nodes.

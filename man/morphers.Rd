@@ -12,6 +12,7 @@
 \alias{to_local_neighborhood}
 \alias{to_dominator_tree}
 \alias{to_minimum_spanning_tree}
+\alias{to_random_spanning_tree}
 \alias{to_shortest_path}
 \alias{to_bfs_tree}
 \alias{to_dfs_tree}
@@ -31,7 +32,7 @@ to_subcomponent(graph, node)
 
 to_split(graph, ..., split_by = NULL)
 
-to_components(graph, type = "weak")
+to_components(graph, type = "weak", min_order = 1)
 
 to_largest_component(graph, type = "weak")
 
@@ -42,6 +43,8 @@ to_local_neighborhood(graph, node, order = 1, mode = "all")
 to_dominator_tree(graph, root, mode = "out")
 
 to_minimum_spanning_tree(graph, weights = NULL)
+
+to_random_spanning_tree(graph)
 
 to_shortest_path(graph, from, to, mode = "out", weights = NULL)
 
@@ -74,6 +77,9 @@ and \code{\link[igraph:cluster_edge_betweenness]{igraph::cluster_edge_betweennes
 the node to that should be included in the component for \code{to_subcomponent()}}
 
 \item{type}{The type of component to split into. Either \code{'weak'} or \code{'strong'}}
+
+\item{min_order}{The minimum order (number of vertices) of the component.
+Components below this will not be created}
 
 \item{loops}{Should loops be included. Defaults to \code{FALSE}}
 
@@ -146,6 +152,9 @@ specific root. When unmorphing only node data will get merged back.
 
 \item \code{to_minimum_spanning_tree()}: Convert a graph into its minimum spanning tree/forest.
 When unmorphing all data will get merged back.
+
+\item \code{to_random_spanning_tree()}: Convert a graph into a random spanning tree/forest. When
+unmorphing all data will get merged back
 
 \item \code{to_shortest_path()}: Limit a graph to the shortest path between two nodes.
 When unmorphing all data is merged back.

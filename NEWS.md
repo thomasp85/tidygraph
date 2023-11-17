@@ -25,6 +25,7 @@
 * Added `to_largest_component()` morpher
 * Added `graph_is_eulerian()` and `edge_rank_eulerian()` for eulerian path 
   calculations
+* Added `to_random_spanning_tree()` morpher
 
 # tidygraph 1.2.3
 

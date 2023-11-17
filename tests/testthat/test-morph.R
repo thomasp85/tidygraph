@@ -37,6 +37,16 @@ test_that('to_components works', {
   expect_equal(pull(gr1, size), c(5, 5, 5, 5, 5, 4, 4, 4, 4))
   expect_equal(nrow(gr2), 2)
 })
+test_that('to_largest_component works', {
+  gr <- create_notable('bull') %>%
+    bind_graphs(create_notable('diamond')) %>%
+    morph(to_largest_component) %>%
+    mutate(size = graph_order())
+  gr1 <- unmorph(gr) %>% activate(nodes)
+  gr2 <- crystallise(gr)
+  expect_equal(pull(gr1, size), c(5, 5, 5, 5, 5, NA, NA, NA, NA))
+  expect_equal(nrow(gr2), 1)
+})
 test_that('to_local_neighborhood works', {
   gr <- create_notable('bull') %>%
     morph(to_local_neighborhood, 5) %>%
@@ -61,7 +71,17 @@ test_that('to_minimum_spanning_tree works', {
     mutate(order = bfs_rank(3))
   gr1 <- unmorph(gr) %>% activate(nodes)
   gr2 <- crystallise(gr)
-  expect_equal(pull(gr1, order), c(2, 4, 1, 5,3))
+  expect_equal(pull(gr1, order), c(2, 4, 1, 5, 3))
+  expect_equal(nrow(gr2), 1)
+})
+test_that('to_random_spanning_tree works', {
+  set.seed(1)
+  gr <- create_notable('bull') %>%
+    morph(to_random_spanning_tree) %>%
+    mutate(order = bfs_rank(3))
+  gr1 <- unmorph(gr) %>% activate(nodes)
+  gr2 <- crystallise(gr)
+  expect_equal(pull(gr1, order), c(4, 2, 1, 5, 3))
   expect_equal(nrow(gr2), 1)
 })
 test_that('to_shortest_path works', {
