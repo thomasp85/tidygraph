@@ -55,7 +55,7 @@ node_rank_hclust <- function(method = 'average', dist = 'shortest', mode = 'out'
     weights <- NA
   }
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
-  compress_rank(hclust(mat, method)$order[focus_ind(.G())])
+  compress_rank(hclust(mat, method)$order[focus_ind(.G(), 'nodes')])
 }
 #' @describeIn node_rank Use simulated annealing based on the "ARSA" method in `seriation`
 #' @param cool cooling rate
@@ -275,5 +275,5 @@ seriate <- function(mat, method, control) {
   if (method == 'GA') seriation::register_GA()
   if (method == 'DendSer') seriation::register_DendSer()
   ser <- seriation::seriate(mat, method, control)
-  compress_rank(seriation::get_rank(ser)[focus_ind(.G())])
+  compress_rank(seriation::get_rank(ser)[focus_ind(.G(), 'nodes')])
 }

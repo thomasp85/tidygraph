@@ -65,7 +65,7 @@ map_bfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   dot_params <- list(...)
   search_df <- bfs_df(graph, root, mode, unreachable)
   paths <- get_paths(as.integer(search_df$parent))
-  call_nodes(graph, .f, search_df, paths, dot_params)[focus_ind(graph)]
+  call_nodes(graph, .f, search_df, paths, dot_params)[focus_ind(graph, 'nodes')]
 }
 #' @rdname map_bfs
 #' @export
@@ -150,7 +150,7 @@ map_bfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   dot_params <- list(...)
   search_df <- bfs_df(graph, root, mode, unreachable)
   offspring <- get_offspring(as.integer(search_df$parent), order(search_df$rank))
-  call_nodes(graph, .f, search_df, offspring, dot_params, reverse = TRUE)[focus_ind(graph)]
+  call_nodes(graph, .f, search_df, offspring, dot_params, reverse = TRUE)[focus_ind(graph, 'nodes')]
 }
 #' @rdname map_bfs_back
 #' @export
@@ -231,7 +231,7 @@ map_dfs <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   dot_params <- list(...)
   search_df <- dfs_df(graph, root, mode, unreachable)
   paths <- get_paths(as.integer(search_df$parent))
-  call_nodes(graph, .f, search_df, paths, dot_params)[focus_ind(graph)]
+  call_nodes(graph, .f, search_df, paths, dot_params)[focus_ind(graph, 'nodes')]
 }
 #' @rdname map_dfs
 #' @export
@@ -315,7 +315,7 @@ map_dfs_back <- function(root, mode = 'out', unreachable = FALSE, .f, ...) {
   dot_params <- list(...)
   search_df <- dfs_df(graph, root, mode, unreachable)
   offspring <- get_offspring(as.integer(search_df$parent), order(search_df$rank))
-  call_nodes(graph, .f, search_df, offspring, dot_params, reverse = TRUE)[focus_ind(graph)]
+  call_nodes(graph, .f, search_df, offspring, dot_params, reverse = TRUE)[focus_ind(graph, 'nodes')]
 }
 #' @rdname map_dfs_back
 #' @export
@@ -384,7 +384,7 @@ map_local <- function(order = 1, mode = 'all', mindist = 0, .f, ...) {
   expect_nodes()
   graph <- .G()
   V(graph)$.central_node <- FALSE
-  res <- lapply(focus_ind(graph), function(i) {
+  res <- lapply(focus_ind(graph, 'nodes'), function(i) {
     V(graph)$.central_node[i] <- TRUE
     ego_graph <- make_ego_graph(graph, order = order, nodes = i, mode = mode, mindist = mindist)[[1]]
     .f(neighborhood = as_tbl_graph(ego_graph), graph = graph, node = i, ...)

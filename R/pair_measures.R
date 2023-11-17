@@ -31,7 +31,7 @@ node_adhesion_to <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_node_ind(nodes, graph)
-  source <- focus_ind(graph)
+  source <- focus_ind(graph, 'nodes')
   target <- rep(nodes, length.out = length(source))
   adhesion <- Map(function(s, t) {
     if (s == t) return(NA)
@@ -47,7 +47,7 @@ node_adhesion_from <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_node_ind(nodes, graph)
-  target <- focus_ind(graph)
+  target <- focus_ind(graph, 'nodes')
   source <- rep(nodes, length.out = length(target))
   adhesion <- Map(function(s, t) {
     if (s == t) return(NA)
@@ -63,7 +63,7 @@ node_cohesion_to <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_node_ind(nodes, graph)
-  source <- focus_ind(graph)
+  source <- focus_ind(graph, 'nodes')
   target <- rep(nodes, length.out = length(source))
   neigh <- lapply(ego(graph, 1, source, 'out', mindist = 1), as.integer)
   adhesion <- Map(function(s, t, n) {
@@ -81,7 +81,7 @@ node_cohesion_from <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_node_ind(nodes, graph)
-  target <- focus_ind(graph)
+  target <- focus_ind(graph, 'nodes')
   source <- rep(nodes, length.out = length(target))
   neigh <- lapply(ego(graph, 1, source, 'out', mindist = 1), as.integer)
   adhesion <- Map(function(s, t, n) {
@@ -112,7 +112,7 @@ node_distance_to <- function(nodes, mode = 'out', weights = NULL, algorithm = 'a
     weights <- NA
   }
   nodes <- as_node_ind(nodes, graph)
-  source <- focus_ind(graph)
+  source <- focus_ind(graph, 'nodes')
   target <- rep(nodes, length.out = length(source))
   target_unique <- unique(target)
   dist <- distances(graph, v = source, to = target_unique, mode = mode, weights = weights, algorithm = algorithm)
@@ -131,7 +131,7 @@ node_distance_from <- function(nodes, mode = 'out', weights = NULL, algorithm = 
     weights <- NA
   }
   nodes <- as_node_ind(nodes, graph)
-  target <- focus_ind(graph)
+  target <- focus_ind(graph, 'nodes')
   source <- rep(nodes, length.out = length(target))
   source_unique <- unique(source)
   dist <- distances(graph, v = source_unique, to = target, mode = mode, weights = weights, algorithm = algorithm)
@@ -145,7 +145,7 @@ node_cocitation_with <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_node_ind(nodes, graph)
-  source <- focus_ind(graph)
+  source <- focus_ind(graph, 'nodes')
   target <- rep(nodes, length.out = length(source))
   cocite <- cocitation(graph)
   cocite[cbind(source, target)]
@@ -158,7 +158,7 @@ node_bibcoupling_with <- function(nodes) {
   expect_nodes()
   graph <- .G()
   nodes <- as_node_ind(nodes, graph)
-  source <- focus_ind(graph)
+  source <- focus_ind(graph, 'nodes')
   target <- rep(nodes, length.out = length(source))
   bibc <- bibcoupling(graph)
   bibc[cbind(source, target)]
@@ -175,7 +175,7 @@ node_similarity_with <- function(nodes, mode = 'out', loops = FALSE, method = 'j
   expect_nodes()
   graph <- .G()
   nodes <- as_node_ind(nodes, graph)
-  source <- focus_ind(graph)
+  source <- focus_ind(graph, 'nodes')
   target <- rep(nodes, length.out = length(source))
   sim <- similarity(graph, mode = mode, loops = loops, method = method)
   sim[cbind(source, target)]
@@ -192,7 +192,7 @@ node_max_flow_to <- function(nodes, capacity = NULL) {
   capacity <- enquo(capacity)
   capacity <- eval_tidy(capacity, .E())
   nodes <- as_node_ind(nodes, graph)
-  source <- focus_ind(graph)
+  source <- focus_ind(graph, 'nodes')
   target <- rep(nodes, length.out = length(source))
   flow <- Map(function(s, t) {
     if (s == t) return(NA)
@@ -210,7 +210,7 @@ node_max_flow_from <- function(nodes, capacity = NULL) {
   capacity <- enquo(capacity)
   capacity <- eval_tidy(capacity, .E())
   nodes <- as_node_ind(nodes, graph)
-  target <- focus_ind(graph)
+  target <- focus_ind(graph, 'nodes')
   source <- rep(nodes, length.out = length(target))
   flow <- Map(function(s, t) {
     if (s == t) return(NA)

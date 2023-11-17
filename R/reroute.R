@@ -45,7 +45,7 @@ reroute.tbl_graph <- function(.data, from = NULL, to = NULL, subset = NULL) {
   edges <- as_tibble(.data, active = 'edges')
   subset <- enquo(subset)
   subset <- eval_tidy(subset, edges)
-  if (is.null(subset)) subset <- focus_ind(.data)
+  if (is.null(subset)) subset <- focus_ind(.data, 'edges')
   edges_sub <- edges[subset, , drop = FALSE]
   from <- eval_tidy(from, edges_sub)
   if (!is.null(from)) edges$from[subset] <- rep(from, length.out = nrow(edges_sub))

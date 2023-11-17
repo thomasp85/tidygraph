@@ -33,7 +33,7 @@ NULL
 local_size <- function(order = 1, mode = 'all', mindist = 0) {
   expect_nodes()
   graph <- .G()
-  ego_size(graph = graph, order = order, nodes = focus_ind(graph), mode = mode, mindist = mindist)
+  ego_size(graph = graph, order = order, nodes = focus_ind(graph, 'nodes'), mode = mode, mindist = mindist)
 }
 #' @describeIn local_graph The members of the neighborhood of each node in a
 #' given distance. Wraps [igraph::ego()].
@@ -42,7 +42,7 @@ local_size <- function(order = 1, mode = 'all', mindist = 0) {
 local_members <- function(order = 1, mode = 'all', mindist = 0) {
   expect_nodes()
   graph <- .G()
-  lapply(ego(graph = graph, order = order, nodes = focus_ind(graph), mode = mode, mindist = mindist), as.integer)
+  lapply(ego(graph = graph, order = order, nodes = focus_ind(graph, 'nodes'), mode = mode, mindist = mindist), as.integer)
 }
 #' @describeIn local_graph The number of triangles each node participate in. Wraps [igraph::count_triangles()].
 #' @importFrom igraph count_triangles
@@ -50,7 +50,7 @@ local_members <- function(order = 1, mode = 'all', mindist = 0) {
 local_triangles <- function() {
   expect_nodes()
   graph <- .G()
-  count_triangles(graph = graph, vids = focus_ind(graph))
+  count_triangles(graph = graph, vids = focus_ind(graph, 'nodes'))
 }
 #' @describeIn local_graph Calculates the average degree based on the neighborhood of each node. Wraps [igraph::knn()].
 #' @param weights An edge weight vector. For `local_ave_degree`: If this argument
@@ -67,7 +67,7 @@ local_ave_degree <- function(weights = NULL) {
     weights <- NA
   }
   graph <- .G()
-  knn(graph = graph, vids = focus_ind(graph), weights = weights)$knn
+  knn(graph = graph, vids = focus_ind(graph, 'nodes'), weights = weights)$knn
 }
 #' @describeIn local_graph Calculate the transitivity of each node, that is, the
 #' propensity for the nodes neighbors to be connected. Wraps [igraph::transitivity()]
@@ -84,5 +84,5 @@ local_transitivity <- function(weights = NULL) {
     'local'
   }
   graph <- .G()
-  transitivity(graph = graph, type = type, vids = focus_ind(graph), weights = weights, isolates = 'zero')
+  transitivity(graph = graph, type = type, vids = focus_ind(graph, 'nodes'), weights = weights, isolates = 'zero')
 }
