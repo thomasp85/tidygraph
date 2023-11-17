@@ -174,9 +174,11 @@ graph_min_cut <- function(capacity = NULL) {
 #' @describeIn graph_measures Calculates the mean distance between all node pairs in the graph. Wraps [igraph::mean_distance()]
 #' @importFrom igraph mean_distance
 #' @export
-graph_mean_dist <- function(directed = TRUE, unconnected = TRUE) {
+graph_mean_dist <- function(directed = TRUE, unconnected = TRUE, weights = NULL) {
   graph <- .G()
-  mean_distance(graph, directed = directed, unconnected = unconnected)
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  mean_distance(graph, directed = directed, unconnected = unconnected, weights = weights)
 }
 #' @describeIn graph_measures Calculates the modularity of the graph contingent on a provided node grouping
 #' @param group The node grouping to calculate the modularity on

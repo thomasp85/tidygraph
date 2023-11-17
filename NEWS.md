@@ -21,6 +21,7 @@
   now works with the tbl_graph constructors (#184)
 * `graph_automorphisms()` gains a `color` argument in line with capabilities in
   igraph
+* `graph_mean_dist()` now supports edge weights through a new `weights` argument
 
 # tidygraph 1.2.3
 
