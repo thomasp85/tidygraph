@@ -91,6 +91,8 @@ called directly. See below for detail of each morpher.</p>
 <span></span>
 <span><span class="fu">to_components</span><span class="op">(</span><span class="va">graph</span>, type <span class="op">=</span> <span class="st">"weak"</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">to_largest_component</span><span class="op">(</span><span class="va">graph</span>, type <span class="op">=</span> <span class="st">"weak"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">to_complement</span><span class="op">(</span><span class="va">graph</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">to_local_neighborhood</span><span class="op">(</span><span class="va">graph</span>, <span class="va">node</span>, order <span class="op">=</span> <span class="fl">1</span>, mode <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
@@ -215,6 +217,9 @@ only the first instance of node data will be used (as the same node can be
 present in multiple subgraphs).</p></li>
 <li><p><code>to_components()</code>: Split a graph into its separate components. When
 unmorphing all data in the subgraphs will get merged back.</p></li>
+<li><p><code>to_largest_component()</code>: Create a new graph only consisting of it's largest
+component. If multiple largest components exists, the one with containing the
+node with the lowest index is chosen.</p></li>
 <li><p><code>to_complement()</code>: Convert a graph into its complement. When unmorphing
 only node data will get merged back.</p></li>
 <li><p><code>to_local_neighborhood()</code>: Convert a graph into the local neighborhood around a
