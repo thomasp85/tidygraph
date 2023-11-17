@@ -49,6 +49,7 @@ NULL
 #' @importFrom stats hclust
 #' @export
 node_rank_hclust <- function(method = 'average', dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
+  expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E())
   if (is.null(weights)) {
