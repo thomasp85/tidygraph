@@ -23,6 +23,8 @@
   igraph
 * `graph_mean_dist()` now supports edge weights through a new `weights` argument
 * Added `to_largest_component()` morpher
+* Added `graph_is_eulerian()` and `edge_rank_eulerian()` for eulerian path 
+  calculations
 
 # tidygraph 1.2.3
 

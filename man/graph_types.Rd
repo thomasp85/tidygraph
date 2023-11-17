@@ -13,6 +13,7 @@
 \alias{graph_is_complete}
 \alias{graph_is_isomorphic_to}
 \alias{graph_is_subgraph_isomorphic_to}
+\alias{graph_is_eulerian}
 \title{Querying graph types}
 \usage{
 graph_is_simple()
@@ -36,6 +37,8 @@ graph_is_complete()
 graph_is_isomorphic_to(graph, method = "auto", ...)
 
 graph_is_subgraph_isomorphic_to(graph, method = "auto", ...)
+
+graph_is_eulerian(cyclic = FALSE)
 }
 \arguments{
 \item{graph}{The graph to compare structure to}
@@ -44,6 +47,8 @@ graph_is_subgraph_isomorphic_to(graph, method = "auto", ...)
 
 \item{...}{Arguments passed on to the comparison methods. See
 \code{\link[igraph:isomorphic]{igraph::is_isomorphic_to()}} and \code{\link[igraph:subgraph_isomorphic]{igraph::is_subgraph_isomorphic_to()}}}
+
+\item{cyclic}{should the eulerian path start and end at the same node}
 }
 \value{
 A logical scalar
@@ -76,6 +81,9 @@ properties and will all return a logical scalar.
 \item \code{graph_is_isomorphic_to()}: Is the graph isomorphic to another graph. See \code{\link[igraph:isomorphic]{igraph::is_isomorphic_to()}}
 
 \item \code{graph_is_subgraph_isomorphic_to()}: Is the graph an isomorphic subgraph to another graph. see \code{\link[igraph:subgraph_isomorphic]{igraph::is_subgraph_isomorphic_to()}}
+
+\item \code{graph_is_eulerian()}: Can all the edges in the graph be reaches by a single
+path or cycle that only goes through each edge once
 
 }}
 \examples{

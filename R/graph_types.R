@@ -5,8 +5,8 @@
 #' properties and will all return a logical scalar.
 #'
 #' @param graph The graph to compare structure to
-#'
 #' @param method The algorithm to use for comparison
+#' @param cyclic should the eulerian path start and end at the same node
 #'
 #' @param ... Arguments passed on to the comparison methods. See
 #' [igraph::is_isomorphic_to()] and [igraph::is_subgraph_isomorphic_to()]
@@ -85,4 +85,15 @@ graph_is_isomorphic_to <- function(graph, method = 'auto', ...) {
 #' @export
 graph_is_subgraph_isomorphic_to <- function(graph, method = 'auto', ...) {
   is_subgraph_isomorphic_to(.G(), graph, method, ...)
+}
+#' @describeIn graph_types Can all the edges in the graph be reaches by a single
+#' path or cycle that only goes through each edge once
+#' @importFrom igraph has_eulerian_cycle has_eulerian_path
+#' @export
+graph_is_eulerian <- function(cyclic = FALSE) {
+  if (cyclic) {
+    has_eulerian_cycle(.G())
+  } else {
+    has_eulerian_path(.G())
+  }
 }

@@ -111,6 +111,7 @@ reference:
       for topological features such as which nodes they link, etc.
     contents:
       - edge_is_mutual
+      - edge_rank_eulerian
   - title: Graph measures
     desc: >
       The graph under investigation can also have properties of its own that can
