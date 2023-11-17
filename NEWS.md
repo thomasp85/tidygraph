@@ -15,6 +15,8 @@
 * Add `iterate_n()` and `iterate_while()` to perform repeated modifications of
   a graph for a specific number of times or until a condition no longer is met 
   (#43)
+* Add `focus()`/`unfocus()` verbs to limit node and edge algorithms to a subset
+  while still keeping the full graph context (#18)
 
 # tidygraph 1.2.3
 
