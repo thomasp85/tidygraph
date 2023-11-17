@@ -101,7 +101,9 @@ properties and will all return a logical scalar.</p>
 <span></span>
 <span><span class="fu">graph_is_isomorphic_to</span><span class="op">(</span><span class="va">graph</span>, method <span class="op">=</span> <span class="st">"auto"</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">graph_is_subgraph_isomorphic_to</span><span class="op">(</span><span class="va">graph</span>, method <span class="op">=</span> <span class="st">"auto"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">graph_is_subgraph_isomorphic_to</span><span class="op">(</span><span class="va">graph</span>, method <span class="op">=</span> <span class="st">"auto"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">graph_is_eulerian</span><span class="op">(</span>cyclic <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -117,6 +119,10 @@ properties and will all return a logical scalar.</p>
 <dt>...</dt>
 <dd><p>Arguments passed on to the comparison methods. See
 <code><a href="https://r.igraph.org/reference/isomorphic.html" class="external-link">igraph::is_isomorphic_to()</a></code> and <code><a href="https://r.igraph.org/reference/subgraph_isomorphic.html" class="external-link">igraph::is_subgraph_isomorphic_to()</a></code></p></dd>
+
+
+<dt>cyclic</dt>
+<dd><p>should the eulerian path start and end at the same node</p></dd>
 
 </dl></div>
     <div id="value">
@@ -139,6 +145,8 @@ properties and will all return a logical scalar.</p>
 <li><p><code>graph_is_complete()</code>: Is the graph fully connected</p></li>
 <li><p><code>graph_is_isomorphic_to()</code>: Is the graph isomorphic to another graph. See <code><a href="https://r.igraph.org/reference/isomorphic.html" class="external-link">igraph::is_isomorphic_to()</a></code></p></li>
 <li><p><code>graph_is_subgraph_isomorphic_to()</code>: Is the graph an isomorphic subgraph to another graph. see <code><a href="https://r.igraph.org/reference/subgraph_isomorphic.html" class="external-link">igraph::is_subgraph_isomorphic_to()</a></code></p></li>
+<li><p><code>graph_is_eulerian()</code>: Can all the edges in the graph be reaches by a single
+path or cycle that only goes through each edge once</p></li>
 </ul></div>
 
     <div id="ref-examples">
