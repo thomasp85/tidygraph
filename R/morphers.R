@@ -106,9 +106,11 @@ to_split <- function(graph, ..., split_by = NULL) {
 #' @describeIn morphers Split a graph into its separate components. When
 #' unmorphing all data in the subgraphs will get merged back.
 #' @param type The type of component to split into. Either `'weak'` or `'strong'`
+#' @param min_order The minimum order (number of vertices) of the component.
+#' Components below this will not be created
 #' @importFrom igraph decompose
 #' @export
-to_components <- function(graph, type = 'weak') {
+to_components <- function(graph, type = 'weak', min_order = 1) {
   graphs <- decompose(graph, mode = type)
   graphs <- lapply(graphs, as_tbl_graph)
   graphs
