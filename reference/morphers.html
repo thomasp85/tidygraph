@@ -89,7 +89,7 @@ called directly. See below for detail of each morpher.</p>
 <span></span>
 <span><span class="fu">to_split</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, split_by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">to_components</span><span class="op">(</span><span class="va">graph</span>, type <span class="op">=</span> <span class="st">"weak"</span><span class="op">)</span></span>
+<span><span class="fu">to_components</span><span class="op">(</span><span class="va">graph</span>, type <span class="op">=</span> <span class="st">"weak"</span>, min_order <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">to_largest_component</span><span class="op">(</span><span class="va">graph</span>, type <span class="op">=</span> <span class="st">"weak"</span><span class="op">)</span></span>
 <span></span>
@@ -100,6 +100,8 @@ called directly. See below for detail of each morpher.</p>
 <span><span class="fu">to_dominator_tree</span><span class="op">(</span><span class="va">graph</span>, <span class="va">root</span>, mode <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">to_minimum_spanning_tree</span><span class="op">(</span><span class="va">graph</span>, weights <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">to_random_spanning_tree</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">to_shortest_path</span><span class="op">(</span><span class="va">graph</span>, <span class="va">from</span>, <span class="va">to</span>, mode <span class="op">=</span> <span class="st">"out"</span>, weights <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
@@ -143,6 +145,11 @@ the node to that should be included in the component for <code>to_subcomponent()
 
 <dt>type</dt>
 <dd><p>The type of component to split into. Either <code>'weak'</code> or <code>'strong'</code></p></dd>
+
+
+<dt>min_order</dt>
+<dd><p>The minimum order (number of vertices) of the component.
+Components below this will not be created</p></dd>
 
 
 <dt>loops</dt>
@@ -228,6 +235,8 @@ single node. When unmorphing all data will be merged back.</p></li>
 specific root. When unmorphing only node data will get merged back.</p></li>
 <li><p><code>to_minimum_spanning_tree()</code>: Convert a graph into its minimum spanning tree/forest.
 When unmorphing all data will get merged back.</p></li>
+<li><p><code>to_random_spanning_tree()</code>: Convert a graph into a random spanning tree/forest. When
+unmorphing all data will get merged back</p></li>
 <li><p><code>to_shortest_path()</code>: Limit a graph to the shortest path between two nodes.
 When unmorphing all data is merged back.</p></li>
 <li><p><code>to_bfs_tree()</code>: Convert a graph into a breath-first search tree based on
