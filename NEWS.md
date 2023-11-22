@@ -27,6 +27,7 @@
   calculations
 * Added `to_random_spanning_tree()` morpher
 * Added `min_order` argument to `to_components()` morpher
+* Added `random_walk_rank()` to perform random walks on the graph
 
 # tidygraph 1.2.3
 
