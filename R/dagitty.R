@@ -1,22 +1,44 @@
 #' @describeIn tbl_graph Method to deal with dagitty objects from the dagitty package
 #' @export
-as_tbl_graph.dagitty <- function(x, directed = TRUE, node_attr = NULL, edge_attr = 'beta', ...) {
-  rlang::check_installed('dagitty', 'in order to coerce a dagitty object to tbl_graph')
-  if(vctrs::vec_as_names(edge_attr) != edge_attr) stop('edge_attr must be a string of length > 0')
-  coords <- dagitty::coordinates(x)
+#' @importFrom rlang is_empty check_installed
+as_tbl_graph.dagitty <- function(x, directed = TRUE, node_attr = NULL, edge_attr = NULL, ...) {
+  check_installed('dagitty', 'in order to coerce a dagitty object to tbl_graph')
+  if (!is_empty(intersect(node_attr, c('adjusted', 'latent', 'exposure', 'outcome')))) stop('node_attr cannot be adjusted, exposure, outcome, or latent, as these are automatically added if present')
+  if (is_empty(names(x))) return(create_empty(0))
+  
   nodes <- tibble::tibble(
-    name = names(x),
-    outcome = name %in% dagitty::outcomes(x),
-    exposure = name %in% dagitty::exposures(x),
-    latent = name %in% dagitty::latents(x),
-    x = coords$x,
-    y = coords$y
-    )
-  if (!is.null(node_attr)){
-    if (vctrs::vec_as_names(node_attr) != node_attr) stop('node_attr must be a string of length > 0')
-    nodes[node_attr] <- dagitty:::.vertexAttributes(x, node_attr)$a
+    name = names(x)
+  )
+  adjusted <- dagitty::adjustedNodes(x)
+  if (!is_empty(adjusted)) nodes$adjusted <- nodes$name %in% adjusted
+  exposure <- dagitty::exposures(x)
+  if (!is_empty(exposure)) nodes$exposure <- nodes$name %in% exposure
+  outcome <- dagitty::outcomes(x)
+  if (!is_empty(outcome)) nodes$outcome <- nodes$name %in% outcome
+  latent <- dagitty::latents(x)
+  if (!is_empty(latent)) nodes$latent <- nodes$name %in% latent
+  coords <- coordinates(x)
+  if (!all(is.na(coords$x))) {
+    nodes$x <- coords$x
+    nodes$y <- coords$y
+  }
+  
+  for (a in node_attr){
+    if (vctrs::vec_as_names(a, repair = 'unique') != a) stop('each node_attr must be a string of length > 0')
+    nodes[a] <- dagitty:::.vertexAttributes(x, a)$a
+  }
+  
+  edges <- dagitty::edges(x)
+  if (is_empty(edges)){
+    edges <- tibble::tibble(from = int(), to = int())
+  } else {
+    edges <- edges[c('v', 'w', 'e')]
+    names(edges) <- c('from', 'to', 'type')
+    for (a in edge_attr){
+      if (vctrs::vec_as_names(a, repair = 'unique') != a) stop('each edge_attr must be a string of length > 0')
+      edges[a] <- dagitty:::.edgeAttributes(x, a)$a
+    }
   } 
-  edges <- dagitty:::.edgeAttributes(x, edge_attr)
-  names(edges) <- c('from', 'to', 'type', edge_attr)
+  
   tbl_graph(nodes = nodes, edges = edges, directed = directed)
 }
