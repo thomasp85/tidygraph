@@ -30,7 +30,7 @@ as_tbl_graph.dagitty <- function(x, directed = TRUE, node_attr = NULL, edge_attr
   
   edges <- dagitty::edges(x)
   if (is_empty(edges)){
-    edges <- tibble::tibble(from = int(), to = int())
+    edges <- tibble::tibble(from = integer(), to = integer())
   } else {
     edges <- edges[c('v', 'w', 'e')]
     names(edges) <- c('from', 'to', 'type')
