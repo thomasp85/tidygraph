@@ -1,9 +1,8 @@
 #' @describeIn tbl_graph Method to deal with dagitty objects from the dagitty package
 #' @export
 #' @importFrom rlang is_empty check_installed
-as_tbl_graph.dagitty <- function(x, directed = TRUE, node_attr = NULL, edge_attr = NULL, ...) {
+as_tbl_graph.dagitty <- function(x, directed = TRUE, ...) {
   check_installed('dagitty', 'in order to coerce a dagitty object to tbl_graph')
-  if (!is_empty(intersect(node_attr, c('adjusted', 'latent', 'exposure', 'outcome')))) stop('node_attr cannot be adjusted, exposure, outcome, or latent, as these are automatically added if present')
   if (is_empty(names(x))) return(create_empty(0))
   
   nodes <- tibble::tibble(
@@ -17,28 +16,19 @@ as_tbl_graph.dagitty <- function(x, directed = TRUE, node_attr = NULL, edge_attr
   if (!is_empty(outcome)) nodes$outcome <- nodes$name %in% outcome
   latent <- dagitty::latents(x)
   if (!is_empty(latent)) nodes$latent <- nodes$name %in% latent
-  coords <- coordinates(x)
+  coords <- dagitty::coordinates(x)
   if (!all(is.na(coords$x))) {
     nodes$x <- coords$x
     nodes$y <- coords$y
   }
   
-  for (a in node_attr){
-    if (vctrs::vec_as_names(a, repair = 'unique') != a) stop('each node_attr must be a string of length > 0')
-    nodes[a] <- dagitty:::.vertexAttributes(x, a)$a
-  }
-  
-  edges <- dagitty::edges(x)
-  if (is_empty(edges)){
-    edges <- tibble::tibble(from = integer(), to = integer())
+  e <- dagitty::edges(x)
+  if (is_empty(e)){
+    e <- tibble::tibble(from = integer(), to = integer())
   } else {
-    edges <- edges[c('v', 'w', 'e')]
-    names(edges) <- c('from', 'to', 'type')
-    for (a in edge_attr){
-      if (vctrs::vec_as_names(a, repair = 'unique') != a) stop('each edge_attr must be a string of length > 0')
-      edges[a] <- dagitty:::.edgeAttributes(x, a)$a
-    }
+    e <- e[c('v', 'w', 'e')]
+    names(e) <- c('from', 'to', 'type')
   } 
   
-  tbl_graph(nodes = nodes, edges = edges, directed = directed)
+  tbl_graph(nodes = nodes, edges = e, directed = directed)
 }
