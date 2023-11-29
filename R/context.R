@@ -17,11 +17,11 @@ ContextBuilder <- R6Class(
       private$check()
       private$context[[length(private$context)]]
     },
-    nodes = function() {
-      as_tibble(self$graph(), active = 'nodes')
+    nodes = function(focused = TRUE) {
+      as_tibble(self$graph(), active = 'nodes', focused = focused)
     },
-    edges = function() {
-      as_tibble(self$graph(), active = 'edges')
+    edges = function(focused = TRUE) {
+      as_tibble(self$graph(), active = 'edges', focused = focused)
     },
     active = function() {
       private$check()
@@ -68,6 +68,9 @@ expect_edges <- function() {
 #' the terminating nodes of the edge, or extract some statistics from the graph
 #' itself to use in computations.
 #'
+#' @param focused Should only the attributes of the currently focused nodes or
+#' edges be returned
+#'
 #' @return Either a `tbl_graph` (`.G()`) or a `tibble` (`.N()`)
 #'
 #' @rdname context_accessors
@@ -90,13 +93,13 @@ NULL
 }
 #' @describeIn context_accessors Get the nodes data from the graph you're currently working on
 #' @export
-.N <- function() {
-  .graph_context$nodes()
+.N <- function(focused = TRUE) {
+  .graph_context$nodes(focused)
 }
 #' @describeIn context_accessors Get the edges data from the graph you're currently working on
 #' @export
-.E <- function() {
-  .graph_context$edges()
+.E <- function(focused = TRUE) {
+  .graph_context$edges(focused)
 }
 
 #' Register a graph context for the duration of the current frame

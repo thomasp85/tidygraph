@@ -9,9 +9,13 @@
 \usage{
 .G()
 
-.N()
+.N(focused = TRUE)
 
-.E()
+.E(focused = TRUE)
+}
+\arguments{
+\item{focused}{Should only the attributes of the currently focused nodes or
+edges be returned}
 }
 \value{
 Either a \code{tbl_graph} (\code{.G()}) or a \code{tibble} (\code{.N()})

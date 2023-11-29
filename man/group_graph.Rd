@@ -9,6 +9,7 @@
 \alias{group_label_prop}
 \alias{group_leading_eigen}
 \alias{group_louvain}
+\alias{group_leiden}
 \alias{group_optimal}
 \alias{group_spinglass}
 \alias{group_walktrap}
@@ -35,6 +36,16 @@ group_leading_eigen(
 )
 
 group_louvain(weights = NULL, resolution = 1)
+
+group_leiden(
+  weights = NULL,
+  resolution = 1,
+  objective_function = "CPM",
+  beta = 0.01,
+  label = NULL,
+  n = 2,
+  node_weights = NULL
+)
 
 group_optimal(weights = NULL)
 
@@ -106,6 +117,8 @@ grouping of edges supported is biconnected components.
 \item \code{group_leading_eigen()}: Group nodes based on the leading eigenvector of the modularity matrix using \code{\link[igraph:cluster_leading_eigen]{igraph::cluster_leading_eigen()}}
 
 \item \code{group_louvain()}: Group nodes by multilevel optimisation of modularity using \code{\link[igraph:cluster_louvain]{igraph::cluster_louvain()}}
+
+\item \code{group_leiden()}: Group nodes according to the Leiden algorithm (\code{\link[igraph:cluster_leiden]{igraph::cluster_leiden()}}) which is similar, but more efficient and provides higher quality results than \code{cluster_louvain()}
 
 \item \code{group_optimal()}: Group nodes by optimising the moldularity score using \code{\link[igraph:cluster_optimal]{igraph::cluster_optimal()}}
 

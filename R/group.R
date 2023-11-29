@@ -150,6 +150,42 @@ group_louvain <- function(weights = NULL, resolution = 1) {
   group <- as.integer(membership(cluster_louvain(graph = .G(), weights = weights, resolution = resolution))[focus_ind(.G(), 'nodes')])
   desc_enumeration(group)
 }
+#' @describeIn group_graph Group nodes according to the Leiden algorithm ([igraph::cluster_leiden()]) which is similar, but more efficient and provides higher quality results than `cluster_louvain()`
+#' @importFrom igraph membership cluster_leiden
+#' @importFrom rlang list2 inject
+#' @export
+group_leiden <- function(weights = NULL, resolution = 1, objective_function = 'CPM', beta = 0.01, label = NULL, n = 2, node_weights = NULL) {
+  expect_nodes()
+  graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
+  res_arg <- if ("resolution" %in% names(formals(igraph::cluster_leiden))) {
+    'resolution'
+  } else {
+    'resolution_parameter'
+  }
+  nodes <- .N(focused = FALSE)
+  label <- enquo(label)
+  label <- eval_tidy(label, nodes)
+  node_weights <- enquo(node_weights)
+  node_weights <- eval_tidy(node_weights, nodes)
+  args <- list2(
+    graph = graph,
+    objective_function = objective_function,
+    weights = weights,
+    {{res_arg}} := resolution,
+    beta = beta,
+    initial_membership = label,
+    n_iterations = n,
+    vertex_weights = node_weights
+  )
+
+  group <- as.integer(membership(inject(cluster_leiden(!!!args)))[focus_ind(.G(), 'nodes')])
+  desc_enumeration(group)
+}
 #' @describeIn group_graph Group nodes by optimising the moldularity score using [igraph::cluster_optimal()]
 #' @importFrom igraph membership cluster_optimal
 #' @export
