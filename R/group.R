@@ -158,7 +158,7 @@ group_louvain <- function(weights = NULL, resolution = 1) {
 }
 #' @describeIn group_graph Group nodes according to the Leiden algorithm ([igraph::cluster_leiden()]) which is similar, but more efficient and provides higher quality results than `cluster_louvain()`
 #' @importFrom igraph membership cluster_leiden
-#' @importFrom rlang list2 inject
+#' @importFrom rlang list2 inject :=
 #' @export
 group_leiden <- function(weights = NULL, resolution = 1, objective_function = 'CPM', beta = 0.01, label = NULL, n = 2, node_weights = NULL) {
   expect_nodes()
@@ -233,6 +233,15 @@ group_walktrap <- function(weights = NULL, steps = 4, n_groups = NULL) {
     group <- cut_at(group, no = n_groups)
   }
   group <- as.integer(group[focus_ind(.G(), 'nodes')])
+  desc_enumeration(group)
+}
+#' @describeIn group_graph Group nodes by simulating fluid interactions on the graph topology using [igraph::cluster_fluid_communities()]
+#' @importFrom igraph cluster_fluid_communities
+#' @export
+group_fluid <- function(n_groups = 2) {
+  expect_nodes()
+  graph <- .G()
+  group <- as.integer(membership(cluster_fluid_communities(graph, n_groups))[focus_ind(graph, 'nodes')])
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group edges by their membership of the maximal binconnected components using [igraph::biconnected_components()]

@@ -13,6 +13,7 @@
 \alias{group_optimal}
 \alias{group_spinglass}
 \alias{group_walktrap}
+\alias{group_fluid}
 \alias{group_biconnected_component}
 \alias{group_color}
 \title{Group nodes and edges based on community structure}
@@ -52,6 +53,8 @@ group_optimal(weights = NULL)
 group_spinglass(weights = NULL, ...)
 
 group_walktrap(weights = NULL, steps = 4, n_groups = NULL)
+
+group_fluid(n_groups = 2)
 
 group_biconnected_component()
 
@@ -134,6 +137,8 @@ grouping of edges supported is biconnected components.
 \item \code{group_spinglass()}: Group nodes using simulated annealing with \code{\link[igraph:cluster_spinglass]{igraph::cluster_spinglass()}}
 
 \item \code{group_walktrap()}: Group nodes via short random walks using \code{\link[igraph:cluster_walktrap]{igraph::cluster_walktrap()}}
+
+\item \code{group_fluid()}: Group nodes by simulating fluid interactions on the graph topology using \code{\link[igraph:cluster_fluid_communities]{igraph::cluster_fluid_communities()}}
 
 \item \code{group_biconnected_component()}: Group edges by their membership of the maximal binconnected components using \code{\link[igraph:biconnected_components]{igraph::biconnected_components()}}
 
