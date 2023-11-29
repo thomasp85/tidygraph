@@ -62,10 +62,7 @@ local_triangles <- function() {
 local_ave_degree <- function(weights = NULL) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   graph <- .G()
   knn(graph = graph, vids = focus_ind(graph, 'nodes'), weights = weights)$knn
 }

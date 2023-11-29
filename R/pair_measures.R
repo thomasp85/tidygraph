@@ -107,10 +107,7 @@ node_distance_to <- function(nodes, mode = 'out', weights = NULL, algorithm = 'a
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   nodes <- as_node_ind(nodes, graph)
   source <- focus_ind(graph, 'nodes')
   target <- rep(nodes, length.out = length(source))
@@ -126,10 +123,7 @@ node_distance_from <- function(nodes, mode = 'out', weights = NULL, algorithm = 
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   nodes <- as_node_ind(nodes, graph)
   target <- focus_ind(graph, 'nodes')
   source <- rep(nodes, length.out = length(target))

@@ -51,10 +51,7 @@ NULL
 node_rank_hclust <- function(method = 'average', dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   compress_rank(hclust(mat, method)$order[focus_ind(.G(), 'nodes')])
 }
@@ -69,10 +66,7 @@ node_rank_hclust <- function(method = 'average', dist = 'shortest', mode = 'out'
 node_rank_anneal <- function(cool = 0.5, tmin = 1e-4, swap_to_inversion = 0.5, step_multiplier = 100, reps = 1, dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   control <- list(cool = cool, tmin = tmin, swap_to_inversion = swap_to_inversion, try_multiplier = step_multiplier, reps = reps)
   seriate(mat, 'ARSA', control)
@@ -84,10 +78,7 @@ node_rank_anneal <- function(cool = 0.5, tmin = 1e-4, swap_to_inversion = 0.5, s
 node_rank_branch_bound <- function(weighted_gradient = FALSE, dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   method <- if (weighted_gradient) 'BBWRCG' else "BBURCG"
   seriate(mat, method, list())
@@ -98,10 +89,7 @@ node_rank_branch_bound <- function(weighted_gradient = FALSE, dist = 'shortest',
 node_rank_traveller <- function(method = 'two_opt', ..., dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   control <- list(method = method, ...)
   seriate(mat, 'TSP', control)
@@ -112,10 +100,7 @@ node_rank_traveller <- function(method = 'two_opt', ..., dist = 'shortest', mode
 node_rank_two <- function(dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'R2E', list())
 }
@@ -125,10 +110,7 @@ node_rank_two <- function(dist = 'shortest', mode = 'out', weights = NULL, algor
 node_rank_mds <- function(method = 'cmdscale', dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'MDS', list(method = method))
 }
@@ -139,10 +121,7 @@ node_rank_mds <- function(method = 'cmdscale', dist = 'shortest', mode = 'out', 
 node_rank_leafsort <- function(method = 'average', type = 'OLO', dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, type, list(method = method))
 }
@@ -152,10 +131,7 @@ node_rank_leafsort <- function(method = 'average', type = 'OLO', dist = 'shortes
 node_rank_visual <- function(dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'VAT', list())
 }
@@ -166,10 +142,7 @@ node_rank_visual <- function(dist = 'shortest', mode = 'out', weights = NULL, al
 node_rank_spectral <- function(normalized = FALSE, dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   method <- if(normalized) 'Spectral_norm' else 'Spectral'
   seriate(mat, method, list())
@@ -182,10 +155,7 @@ node_rank_spectral <- function(normalized = FALSE, dist = 'shortest', mode = 'ou
 node_rank_spin_out <- function(step = 25, nstart = 10, dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'SPIN_STS', list(step = step, nstart = nstart))
 }
@@ -196,10 +166,7 @@ node_rank_spin_out <- function(step = 25, nstart = 10, dist = 'shortest', mode =
 node_rank_spin_in <- function(step = 5, sigma = seq(20, 1, length.out = 10), dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'SPIN_NH', list(step = step, sigma = sigma))
 }
@@ -212,10 +179,7 @@ node_rank_spin_in <- function(step = 5, sigma = seq(20, 1, length.out = 10), dis
 node_rank_quadratic <- function(criterion = '2SUM', reps = 1, step = 2 * graph_order(), step_multiplier = 1.1, temp_multiplier  = 0.5, maxsteps = 50, dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   control = list(rep = reps, miter = step, fiter = step_multiplier, ft  = temp_multiplier, maxsteps = maxsteps)
   method = paste0('QAP_', toupper(criterion))
@@ -227,10 +191,7 @@ node_rank_quadratic <- function(criterion = '2SUM', reps = 1, step = 2 * graph_o
 node_rank_genetic <- function(... , dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'GA', list())
 }
@@ -240,10 +201,7 @@ node_rank_genetic <- function(... , dist = 'shortest', mode = 'out', weights = N
 node_rank_dendser <- function(... , dist = 'shortest', mode = 'out', weights = NULL, algorithm = 'automatic') {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   mat <- to_dist(.G(), dist, mode, weights, algorithm)
   seriate(mat, 'DendSer', list())
 }

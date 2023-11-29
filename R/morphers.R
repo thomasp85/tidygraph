@@ -200,10 +200,7 @@ to_shortest_path <- function(graph, from, to, mode = 'out', weights = NULL) {
   from <- as_node_ind(from, graph)
   to <- eval_tidy(enquo(to), nodes)
   to <- as_node_ind(to, graph)
-  weights <- eval_tidy(enquo(weights), as_tibble(graph, active = 'edges'))
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(enquo(weights), as_tibble(graph, active = 'edges')) %||% NA
   path <- shortest_paths(graph, from = from, to = to, mode = mode, weights = weights, output = 'both')
   short_path <- slice(activate(graph, 'edges'), as.integer(path$epath[[1]]))
   short_path <- slice(activate(short_path, 'nodes'), as.integer(path$vpath[[1]]))
@@ -322,10 +319,7 @@ to_undirected <- function(graph) {
 #' @export
 to_hierarchical_clusters <- function(graph, method = 'walktrap', weights = NULL, ...) {
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   hierarchy <- switch(
     method,
     walktrap = cluster_walktrap(graph, weights = weights, ...),

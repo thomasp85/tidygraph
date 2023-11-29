@@ -53,8 +53,7 @@ random_walk_rank <- function(n, root = NULL, mode = "out", weights = NULL) {
     walk <- as.integer(random_walk(graph, root, n, mode))
     len_out <- gorder(graph)
   } else {
-    weights <- eval_tidy(weights, .E())
-    if (is.null(weights)) weights <- NA
+    weights <- eval_tidy(weights, .E(focused = FALSE)) %||% NA
     walk <- as.integer(random_edge_walk(graph, root, n, weights, mode))
     len_out <- gsize(graph)
   }

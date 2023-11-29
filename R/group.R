@@ -61,8 +61,7 @@ group_components <- function(type = 'weak') {
 group_edge_betweenness <- function(weights = NULL, directed = TRUE, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  # NULL in weights is for once respected despite a weight attribute
+  weights <- eval_tidy(weights, .E()) %||% NA
   group <- cluster_edge_betweenness(graph = .G(), weights = weights, directed = directed)
   if (is.null(n_groups)) {
     group <- membership(group)
@@ -78,8 +77,7 @@ group_edge_betweenness <- function(weights = NULL, directed = TRUE, n_groups = N
 group_fast_greedy <- function(weights = NULL, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  # NULL in weights is for once respected despite a weight attribute
+  weights <- eval_tidy(weights, .E()) %||% NA
   group <- cluster_fast_greedy(graph = .G(), weights = weights)
   if (is.null(n_groups)) {
     group <- membership(group)
@@ -95,10 +93,7 @@ group_fast_greedy <- function(weights = NULL, n_groups = NULL) {
 group_infomap <- function(weights = NULL, node_weights = NULL, trials = 10) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   node_weights <- enquo(node_weights)
   node_weights <- eval_tidy(node_weights, .N())
   group <- as.integer(membership(cluster_infomap(graph = .G(), e.weights = weights, v.weights = node_weights, nb.trials = trials))[focus_ind(.G(), 'nodes')])
@@ -110,10 +105,7 @@ group_infomap <- function(weights = NULL, node_weights = NULL, trials = 10) {
 group_label_prop <- function(weights = NULL, label = NULL, fixed = NULL) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   N <- .N()
   label <- enquo(label)
   label <- eval_tidy(label, N)
@@ -128,10 +120,7 @@ group_label_prop <- function(weights = NULL, label = NULL, fixed = NULL) {
 group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, options = igraph::arpack_defaults, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   label <- enquo(label)
   label <- eval_tidy(label, .N())
   group <- cluster_leading_eigen(graph = .G(), steps = steps, weights = weights, start = label, options = options)
@@ -149,10 +138,7 @@ group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, option
 group_louvain <- function(weights = NULL, resolution = 1) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   group <- as.integer(membership(cluster_louvain(graph = .G(), weights = weights, resolution = resolution))[focus_ind(.G(), 'nodes')])
   desc_enumeration(group)
 }
@@ -164,10 +150,7 @@ group_leiden <- function(weights = NULL, resolution = 1, objective_function = 'C
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   # `resolution_parameter` may be renamed to `resolution` in future release of igraph
   res_arg <- if ("resolution" %in% names(formals(igraph::cluster_leiden))) {
     'resolution'
@@ -199,10 +182,7 @@ group_leiden <- function(weights = NULL, resolution = 1, objective_function = 'C
 group_optimal <- function(weights = NULL) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   group <- as.integer(membership(cluster_optimal(graph = .G(), weights = weights))[focus_ind(.G(), 'nodes')])
   desc_enumeration(group)
 }
@@ -212,10 +192,7 @@ group_optimal <- function(weights = NULL) {
 group_spinglass <- function(weights = NULL, ...) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   group <- as.integer(membership(cluster_spinglass(graph = .G(), weights = weights, vertex = NULL, ...))[focus_ind(.G(), 'nodes')])
   desc_enumeration(group)
 }
@@ -225,7 +202,7 @@ group_spinglass <- function(weights = NULL, ...) {
 group_walktrap <- function(weights = NULL, steps = 4, n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
+  weights <- eval_tidy(weights, .E()) %||% NA
   group <- cluster_walktrap(graph = .G(), weights = weights, steps = steps)
   if (is.null(n_groups)) {
     group <- membership(group)

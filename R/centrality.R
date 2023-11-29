@@ -55,10 +55,7 @@ centrality_alpha <- function(weights = NULL, alpha = 1, exo = 1, tol = 1e-7, loo
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   exo <- enquo(exo)
   exo <- eval_tidy(exo, .N())
   alpha_centrality(graph = graph, nodes = focus_ind(graph, 'nodes'), alpha = alpha, exo = exo, weights = weights, tol = tol, loops = loops)
@@ -69,10 +66,7 @@ centrality_alpha <- function(weights = NULL, alpha = 1, exo = 1, tol = 1e-7, loo
 centrality_authority <- function(weights = NULL, scale = TRUE, options = igraph::arpack_defaults) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   graph <- .G()
   authority_score(graph = graph, scale = scale, weights = weights, options = options)$vector[focus_ind(graph, 'nodes')]
 }
@@ -84,10 +78,7 @@ centrality_betweenness <- function(weights = NULL, directed = TRUE, cutoff = -1,
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   cutoff <- cutoff %||% -1
   betweenness(graph = graph, v = focus_ind(graph, 'nodes'), directed = directed, cutoff = cutoff, weights = weights, normalized = normalized)
 
@@ -108,10 +99,7 @@ centrality_closeness <- function(weights = NULL, mode = 'out', normalized = FALS
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   cutoff <- cutoff %||% -1
   closeness(graph = graph, vids = focus_ind(graph, 'nodes'), mode = mode, cutoff = cutoff, weights = weights, normalized = normalized)
 }
@@ -121,10 +109,7 @@ centrality_closeness <- function(weights = NULL, mode = 'out', normalized = FALS
 centrality_eigen <- function(weights = NULL, directed = FALSE, scale = TRUE, options = igraph::arpack_defaults) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   graph <- .G()
   eigen_centrality(graph = graph, directed = directed, scale = scale, weights = weights, options = options)$vector[focus_ind(graph, 'nodes')]
 }
@@ -134,10 +119,7 @@ centrality_eigen <- function(weights = NULL, directed = FALSE, scale = TRUE, opt
 centrality_hub <- function(weights = NULL, scale = TRUE, options = igraph::arpack_defaults) {
   expect_nodes()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   graph <- .G()
   hub_score(graph = graph, scale = scale, weights = weights, options = options)$vector[focus_ind(graph, 'nodes')]
 }
@@ -148,10 +130,7 @@ centrality_pagerank <- function(weights = NULL, directed = TRUE, damping = 0.85,
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   personalized <- enquo(personalized)
   personalized <- eval_tidy(personalized, .N())
   page_rank(graph = graph, vids = focus_ind(graph, 'nodes'), directed = directed, damping = damping, personalized = personalized, weights = weights)$vector
@@ -172,10 +151,7 @@ centrality_degree <- function(weights = NULL, mode = 'out', loops = TRUE, normal
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E()) %||% NA
   if (is.null(weights)) {
     degree(graph = graph, v = focus_ind(graph, 'nodes'), mode = mode, loops = loops, normalized = normalized)
   } else {
@@ -190,11 +166,7 @@ centrality_edge_betweenness <- function(weights = NULL, directed = TRUE, cutoff 
   expect_edges()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
-
+  weights <- eval_tidy(weights, .E()) %||% NA
   cutoff <- cutoff %||% -1
   edge_betweenness(graph = graph, e = focus_ind(graph, 'edges'), directed = directed, cutoff = cutoff, weights = weights)
 }
@@ -206,11 +178,7 @@ centrality_harmonic <- function(weights = NULL, mode = 'out', normalized = FALSE
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
-
+  weights <- eval_tidy(weights, .E()) %||% NA
   cutoff <- cutoff %||% -1
   harmonic_centrality(graph, vids = focus_ind(graph, 'nodes'), mode = mode, weights = weights, normalized = normalized, cutoff = cutoff)
 }

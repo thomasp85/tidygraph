@@ -96,10 +96,7 @@ graph_motif_count <- function(size = 3, cut.prob = rep(0, size)) {
 graph_diameter <- function(weights = NULL, directed = TRUE, unconnected = TRUE) {
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
-  if (is.null(weights)) {
-    weights <- NA
-  }
+  weights <- eval_tidy(weights, .E(focused = FALSE)) %||% NA
   diameter(graph, directed, unconnected, weights)
 }
 #' @describeIn graph_measures Measrues the length of the shortest circle in the graph. Wraps [igraph::girth()]
@@ -177,7 +174,7 @@ graph_min_cut <- function(capacity = NULL) {
 graph_mean_dist <- function(directed = TRUE, unconnected = TRUE, weights = NULL) {
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E())
+  weights <- eval_tidy(weights, .E(focused = FALSE)) %||% NA
   mean_distance(graph, directed = directed, unconnected = unconnected, weights = weights)
 }
 #' @describeIn graph_measures Calculates the modularity of the graph contingent on a provided node grouping
