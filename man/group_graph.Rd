@@ -13,6 +13,7 @@
 \alias{group_spinglass}
 \alias{group_walktrap}
 \alias{group_biconnected_component}
+\alias{group_color}
 \title{Group nodes and edges based on community structure}
 \usage{
 group_components(type = "weak")
@@ -42,6 +43,8 @@ group_spinglass(weights = NULL, ...)
 group_walktrap(weights = NULL, steps = 4, n_groups = NULL)
 
 group_biconnected_component()
+
+group_color()
 }
 \arguments{
 \item{type}{The type of component to find. Either \code{'weak'} or \code{'strong'}}
@@ -111,6 +114,8 @@ grouping of edges supported is biconnected components.
 \item \code{group_walktrap()}: Group nodes via short random walks using \code{\link[igraph:cluster_walktrap]{igraph::cluster_walktrap()}}
 
 \item \code{group_biconnected_component()}: Group edges by their membership of the maximal binconnected components using \code{\link[igraph:biconnected_components]{igraph::biconnected_components()}}
+
+\item \code{group_color()}: Groups nodes by their color using \code{\link[igraph:greedy_vertex_coloring]{igraph::greedy_vertex_coloring()}}. Be aware that this is not a clustering algorithm as coloring specifically provide a color to each node so that no neighbors have the same color
 
 }}
 \examples{

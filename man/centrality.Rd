@@ -93,7 +93,12 @@ centrality_degree(
 
 centrality_edge_betweenness(weights = NULL, directed = TRUE, cutoff = NULL)
 
-centrality_harmonic(weights, mode = "out", normalized = FALSE, cutoff = NULL)
+centrality_harmonic(
+  weights = NULL,
+  mode = "out",
+  normalized = FALSE,
+  cutoff = NULL
+)
 
 centrality_manual(relation = "dist_sp", aggregation = "sum", ...)
 

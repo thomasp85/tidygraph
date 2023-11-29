@@ -20,6 +20,7 @@ test_that("grouping returns integer vector", {
   #expect_type(get_group(gr, group_optimal()), 'integer')
   expect_type(get_group(gr, group_spinglass()), 'integer')
   expect_type(get_group(gr, group_walktrap()), 'integer')
+  expect_type(get_group(gr, group_color()), 'integer')
   gr1 <- activate(gr, edges)
   expect_type(get_group(gr1, group_biconnected_component()), 'integer')
 
@@ -37,6 +38,7 @@ test_that("grouping returns integer of correct length", {
   #expect_length(get_group(gr, group_optimal()), igraph::gorder(gr))
   expect_length(get_group(gr, group_spinglass()), igraph::gorder(gr))
   expect_length(get_group(gr, group_walktrap()), igraph::gorder(gr))
+  expect_length(get_group(gr, group_color()), igraph::gorder(gr))
   gr1 <- activate(gr, edges)
   expect_length(get_group(gr1, group_biconnected_component()), igraph::gsize(gr1))
 
@@ -56,6 +58,7 @@ test_that("grouping requires correct activation", {
   #expect_error(get_group(gr1, group_optimal()))
   expect_error(get_group(gr1, group_spinglass()))
   expect_error(get_group(gr1, group_walktrap()))
+  expect_error(get_group(gr1, group_color()))
 
   skip_on_os('windows')
   expect_error(get_group(gr1, group_leading_eigen()))

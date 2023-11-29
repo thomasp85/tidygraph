@@ -203,6 +203,17 @@ group_biconnected_component <- function() {
   group <- rep(seq_along(ind), lengths(ind))[order(unlist(ind))][focus_ind(.G(), 'edges')]
   desc_enumeration(group)
 }
+#' @describeIn group_graph Groups nodes by their color using [igraph::greedy_vertex_coloring()]. Be aware that this is not a clustering algorithm as coloring specifically provide a color to each node so that no neighbors have the same color
+#' @importFrom igraph greedy_vertex_coloring
+#' @export
+group_color <- function() {
+  expect_nodes()
+  graph <- .G()
+  group <- greedy_vertex_coloring(graph)
+
+  group <- as.integer(group[focus_ind(.G(), 'nodes')])
+  desc_enumeration(group)
+}
 
 
 # HELPERS -----------------------------------------------------------------

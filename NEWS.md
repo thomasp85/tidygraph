@@ -31,6 +31,7 @@
 * Added `centrality_harmonic()` + deprecated `centrality_closeness_harmonic()`.
   The latter is an interface to netrankr while the former is a more efficient 
   and flexible igraph implementation.
+* Added `group_color()` as an interface to `greedy_vertex_coloring()` in igraph
 
 # tidygraph 1.2.3
 
