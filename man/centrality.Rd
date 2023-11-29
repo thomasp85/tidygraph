@@ -13,6 +13,7 @@
 \alias{centrality_subgraph}
 \alias{centrality_degree}
 \alias{centrality_edge_betweenness}
+\alias{centrality_harmonic}
 \alias{centrality_manual}
 \alias{centrality_closeness_harmonic}
 \alias{centrality_closeness_residual}
@@ -91,6 +92,8 @@ centrality_degree(
 )
 
 centrality_edge_betweenness(weights = NULL, directed = TRUE, cutoff = NULL)
+
+centrality_harmonic(weights, mode = "out", normalized = FALSE, cutoff = NULL)
 
 centrality_manual(relation = "dist_sp", aggregation = "sum", ...)
 
@@ -217,9 +220,11 @@ all only work on undirected graphs.
 
 \item \code{centrality_edge_betweenness()}: Wrapper for \code{\link[igraph:betweenness]{igraph::edge_betweenness()}}
 
+\item \code{centrality_harmonic()}: Wrapper for \code{\link[igraph:harmonic_centrality]{igraph::harmonic_centrality()}}
+
 \item \code{centrality_manual()}: Manually specify your centrality score using the \code{netrankr} framework (\code{netrankr})
 
-\item \code{centrality_closeness_harmonic()}: centrality based on inverse shortest path (\code{netrankr})
+\item \code{centrality_closeness_harmonic()}: \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} centrality based on inverse shortest path (\code{netrankr})
 
 \item \code{centrality_closeness_residual()}: centrality based on 2-to-the-power-of negative shortest path (\code{netrankr})
 

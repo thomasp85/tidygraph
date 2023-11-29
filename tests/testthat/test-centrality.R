@@ -10,6 +10,7 @@ test_that("centrality returns numeric", {
   expect_type(get_cent(gr1, centrality_pagerank()), 'double')
   expect_type(get_cent(gr1, centrality_power()), 'double')
   expect_type(get_cent(gr1, centrality_subgraph()), 'double')
+  expect_type(get_cent(gr1, centrality_harmonic()), 'double')
   gr2 <- activate(gr1, 'edges')
   expect_type(get_cent(gr2, centrality_edge_betweenness()), 'double')
 
@@ -27,6 +28,7 @@ test_that("centrality returns correct length", {
   expect_length(get_cent(gr1, centrality_pagerank()), 4)
   expect_length(get_cent(gr1, centrality_power()), 4)
   expect_length(get_cent(gr1, centrality_subgraph()), 4)
+  expect_length(get_cent(gr1, centrality_harmonic()), 4)
   gr2 <- activate(gr1, 'edges')
   expect_length(get_cent(gr2, centrality_edge_betweenness()), 5)
 
@@ -44,6 +46,7 @@ test_that("centrality returns correct length for focus", {
   expect_length(get_cent(gr1, centrality_pagerank()), 2)
   expect_length(get_cent(gr1, centrality_power()), 2)
   expect_length(get_cent(gr1, centrality_subgraph()), 2)
+  expect_length(get_cent(gr1, centrality_harmonic()), 2)
   gr2 <- activate(gr1, 'edges') |> focus(dplyr::row_number() < 3)
   expect_length(get_cent(gr2, centrality_edge_betweenness()), 2)
 
@@ -63,6 +66,7 @@ test_that("centrality requires the right activation", {
   expect_error(get_cent(gr2, centrality_pagerank()))
   expect_error(get_cent(gr2, centrality_power()))
   expect_error(get_cent(gr2, centrality_subgraph()))
+  expect_error(get_cent(gr2, centrality_harmonic()))
 
   skip_on_os('windows')
   expect_error(get_cent(gr2, centrality_authority()))

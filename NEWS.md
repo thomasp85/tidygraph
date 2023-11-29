@@ -28,6 +28,9 @@
 * Added `to_random_spanning_tree()` morpher
 * Added `min_order` argument to `to_components()` morpher
 * Added `random_walk_rank()` to perform random walks on the graph
+* Added `centrality_harmonic()` + deprecated `centrality_closeness_harmonic()`.
+  The latter is an interface to netrankr while the former is a more efficient 
+  and flexible igraph implementation.
 
 # tidygraph 1.2.3
 

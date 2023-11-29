@@ -184,7 +184,7 @@ centrality_degree <- function(weights = NULL, mode = 'out', loops = TRUE, normal
 }
 #' @describeIn centrality Wrapper for [igraph::edge_betweenness()]
 #' @importFrom igraph edge_betweenness E
-#' @importFrom rlang quos
+#' @importFrom rlang enquo eval_tidy
 #' @export
 centrality_edge_betweenness <- function(weights = NULL, directed = TRUE, cutoff = NULL) {
   expect_edges()
@@ -197,6 +197,22 @@ centrality_edge_betweenness <- function(weights = NULL, directed = TRUE, cutoff 
 
   cutoff <- cutoff %||% -1
   edge_betweenness(graph = graph, e = focus_ind(graph, 'edges'), directed = directed, cutoff = cutoff, weights = weights)
+}
+#' @describeIn centrality Wrapper for [igraph::harmonic_centrality()]
+#' @importFrom igraph harmonic_centrality
+#' @importFrom rlang enquo eval_tidy
+#' @export
+centrality_harmonic <- function(weights = NULL, mode = 'out', normalized = FALSE, cutoff = NULL) {
+  expect_nodes()
+  graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E())
+  if (is.null(weights)) {
+    weights <- NA
+  }
+
+  cutoff <- cutoff %||% -1
+  harmonic_centrality(graph, vids = focus_ind(graph, 'nodes'), mode = mode, weights = weights, normalized = normalized, cutoff = cutoff)
 }
 #' @describeIn centrality Manually specify your centrality score using the `netrankr` framework (`netrankr`)
 #' @param relation The indirect relation measure type to be used in `netrankr::indirect_relations`
@@ -213,9 +229,10 @@ centrality_manual <- function(relation = 'dist_sp', aggregation = 'sum', ...) {
   rel <- netrankr::indirect_relations(graph, type = relation, ...)
   netrankr::aggregate_positions(rel, type = aggregation)[focus_ind(graph, 'nodes')]
 }
-#' @describeIn centrality centrality based on inverse shortest path (`netrankr`)
+#' @describeIn centrality `r lifecycle::badge("deprecated")` centrality based on inverse shortest path (`netrankr`)
 #' @export
 centrality_closeness_harmonic <- function() {
+  lifecycle::deprecate_soft('1.3.0', 'centrality_closeness_harmonic()', 'centrality_harmonic()')
   centrality_manual('dist_sp', FUN = netrankr::dist_inv)
 }
 #' @describeIn centrality centrality based on 2-to-the-power-of negative shortest path (`netrankr`)
