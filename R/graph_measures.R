@@ -35,10 +35,10 @@ graph_adhesion <- function() {
 graph_assortativity <- function(attr, in_attr = NULL, directed = TRUE) {
   graph <- .G()
   attr <- enquo(attr)
-  attr <- eval_tidy(attr, .N())
+  attr <- eval_tidy(attr, .N(focused = FALSE))
   if (is.numeric(attr)) {
     in_attr <- enquo(in_attr)
-    in_attr <- eval_tidy(in_attr, .N())
+    in_attr <- eval_tidy(in_attr, .N(focused = FALSE))
     assortativity(graph, attr, in_attr, directed)
   } else {
     assortativity_nominal(graph, as.factor(attr), directed)
@@ -51,7 +51,7 @@ graph_assortativity <- function(attr, in_attr = NULL, directed = TRUE) {
 graph_automorphisms <- function(sh = 'fm', colors = NULL) {
   graph <- .G()
   colors <- enquo(colors)
-  colors <- eval_tidy(colors, .N())
+  colors <- eval_tidy(colors, .N(focused = FALSE))
   as.numeric(count_automorphisms(graph, colors = colors, sh = sh)$group_size)
 }
 #' @describeIn graph_measures Get the size of the largest clique. Wraps [igraph::clique_num()]
@@ -69,7 +69,7 @@ graph_clique_num <- function() {
 graph_clique_count <- function(min = NULL, max = NULL, subset = NULL) {
   graph <- .G()
   subset <- enquo(subset)
-  subset <- eval_tidy(subset, .N())
+  subset <- eval_tidy(subset, .N(focused = FALSE))
   if (is.logical(subset)) subset <- which(subset)
   count_max_cliques(graph, min, max, subset)
 }
@@ -168,7 +168,7 @@ graph_reciprocity <- function(ignore_loops = TRUE, ratio = FALSE) {
 graph_min_cut <- function(capacity = NULL) {
   graph <- .G()
   capacity <- enquo(capacity)
-  capacity <- eval_tidy(capacity, .E())
+  capacity <- eval_tidy(capacity, .E(focused = FALSE))
   min_cut(graph, capacity = capacity)
 }
 #' @describeIn graph_measures Calculates the mean distance between all node pairs in the graph. Wraps [igraph::mean_distance()]
@@ -188,7 +188,7 @@ graph_modularity <- function(group, weights = NULL) {
   graph <- .G()
   group <- enquo(group)
   weights <- enquo(weights)
-  group <- eval_tidy(group, .N())
-  weights <- eval_tidy(weights, .E())
+  group <- eval_tidy(group, .N(focused = FALSE))
+  weights <- eval_tidy(weights, .E(focused = FALSE))
   modularity(graph, group, weights)
 }
