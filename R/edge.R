@@ -94,3 +94,20 @@ edge_is_bridge <- function() {
   graph <- .G()
   focus_ind(graph, 'edges') %in% bridges(graph)
 }
+#' @describeIn edge_types Query whether an edge is part of the minimal feedback
+#' arc set (its removal together with the rest will break all cycles in the
+#' graph)
+#' @importFrom rlang eval_tidy enquo
+#' @importFrom igraph feedback_arc_set
+#' @param weights The weight of the edges to use for the calculation. Will be
+#' evaluated in the context of the edge data.
+#' @param approximate Should the minimal set be approximated or exact
+#' @export
+edge_is_feedback_arc <- function(weights = NULL, approximate = TRUE) {
+  expect_edges()
+  graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E(focused = FALSE)) %||% NA
+  alg <- if (approximate) 'approx_eades' else 'exact_ip'
+  focus_ind(graph, 'edges') %in% feedback_arc_set(graph, weights, alg)
+}

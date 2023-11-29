@@ -12,6 +12,7 @@ test_that("edge types return logical", {
   expect_type(get_type(gr, edge_is_multiple()), 'logical')
   expect_type(get_type(gr, edge_is_mutual()), 'logical')
   expect_type(get_type(gr, edge_is_bridge()), 'logical')
+  expect_type(get_type(gr, edge_is_feedback_arc()), 'logical')
 })
 test_that("edge types return correct length", {
   gr <- create_notable('bull') %>%
@@ -24,6 +25,7 @@ test_that("edge types return correct length", {
   expect_length(get_type(gr, edge_is_multiple()), igraph::gsize(gr))
   expect_length(get_type(gr, edge_is_mutual()), igraph::gsize(gr))
   expect_length(get_type(gr, edge_is_bridge()), igraph::gsize(gr))
+  expect_length(get_type(gr, edge_is_feedback_arc()), igraph::gsize(gr))
 })
 
 test_that("edge types return correct length for focus", {
@@ -38,6 +40,7 @@ test_that("edge types return correct length for focus", {
   expect_length(get_type(gr, edge_is_multiple()), 2)
   expect_length(get_type(gr, edge_is_mutual()), 2)
   expect_length(get_type(gr, edge_is_bridge()), 2)
+  expect_length(get_type(gr, edge_is_feedback_arc()), 2)
 })
 
 test_that("edge types require edge active", {
@@ -51,6 +54,7 @@ test_that("edge types require edge active", {
   expect_error(get_type(gr, edge_is_multiple()))
   expect_error(get_type(gr, edge_is_mutual()))
   expect_error(get_type(gr, edge_is_bridge()))
+  expect_error(get_type(gr, edge_is_feedback_arc()))
 })
 
 test_empty_context()
