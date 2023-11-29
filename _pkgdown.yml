@@ -105,6 +105,7 @@ reference:
       - node_dominator
       - node_is_cut
       - node_adhesion_to
+      - random_walk_rank
   - title: Edge measures
     desc: >
       Fewer quantitative measures exist for edges, but they can still be queried
@@ -112,6 +113,7 @@ reference:
     contents:
       - edge_is_mutual
       - edge_rank_eulerian
+      - random_walk_rank
   - title: Graph measures
     desc: >
       The graph under investigation can also have properties of its own that can
