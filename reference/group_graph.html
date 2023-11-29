@@ -125,6 +125,8 @@ grouping of edges supported is biconnected components.</p>
 <span></span>
 <span><span class="fu">group_walktrap</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, steps <span class="op">=</span> <span class="fl">4</span>, n_groups <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">group_fluid</span><span class="op">(</span>n_groups <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">group_biconnected_component</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">group_color</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -223,6 +225,7 @@ to the smallest group</p>
 <li><p><code>group_optimal()</code>: Group nodes by optimising the moldularity score using <code><a href="https://r.igraph.org/reference/cluster_optimal.html" class="external-link">igraph::cluster_optimal()</a></code></p></li>
 <li><p><code>group_spinglass()</code>: Group nodes using simulated annealing with <code><a href="https://r.igraph.org/reference/cluster_spinglass.html" class="external-link">igraph::cluster_spinglass()</a></code></p></li>
 <li><p><code>group_walktrap()</code>: Group nodes via short random walks using <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="external-link">igraph::cluster_walktrap()</a></code></p></li>
+<li><p><code>group_fluid()</code>: Group nodes by simulating fluid interactions on the graph topology using <code><a href="https://r.igraph.org/reference/cluster_fluid_communities.html" class="external-link">igraph::cluster_fluid_communities()</a></code></p></li>
 <li><p><code>group_biconnected_component()</code>: Group edges by their membership of the maximal binconnected components using <code><a href="https://r.igraph.org/reference/biconnected_components.html" class="external-link">igraph::biconnected_components()</a></code></p></li>
 <li><p><code>group_color()</code>: Groups nodes by their color using <code><a href="https://r.igraph.org/reference/greedy_vertex_coloring.html" class="external-link">igraph::greedy_vertex_coloring()</a></code>. Be aware that this is not a clustering algorithm as coloring specifically provide a color to each node so that no neighbors have the same color</p></li>
 </ul></div>
@@ -240,15 +243,15 @@ to the smallest group</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 36 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data: 69 × 2</span></span>
