@@ -115,7 +115,9 @@ grouping of edges supported is biconnected components.</p>
 <span></span>
 <span><span class="fu">group_walktrap</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, steps <span class="op">=</span> <span class="fl">4</span>, n_groups <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">group_biconnected_component</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">group_biconnected_component</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">group_color</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -196,6 +198,7 @@ to the smallest group</p>
 <li><p><code>group_spinglass()</code>: Group nodes using simulated annealing with <code><a href="https://r.igraph.org/reference/cluster_spinglass.html" class="external-link">igraph::cluster_spinglass()</a></code></p></li>
 <li><p><code>group_walktrap()</code>: Group nodes via short random walks using <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="external-link">igraph::cluster_walktrap()</a></code></p></li>
 <li><p><code>group_biconnected_component()</code>: Group edges by their membership of the maximal binconnected components using <code><a href="https://r.igraph.org/reference/biconnected_components.html" class="external-link">igraph::biconnected_components()</a></code></p></li>
+<li><p><code>group_color()</code>: Groups nodes by their color using <code><a href="https://r.igraph.org/reference/greedy_vertex_coloring.html" class="external-link">igraph::greedy_vertex_coloring()</a></code>. Be aware that this is not a clustering algorithm as coloring specifically provide a color to each node so that no neighbors have the same color</p></li>
 </ul></div>
 
     <div id="ref-examples">
