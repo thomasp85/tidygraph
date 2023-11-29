@@ -109,6 +109,16 @@ grouping of edges supported is biconnected components.</p>
 <span></span>
 <span><span class="fu">group_louvain</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, resolution <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">group_leiden</span><span class="op">(</span></span>
+<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  resolution <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  objective_function <span class="op">=</span> <span class="st">"CPM"</span>,</span>
+<span>  beta <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>  label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  node_weights <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">group_optimal</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">group_spinglass</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -194,6 +204,7 @@ to the smallest group</p>
 <li><p><code>group_label_prop()</code>: Group nodes by propagating labels using <code><a href="https://r.igraph.org/reference/cluster_label_prop.html" class="external-link">igraph::cluster_label_prop()</a></code></p></li>
 <li><p><code>group_leading_eigen()</code>: Group nodes based on the leading eigenvector of the modularity matrix using <code><a href="https://r.igraph.org/reference/cluster_leading_eigen.html" class="external-link">igraph::cluster_leading_eigen()</a></code></p></li>
 <li><p><code>group_louvain()</code>: Group nodes by multilevel optimisation of modularity using <code><a href="https://r.igraph.org/reference/cluster_louvain.html" class="external-link">igraph::cluster_louvain()</a></code></p></li>
+<li><p><code>group_leiden()</code>: Group nodes according to the Leiden algorithm (<code><a href="https://r.igraph.org/reference/cluster_leiden.html" class="external-link">igraph::cluster_leiden()</a></code>) which is similar, but more efficient and provides higher quality results than <code>cluster_louvain()</code></p></li>
 <li><p><code>group_optimal()</code>: Group nodes by optimising the moldularity score using <code><a href="https://r.igraph.org/reference/cluster_optimal.html" class="external-link">igraph::cluster_optimal()</a></code></p></li>
 <li><p><code>group_spinglass()</code>: Group nodes using simulated annealing with <code><a href="https://r.igraph.org/reference/cluster_spinglass.html" class="external-link">igraph::cluster_spinglass()</a></code></p></li>
 <li><p><code>group_walktrap()</code>: Group nodes via short random walks using <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="external-link">igraph::cluster_walktrap()</a></code></p></li>
@@ -214,12 +225,12 @@ to the smallest group</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     3</span>
