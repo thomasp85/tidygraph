@@ -84,7 +84,16 @@ initial groups. Will be evaluated in the context of the node data.}
 
 \item{options}{Settings passed on to \code{igraph::arpack()}}
 
-\item{resolution}{Resolution of the modularity function used internally in the algorithm}
+\item{resolution}{Resolution of the modularity function used internally in
+the algorithm}
+
+\item{objective_function}{Either \code{"CPM"} (constant potts model) or
+\code{"modularity"}. Sets the objective function to use.}
+
+\item{beta}{Parameter affecting the randomness in the Leiden algorithm. This
+affects only the refinement step of the algorithm.}
+
+\item{n}{The number of iterations to run the clustering}
 
 \item{...}{arguments passed on to \code{\link[igraph:cluster_spinglass]{igraph::cluster_spinglass()}}}
 }

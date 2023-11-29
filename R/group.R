@@ -24,7 +24,13 @@
 #' @param trials Number of times partition of the network should be attempted
 #' @param steps The number of steps in the random walks
 #' @param options Settings passed on to `igraph::arpack()`
-#' @param resolution Resolution of the modularity function used internally in the algorithm
+#' @param resolution Resolution of the modularity function used internally in
+#' the algorithm
+#' @param objective_function Either `"CPM"` (constant potts model) or
+#' `"modularity"`. Sets the objective function to use.
+#' @param beta Parameter affecting the randomness in the Leiden algorithm. This
+#' affects only the refinement step of the algorithm.
+#' @param n The number of iterations to run the clustering
 #' @param ... arguments passed on to [igraph::cluster_spinglass()]
 #'
 #' @return a numeric vector with the membership for each node in the graph. The
@@ -162,6 +168,7 @@ group_leiden <- function(weights = NULL, resolution = 1, objective_function = 'C
   if (is.null(weights)) {
     weights <- NA
   }
+  # `resolution_parameter` may be renamed to `resolution` in future release of igraph
   res_arg <- if ("resolution" %in% names(formals(igraph::cluster_leiden))) {
     'resolution'
   } else {
