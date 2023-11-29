@@ -156,6 +156,8 @@ all only work on undirected graphs.</p>
 <span></span>
 <span><span class="fu">centrality_edge_betweenness</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, cutoff <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">centrality_harmonic</span><span class="op">(</span><span class="va">weights</span>, mode <span class="op">=</span> <span class="st">"out"</span>, normalized <span class="op">=</span> <span class="cn">FALSE</span>, cutoff <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">centrality_manual</span><span class="op">(</span>relation <span class="op">=</span> <span class="st">"dist_sp"</span>, aggregation <span class="op">=</span> <span class="st">"sum"</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">centrality_closeness_harmonic</span><span class="op">(</span><span class="op">)</span></span>
@@ -302,8 +304,9 @@ random walk. Evaluated in the context of the node data.</p></dd>
 <li><p><code>centrality_subgraph()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/subgraph_centrality.html" class="external-link">igraph::subgraph_centrality()</a></code></p></li>
 <li><p><code>centrality_degree()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/degree.html" class="external-link">igraph::degree()</a></code> and <code><a href="https://r.igraph.org/reference/strength.html" class="external-link">igraph::strength()</a></code></p></li>
 <li><p><code>centrality_edge_betweenness()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/betweenness.html" class="external-link">igraph::edge_betweenness()</a></code></p></li>
+<li><p><code>centrality_harmonic()</code>: Wrapper for <code><a href="https://r.igraph.org/reference/harmonic_centrality.html" class="external-link">igraph::harmonic_centrality()</a></code></p></li>
 <li><p><code>centrality_manual()</code>: Manually specify your centrality score using the <code>netrankr</code> framework (<code>netrankr</code>)</p></li>
-<li><p><code>centrality_closeness_harmonic()</code>: centrality based on inverse shortest path (<code>netrankr</code>)</p></li>
+<li><p><code>centrality_closeness_harmonic()</code>: <a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> centrality based on inverse shortest path (<code>netrankr</code>)</p></li>
 <li><p><code>centrality_closeness_residual()</code>: centrality based on 2-to-the-power-of negative shortest path (<code>netrankr</code>)</p></li>
 <li><p><code>centrality_closeness_generalised()</code>: centrality based on alpha-to-the-power-of negative shortest path (<code>netrankr</code>)</p></li>
 <li><p><code>centrality_integration()</code>: centrality based on \(1 - (x - 1)/max(x)\) transformation of shortest path (<code>netrankr</code>)</p></li>
