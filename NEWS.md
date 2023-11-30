@@ -35,6 +35,8 @@
 * Added `group_leiden()` to interface with `cluster_leiden()` in igraph
 * Added `group_fluid()` to interface with `cluster_fluid_communities()` in igraph
 * Added `edge_is_feedback_arc()` to interface with `feedback_arc_set()` in igraph
+* Added `graph_efficiency()` and `node_effeciency()` interfacing with 
+  `global_efficiency()` and `local_efficiency()` in igraph
 
 # tidygraph 1.2.3
 

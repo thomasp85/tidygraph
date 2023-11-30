@@ -21,6 +21,7 @@
 \alias{graph_min_cut}
 \alias{graph_mean_dist}
 \alias{graph_modularity}
+\alias{graph_efficiency}
 \title{Graph measurements}
 \usage{
 graph_adhesion()
@@ -60,6 +61,8 @@ graph_min_cut(capacity = NULL)
 graph_mean_dist(directed = TRUE, unconnected = TRUE, weights = NULL)
 
 graph_modularity(group, weights = NULL)
+
+graph_efficiency(weights = NULL, directed = TRUE)
 }
 \arguments{
 \item{attr}{The node attribute to measure on}
@@ -165,6 +168,8 @@ them.
 \item \code{graph_mean_dist()}: Calculates the mean distance between all node pairs in the graph. Wraps \code{\link[igraph:distances]{igraph::mean_distance()}}
 
 \item \code{graph_modularity()}: Calculates the modularity of the graph contingent on a provided node grouping
+
+\item \code{graph_efficiency()}: Calculate the global efficiency of the graph
 
 }}
 \examples{

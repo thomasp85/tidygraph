@@ -176,7 +176,9 @@ node_is_connected <- function(nodes, mode = 'all', any = FALSE) {
 #' into the class of [centrality] measures. For lack of a better place they are
 #' collected under the `node_*` umbrella of functions.
 #'
-#' @inheritParams node_types
+#' @param mode How edges are treated. In `node_coreness()` it chooses which kind
+#' of coreness measure to calculate. In `node_efficiency()` it defines how the
+#' local neighborhood is created
 #' @param weights The weights to use for each node during calculation
 #'
 #' @return A numeric vector of the same length as the number of nodes in the
@@ -232,6 +234,17 @@ node_diversity <- function(weights) {
     cli::cli_abort('{.arg weights} must be a valid vector')
   }
   diversity(graph, weights = weights, vids = focus_ind(graph, 'nodes'))
+}
+#' @describeIn node_measures measures the local efficiency around each node. See [igraph::local_efficiency()]
+#' @importFrom rlang enquo eval_tidy
+#' @importFrom igraph local_efficiency
+#' @export
+node_efficiency <- function(weights = NULL, directed = TRUE, mode = 'all') {
+  expect_nodes()
+  graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E()) %||% NA
+  local_efficiency(graph, focus_ind(graph, 'nodes'), weights, directed, mode)
 }
 #' @describeIn node_measures measures Valente's Bridging measures for detecting structural bridges (`influenceR`)
 #' @export

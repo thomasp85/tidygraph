@@ -189,3 +189,13 @@ graph_modularity <- function(group, weights = NULL) {
   weights <- eval_tidy(weights, .E(focused = FALSE))
   modularity(graph, group, weights)
 }
+#' @describeIn graph_measures Calculate the global efficiency of the graph
+#' @importFrom igraph global_efficiency
+#' @importFrom rlang enquo eval_tidy
+#' @export
+graph_efficiency <- function(weights = NULL, directed = TRUE) {
+  graph <- .G()
+  weights <- enquo(weights)
+  weights <- eval_tidy(weights, .E(focused = FALSE)) %||% NA
+  global_efficiency(graph, weights = weights, directed = directed)
+}

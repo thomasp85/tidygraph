@@ -6,6 +6,7 @@
 \alias{node_constraint}
 \alias{node_coreness}
 \alias{node_diversity}
+\alias{node_efficiency}
 \alias{node_bridging_score}
 \alias{node_effective_network_size}
 \alias{node_connectivity_impact}
@@ -21,6 +22,8 @@ node_coreness(mode = "out")
 
 node_diversity(weights)
 
+node_efficiency(weights = NULL, directed = TRUE, mode = "all")
+
 node_bridging_score()
 
 node_effective_network_size()
@@ -32,7 +35,9 @@ node_closeness_impact()
 node_fareness_impact()
 }
 \arguments{
-\item{mode}{The way edges should be followed in the case of directed graphs.}
+\item{mode}{How edges are treated. In \code{node_coreness()} it chooses which kind
+of coreness measure to calculate. In \code{node_efficiency()} it defines how the
+local neighborhood is created}
 
 \item{weights}{The weights to use for each node during calculation}
 }
@@ -54,6 +59,8 @@ collected under the \verb{node_*} umbrella of functions.
 \item \code{node_coreness()}: measures the coreness of each node. See \code{\link[igraph:coreness]{igraph::coreness()}}
 
 \item \code{node_diversity()}: measures the diversity of the node. See \code{\link[igraph:diversity]{igraph::diversity()}}
+
+\item \code{node_efficiency()}: measures the local efficiency around each node. See \code{\link[igraph:global_efficiency]{igraph::local_efficiency()}}
 
 \item \code{node_bridging_score()}: measures Valente's Bridging measures for detecting structural bridges (\code{influenceR})
 
