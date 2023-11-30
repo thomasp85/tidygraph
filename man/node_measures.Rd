@@ -40,6 +40,9 @@ of coreness measure to calculate. In \code{node_efficiency()} it defines how the
 local neighborhood is created}
 
 \item{weights}{The weights to use for each node during calculation}
+
+\item{directed}{Should the graph be treated as a directed graph if it is in
+fact directed}
 }
 \value{
 A numeric vector of the same length as the number of nodes in the

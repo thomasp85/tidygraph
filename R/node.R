@@ -180,6 +180,8 @@ node_is_connected <- function(nodes, mode = 'all', any = FALSE) {
 #' of coreness measure to calculate. In `node_efficiency()` it defines how the
 #' local neighborhood is created
 #' @param weights The weights to use for each node during calculation
+#' @param directed Should the graph be treated as a directed graph if it is in
+#' fact directed
 #'
 #' @return A numeric vector of the same length as the number of nodes in the
 #' graph.
