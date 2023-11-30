@@ -32,7 +32,7 @@ use in a tidy workflow.
 ```{r, message=FALSE}
 library(tidygraph)
 
-play_erdos_renyi(10, 0.5) %>% 
+play_gnp(10, 0.5) %>% 
   activate(nodes) %>% 
   mutate(degree = centrality_degree()) %>% 
   activate(edges) %>% 

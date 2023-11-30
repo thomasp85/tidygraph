@@ -25,33 +25,37 @@ workflow.
 ``` r
 library(tidygraph)
 
-play_erdos_renyi(10, 0.5) %>% 
+play_gnp(10, 0.5) %>% 
   activate(nodes) %>% 
   mutate(degree = centrality_degree()) %>% 
   activate(edges) %>% 
   mutate(centrality = centrality_edge_betweenness()) %>% 
   arrange(centrality)
-#> # A tbl_graph: 10 nodes and 57 edges
+#> # A tbl_graph: 10 nodes and 47 edges
 #> #
 #> # A directed simple graph with 1 component
 #> #
-#> # A tibble: 57 × 3
-#>    from    to centrality
-#>   <int> <int>      <dbl>
-#> 1     4     3       1.31
-#> 2     6     3       1.33
-#> 3     8     5       1.33
-#> 4     8     2       1.34
-#> 5     9     2       1.34
-#> 6     7     3       1.37
-#> # ℹ 51 more rows
+#> # Edge Data: 47 × 3 (active)
+#>     from    to centrality
+#>    <int> <int>      <dbl>
+#>  1     5     8       1   
+#>  2     3     6       1.2 
+#>  3     5     9       1.2 
+#>  4    10     1       1.25
+#>  5     3     8       1.25
+#>  6     4     1       1.33
+#>  7     5     1       1.33
+#>  8     5     6       1.33
+#>  9     5    10       1.5 
+#> 10     6     8       1.5 
+#> # ℹ 37 more rows
 #> #
-#> # A tibble: 10 × 1
+#> # Node Data: 10 × 1
 #>   degree
 #>    <dbl>
-#> 1      5
-#> 2      4
-#> 3      6
+#> 1      4
+#> 2      5
+#> 3      7
 #> # ℹ 7 more rows
 ```
 
