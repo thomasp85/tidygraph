@@ -123,7 +123,9 @@ them.</p>
 <span></span>
 <span><span class="fu">graph_mean_dist</span><span class="op">(</span>directed <span class="op">=</span> <span class="cn">TRUE</span>, unconnected <span class="op">=</span> <span class="cn">TRUE</span>, weights <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">graph_modularity</span><span class="op">(</span><span class="va">group</span>, weights <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">graph_modularity</span><span class="op">(</span><span class="va">group</span>, weights <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">graph_efficiency</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -243,6 +245,7 @@ will be returned.</p></dd>
 <li><p><code>graph_min_cut()</code>: Calculates the minimum number of edges to remove in order to split the graph into two clusters. Wraps <code><a href="https://r.igraph.org/reference/min_cut.html" class="external-link">igraph::min_cut()</a></code></p></li>
 <li><p><code>graph_mean_dist()</code>: Calculates the mean distance between all node pairs in the graph. Wraps <code><a href="https://r.igraph.org/reference/distances.html" class="external-link">igraph::mean_distance()</a></code></p></li>
 <li><p><code>graph_modularity()</code>: Calculates the modularity of the graph contingent on a provided node grouping</p></li>
+<li><p><code>graph_efficiency()</code>: Calculate the global efficiency of the graph</p></li>
 </ul></div>
 
     <div id="ref-examples">

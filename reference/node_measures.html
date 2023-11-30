@@ -89,6 +89,8 @@ collected under the <code>node_*</code> umbrella of functions.</p>
 <span></span>
 <span><span class="fu">node_diversity</span><span class="op">(</span><span class="va">weights</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">node_efficiency</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, mode <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">node_bridging_score</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">node_effective_network_size</span><span class="op">(</span><span class="op">)</span></span>
@@ -103,7 +105,9 @@ collected under the <code>node_*</code> umbrella of functions.</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>mode</dt>
-<dd><p>The way edges should be followed in the case of directed graphs.</p></dd>
+<dd><p>How edges are treated. In <code>node_coreness()</code> it chooses which kind
+of coreness measure to calculate. In <code>node_efficiency()</code> it defines how the
+local neighborhood is created</p></dd>
 
 
 <dt>weights</dt>
@@ -124,6 +128,7 @@ graph.</p>
 <li><p><code>node_constraint()</code>: measures Burts constraint of the node. See <code><a href="https://r.igraph.org/reference/constraint.html" class="external-link">igraph::constraint()</a></code></p></li>
 <li><p><code>node_coreness()</code>: measures the coreness of each node. See <code><a href="https://r.igraph.org/reference/coreness.html" class="external-link">igraph::coreness()</a></code></p></li>
 <li><p><code>node_diversity()</code>: measures the diversity of the node. See <code><a href="https://r.igraph.org/reference/diversity.html" class="external-link">igraph::diversity()</a></code></p></li>
+<li><p><code>node_efficiency()</code>: measures the local efficiency around each node. See <code><a href="https://r.igraph.org/reference/global_efficiency.html" class="external-link">igraph::local_efficiency()</a></code></p></li>
 <li><p><code>node_bridging_score()</code>: measures Valente's Bridging measures for detecting structural bridges (<code>influenceR</code>)</p></li>
 <li><p><code>node_effective_network_size()</code>: measures Burt's Effective Network Size indicating access to structural holes in the network (<code>influenceR</code>)</p></li>
 <li><p><code>node_connectivity_impact()</code>: measures the impact on connectivity when removing the node (<code>NetSwan</code>)</p></li>
