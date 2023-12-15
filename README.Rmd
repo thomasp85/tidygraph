@@ -10,6 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "README-"
 )
+set.seed(1)
 ```
 
 # tidygraph <img src="man/figures/logo.png" align="right" width="140px"/>

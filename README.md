@@ -31,31 +31,31 @@ play_gnp(10, 0.5) %>%
   activate(edges) %>% 
   mutate(centrality = centrality_edge_betweenness()) %>% 
   arrange(centrality)
-#> # A tbl_graph: 10 nodes and 47 edges
+#> # A tbl_graph: 10 nodes and 51 edges
 #> #
 #> # A directed simple graph with 1 component
 #> #
-#> # Edge Data: 47 × 3 (active)
+#> # Edge Data: 51 × 3 (active)
 #>     from    to centrality
 #>    <int> <int>      <dbl>
-#>  1     5     8       1   
-#>  2     3     6       1.2 
-#>  3     5     9       1.2 
-#>  4    10     1       1.25
-#>  5     3     8       1.25
-#>  6     4     1       1.33
-#>  7     5     1       1.33
-#>  8     5     6       1.33
-#>  9     5    10       1.5 
-#> 10     6     8       1.5 
-#> # ℹ 37 more rows
+#>  1     2     7       1.25
+#>  2     6     5       1.33
+#>  3     1     3       1.4 
+#>  4     2    10       1.53
+#>  5     2     8       1.58
+#>  6     8     9       1.65
+#>  7     2     3       1.67
+#>  8     2     5       1.73
+#>  9     3     5       1.73
+#> 10     8     5       1.73
+#> # ℹ 41 more rows
 #> #
 #> # Node Data: 10 × 1
 #>   degree
 #>    <dbl>
-#> 1      4
-#> 2      5
-#> 3      7
+#> 1      6
+#> 2      7
+#> 3      6
 #> # ℹ 7 more rows
 ```
 
