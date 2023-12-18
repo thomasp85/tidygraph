@@ -40,9 +40,6 @@
     <loc>https://tidygraph.data-imaginist.com/reference/create_graphs.html</loc>
   </url>
   <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/dot-register_graph_context.html</loc>
-  </url>
-  <url>
     <loc>https://tidygraph.data-imaginist.com/reference/edge_rank.html</loc>
   </url>
   <url>
@@ -56,6 +53,9 @@
   </url>
   <url>
     <loc>https://tidygraph.data-imaginist.com/reference/fortify.tbl_graph.html</loc>
+  </url>
+  <url>
+    <loc>https://tidygraph.data-imaginist.com/reference/graph-context.html</loc>
   </url>
   <url>
     <loc>https://tidygraph.data-imaginist.com/reference/graph_join.html</loc>
