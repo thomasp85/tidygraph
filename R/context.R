@@ -47,6 +47,23 @@ ContextBuilder <- R6Class(
     }
   )
 )
+#' Register a graph context for the duration of the current frame
+#'
+#' This function sets the provided graph to be the context for tidygraph
+#' algorithms, such as e.g. [node_is_center()], for the duration of the current
+#' environment. It automatically removes the graph once the environment exits.
+#'
+#' @param graph A `tbl_graph` object
+#'
+#' @param free Should the active state of the graph be ignored?
+#'
+#' @param env The environment where the context should be active
+#'
+#' @keywords internal
+#' @name graph-context
+#' @rdname graph-context
+NULL
+#' @rdname graph-context
 #' @export
 .graph_context <- ContextBuilder$new()
 expect_nodes <- function() {
@@ -102,20 +119,8 @@ NULL
   .graph_context$edges(focused)
 }
 
-#' Register a graph context for the duration of the current frame
-#'
-#' This function sets the provided graph to be the context for tidygraph
-#' algorithms, such as e.g. [node_is_center()], for the duration of the current
-#' environment. It automatically removes the graph once the environment exits.
-#'
-#' @param graph A `tbl_graph` object
-#'
-#' @param free Should the active state of the graph be ignored?
-#'
-#' @param env The environment where the context should be active
-#'
+#' @rdname graph-context
 #' @export
-#' @keywords internal
 .register_graph_context <- function(graph, free = FALSE, env = parent.frame()) {
   check_tbl_graph(graph)
   if (identical(env, .GlobalEnv)) {
@@ -128,6 +133,9 @@ NULL
   do.call(on.exit, alist(expr = .graph_context$clear(), add = TRUE), envir = env)
   invisible(NULL)
 }
+
+#' @rdname graph-context
+#' @export
 .free_graph_context <- function(env = parent.frame()) {
   if (identical(env, .GlobalEnv)) {
     cli::cli_abort('A context cannot be freed in the global environment')
