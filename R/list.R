@@ -74,6 +74,8 @@ as_graph_node_edge <- function(x, directed, node_key = 'name') {
   to_ind <- which(names(edges) == 'to')
   if (length(to_ind) == 0) to_ind <- 2
   edges <- edges[, c(from_ind, to_ind, seq_along(edges)[-c(from_ind, to_ind)]), drop = FALSE]
+  if (is.factor(edges[[1]])) edges[[1]] <- as.character(edges[[1]])
+  if (is.factor(edges[[2]])) edges[[2]] <- as.character(edges[[2]])
   if (!is.null(nodes)) {
     if (is.na(node_key)) {
       name_ind <- 1L

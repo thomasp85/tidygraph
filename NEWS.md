@@ -1,5 +1,7 @@
 # tidygraph (development version)
 
+* Fix a bug in `tbl_graph()` when edge `to` and `from` where encoded as factors
+
 # tidygraph 1.3.0
 
 * Add `resolution` argument to `group_louvrain()` to mirror the igraph function
