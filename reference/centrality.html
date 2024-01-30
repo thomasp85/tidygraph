@@ -110,11 +110,7 @@ all only work on undirected graphs.</p>
 <span>  loops <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">centrality_authority</span><span class="op">(</span></span>
-<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/arpack.html" class="external-link">arpack_defaults</a></span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">centrality_authority</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, options <span class="op">=</span> <span class="fu">arpack_defaults</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">centrality_betweenness</span><span class="op">(</span></span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -136,10 +132,10 @@ all only work on undirected graphs.</p>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/arpack.html" class="external-link">arpack_defaults</a></span></span>
+<span>  options <span class="op">=</span> <span class="fu">arpack_defaults</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">centrality_hub</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, options <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/arpack.html" class="external-link">arpack_defaults</a></span><span class="op">)</span></span>
+<span><span class="fu">centrality_hub</span><span class="op">(</span>weights <span class="op">=</span> <span class="cn">NULL</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, options <span class="op">=</span> <span class="fu">arpack_defaults</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">centrality_pagerank</span><span class="op">(</span></span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
