@@ -1,3 +1,5 @@
+# tidygraph (development version)
+
 # tidygraph 1.3.1
 
 * Fix a bug in `tbl_graph()` when edge `to` and `from` where encoded as factors
