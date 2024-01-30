@@ -32,7 +32,7 @@ group_leading_eigen(
   weights = NULL,
   steps = -1,
   label = NULL,
-  options = igraph::arpack_defaults,
+  options = arpack_defaults(),
   n_groups = NULL
 )
 

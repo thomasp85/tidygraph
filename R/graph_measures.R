@@ -39,9 +39,9 @@ graph_assortativity <- function(attr, in_attr = NULL, directed = TRUE) {
   if (is.numeric(attr)) {
     in_attr <- enquo(in_attr)
     in_attr <- eval_tidy(in_attr, .N(focused = FALSE))
-    assortativity(graph, attr, in_attr, directed)
+    assortativity(graph, values = attr, values.in = in_attr, directed = directed)
   } else {
-    assortativity_nominal(graph, as.factor(attr), directed)
+    assortativity_nominal(graph, types = as.factor(attr), directed = directed)
   }
 }
 #' @describeIn graph_measures Calculate the number of automorphisms of the graph. Wraps [igraph::count_automorphisms()]

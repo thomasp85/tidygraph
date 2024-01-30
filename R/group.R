@@ -115,9 +115,9 @@ group_label_prop <- function(weights = NULL, label = NULL, fixed = NULL) {
   desc_enumeration(group)
 }
 #' @describeIn group_graph Group nodes based on the leading eigenvector of the modularity matrix using [igraph::cluster_leading_eigen()]
-#' @importFrom igraph membership cluster_leading_eigen cut_at
+#' @importFrom igraph membership cluster_leading_eigen cut_at arpack_defaults
 #' @export
-group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, options = igraph::arpack_defaults, n_groups = NULL) {
+group_leading_eigen <- function(weights = NULL, steps = -1, label = NULL, options = arpack_defaults(), n_groups = NULL) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E()) %||% NA

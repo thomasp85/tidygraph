@@ -44,11 +44,7 @@ centrality_alpha(
   loops = FALSE
 )
 
-centrality_authority(
-  weights = NULL,
-  scale = TRUE,
-  options = igraph::arpack_defaults
-)
+centrality_authority(weights = NULL, scale = TRUE, options = arpack_defaults())
 
 centrality_betweenness(
   weights = NULL,
@@ -70,10 +66,10 @@ centrality_eigen(
   weights = NULL,
   directed = FALSE,
   scale = TRUE,
-  options = igraph::arpack_defaults
+  options = arpack_defaults()
 )
 
-centrality_hub(weights = NULL, scale = TRUE, options = igraph::arpack_defaults)
+centrality_hub(weights = NULL, scale = TRUE, options = arpack_defaults())
 
 centrality_pagerank(
   weights = NULL,

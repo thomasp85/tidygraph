@@ -1,6 +1,7 @@
 # tidygraph (development version)
 
 * Fix a bug in `tbl_graph()` when edge `to` and `from` where encoded as factors
+* Secure compitability with igraph 2.0.0
 
 # tidygraph 1.3.0
 

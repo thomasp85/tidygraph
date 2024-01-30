@@ -199,6 +199,7 @@ as_tbl_graph.tbl_graph <- function(x, ...) {
 set_graph_data <- function(x, value, active) {
   UseMethod('set_graph_data')
 }
+#' @export
 set_graph_data.tbl_graph <- function(x, value, active = NULL) {
   if (is.null(active)) active <- active(x)
   switch(
@@ -208,6 +209,7 @@ set_graph_data.tbl_graph <- function(x, value, active = NULL) {
     cli::cli_abort('Unknown active element: {.val {active}}. Only nodes and edges supported')
   )
 }
+#' @export
 set_graph_data.grouped_tbl_graph <- function(x, value, active = NULL) {
   x <- NextMethod()
   apply_groups(x, value)

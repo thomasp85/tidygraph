@@ -61,9 +61,9 @@ centrality_alpha <- function(weights = NULL, alpha = 1, exo = 1, tol = 1e-7, loo
   alpha_centrality(graph = graph, nodes = focus_ind(graph, 'nodes'), alpha = alpha, exo = exo, weights = weights, tol = tol, loops = loops)
 }
 #' @describeIn centrality Wrapper for [igraph::authority_score()]
-#' @importFrom igraph authority_score
+#' @importFrom igraph authority_score arpack_defaults
 #' @export
-centrality_authority <- function(weights = NULL, scale = TRUE, options = igraph::arpack_defaults) {
+centrality_authority <- function(weights = NULL, scale = TRUE, options = arpack_defaults()) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E()) %||% NA
@@ -104,9 +104,9 @@ centrality_closeness <- function(weights = NULL, mode = 'out', normalized = FALS
   closeness(graph = graph, vids = focus_ind(graph, 'nodes'), mode = mode, cutoff = cutoff, weights = weights, normalized = normalized)
 }
 #' @describeIn centrality Wrapper for [igraph::eigen_centrality()]
-#' @importFrom igraph eigen_centrality
+#' @importFrom igraph eigen_centrality arpack_defaults
 #' @export
-centrality_eigen <- function(weights = NULL, directed = FALSE, scale = TRUE, options = igraph::arpack_defaults) {
+centrality_eigen <- function(weights = NULL, directed = FALSE, scale = TRUE, options = arpack_defaults()) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E()) %||% NA
@@ -114,9 +114,9 @@ centrality_eigen <- function(weights = NULL, directed = FALSE, scale = TRUE, opt
   eigen_centrality(graph = graph, directed = directed, scale = scale, weights = weights, options = options)$vector[focus_ind(graph, 'nodes')]
 }
 #' @describeIn centrality Wrapper for [igraph::hub_score()]
-#' @importFrom igraph hub_score
+#' @importFrom igraph hub_score arpack_defaults
 #' @export
-centrality_hub <- function(weights = NULL, scale = TRUE, options = igraph::arpack_defaults) {
+centrality_hub <- function(weights = NULL, scale = TRUE, options = arpack_defaults()) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E()) %||% NA
@@ -151,7 +151,7 @@ centrality_degree <- function(weights = NULL, mode = 'out', loops = TRUE, normal
   expect_nodes()
   graph <- .G()
   weights <- enquo(weights)
-  weights <- eval_tidy(weights, .E()) %||% NA
+  weights <- eval_tidy(weights, .E())
   if (is.null(weights)) {
     degree(graph = graph, v = focus_ind(graph, 'nodes'), mode = mode, loops = loops, normalized = normalized)
   } else {
@@ -187,11 +187,12 @@ centrality_harmonic <- function(weights = NULL, mode = 'out', normalized = FALSE
 #' @param aggregation The aggregation type to use on the indirect relations to be used in `netrankr::aggregate_positions`
 #' @param ... Arguments to pass on to `netrankr::indirect_relations`
 #' @export
+#' @importFrom igraph is_directed
 centrality_manual <- function(relation = 'dist_sp', aggregation = 'sum', ...) {
   expect_netrankr()
   expect_nodes()
   graph <- .G()
-  if (is.directed(graph)) {
+  if (is_directed(graph)) {
     cli::cli_abort("Centrality measures based on the {.pkg netrankr} package only works on undirected networks")
   }
   rel <- netrankr::indirect_relations(graph, type = relation, ...)

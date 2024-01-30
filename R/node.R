@@ -28,13 +28,13 @@ node_is_cut <- function() {
   focus_ind(graph, 'nodes') %in% articulation_points(graph)
 }
 #' @describeIn node_types is the node a root in a tree
-#' @importFrom igraph degree is.directed
+#' @importFrom igraph degree is_directed
 #' @export
 node_is_root <- function() {
   expect_nodes()
   graph <- .G()
   node_inds <- focus_ind(graph, 'nodes')
-  if ((!is_tree(graph) && !is_forest(graph)) || !is.directed(graph)) {
+  if ((!is_tree(graph) && !is_forest(graph)) || !is_directed(graph)) {
     return(rep(FALSE, length(node_inds)))
   }
   deg_in <- degree(graph, mode = 'in') == 0
@@ -43,7 +43,7 @@ node_is_root <- function() {
   root[node_inds]
 }
 #' @describeIn node_types is the node a leaf in a tree
-#' @importFrom igraph degree is.directed
+#' @importFrom igraph degree is_directed
 #' @export
 node_is_leaf <- function() {
   expect_nodes()
@@ -52,7 +52,7 @@ node_is_leaf <- function() {
   if ((!is_tree(graph) && !is_forest(graph))) {
     return(rep(FALSE, length(node_inds)))
   }
-  if (is.directed(graph)) {
+  if (is_directed(graph)) {
     deg_in <- degree(graph, mode = 'in') == 0
     deg_out <- degree(graph, mode = 'out') == 0
     leaf <- if (sum(deg_out) > sum(deg_in)) deg_out else deg_in

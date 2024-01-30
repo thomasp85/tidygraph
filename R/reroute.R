@@ -32,7 +32,7 @@ reroute <- function(.data, from = NULL, to = NULL, subset = NULL) {
 }
 #' @export
 #' @importFrom rlang enquo eval_tidy
-#' @importFrom igraph is.directed
+#' @importFrom igraph is_directed
 reroute.tbl_graph <- function(.data, from = NULL, to = NULL, subset = NULL) {
   .register_graph_context(.data)
   expect_edges()
@@ -54,7 +54,7 @@ reroute.tbl_graph <- function(.data, from = NULL, to = NULL, subset = NULL) {
   .data <- tbl_graph(
     nodes = as_tibble(.data, active = 'nodes'),
     edges = edges,
-    directed = is.directed(.data)
+    directed = is_directed(.data)
   ) %gr_attr% .data
   active(.data) <- 'edges'
   .data

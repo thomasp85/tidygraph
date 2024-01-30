@@ -24,11 +24,11 @@ arrange.morphed_tbl_graph <- function(.data, ...) {
 #' @export
 dplyr::arrange
 
-#' @importFrom igraph is.directed as_data_frame
+#' @importFrom igraph is_directed as_data_frame
 permute_edges <- function(graph, order) {
   graph_mod <- as_data_frame(graph, what = 'both')
   graph_mod$edges <- graph_mod$edges[order, ]
-  as_tbl_graph(graph_mod, directed = is.directed(graph))
+  as_tbl_graph(graph_mod, directed = is_directed(graph))
 }
 #' @importFrom igraph permute
 permute_nodes <- function(graph, order) {

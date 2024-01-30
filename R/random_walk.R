@@ -50,15 +50,15 @@ random_walk_rank <- function(n, root = NULL, mode = "out", weights = NULL) {
     if (!quo_is_null(weights)) {
       cli::cli_warn('{.arg weights} is ignored when doing a random walk on nodes')
     }
-    walk <- as.integer(random_walk(graph, root, n, mode))
+    walk <- as.integer(random_walk(graph, root, n, mode = mode))
     len_out <- gorder(graph)
   } else {
     weights <- eval_tidy(weights, .E(focused = FALSE)) %||% NA
-    walk <- as.integer(random_edge_walk(graph, root, n, weights, mode))
+    walk <- as.integer(random_edge_walk(graph, root, n, weights, mode = mode))
     len_out <- gsize(graph)
   }
   res <- rep(list(integer()), len_out)
-  ord <- split(seq_len(n), walk)
+  ord <- split(seq_along(walk), walk)
   res[as.integer(names(ord))] <- ord
   res[focus_ind(graph, active(graph))]
 }
