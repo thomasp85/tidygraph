@@ -258,12 +258,13 @@ to_simple <- function(graph, remove_multiples = TRUE, remove_loops = TRUE) {
 #' @describeIn morphers Combine multiple nodes into one. `...`
 #' is evaluated in the same manner as `group_by`. When unmorphing all
 #' data will get merged back.
-#' @param simplify Should edges in the contracted graph be simplified? Defaults
-#' to `TRUE`
+#' @param remove_multiples Should edges that run between the same nodes be
+#' reduced to one
+#' @param remove_loops Should edges that start and end at the same node be removed
 #' @importFrom tidyr nest_legacy
 #' @importFrom igraph contract
 #' @export
-to_contracted <- function(graph, ..., simplify = TRUE) {
+to_contracted <- function(graph, ..., remove_multiples = TRUE, remove_loops = TRUE) {
   nodes <- as_tibble(graph, active = 'nodes')
   nodes <- group_by(nodes, ...)
   ind <- group_indices(nodes)
@@ -274,8 +275,8 @@ to_contracted <- function(graph, ..., simplify = TRUE) {
   nodes$.orig_data <- lapply(nodes$.orig_data, function(x) {x$.tidygraph_node_index <- NULL; x})
   nodes$.tidygraph_node_index <- ind
   contracted <- set_node_attributes(contracted, nodes)
-  if (simplify) {
-    contracted <- to_simple(contracted)[[1]]
+  if (remove_multiples | remove_loops) {
+    contracted <- to_simple(contracted, remove_multiples = remove_multiples, remove_loops = remove_loops)[[1]]
   }
   list(
     contracted = contracted
