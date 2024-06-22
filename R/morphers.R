@@ -255,6 +255,42 @@ to_simple <- function(graph, remove_multiples = TRUE, remove_loops = TRUE) {
     simple = simple
   )
 }
+#' @describeIn morphers Expand weighted links into multiple edges. Each link with
+#' a weight equal to a natural number will be split into multiple edges.
+#' @param weights The name of the column containing the weights.
+#' @importFrom igraph is_directed
+#' @importFrom rlang ensym
+#' @export
+to_multi <- function(graph, weights = "weight") {
+  weights <- rlang::ensym(weights)
+  edges <- as_tibble(graph, active = 'edges')
+  graph <- set_edge_attributes(graph, edges[, '.tidygraph_edge_index', drop = FALSE])
+  
+  weights_col <- rlang::as_string(weights)
+  
+  if (!weights_col %in% colnames(edges)) {
+    stop("The specified weight column does not exist in the edges.")
+  }
+  
+  # Ensure weights are natural numbers
+  if (any(edges[[weights_col]] <= 0) | any(edges[[weights_col]] != floor(edges[[weights_col]]))) {
+    stop("All weights must be natural numbers (positive integers).")
+  }
+  
+  # Repeat edges according to their weight
+  expanded_edges <- tidyr::uncount(edges, weights = !!weights)
+  edges$.tidygraph_edge_index <- NULL
+  expanded_edges$.orig_data <- lapply(expanded_edges$.tidygraph_edge_index, function(i) edges[i, , drop = FALSE])
+  
+  # Create a new graph with expanded edges
+  multi_edge_graph <- tbl_graph(nodes = as_tibble(graph, active = 'nodes'),
+                                edges = expanded_edges, directed = is_directed(graph))
+  multi_edge_graph <- set_edge_attributes(multi_edge_graph, expanded_edges)
+  
+  list(
+    multi_edge_graph = multi_edge_graph
+  )
+}
 #' @describeIn morphers Combine multiple nodes into one. `...`
 #' is evaluated in the same manner as `group_by`. When unmorphing all
 #' data will get merged back.
