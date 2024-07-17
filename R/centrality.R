@@ -60,15 +60,15 @@ centrality_alpha <- function(weights = NULL, alpha = 1, exo = 1, tol = 1e-7, loo
   exo <- eval_tidy(exo, .N())
   alpha_centrality(graph = graph, nodes = focus_ind(graph, 'nodes'), alpha = alpha, exo = exo, weights = weights, tol = tol, loops = loops)
 }
-#' @describeIn centrality Wrapper for [igraph::authority_score()]
-#' @importFrom igraph authority_score arpack_defaults
+#' @describeIn centrality Wrapper for [igraph::hits_scores()]
+#' @importFrom igraph hits_scores arpack_defaults
 #' @export
 centrality_authority <- function(weights = NULL, scale = TRUE, options = arpack_defaults()) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E()) %||% NA
   graph <- .G()
-  authority_score(graph = graph, scale = scale, weights = weights, options = options)$vector[focus_ind(graph, 'nodes')]
+  hits_scores(graph = graph, scale = scale, weights = weights, options = options)$authority[focus_ind(graph, 'nodes')]
 }
 #' @describeIn centrality Wrapper for [igraph::betweenness()]
 #' @importFrom igraph V betweenness
