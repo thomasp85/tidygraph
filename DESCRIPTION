@@ -18,7 +18,7 @@ BugReports: https://github.com/thomasp85/tidygraph/issues
 Imports: 
     cli,
     dplyr (>= 0.8.5),
-    igraph (>= 2.0.0),
+    igraph (>= 2.0.3.9045),
     lifecycle,
     magrittr,
     pillar,
@@ -47,3 +47,5 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Config/testthat/edition: 3
+Remotes:  
+    igraph/rigraph
