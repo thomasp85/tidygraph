@@ -113,15 +113,15 @@ centrality_eigen <- function(weights = NULL, directed = FALSE, scale = TRUE, opt
   graph <- .G()
   eigen_centrality(graph = graph, directed = directed, scale = scale, weights = weights, options = options)$vector[focus_ind(graph, 'nodes')]
 }
-#' @describeIn centrality Wrapper for [igraph::hub_score()]
-#' @importFrom igraph hub_score arpack_defaults
+#' @describeIn centrality Wrapper for [igraph::hits_scores()]
+#' @importFrom igraph hits_scores arpack_defaults
 #' @export
 centrality_hub <- function(weights = NULL, scale = TRUE, options = arpack_defaults()) {
   expect_nodes()
   weights <- enquo(weights)
   weights <- eval_tidy(weights, .E()) %||% NA
   graph <- .G()
-  hub_score(graph = graph, scale = scale, weights = weights, options = options)$vector[focus_ind(graph, 'nodes')]
+  hits_scores(graph = graph, scale = scale, weights = weights, options = options)$hub[focus_ind(graph, 'nodes')]
 }
 #' @describeIn centrality Wrapper for [igraph::page_rank()]
 #' @importFrom igraph V page_rank
