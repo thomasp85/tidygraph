@@ -1,147 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/404.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/index.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/activate.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/bind_graphs.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/centrality.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/component_games.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/context_accessors.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/create_graphs.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/edge_rank.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/edge_types.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/evolution_games.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/focus.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/fortify.tbl_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/graph-context.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/graph_join.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/graph_measures.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/graph_types.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/group_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/iterate.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/local_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/map_bfs.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/map_bfs_back.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/map_dfs.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/map_dfs_back.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/map_local.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/morph.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/morphers.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/mutate_as_tbl.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/node_measures.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/node_rank.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/node_topology.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/node_types.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/pair_measures.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/random_walk_rank.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/reroute.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/sampling_games.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/search_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/tbl_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/tidygraph-package.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/type_games.html</loc>
-  </url>
-  <url>
-    <loc>https://tidygraph.data-imaginist.com/reference/with_graph.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://tidygraph.data-imaginist.com/404.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/LICENSE-text.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/LICENSE.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/authors.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/index.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/news/index.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/activate.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/bind_graphs.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/centrality.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/component_games.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/context_accessors.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/create_graphs.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/edge_rank.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/edge_types.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/evolution_games.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/focus.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/fortify.tbl_graph.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/graph-context.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/graph_join.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/graph_measures.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/graph_types.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/group_graph.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/index.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/iterate.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/local_graph.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/map_bfs.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/map_bfs_back.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/map_dfs.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/map_dfs_back.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/map_local.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/morph.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/morphers.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/mutate_as_tbl.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/node_measures.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/node_rank.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/node_topology.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/node_types.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/pair_measures.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/random_walk_rank.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/reexports.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/reroute.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/sampling_games.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/search_graph.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/tbl_graph.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/tidygraph-package.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/type_games.html</loc></url>
+<url><loc>https://tidygraph.data-imaginist.com/reference/with_graph.html</loc></url>
 </urlset>
+
