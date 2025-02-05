@@ -164,10 +164,10 @@ node_is_connected <- function(nodes, mode = 'all', any = FALSE) {
   reached <- is.finite(t(distances(graph, v = node_inds, to = all_nodes, mode = mode, weights = NA)))
   nodes <- rep_len(nodes, length(node_inds))
   vapply(seq_along(node_inds), function(i) {
-    n <- node_inds[i]
-    connections <- match(nodes[[i]], all_nodes)
+      n <- node_inds[i]
+      connections <- match(nodes[[i]], all_nodes)
     found <- reached[,n][connections]
-    if (any) any(found) else all(found)
+      if (any) any(found) else all(found)
   }, logical(1))
 }
 #' Querying node measures
@@ -267,27 +267,27 @@ node_effective_network_size <- function() {
   graph <- .G()
   influenceR::ens(graph)[focus_ind(graph, 'nodes')]
 }
-#' @describeIn node_measures measures the impact on connectivity when removing the node (`NetSwan`)
+#' @describeIn node_measures measures the impact on connectivity when removing the node (`netrankr`)
 #' @export
 node_connectivity_impact <- function() {
-  expect_netswan()
+  expect_netrankr()
   expect_nodes()
   graph <- .G()
-  NetSwan::swan_connectivity(graph)[focus_ind(graph, 'nodes')]
+  netrankr::swan_connectivity(graph)[focus_ind(graph, 'nodes')]
 }
-#' @describeIn node_measures measures the impact on closeness when removing the node (`NetSwan`)
+#' @describeIn node_measures measures the impact on closeness when removing the node (`netrankr`)
 #' @export
 node_closeness_impact <- function() {
-  expect_netswan()
+  expect_netrankr()
   expect_nodes()
   graph <- .G()
-  NetSwan::swan_closeness(graph)[focus_ind(graph, 'nodes')]
+  netrankr::swan_closeness(graph)[focus_ind(graph, 'nodes')]
 }
-#' @describeIn node_measures measures the impact on fareness (distance between all node pairs) when removing the node (`NetSwan`)
+#' @describeIn node_measures measures the impact on fareness (distance between all node pairs) when removing the node (`netrankr`)
 #' @export
 node_fareness_impact <- function() {
-  expect_netswan()
+  expect_netrankr()
   expect_nodes()
   graph <- .G()
-  NetSwan::swan_efficiency(graph)[focus_ind(graph, 'nodes')]
+  netrankr::swan_efficiency(graph)[focus_ind(graph, 'nodes')]
 }
