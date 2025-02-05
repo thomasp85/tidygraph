@@ -36,8 +36,7 @@ Suggests:
     graph,
     influenceR,
     methods,
-    netrankr,
-    NetSwan,
+    netrankr (>= 1.2.4),
     network,
     seriation,
     testthat (>= 3.0.0)

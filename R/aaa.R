@@ -30,6 +30,3 @@ expect_netrankr <- function(...) {
 expect_seriation <- function(...) {
   rlang::check_installed('seriation', ...)
 }
-expect_netswan <- function(...) {
-  rlang::check_installed('NetSwan', ...)
-}

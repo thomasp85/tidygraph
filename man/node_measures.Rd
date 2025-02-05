@@ -69,11 +69,11 @@ collected under the \verb{node_*} umbrella of functions.
 
 \item \code{node_effective_network_size()}: measures Burt's Effective Network Size indicating access to structural holes in the network (\code{influenceR})
 
-\item \code{node_connectivity_impact()}: measures the impact on connectivity when removing the node (\code{NetSwan})
+\item \code{node_connectivity_impact()}: measures the impact on connectivity when removing the node (\code{netrankr})
 
-\item \code{node_closeness_impact()}: measures the impact on closeness when removing the node (\code{NetSwan})
+\item \code{node_closeness_impact()}: measures the impact on closeness when removing the node (\code{netrankr})
 
-\item \code{node_fareness_impact()}: measures the impact on fareness (distance between all node pairs) when removing the node (\code{NetSwan})
+\item \code{node_fareness_impact()}: measures the impact on fareness (distance between all node pairs) when removing the node (\code{netrankr})
 
 }}
 \examples{
