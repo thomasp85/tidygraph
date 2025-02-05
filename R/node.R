@@ -164,10 +164,10 @@ node_is_connected <- function(nodes, mode = 'all', any = FALSE) {
   reached <- is.finite(t(distances(graph, v = node_inds, to = all_nodes, mode = mode, weights = NA)))
   nodes <- rep_len(nodes, length(node_inds))
   vapply(seq_along(node_inds), function(i) {
-      n <- node_inds[i]
-      connections <- match(nodes[[i]], all_nodes)
+    n <- node_inds[i]
+    connections <- match(nodes[[i]], all_nodes)
     found <- reached[,n][connections]
-      if (any) any(found) else all(found)
+    if (any) any(found) else all(found)
   }, logical(1))
 }
 #' Querying node measures
