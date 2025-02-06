@@ -112,7 +112,7 @@ graph_girth <- function() {
 #' @export
 graph_radius <- function(mode = 'out') {
   graph <- .G()
-  radius(graph, mode)
+  radius(graph, mode = mode)
 }
 #' @describeIn graph_measures Counts the number of mutually connected nodes. Wraps [igraph::dyad_census()]
 #' @importFrom igraph dyad_census

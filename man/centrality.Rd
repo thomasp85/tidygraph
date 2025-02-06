@@ -201,7 +201,7 @@ all only work on undirected graphs.
 \itemize{
 \item \code{centrality_alpha()}: Wrapper for \code{\link[igraph:alpha_centrality]{igraph::alpha_centrality()}}
 
-\item \code{centrality_authority()}: Wrapper for \code{\link[igraph:hub_score]{igraph::authority_score()}}
+\item \code{centrality_authority()}: Wrapper for \code{\link[igraph:hits_scores]{igraph::hits_scores()}}
 
 \item \code{centrality_betweenness()}: Wrapper for \code{\link[igraph:betweenness]{igraph::betweenness()}}
 
@@ -211,7 +211,7 @@ all only work on undirected graphs.
 
 \item \code{centrality_eigen()}: Wrapper for \code{\link[igraph:eigen_centrality]{igraph::eigen_centrality()}}
 
-\item \code{centrality_hub()}: Wrapper for \code{\link[igraph:hub_score]{igraph::hub_score()}}
+\item \code{centrality_hub()}: Wrapper for \code{\link[igraph:hits_scores]{igraph::hits_scores()}}
 
 \item \code{centrality_pagerank()}: Wrapper for \code{\link[igraph:page_rank]{igraph::page_rank()}}
 
