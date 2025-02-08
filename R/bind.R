@@ -46,12 +46,12 @@
 #' graph %>% bind_graphs(new_graph)
 #'
 bind_graphs <- function(.data, ...) {
-  .data <- unfocus(.data)
   if (is_bare_list(.data)) {
-    .data <- lapply(c(.data, list2(...)), as_tbl_graph)
+    .data <- lapply(lapply(c(.data, list2(...)), unfocus), as_tbl_graph)
     dots <- .data[-1]
     .data <- .data[[1]]
   } else {
+    .data <- unfocus(.data)
     .data <- as_tbl_graph(.data)
     dots <- lapply(list2(...), as_tbl_graph)
   }

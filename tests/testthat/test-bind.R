@@ -10,6 +10,15 @@ test_that("bind_graphs works", {
   tbl <- as_tibble(gr)
   expect_true(all(lengths(lapply(split(tbl$group, tbl$comp), unique)) == 1))
 })
+
+test_that("bind_graphs works for .data a list of supported objects", {
+  gr1 <- create_notable('bull')
+  gr2 <- gr1
+  gr1 <- mutate(gr1, group = 1)
+  gr2 <- mutate(gr2, group = 2)
+  gr <- expect_no_error(bind_graphs(list(gr1, gr2)))
+})
+
 test_that('bind_nodes works', {
   gr1 <- tbl_graph(head(mtcars))
   gr1 <- bind_nodes(gr1, tail(mtcars))
